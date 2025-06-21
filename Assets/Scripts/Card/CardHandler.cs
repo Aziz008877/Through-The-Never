@@ -47,7 +47,7 @@ public class CardHandler : MonoBehaviour
     public void ApplySkill(int skillID)
     {
         _cameraShake.Shake();
-        /*_playerSkillHandler.ApplySelectedSkill(skillID);
+        _playerSkillHandler.ApplySelectedSkill(skillID);
         
         for (int i = 0; i < _allCards.Length; i++)
         {
@@ -55,7 +55,13 @@ public class CardHandler : MonoBehaviour
             {
                 continue;
             }
-            _allCards[i].FadeOut();
-        }*/
+            _allCards[i].FadeOut(0.1f);
+        }
+
+        _allCards[skillID].GetComponent<RectTransform>().DOAnchorPosX(0, _dotweenSettings.Duration)
+            .OnComplete(delegate
+            {
+                _canvasGroup.DOFade(0, 0.5f);
+            });
     }
 }

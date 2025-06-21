@@ -50,7 +50,7 @@ public class CardFlip : MonoBehaviour
             {
                 reveal.SetActive(true);
             }
-
+            
             transform.DOScaleX(1f, _flipDuration / 2f).OnComplete(() =>
             {
                 _isAnimating = false;

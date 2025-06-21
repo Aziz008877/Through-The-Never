@@ -837,6 +837,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9007858125971130405, guid: 8a915dbbc4b23bf4f931629039cfbf6f, type: 3}
   m_PrefabInstance: {fileID: 373643255}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &248973612 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4747086219730781014, guid: 3345f80e87b1f7b429c617c3dc4ffd53, type: 3}
+  m_PrefabInstance: {fileID: 1488107886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &269883695
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2651,7 +2656,7 @@ MonoBehaviour:
   - {fileID: 1333216658}
   - {fileID: 374470783}
   - {fileID: 720820259}
-  - {fileID: 0}
+  - {fileID: 1227246737}
   _cardPressButton: {fileID: 617802706}
   _renderer: {fileID: 617802704}
   _frontSprite: {fileID: 21300000, guid: d39ecee8ff8063541a59429bde19f85a, type: 3}
@@ -3922,7 +3927,7 @@ MonoBehaviour:
   _skillDamageType: 0
   _coolDown: 0
   _damage: 15
-  _duration: 0
+  _duration: 3
   _fireball: {fileID: 6973602307963348459, guid: 99fb733145ff58d498833a89eaa8aff1, type: 3}
   _spawnParent: {fileID: 728627939}
   _fireballMode: 0
@@ -5194,6 +5199,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168880041}
   m_CullTransparentMesh: 1
+--- !u!1 &1227246737 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4747086219730781014, guid: 3345f80e87b1f7b429c617c3dc4ffd53, type: 3}
+  m_PrefabInstance: {fileID: 198079893}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1227246738 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2323227240281480358, guid: 3345f80e87b1f7b429c617c3dc4ffd53, type: 3}
@@ -5275,7 +5285,7 @@ MonoBehaviour:
   - {fileID: 515438823}
   - {fileID: 1315856060}
   - {fileID: 1439085184}
-  - {fileID: 0}
+  - {fileID: 1748040445}
   _cardPressButton: {fileID: 1245978975}
   _renderer: {fileID: 1245978973}
   _frontSprite: {fileID: 21300000, guid: d39ecee8ff8063541a59429bde19f85a, type: 3}
@@ -5304,13 +5314,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: f76d1196bf88b564f93d487f2edad3d4, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 1
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1245978974
@@ -6361,7 +6371,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1406838308
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7255,13 +7265,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: f76d1196bf88b564f93d487f2edad3d4, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 1
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 1
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &1560239392
@@ -7288,7 +7298,7 @@ MonoBehaviour:
   - {fileID: 557599241}
   - {fileID: 1933429605}
   - {fileID: 1575245468}
-  - {fileID: 0}
+  - {fileID: 248973612}
   _cardPressButton: {fileID: 1560239395}
   _renderer: {fileID: 1560239391}
   _frontSprite: {fileID: 21300000, guid: d39ecee8ff8063541a59429bde19f85a, type: 3}
@@ -7481,7 +7491,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4c883648c96b61d49b33ddf6110362e0, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -5667533160150377170, guid: 4c883648c96b61d49b33ddf6110362e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -7546,7 +7556,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1575245471
@@ -8269,6 +8279,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1727849596}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1748040445 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4747086219730781014, guid: 3345f80e87b1f7b429c617c3dc4ffd53, type: 3}
+  m_PrefabInstance: {fileID: 786998151}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1757132206
 GameObject:
   m_ObjectHideFlags: 0
@@ -8903,7 +8918,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4c883648c96b61d49b33ddf6110362e0, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: -5667533160150377170, guid: 4c883648c96b61d49b33ddf6110362e0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8968,7 +8983,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1933429608

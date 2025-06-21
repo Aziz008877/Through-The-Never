@@ -9,12 +9,11 @@ public class CardUIData : MonoBehaviour
     [SerializeField] private Image _skillIconImage;
     [SerializeField] private TextMeshProUGUI _skillNameText;
     [SerializeField] private TextMeshProUGUI _skillDescriptionText;
-    [SerializeField] private RectTransform _fadeFrame;
-    private Image _mainCardImage;
-
+    [SerializeField] private DotweenSettings _dotweenSettings;
+    private CanvasGroup _canvasGroup;
     private void Start()
     {
-        _mainCardImage = GetComponent<Image>();
+        _canvasGroup = GetComponent<CanvasGroup>();
     }
 
     public void ReceiveCardData(SkillUIData skillUIData)
@@ -24,14 +23,12 @@ public class CardUIData : MonoBehaviour
         _skillDescriptionText.text = skillUIData.SkillDescription;
     }
 
-    public void FadeOut()
+    public void FadeOut(float value)
     {
-        _fadeFrame.gameObject.SetActive(true);
-        _mainCardImage.DOFillAmount(0, 1);
-        _fadeFrame.DOAnchorPosY(360, 1)
+        _canvasGroup.DOFade(value, _dotweenSettings.Duration)
             .OnComplete(delegate
             {
-                _fadeFrame.gameObject.SetActive(false);
+                transform.DOMoveY(3000, 0.5f);
             });
     }
 }
