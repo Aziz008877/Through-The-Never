@@ -7,7 +7,7 @@ public class Chest : MonoBehaviour, IInteractable
     [field: SerializeField] public Transform InteractionUI { get; set; }
     [SerializeField] private Transform _chestUp;
     [SerializeField] private DotweenSettings _dotweenSettings;
-    public event Action OnChestOpened;
+    public Action OnChestOpened;
     public void PerformAction(GameObject player)
     {
         _chestUp
