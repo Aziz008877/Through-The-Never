@@ -1,27 +1,25 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using DG.Tweening;
+using Zenject;
 
-[RequireComponent(typeof(PlayerInput))]
-public class PlayerDash : MonoBehaviour
+public class PlayerDash : BaseSkill
 {
     [Header("Dash")]
     [SerializeField] private float _dashDistance = 5f;
     [SerializeField] private float _dashDuration = 0.2f;
     [SerializeField] private float _dashCooldown = 1f;
-
+    [SerializeField] private ParticleSystem _dashParticles;
+    [SerializeField] private Transform _player;
+    [Inject] private PlayerMove _playerMove;
+    [Inject] private PlayerInput _playerInput;
     private bool _canDash = true;
     private Tween _dashTween;
-    private PlayerMove _playerMove;
-    private PlayerAnimator _playerAnimator;
-    private PlayerInput _playerInput;
     public Action OnPlayerDash;
-    private void Start()
+    private void Awake()
     {
-        _playerInput = GetComponent<PlayerInput>();
         _playerInput.OnPlayerDash += HandleDash;
-        _playerMove = GetComponent<PlayerMove>();
-        _playerAnimator = GetComponent<PlayerAnimator>();
     }
 
     private void HandleDash()
@@ -34,14 +32,16 @@ public class PlayerDash : MonoBehaviour
         if (!_canDash) return;
 
         if (moveDir == Vector3.zero)
-            moveDir = transform.forward;
+            moveDir = _player.forward;
         
         _canDash = false;
         _dashTween?.Kill();
 
-        Vector3 dashTarget = transform.position + moveDir.normalized * _dashDistance;
+        Vector3 dashTarget = _player.position + moveDir.normalized * _dashDistance;
         OnPlayerDash?.Invoke();
-        _dashTween = transform.DOMove(dashTarget, _dashDuration)
+        _dashParticles.Play();
+
+        _dashTween = _player.DOMove(dashTarget, _dashDuration)
             .SetEase(Ease.OutQuad)
             .OnComplete(delegate
             {

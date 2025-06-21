@@ -1,13 +1,14 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private Fountain _fountain;
-    private PlayerState _playerState;
-    private PlayerDash _playerDash;
-    private PlayerMove _playerMove;
+    [Inject] private PlayerState _playerState;
+    [Inject] private PlayerDash _playerDash;
+    [Inject] private PlayerMove _playerMove;
     private readonly int _isMoving = Animator.StringToHash("IsMoving");
     private readonly int _isRunning = Animator.StringToHash("IsRunning");
     private readonly int _isCrouching = Animator.StringToHash("IsCrouching");
@@ -20,11 +21,6 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Awake()
     {
-        _playerDash = GetComponent<PlayerDash>();
-        _playerMove = GetComponent<PlayerMove>();
-        _playerState = GetComponent<PlayerState>();
-        _playerMove = GetComponent<PlayerMove>();
-        
         _fountain.OnPlayerHealing += PlayerSitState;
         _playerDash.OnPlayerDash += Dash;
         _playerMove.OnPlayerMove += ReceivePlayerMoveState;

@@ -8,10 +8,12 @@ public class Fireball : MonoBehaviour
     [SerializeField] private ParticleSystem _fireballParticles;
     [SerializeField] private ParticleSystem _fireballHit;
     [SerializeField] private float _speed;
-
-    public void Init()
+    private float _damage;
+    public void Init(float damage, float duration)
     {
+        _damage = damage;
         _castParticles.Play();
+        Invoke(nameof(DestroyFireball), duration);
     }
     private void Update()
     {
@@ -19,6 +21,12 @@ public class Fireball : MonoBehaviour
     }
 
     private async void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.name);
+        DestroyFireball();
+    }
+
+    private async void DestroyFireball()
     {
         _fireballHit.Play();
         _fireballParticles.gameObject.SetActive(false);

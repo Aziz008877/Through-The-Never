@@ -1,16 +1,17 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
+using Zenject;
 
 public class CardHandler : MonoBehaviour
 {
     [SerializeField] private CardUIData[] _allCards;
-    [SerializeField] private SkillData[] _skillDatas;
+    [SerializeField] private SkillUIData[] _skillDatas;
     [SerializeField] private Chest _chest;
     [SerializeField] private CameraShake _cameraShake;
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private DotweenSettings _dotweenSettings;
-
+    [Inject] private PlayerSkillHandler _playerSkillHandler;
     private void Awake()
     {
         _chest.OnChestOpened += OnChestInteraction;
@@ -46,5 +47,15 @@ public class CardHandler : MonoBehaviour
     public void ApplySkill(int skillID)
     {
         _cameraShake.Shake();
+        /*_playerSkillHandler.ApplySelectedSkill(skillID);
+        
+        for (int i = 0; i < _allCards.Length; i++)
+        {
+            if (i == skillID)
+            {
+                continue;
+            }
+            _allCards[i].FadeOut();
+        }*/
     }
 }

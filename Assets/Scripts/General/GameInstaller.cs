@@ -7,5 +7,9 @@ public class GameInstaller : MonoInstaller
         Container.Bind<PlayerInput>().FromComponentInHierarchy().AsSingle();
         Container.Bind<PlayerAnimator>().FromComponentInHierarchy().AsSingle();
         Container.Bind<CameraShake>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<PlayerDash>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<PlayerMove>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<PlayerSkillHandler>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<FireballSkill>().FromComponentInHierarchy().AsSingle();
     }
 }
