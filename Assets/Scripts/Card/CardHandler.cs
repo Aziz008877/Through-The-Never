@@ -7,10 +7,9 @@ public class CardHandler : MonoBehaviour
     [SerializeField] private CardUIData[] _allCards;
     [SerializeField] private SkillData[] _skillDatas;
     [SerializeField] private Chest _chest;
+    [SerializeField] private CameraShake _cameraShake;
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private DotweenSettings _dotweenSettings;
-
-    private bool _cardsShown = false;
 
     private void Awake()
     {
@@ -24,15 +23,7 @@ public class CardHandler : MonoBehaviour
 
     private void OnChestInteraction()
     {
-        if (!_cardsShown)
-        {
-            ShowCards();
-            _cardsShown = true;
-        }
-        else
-        {
-            ApplySkills();
-        }
+        ShowCards();
     }
 
     private void ShowCards()
@@ -52,14 +43,8 @@ public class CardHandler : MonoBehaviour
         });
     }
 
-    private void ApplySkills()
+    public void ApplySkill(int skillID)
     {
-        foreach (var skill in _skillDatas)
-        {
-            Debug.Log("Skill applied: " + skill.SkillName);
-            // Вставь здесь настоящую логику применения навыков
-        }
-
-        _canvasGroup.DOFade(0, 0.5f);
+        _cameraShake.Shake();
     }
 }

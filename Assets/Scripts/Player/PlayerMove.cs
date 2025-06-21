@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _crouchSpeed = 3f;
     [SerializeField] private float _rotationSpeed = 10f;
     [SerializeField] private Camera _mainCamera;
-
+    public Vector3 LastMoveDirection { get; private set; } = Vector3.forward;
     private PlayerInput _playerInput;
     private float _speed;
     private bool _isMoving;
@@ -53,7 +53,7 @@ public class PlayerMove : MonoBehaviour
         RotateTowardsMouse();
         Vector3 inputDirection = new Vector3(moveInput.x, 0f, moveInput.y);
         Vector3 moveDir = Quaternion.Euler(0f, transform.eulerAngles.y, 0f) * inputDirection;
-        
+        LastMoveDirection = moveDir;
         if (_isMoving)
         {
             transform.position += moveDir.normalized * _speed * Time.deltaTime;

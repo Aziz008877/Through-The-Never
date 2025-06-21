@@ -5,7 +5,8 @@ public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private Animator _playerAnimator;
     [SerializeField] private Fountain _fountain;
-    [SerializeField] private PlayerState _playerState;
+    private PlayerState _playerState;
+    private PlayerDash _playerDash;
     private PlayerMove _playerMove;
     private readonly int _isMoving = Animator.StringToHash("IsMoving");
     private readonly int _isRunning = Animator.StringToHash("IsRunning");
@@ -15,10 +16,20 @@ public class PlayerAnimator : MonoBehaviour
     private readonly int _basicAttack = Animator.StringToHash("BasicAttack");
     private readonly int _isShield = Animator.StringToHash("IsShield");
     private readonly int _isSitting = Animator.StringToHash("IsSitting");
+    private readonly int _dash = Animator.StringToHash("Dash");
 
     private void Awake()
     {
+        _playerDash = GetComponent<PlayerDash>();
+        _playerMove = GetComponent<PlayerMove>();
+        _playerState = GetComponent<PlayerState>();
+        _playerMove = GetComponent<PlayerMove>();
+        
         _fountain.OnPlayerHealing += PlayerSitState;
+        _playerDash.OnPlayerDash += Dash;
+        _playerMove.OnPlayerMove += ReceivePlayerMoveState;
+        _playerMove.OnPlayerSprint += Sprint;
+        _playerMove.OnPlayerCrouch += Crouch;
     }
 
     private void PlayerSitState(bool sitState)
@@ -32,12 +43,9 @@ public class PlayerAnimator : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Dash()
     {
-        _playerMove = GetComponent<PlayerMove>();
-        _playerMove.OnPlayerMove += ReceivePlayerMoveState;
-        _playerMove.OnPlayerSprint += Sprint;
-        _playerMove.OnPlayerCrouch += Crouch;
+        _playerAnimator.SetTrigger(_dash);
     }
 
     private void Crouch(bool crouchState)
@@ -82,5 +90,6 @@ public class PlayerAnimator : MonoBehaviour
     {
         _playerMove.OnPlayerMove -= ReceivePlayerMoveState;
         _fountain.OnPlayerHealing -= PlayerSitState;
+        _playerDash.OnPlayerDash -= Dash;
     }
 }

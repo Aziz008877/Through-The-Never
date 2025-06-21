@@ -13,7 +13,7 @@ public class PlayerInput : MonoBehaviour
     public Action<bool> OnShieldPressed;
     public Action OnPlayerJump;
     public Action OnPlayerPressedBasic;
-    public Action OnPlayerAOE;
+    public Action OnPlayerDash;
     private void Update()
     {
         if (_playerState.CurrentPlayerState == CurrentPlayerState.CanControl)
@@ -21,7 +21,7 @@ public class PlayerInput : MonoBehaviour
             Move();
             BaseSkill();
             Shield();
-            AOEDamage();
+            Dash();
         }
     }
 
@@ -54,11 +54,11 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
-    private void AOEDamage()
+    private void Dash()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            OnPlayerAOE?.Invoke();
+            OnPlayerDash?.Invoke();
         }
     }
 
