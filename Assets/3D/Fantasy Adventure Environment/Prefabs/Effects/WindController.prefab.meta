@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2b921f83e3023db489286b9d6df19b96
+timeCreated: 1494934283
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Prefabs/Effects/WindController.prefab
+  uploadId: 578088

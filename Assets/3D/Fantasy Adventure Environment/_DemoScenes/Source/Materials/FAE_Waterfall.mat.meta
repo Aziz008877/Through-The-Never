@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: db3bf6537201aff4ab6c1f79064757f7
+timeCreated: 1495804829
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/_DemoScenes/Source/Materials/FAE_Waterfall.mat
+  uploadId: 578088

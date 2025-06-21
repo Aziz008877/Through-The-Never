@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6e74714cd6a04074a96116e9f27455aa
+timeCreated: 1521302255
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/_DemoScenes/Source/FAE_Waterfall.shader
+  uploadId: 578088

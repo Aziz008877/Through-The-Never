@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6f7eb092bd8c5744984d49b87e9aeafc
+timeCreated: 1470398566
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Materials/Effects/FAE_AdditiveParticle.mat
+  uploadId: 578088

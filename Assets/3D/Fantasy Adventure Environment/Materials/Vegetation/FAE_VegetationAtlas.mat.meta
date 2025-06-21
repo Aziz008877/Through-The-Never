@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a9d90c381090115459560756b8258e21
+timeCreated: 1490272373
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Materials/Vegetation/FAE_VegetationAtlas.mat
+  uploadId: 578088

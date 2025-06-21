@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7d857d9d2cb6bb043870f6779f84ef15
+timeCreated: 1581416245
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/_DemoScenes/Source/Materials/StandardTerrain.mat
+  uploadId: 578088

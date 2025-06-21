@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 346fd39ddd4c33642b14604713048679
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 36300000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/_DemoScenes/FAE_Demo1/OcclusionCullingData.asset
+  uploadId: 578088

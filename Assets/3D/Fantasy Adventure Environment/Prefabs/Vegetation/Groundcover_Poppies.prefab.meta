@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0c5cb9b55667d0249ba6b29b934f2bb0
+timeCreated: 1491491589
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Prefabs/Vegetation/Groundcover_Poppies.prefab
+  uploadId: 578088

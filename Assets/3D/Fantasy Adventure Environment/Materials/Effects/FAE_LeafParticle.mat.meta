@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: eb90cfcfbc575f6489371b97e180f526
+timeCreated: 1496319857
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Materials/Effects/FAE_LeafParticle.mat
+  uploadId: 578088

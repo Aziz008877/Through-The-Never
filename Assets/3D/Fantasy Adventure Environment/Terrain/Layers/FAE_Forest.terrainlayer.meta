@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a5ff8d4887721f444a53456d79ca357d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8574412962073106934
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Terrain/Layers/FAE_Forest.terrainlayer
+  uploadId: 578088

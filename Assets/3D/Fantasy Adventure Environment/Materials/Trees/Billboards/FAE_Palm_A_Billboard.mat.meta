@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e5156e95f9b761f4b957bf9785c73638
+timeCreated: 1490620574
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Materials/Trees/Billboards/FAE_Palm_A_Billboard.mat
+  uploadId: 578088

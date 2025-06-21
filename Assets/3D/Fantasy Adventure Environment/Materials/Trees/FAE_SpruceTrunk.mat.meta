@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3e6da3e84e53ed44a98380507f6e1e64
+timeCreated: 1490286462
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Materials/Trees/FAE_SpruceTrunk.mat
+  uploadId: 578088

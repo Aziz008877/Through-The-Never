@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 67db05b848ced8c4e88dea90aaaefd0f
+timeCreated: 1508853551
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Materials/Objects/FAE_Branches.mat
+  uploadId: 578088

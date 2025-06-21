@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1b1b906a1ee89014a8e4febf58b815e3
+timeCreated: 1501856600
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Materials/Trees/FAE_PalmBark.mat
+  uploadId: 578088

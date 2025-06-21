@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 441a676d66e6f164b898797864bae8c4
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Editor/sc.fae.editor.asmdef
+  uploadId: 578088

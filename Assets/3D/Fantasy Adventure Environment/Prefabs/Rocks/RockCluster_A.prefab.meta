@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0a9df222064d4534da4279115fea376b
+timeCreated: 1496079170
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Prefabs/Rocks/RockCluster_A.prefab
+  uploadId: 578088

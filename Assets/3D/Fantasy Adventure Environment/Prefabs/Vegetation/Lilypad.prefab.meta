@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 128bb41956725cf4397cae0c0e42b526
+timeCreated: 1496398232
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Prefabs/Vegetation/Lilypad.prefab
+  uploadId: 578088

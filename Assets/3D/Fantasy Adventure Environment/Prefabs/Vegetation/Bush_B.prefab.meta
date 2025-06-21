@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e979b610c33ad974ea7b7efea2115e3a
+timeCreated: 1490274112
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Prefabs/Vegetation/Bush_B.prefab
+  uploadId: 578088

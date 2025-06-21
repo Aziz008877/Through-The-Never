@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: a532fad6a55bf024a87605fe1efeeb67
+timeCreated: 1516359143
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/PostProcessingAssets/FAE_PostProcessingProfile_v2.asset
+  uploadId: 578088

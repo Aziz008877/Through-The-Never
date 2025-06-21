@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e70352c946d2d3249b00e9e0a8b5a18f
+timeCreated: 1495445036
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Prefabs/Trees/FAE_Birch_C.prefab
+  uploadId: 578088

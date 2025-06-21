@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 00c305d1767ffb741905e18493a33c9b
+timeCreated: 1523784234
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70354
+  packageName: Fantasy Adventure Environment
+  packageVersion: 1.5.6
+  assetPath: Assets/Fantasy Adventure Environment/Shaders/VS_InstancedIndirect.cginc
+  uploadId: 578088
