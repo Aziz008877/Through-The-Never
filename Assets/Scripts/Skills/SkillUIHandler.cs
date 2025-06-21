@@ -4,7 +4,7 @@ public class SkillUIHandler : MonoBehaviour
 {
     [SerializeField] private GameObject[] _skillsVisuals;
 
-    private void ShowUISkill(int id)
+    public void ShowUISkill(int id)
     {
         _skillsVisuals[id].SetActive(true);
     }

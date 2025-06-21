@@ -11,5 +11,7 @@ public class GameInstaller : MonoInstaller
         Container.Bind<PlayerMove>().FromComponentInHierarchy().AsSingle();
         Container.Bind<PlayerSkillHandler>().FromComponentInHierarchy().AsSingle();
         Container.Bind<FireballSkill>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<FireAOESkill>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<SkillUIHandler>().FromComponentInHierarchy().AsSingle();
     }
 }

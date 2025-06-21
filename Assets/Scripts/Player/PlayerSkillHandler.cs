@@ -5,12 +5,14 @@ public class PlayerSkillHandler : MonoBehaviour
 {
     [Inject] private PlayerDash _playerDash;
     [Inject] private FireballSkill _fireballSkill;
+    [Inject] private SkillUIHandler _skillUIHandler;
     public void ApplySelectedSkill(int skillID)
     {
         switch (skillID)
         {
             case 0:
                 _playerDash.gameObject.SetActive(true);
+                _skillUIHandler.ShowUISkill(skillID);
                 break;
             
             case 1:

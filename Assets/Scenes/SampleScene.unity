@@ -2594,6 +2594,7 @@ GameObject:
   - component: {fileID: 617802703}
   - component: {fileID: 617802702}
   - component: {fileID: 617802706}
+  - component: {fileID: 617802707}
   m_Layer: 0
   m_Name: Card (1)
   m_TagString: Untagged
@@ -2639,7 +2640,9 @@ MonoBehaviour:
   _skillIconImage: {fileID: 1333216660}
   _skillNameText: {fileID: 374470785}
   _skillDescriptionText: {fileID: 720820261}
-  _fadeFrame: {fileID: 1227246738}
+  _dotweenSettings:
+    Duration: 0.2
+    AnimationType: 1
 --- !u!114 &617802703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2746,6 +2749,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &617802707
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617802700}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &665205464
 GameObject:
   m_ObjectHideFlags: 0
@@ -3783,6 +3798,7 @@ Transform:
   m_Children:
   - {fileID: 879553076}
   - {fileID: 1260166566}
+  - {fileID: 1676442964}
   m_Father: {fileID: 1726106588}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &850157266
@@ -5223,6 +5239,7 @@ GameObject:
   - component: {fileID: 1245978972}
   - component: {fileID: 1245978971}
   - component: {fileID: 1245978975}
+  - component: {fileID: 1245978976}
   m_Layer: 0
   m_Name: Card (2)
   m_TagString: Untagged
@@ -5268,7 +5285,9 @@ MonoBehaviour:
   _skillIconImage: {fileID: 515438825}
   _skillNameText: {fileID: 1315856062}
   _skillDescriptionText: {fileID: 1439085186}
-  _fadeFrame: {fileID: 786998152}
+  _dotweenSettings:
+    Duration: 0.2
+    AnimationType: 1
 --- !u!114 &1245978972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5375,6 +5394,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &1245978976
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245978969}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1250965043
 GameObject:
   m_ObjectHideFlags: 0
@@ -6637,8 +6668,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillsVisuals:
-  - {fileID: 1632419181}
-  - {fileID: 1582587842}
   - {fileID: 315113700}
 --- !u!1 &1472129926
 GameObject:
@@ -6672,6 +6701,11 @@ Transform:
   - {fileID: 246564114}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!198 &1483015132 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2866496163826093500, guid: 8a915dbbc4b23bf4f931629039cfbf6f, type: 3}
+  m_PrefabInstance: {fileID: 373643255}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1488107886
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7214,6 +7248,7 @@ GameObject:
   - component: {fileID: 1560239393}
   - component: {fileID: 1560239394}
   - component: {fileID: 1560239395}
+  - component: {fileID: 1560239396}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -7321,7 +7356,9 @@ MonoBehaviour:
   _skillIconImage: {fileID: 557599243}
   _skillNameText: {fileID: 1933429607}
   _skillDescriptionText: {fileID: 1575245470}
-  _fadeFrame: {fileID: 1488107887}
+  _dotweenSettings:
+    Duration: 0.2
+    AnimationType: 1
 --- !u!114 &1560239395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7366,6 +7403,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!225 &1560239396
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1560239389}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1001 &1564362784
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7847,6 +7896,57 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 4, z: 4}
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!1 &1676442963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1676442964}
+  - component: {fileID: 1676442965}
+  m_Layer: 0
+  m_Name: FireAOESkill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1676442964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676442963}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 840037107}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1676442965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676442963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89eeb659b4f4ac140aa9083a20446e3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillUIData: {fileID: 11400000, guid: 3785aaf7e3ad34e4da4272b154463348, type: 2}
+  _skillType: 0
+  _skillDamageType: 0
+  _coolDown: 0
+  _damage: 0
+  _duration: 0
+  _aoeParticles: {fileID: 1483015132}
 --- !u!1 &1678058327
 GameObject:
   m_ObjectHideFlags: 0

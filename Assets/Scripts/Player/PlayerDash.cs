@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using UnityEngine;
 using DG.Tweening;
 using Zenject;
@@ -14,6 +13,7 @@ public class PlayerDash : BaseSkill
     [SerializeField] private Transform _player;
     [Inject] private PlayerMove _playerMove;
     [Inject] private PlayerInput _playerInput;
+    [Inject] private FireAOESkill _fireAoeSkillSkill;
     private bool _canDash = true;
     private Tween _dashTween;
     public Action OnPlayerDash;
@@ -45,6 +45,7 @@ public class PlayerDash : BaseSkill
             .SetEase(Ease.OutQuad)
             .OnComplete(delegate
             {
+                _fireAoeSkillSkill.PerformSkill(_playerMove.gameObject);
                 Invoke(nameof(ResetDash), _dashCooldown);
             });
     }
