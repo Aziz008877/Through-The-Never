@@ -13,5 +13,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<FireballSkill>().FromComponentInHierarchy().AsSingle();
         Container.Bind<FireAOESkill>().FromComponentInHierarchy().AsSingle();
         Container.Bind<SkillUIHandler>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<FadeInOutEffect>().FromComponentInHierarchy().AsSingle();
     }
 }
