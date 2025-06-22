@@ -1,0 +1,29 @@
+fileFormatVersion: 2
+guid: 9b3978dc1aa1792448546b7c9bc140d7
+AudioImporter:
+  externalObjects: {}
+  serializedVersion: 6
+  defaultSettings:
+    loadType: 0
+    sampleRateSetting: 0
+    sampleRateOverride: 44100
+    compressionFormat: 1
+    quality: 1
+    conversionMode: 0
+  platformSettingOverrides: {}
+  forceToMono: 0
+  normalize: 1
+  preloadAudioData: 1
+  loadInBackground: 0
+  ambisonic: 0
+  3D: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 284695
+  packageName: Combat Magic Spells - Volume II
+  packageVersion: 1.0
+  assetPath: Assets/CombatMagicSpellsVIISFX/Dark5/SFX_Spell01Layer02.wav
+  uploadId: 766231

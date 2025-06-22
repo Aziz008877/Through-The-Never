@@ -14,7 +14,11 @@ public class TaskHandler : MonoBehaviour
 
     private void Awake()
     {
-        _fountain.OnPlayerHealing += HealingTask;
+        if (_fountain != null)
+        {
+            _fountain.OnPlayerHealing += HealingTask;
+        }
+        
         _chest.OnChestOpened += ChestTask;
     }
 
@@ -30,7 +34,11 @@ public class TaskHandler : MonoBehaviour
 
     private void OnDestroy()
     {
-        _fountain.OnPlayerHealing -= HealingTask;
+        if (_fountain != null)
+        {
+            _fountain.OnPlayerHealing -= HealingTask;
+        }
+        
         _chest.OnChestOpened -= ChestTask;
     }
 }

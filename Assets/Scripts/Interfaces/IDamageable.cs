@@ -1,6 +1,11 @@
+using System;
 using UnityEngine;
 
-public interface IDamageable 
+public interface IDamageable
 {
-    
+    float CurrentHP { get; set; }
+    float MinHP { get; set; }
+    float MaxHP { get; set; }
+    Action<Transform> OnEnemyDead { get; set; }
+    void ReceiveDamage(float damageValue, SkillDamageType type);
 }

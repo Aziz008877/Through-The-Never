@@ -8,6 +8,7 @@ public class BaseSkill : MonoBehaviour
     [SerializeField] protected float _coolDown;
     [SerializeField] protected float _damage;
     [SerializeField] protected float _duration;
+    [SerializeField] protected float _radius;
     public virtual void Init()
     {
         

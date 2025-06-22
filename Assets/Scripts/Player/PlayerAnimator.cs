@@ -21,7 +21,11 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Awake()
     {
-        _fountain.OnPlayerHealing += PlayerSitState;
+        if (_fountain != null)
+        {
+            _fountain.OnPlayerHealing += PlayerSitState;
+        }
+        
         _playerDash.OnPlayerDash += Dash;
         _playerMove.OnPlayerMove += ReceivePlayerMoveState;
         _playerMove.OnPlayerSprint += Sprint;
@@ -84,8 +88,12 @@ public class PlayerAnimator : MonoBehaviour
     
     private void OnDestroy()
     {
+        if (_fountain != null)
+        {
+            _fountain.OnPlayerHealing -= PlayerSitState;
+        }
+        
         _playerMove.OnPlayerMove -= ReceivePlayerMoveState;
-        _fountain.OnPlayerHealing -= PlayerSitState;
         _playerDash.OnPlayerDash -= Dash;
     }
 }

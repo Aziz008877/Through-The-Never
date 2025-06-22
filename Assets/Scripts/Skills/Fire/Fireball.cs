@@ -1,17 +1,17 @@
-using System;
 using System.Threading.Tasks;
 using UnityEngine;
-
 public class Fireball : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _castParticles;
     [SerializeField] private ParticleSystem _fireballParticles;
     [SerializeField] private ParticleSystem _fireballHit;
     [SerializeField] private float _speed;
+    private SkillDamageType _skillDamageType;
     private float _damage;
-    public void Init(float damage, float duration)
+    public void Init(float damage, float duration, SkillDamageType skillDamageType)
     {
         _damage = damage;
+        _skillDamageType = skillDamageType;
         _castParticles.Play();
         Invoke(nameof(DestroyFireball), duration);
     }
@@ -20,10 +20,13 @@ public class Fireball : MonoBehaviour
         transform.position += transform.forward * _speed * Time.deltaTime;
     }
 
-    private async void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.name);
-        DestroyFireball();
+        if (other.TryGetComponent(out IDamageable damageable))
+        {
+            damageable.ReceiveDamage(_damage, _skillDamageType);
+            DestroyFireball();
+        }
     }
 
     private async void DestroyFireball()

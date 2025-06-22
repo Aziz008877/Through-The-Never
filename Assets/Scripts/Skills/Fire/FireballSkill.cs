@@ -5,6 +5,7 @@ public class FireballSkill : BaseSkill
     [SerializeField] private Fireball _fireball;
     [SerializeField] private Transform _spawnParent;
     [SerializeField] private FireballMode _fireballMode;
+    [SerializeField] private AudioSource _fireballSound;
     [Inject] private PlayerAnimator _playerAnimator;
     [Inject] private CameraShake _cameraShake;
     [Inject] private PlayerInput _playerInput;
@@ -15,26 +16,24 @@ public class FireballSkill : BaseSkill
 
     public override void PerformSkill()
     {
-        if (_fireballMode == FireballMode.Single)
+        _playerAnimator.CastBasics();
+        _cameraShake.Shake();
+        _fireballSound.pitch = Random.Range(0.9f, 1.5f);
+        _fireballSound.PlayOneShot(_fireballSound.clip);
+        SpawnFireball(_spawnParent.rotation);
+
+        if (_fireballMode == FireballMode.Triple)
         {
-            _playerAnimator.CastBasics();
-            Fireball fireball = Instantiate(_fireball, _spawnParent.position, _spawnParent.rotation);
-            _cameraShake.Shake();
-            fireball.Init(_damage, _duration);
+            float angleOffset = 15f;
+            SpawnFireball(Quaternion.Euler(0f, _spawnParent.eulerAngles.y - angleOffset, 0f));
+            SpawnFireball(Quaternion.Euler(0f, _spawnParent.eulerAngles.y + angleOffset, 0f));
         }
-        else if (_fireballMode == FireballMode.Triple)
-        {
-            Fireball center = Instantiate(_fireball, _spawnParent.position, _spawnParent.rotation);
-            center.Init(_damage, _duration);
-            
-            Quaternion leftRotation = Quaternion.Euler(0f, _spawnParent.eulerAngles.y - 15f, 0f);
-            Fireball left = Instantiate(_fireball, _spawnParent.position, leftRotation);
-            left.Init(_damage, _duration);
-            
-            Quaternion rightRotation = Quaternion.Euler(0f, _spawnParent.eulerAngles.y + 15f, 0f);
-            Fireball right = Instantiate(_fireball, _spawnParent.position, rightRotation);
-            right.Init(_damage, _duration);
-        }
+    }
+
+    private void SpawnFireball(Quaternion rotation)
+    {
+        Fireball instance = Instantiate(_fireball, _spawnParent.position, rotation);
+        instance.Init(_damage, _duration, _skillDamageType);
     }
 
     public override void UpdateSkill()

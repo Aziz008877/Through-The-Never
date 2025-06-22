@@ -62,6 +62,8 @@ public class CardHandler : MonoBehaviour
             .OnComplete(delegate
             {
                 _canvasGroup.DOFade(0, 0.5f);
+                _canvasGroup.blocksRaycasts = false;
+                _canvasGroup.interactable = false;
             });
     }
 }

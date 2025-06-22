@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using DG.Tweening;
 using Zenject;
+using Random = UnityEngine.Random;
 
 public class PlayerDash : BaseSkill
 {
@@ -11,6 +12,7 @@ public class PlayerDash : BaseSkill
     [SerializeField] private float _dashCooldown = 1f;
     [SerializeField] private ParticleSystem _dashParticles;
     [SerializeField] private Transform _player;
+    [SerializeField] private AudioSource _dashSound;
     [Inject] private PlayerMove _playerMove;
     [Inject] private PlayerInput _playerInput;
     [Inject] private FireAOESkill _fireAoeSkillSkill;
@@ -36,7 +38,8 @@ public class PlayerDash : BaseSkill
         
         _canDash = false;
         _dashTween?.Kill();
-
+        _dashSound.pitch = Random.Range(0.9f, 1.5f);
+        _dashSound.PlayOneShot(_dashSound.clip);
         Vector3 dashTarget = _player.position + moveDir.normalized * _dashDistance;
         OnPlayerDash?.Invoke();
         _dashParticles.Play();
