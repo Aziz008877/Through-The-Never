@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12e1cac27ba9aa43839520ab58ec9e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damageTextPrefab: {fileID: 0}
+  _damageTextPrefab: {fileID: 423683966747345815, guid: 26097ffacbb914a458d7f7c9950dbc42, type: 3}
   _poolSize: 20
 --- !u!1 &16479547
 GameObject:
@@ -8887,9 +8887,6 @@ MonoBehaviour:
       m_Calls: []
   _hpFillValue: {fileID: 777091934}
   _edgeGlowEffect: {fileID: 1552967853}
-  _dotweenSettings:
-    Duration: 3
-    AnimationType: 1
 --- !u!114 &1726106597
 MonoBehaviour:
   m_ObjectHideFlags: 0

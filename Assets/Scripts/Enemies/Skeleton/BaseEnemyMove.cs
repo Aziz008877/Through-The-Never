@@ -1,17 +1,19 @@
 using UnityEngine;
 using UnityEngine.AI;
-public class EnemyMove : MonoBehaviour
+public class BaseEnemyMove : MonoBehaviour
 {
     [SerializeField] private Transform _target;
     [SerializeField] private float _attackDistance = 2f;
     [SerializeField] private float _attackCooldown = 1.5f;
     private NavMeshAgent _agent;
     private BaseEnemyAnimation _enemyAnimation;
+    private BaseEnemyAttack _enemyAttack;
     private float _lastAttackTime;
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
         _enemyAnimation = GetComponent<BaseEnemyAnimation>();
+        _enemyAttack = GetComponent<BaseEnemyAttack>();
     }
 
     private void Update()
@@ -39,11 +41,7 @@ public class EnemyMove : MonoBehaviour
 
     private void Attack()
     {
+        _enemyAttack.PrepareAttack(_target);
         _enemyAnimation.AttackAnimation();
-    }
-
-    public void SetTarget(Transform newTarget)
-    {
-        _target = newTarget;
     }
 }

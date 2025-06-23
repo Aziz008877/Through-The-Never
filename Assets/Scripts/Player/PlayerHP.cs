@@ -12,7 +12,6 @@ public class PlayerHP : MonoBehaviour
     [Header("HP Visuals")]
     [SerializeField] private Image _hpFillValue;
     [SerializeField] private GameObject _edgeGlowEffect;
-    [SerializeField] private DotweenSettings _dotweenSettings;
 
     public Action<float> OnHpValueUpdated;
     public Action OnPlayerDead;
@@ -27,14 +26,8 @@ public class PlayerHP : MonoBehaviour
     {
         ClampHP();
         _edgeGlowEffect.SetActive(true);
-        _hpFillValue
-            .DOFillAmount(_currentHP / _maxHP, _dotweenSettings.Duration)
-            .SetEase(_dotweenSettings.AnimationType)
-            .OnComplete(delegate
-            {
-                _edgeGlowEffect.SetActive(false);
-            });
-        
+        _hpFillValue.fillAmount = _currentHP / _maxHP;
+
         OnHpValueUpdated?.Invoke(_currentHP);
         
         if (_currentHP <= _minHp)
@@ -50,7 +43,7 @@ public class PlayerHP : MonoBehaviour
         UpdateHP();
     }
 
-    private void ReceiveDamage(float damageValue)
+    public void ReceiveDamage(float damageValue)
     {
         _currentHP -= damageValue;
         UpdateHP();
