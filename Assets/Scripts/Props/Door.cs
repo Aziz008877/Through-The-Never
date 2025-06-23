@@ -10,7 +10,8 @@ public class Door : MonoBehaviour, IInteractable
     [SerializeField] private Color _inactiveColor, _activeColor;
     [SerializeField] private Chest _chest;
     [Inject] private FadeInOutEffect _fade;
-    private bool _canPerform = false;
+    [field: SerializeField] public bool CanInteract { get; set; }
+
     private void Awake()
     {
         _chest.OnChestOpened += ReceiveChestOpened;
@@ -19,13 +20,13 @@ public class Door : MonoBehaviour, IInteractable
 
     private void ReceiveChestOpened()
     {
-        _canPerform = true;
+        CanInteract = true;
         _doorMaterial.SetColor("_EmissionColor", _activeColor);
     }
 
     public void PerformAction(GameObject player)
     {
-        if (_canPerform)
+        if (CanInteract)
         {
             _fade.Fade(1);
         }

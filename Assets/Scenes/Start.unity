@@ -4431,6 +4431,7 @@ MonoBehaviour:
   _coolDown: 0
   _damage: 15
   _duration: 3
+  _radius: 0
   _fireball: {fileID: 6973602307963348459, guid: 99fb733145ff58d498833a89eaa8aff1, type: 3}
   _spawnParent: {fileID: 728627939}
   _fireballMode: 0
@@ -4821,6 +4822,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healValue: 100
   <InteractionUI>k__BackingField: {fileID: 1501836637}
+  <CanInteract>k__BackingField: 1
+  _healSFX: {fileID: 877999027}
 --- !u!65 &914916169
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6094,6 +6097,7 @@ MonoBehaviour:
   _coolDown: 1
   _damage: 0
   _duration: 0
+  _radius: 0
   _dashDistance: 5
   _dashDuration: 0.2
   _dashCooldown: 0.5
@@ -8601,6 +8605,7 @@ MonoBehaviour:
   _coolDown: 0
   _damage: 0
   _duration: 0
+  _radius: 0
   _aoeParticles: {fileID: 1483015132}
 --- !u!1 &1678058327
 GameObject:
@@ -9675,6 +9680,7 @@ MonoBehaviour:
   _inactiveColor: {r: 0.003921569, g: 0.011764706, b: 0.019607844, a: 1}
   _activeColor: {r: 40.304253, g: 18.560713, b: 10.076063, a: 1}
   _chest: {fileID: 919132148772704824}
+  <CanInteract>k__BackingField: 0
 --- !u!65 &1917452673
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10710,6 +10716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <InteractionUI>k__BackingField: {fileID: 1761871417}
+  <CanInteract>k__BackingField: 1
   _chestUp: {fileID: 3437883113055165657}
   _dotweenSettings:
     Duration: 1

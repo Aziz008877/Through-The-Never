@@ -5,17 +5,23 @@ using UnityEngine;
 public class Chest : MonoBehaviour, IInteractable
 {
     [field: SerializeField] public Transform InteractionUI { get; set; }
+    [field: SerializeField] public bool CanInteract { get; set; }
     [SerializeField] private Transform _chestUp;
     [SerializeField] private DotweenSettings _dotweenSettings;
     public Action OnChestOpened;
     public void PerformAction(GameObject player)
     {
-        _chestUp
-            .DOLocalRotate(new Vector3(-90, 0, 0), _dotweenSettings.Duration)
-            .SetEase(_dotweenSettings.AnimationType)
-            .OnComplete(delegate
-            {
-                OnChestOpened?.Invoke();
-            });
+        if (CanInteract)
+        {
+            CanInteract = false;
+            
+            _chestUp
+                .DOLocalRotate(new Vector3(-90, 0, 0), _dotweenSettings.Duration)
+                .SetEase(_dotweenSettings.AnimationType)
+                .OnComplete(delegate
+                {
+                    OnChestOpened?.Invoke();
+                });
+        }
     }
 }
