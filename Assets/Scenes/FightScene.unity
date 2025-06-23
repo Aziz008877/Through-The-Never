@@ -6933,6 +6933,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <InteractionUI>k__BackingField: {fileID: 194755008}
+  <CanInteract>k__BackingField: 0
   _chestUp: {fileID: 1166817847}
   _dotweenSettings:
     Duration: 1
@@ -7024,9 +7025,9 @@ MonoBehaviour:
   _skillType: 0
   _skillDamageType: 0
   _coolDown: 0
-  _damage: 0
+  _damage: 30
   _duration: 0
-  _radius: 0
+  _radius: 3
   _aoeParticles: {fileID: 1635077054}
 --- !u!1 &418489422
 GameObject:
@@ -24762,7 +24763,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8189179709687727534, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.02
+      value: -9.2
       objectReference: {fileID: 0}
     - target: {fileID: 8189179709687727534, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -24770,7 +24771,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8189179709687727534, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.97
+      value: 11.03
       objectReference: {fileID: 0}
     - target: {fileID: 8189179709687727534, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -24864,7 +24865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e299a5c93daeef4e87ade96b3647e30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentHP>k__BackingField: 50
+  <CurrentHP>k__BackingField: 10000
   <MinHP>k__BackingField: 0
   <MaxHP>k__BackingField: 100
 --- !u!95 &1010642284 stripped
@@ -24895,7 +24896,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -25240,6 +25241,7 @@ Transform:
   - {fileID: 2016357014}
   - {fileID: 436087288}
   - {fileID: 795231410}
+  - {fileID: 1223426571}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1117523933
@@ -25709,6 +25711,52 @@ Transform:
   m_Children:
   - {fileID: 1742036359}
   m_Father: {fileID: 1386508823}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1223426569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1223426571}
+  - component: {fileID: 1223426570}
+  m_Layer: 0
+  m_Name: DamageTextHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1223426570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223426569}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e12e1cac27ba9aa43839520ab58ec9e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageTextPrefab: {fileID: 423683966747345815, guid: 26097ffacbb914a458d7f7c9950dbc42, type: 3}
+  _poolSize: 20
+--- !u!4 &1223426571
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1223426569}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1095996387}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1240962458
 GameObject:
@@ -27825,7 +27873,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1709458004
 Transform:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using ModestTree;
 using UnityEngine;
 
 public class FireAOESkill : BaseSkill
@@ -16,6 +17,7 @@ public class FireAOESkill : BaseSkill
         {
             if (col.TryGetComponent(out IDamageable iDamageable))
             {
+                Debug.Log(col.name);
                 iDamageable.ReceiveDamage(_damage, _skillDamageType);
             }
         }

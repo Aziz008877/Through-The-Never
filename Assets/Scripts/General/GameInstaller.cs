@@ -14,5 +14,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<FireAOESkill>().FromComponentInHierarchy().AsSingle();
         Container.Bind<SkillUIHandler>().FromComponentInHierarchy().AsSingle();
         Container.Bind<FadeInOutEffect>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<DamageTextPool>().FromComponentInHierarchy().AsSingle();
     }
 }
