@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: eea634a3c397fb744b012e54a301c56d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 283690
+  packageName: Necromancer Army - Ghoul
+  packageVersion: 1.0
+  assetPath: Assets/SimpleAssets/Necromancers/Ghoul/Animation/GhoulController.controller
+  uploadId: 664701

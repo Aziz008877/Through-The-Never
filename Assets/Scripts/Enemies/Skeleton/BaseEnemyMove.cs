@@ -41,7 +41,7 @@ public class BaseEnemyMove : MonoBehaviour
 
     private void Attack()
     {
-        _enemyAttack.PrepareAttack(_target);
+        //_enemyAttack.PrepareAttack(_target);
         _enemyAnimation.AttackAnimation();
     }
 }

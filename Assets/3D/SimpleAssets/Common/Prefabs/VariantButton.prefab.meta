@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 68d8984c970d418439a3d7fe9f292b4d
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 283690
+  packageName: Necromancer Army - Ghoul
+  packageVersion: 1.0
+  assetPath: Assets/SimpleAssets/Common/Prefabs/VariantButton.prefab
+  uploadId: 664701

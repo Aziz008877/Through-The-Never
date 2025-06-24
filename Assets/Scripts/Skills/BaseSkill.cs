@@ -9,6 +9,8 @@ public class BaseSkill : MonoBehaviour
     [SerializeField] protected float _damage;
     [SerializeField] protected float _duration;
     [SerializeField] protected float _radius;
+    protected float _cooldownTimer = 0f;
+    public bool IsReady => _cooldownTimer <= 0f;
     public virtual void Init()
     {
         
@@ -21,17 +23,24 @@ public class BaseSkill : MonoBehaviour
     
     public virtual void PerformSkill()
     {
-        
+        _cooldownTimer = _coolDown;
     }
 
     public virtual void PerformSkill(GameObject player)
     {
-        
+        if (!IsReady) return;
+        _cooldownTimer = _coolDown;
     }
 
     public virtual void UpdateSkill()
     {
         
+    }
+    
+    protected virtual void Update()
+    {
+        if (_cooldownTimer > 0f)
+            _cooldownTimer -= Time.deltaTime;
     }
 }
 

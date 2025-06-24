@@ -4474,7 +4474,7 @@ MonoBehaviour:
   _skillUIData: {fileID: 11400000, guid: 3155a4652c739ad47913a4b7a7836947, type: 2}
   _skillType: 0
   _skillDamageType: 0
-  _coolDown: 0
+  _coolDown: 0.5
   _damage: 15
   _duration: 3
   _radius: 0
@@ -6146,7 +6146,6 @@ MonoBehaviour:
   _radius: 0
   _dashDistance: 5
   _dashDuration: 0.2
-  _dashCooldown: 0.5
   _dashParticles: {fileID: 1060545959544666048}
   _player: {fileID: 1726106588}
   _dashSound: {fileID: 1316482156}

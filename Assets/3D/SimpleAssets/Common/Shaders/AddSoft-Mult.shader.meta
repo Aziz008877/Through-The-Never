@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c73a1f0ce5066174ab2e764e034dff90
+timeCreated: 1506417688
+licenseType: Store
+ShaderImporter:
+  defaultTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 283690
+  packageName: Necromancer Army - Ghoul
+  packageVersion: 1.0
+  assetPath: Assets/SimpleAssets/Common/Shaders/AddSoft-Mult.shader
+  uploadId: 664701

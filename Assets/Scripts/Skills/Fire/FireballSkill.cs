@@ -13,10 +13,14 @@ public class FireballSkill : BaseSkill
     {
         _playerInput.OnPlayerPressedBasic += PerformSkill;
     }
-
+    
     public override void PerformSkill()
     {
-        _playerAnimator.CastBasics();
+        if (!IsReady) return;
+        
+        base.PerformSkill();
+        
+        //_playerAnimator.CastBasics();
         _cameraShake.Shake();
         _fireballSound.pitch = Random.Range(0.9f, 1.5f);
         _fireballSound.PlayOneShot(_fireballSound.clip);

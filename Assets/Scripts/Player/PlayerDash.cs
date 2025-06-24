@@ -9,14 +9,12 @@ public class PlayerDash : BaseSkill
     [Header("Dash")]
     [SerializeField] private float _dashDistance = 5f;
     [SerializeField] private float _dashDuration = 0.2f;
-    [SerializeField] private float _dashCooldown = 1f;
     [SerializeField] private ParticleSystem _dashParticles;
     [SerializeField] private Transform _player;
     [SerializeField] private AudioSource _dashSound;
     [Inject] private PlayerMove _playerMove;
     [Inject] private PlayerInput _playerInput;
     [Inject] private FireAOESkill _fireAoeSkillSkill;
-    private bool _canDash = true;
     private Tween _dashTween;
     public Action OnPlayerDash;
     private void Awake()
@@ -31,12 +29,12 @@ public class PlayerDash : BaseSkill
 
     private void TryDash(Vector3 moveDir)
     {
-        if (!_canDash) return;
-
+        if (!IsReady) return;
+        base.PerformSkill();
+        
         if (moveDir == Vector3.zero)
             moveDir = _player.forward;
         
-        _canDash = false;
         _dashTween?.Kill();
         _dashSound.pitch = Random.Range(0.9f, 1.5f);
         _dashSound.PlayOneShot(_dashSound.clip);
@@ -49,12 +47,6 @@ public class PlayerDash : BaseSkill
             .OnComplete(delegate
             {
                 _fireAoeSkillSkill.PerformSkill(_playerMove.gameObject);
-                Invoke(nameof(ResetDash), _dashCooldown);
             });
-    }
-    
-    private void ResetDash()
-    {
-        _canDash = true;
     }
 }
