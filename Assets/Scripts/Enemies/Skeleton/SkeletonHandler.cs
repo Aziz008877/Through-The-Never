@@ -1,16 +1,31 @@
+using System;
 using UnityEngine;
 
 public class SkeletonHandler : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private BaseEnemyHP[] _allSkeletons;
+
+    private void Awake()
     {
-        
+        foreach (var skeleton in _allSkeletons)
+        {
+            skeleton.OnEnemyDead += ReceiveEnemyDeadState;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ReceiveEnemyDeadState(Transform deadPosition)
     {
-        
+        throw new NotImplementedException();
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var skeleton in _allSkeletons)
+        {
+            if (skeleton != null)
+            {
+                skeleton.OnEnemyDead -= ReceiveEnemyDeadState;
+            }
+        }
     }
 }
