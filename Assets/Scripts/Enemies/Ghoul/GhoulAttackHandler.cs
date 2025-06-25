@@ -3,6 +3,7 @@ using UnityEngine;
 public class GhoulAttackHandler : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _leftHandSlashVFX, _rightHandSlashVFX;
+    [SerializeField] private GhoulFireball _ghoulFireball;
     [SerializeField] private Transform _target;
     [SerializeField] private float _damage, _meleeDamageDistance;
     [SerializeField] private CameraShake _cameraShake;
@@ -47,6 +48,7 @@ public class GhoulAttackHandler : MonoBehaviour
 
     public void RangeAttack()
     {
-        
+        _cameraShake.Shake();
+        Instantiate(_ghoulFireball, transform.position, transform.rotation);
     }
 }

@@ -25182,10 +25182,10 @@ PrefabInstance:
       addedObject: {fileID: 1010642285}
     - targetCorrespondingSourceObject: {fileID: 8858051749441068820, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1010642287}
+      addedObject: {fileID: 1010642289}
     - targetCorrespondingSourceObject: {fileID: 8858051749441068820, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1010642289}
+      addedObject: {fileID: 1010642290}
     - targetCorrespondingSourceObject: {fileID: 8858051749441068820, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1010642286}
@@ -25275,21 +25275,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1010642287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1010642281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecaa72567cc642248b69485b9ee31853, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _target: {fileID: 1603916744}
-  _attackDistance: 2
-  _attackCooldown: 1.5
 --- !u!4 &1010642288 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8189179709687727534, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
@@ -25309,6 +25294,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitDistance: 2
   _damage: 10
+--- !u!114 &1010642290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1010642281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c30dd36ce3d4b994d94573dbb6a83ceb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 1603916744}
+  _attackDistance: 2
+  _attackCooldown: 1.5
 --- !u!1 &1025706841
 GameObject:
   m_ObjectHideFlags: 0
@@ -39654,7 +39654,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 961803237283086986, guid: f2e88bd765545024e8e7fd868dca8642, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5833004339577864778, guid: f2e88bd765545024e8e7fd868dca8642, type: 3}
       propertyPath: m_Controller
@@ -39768,8 +39768,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 1603916744}
-  _attackDistance: 3
-  _attackCooldown: 1.5
 --- !u!195 &1891959510
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -39780,7 +39778,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 0
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -39806,6 +39804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _leftHandSlashVFX: {fileID: 1203353328}
   _rightHandSlashVFX: {fileID: 1177008249}
+  _ghoulFireball: {fileID: 7437796670867592194, guid: 62362e13adb8f2443986d5b41ba25252, type: 3}
   _target: {fileID: 1603916744}
   _damage: 15
   _meleeDamageDistance: 3
