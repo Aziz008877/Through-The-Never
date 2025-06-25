@@ -39681,10 +39681,10 @@ PrefabInstance:
       addedObject: {fileID: 1891959507}
     - targetCorrespondingSourceObject: {fileID: 961803237283086986, guid: f2e88bd765545024e8e7fd868dca8642, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1891959508}
+      addedObject: {fileID: 1891959512}
     - targetCorrespondingSourceObject: {fileID: 961803237283086986, guid: f2e88bd765545024e8e7fd868dca8642, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1891959509}
+      addedObject: {fileID: 1891959513}
     - targetCorrespondingSourceObject: {fileID: 961803237283086986, guid: f2e88bd765545024e8e7fd868dca8642, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1891959511}
@@ -39742,32 +39742,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &1891959508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 676741774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3659f785e28c2cc4faca44cf78f34a29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyAnimator: {fileID: 1891959505}
---- !u!114 &1891959509
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 676741774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecaa72567cc642248b69485b9ee31853, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _target: {fileID: 1603916744}
 --- !u!195 &1891959510
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -39809,6 +39783,36 @@ MonoBehaviour:
   _damage: 15
   _meleeDamageDistance: 3
   _cameraShake: {fileID: 498861257}
+--- !u!114 &1891959512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676741774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c28fa9a9f1536524db94031f04c50e53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyAnimator: {fileID: 1891959505}
+--- !u!114 &1891959513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676741774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dec2bd1ba1171ad418979fa8a5691616, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _target: {fileID: 1603916744}
+  _meleeDistance: 2
+  _rangedDistance: 6
+  _attackCooldown: 2
+  _rangedAttackChance: 0.5
 --- !u!1 &1921689877
 GameObject:
   m_ObjectHideFlags: 0
