@@ -11,11 +11,11 @@ public class BaseEnemyAnimation : MonoBehaviour
     
     public virtual void PlayMeleeAttack()
     {
-        Debug.LogWarning($"{name}: PlayMeleeAttack not implemented.");
+        
     }
 
     public virtual void PlayRangedAttack()
     {
-        Debug.LogWarning($"{name}: PlayRangedAttack not implemented.");
+
     }
 }
