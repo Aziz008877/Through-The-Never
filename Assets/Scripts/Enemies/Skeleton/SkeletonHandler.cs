@@ -1,10 +1,12 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class SkeletonHandler : MonoBehaviour
 {
     [SerializeField] private BaseEnemyHP[] _allSkeletons;
-
+    [SerializeField] private UnityEvent _onAllSkeletonsDestroyed;
+    private int _killCount;
     private void Awake()
     {
         foreach (var skeleton in _allSkeletons)
@@ -15,7 +17,12 @@ public class SkeletonHandler : MonoBehaviour
 
     private void ReceiveEnemyDeadState(Transform deadPosition)
     {
-        throw new NotImplementedException();
+        _killCount++;
+
+        if (_killCount >= _allSkeletons.Length)
+        {
+            _onAllSkeletonsDestroyed?.Invoke();
+        }
     }
 
     private void OnDestroy()
