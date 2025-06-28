@@ -2,35 +2,37 @@ using UnityEngine;
 
 public class GhoulMove : BaseEnemyMove
 {
-    [Header("Attack Settings")]
-    [SerializeField] private float _meleeDistance = 2f;
-    [SerializeField] private float _rangedCooldown = 4f;
-    [SerializeField] private float _meleeCooldown = 2f;
-    [SerializeField] private float _stopDurationAfterAttack = 1f;
+    private GhoulAttackHandler _ghoulAttackHandler;
+
     private float _lastMeleeTime = -Mathf.Infinity;
     private float _lastRangedTime = -Mathf.Infinity;
     private bool _isAttacking = false;
+
+    protected void Awake()
+    {
+        _ghoulAttackHandler = GetComponent<GhoulAttackHandler>();
+    }
+
     private void Update()
     {
         if (_target == null) return;
-        float distance = Vector3.Distance(transform.position, _target.position);
-
+        
         if (_isAttacking)
         {
             StopChasing();
             return;
         }
 
-        if (distance <= _meleeDistance && Time.time >= _lastMeleeTime + _meleeCooldown)
+        float distance = Vector3.Distance(transform.position, _target.position);
+        
+        if (distance <= _ghoulAttackHandler.MeleeDistance && Time.time >= _lastMeleeTime + _ghoulAttackHandler.MeleeCooldown)
         {
-            _lastMeleeTime = Time.time;
             PerformMeleeAttack();
             return;
         }
-
-        if (distance > _meleeDistance && Time.time >= _lastRangedTime + _rangedCooldown)
+        
+        if (distance > _ghoulAttackHandler.MeleeDistance && Time.time >= _lastRangedTime + _ghoulAttackHandler.RangeCooldown)
         {
-            _lastRangedTime = Time.time;
             PerformRangedAttack();
             return;
         }
@@ -42,20 +44,24 @@ public class GhoulMove : BaseEnemyMove
     {
         _isAttacking = true;
         StopChasing();
+        _lastMeleeTime = Time.time;
+
         _enemyAnimation.PlayMeleeAttack();
         // _enemyAttack.PrepareAttack(_target);
 
-        Invoke(nameof(EndAttack), _stopDurationAfterAttack);
+        Invoke(nameof(EndAttack), _ghoulAttackHandler.StopDurationAfterAttack);
     }
 
     private void PerformRangedAttack()
     {
         _isAttacking = true;
         StopChasing();
-        _enemyAnimation.PlayRangedAttack();
-        // _enemyAttack.PrepareRangedAttack(_target);
+        _lastRangedTime = Time.time;
 
-        Invoke(nameof(EndAttack), _stopDurationAfterAttack);
+        _enemyAnimation.PlayRangedAttack();
+        // _enemyAttack.PerformRangeAttack();
+
+        Invoke(nameof(EndAttack), _ghoulAttackHandler.StopDurationAfterAttack);
     }
 
     private void EndAttack()
@@ -67,15 +73,6 @@ public class GhoulMove : BaseEnemyMove
     {
         if (_isAttacking) return;
 
-        _agent.isStopped = false;
-        _agent.SetDestination(_target.position);
-        _enemyAnimation.ChangeMoveState(true);
-    }
-
-    protected override void StopChasing()
-    {
-        _agent.isStopped = true;
-        _agent.velocity = Vector3.zero;
-        _enemyAnimation.ChangeMoveState(false);
+        base.ChaseTarget();
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BaseEnemyAnimation : MonoBehaviour
+public abstract class BaseEnemyAnimation : MonoBehaviour
 {
     [SerializeField] protected Animator _enemyAnimator;
     protected int _isRunning = Animator.StringToHash("IsRunning");

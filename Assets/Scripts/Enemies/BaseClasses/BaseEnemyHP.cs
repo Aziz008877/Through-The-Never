@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-public class BaseEnemyHP : MonoBehaviour, IDamageable
+public abstract class BaseEnemyHP : MonoBehaviour, IDamageable
 {
     [field: SerializeField] public float CurrentHP { get; set; }
     [field: SerializeField] public float MinHP { get; set; }
