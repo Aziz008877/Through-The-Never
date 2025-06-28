@@ -3,12 +3,17 @@ using UnityEngine.AI;
 
 public abstract class BaseEnemyMove : MonoBehaviour
 {
-    [SerializeField] protected Transform _target;
     [SerializeField] protected float _rotationSpeed;
     protected NavMeshAgent _agent;
     protected BaseEnemyAnimation _enemyAnimation;
     protected BaseEnemyAttack _enemyAttack;
+    protected Transform _target;
 
+    public virtual void ReceiveTargetEnemy(Transform target)
+    {
+        _target = target;
+    }
+    
     protected virtual void Start()
     {
         _agent = GetComponent<NavMeshAgent>();

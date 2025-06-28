@@ -4,11 +4,10 @@ public class SkeletonMove : BaseEnemyMove
 {
     private float _lastMeleeTime = -Mathf.Infinity;
     private bool _isAttacking = false;
-
     private void Update()
     {
         if (_target == null) return;
-
+        
         if (_isAttacking)
         {
             StopChasing();

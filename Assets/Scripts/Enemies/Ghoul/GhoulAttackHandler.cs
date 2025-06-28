@@ -1,4 +1,6 @@
 using UnityEngine;
+using System.Collections.Generic;
+using Zenject;
 
 public class GhoulAttackHandler : BaseEnemyAttack
 {
@@ -7,6 +9,41 @@ public class GhoulAttackHandler : BaseEnemyAttack
     [SerializeField] private GhoulFireball _ghoulFireball;
     [SerializeField] private CameraShake _cameraShake;
     [SerializeField] private Transform _fireballSpawnPoint;
+    [SerializeField] private GameObject _skeletonPrefab;
+    [SerializeField] private Transform[] _summonPoints;
+    [Inject] private DamageTextPool _damageTextPool;
+    public float SummonCooldown = 10f;
+    public float StopDurationAfterSummon = 2f;
+
+    private List<BaseEnemyHP> _spawnedSkeletons = new List<BaseEnemyHP>();
+    private bool _canSummon = true;
+
+    private void Update()
+    {
+        CheckSkeletonsAlive();
+    }
+
+    private void CheckSkeletonsAlive()
+    {
+        _spawnedSkeletons.RemoveAll(s => s == null);
+
+        if (_spawnedSkeletons.Count == 0 && !_canSummon)
+        {
+            Invoke(nameof(ResetSummonCooldown), SummonCooldown);
+            _canSummon = true;
+        }
+    }
+
+    private void ResetSummonCooldown()
+    {
+        _canSummon = true;
+    }
+
+    public bool CanSummonSkeletons()
+    {
+        return _canSummon && _spawnedSkeletons.Count == 0;
+    }
+
     public void FirstMeleeAttack()
     {
         _cameraShake.Shake();
@@ -33,11 +70,31 @@ public class GhoulAttackHandler : BaseEnemyAttack
         if (_target == null) return;
 
         float distance = Vector3.Distance(transform.position, _target.position);
-        
         if (distance <= _meleeDistance)
         {
             _target.GetComponent<PlayerHP>()?.ReceiveDamage(_damage);
         }
+    }
+
+    public void SpawnSkeletons()
+    {
+        if (!CanSummonSkeletons()) return;
+
+        foreach (var point in _summonPoints)
+        {
+            GameObject skeleton = Instantiate(_skeletonPrefab, point.position, point.rotation);
+            if (skeleton.TryGetComponent(out BaseEnemyHP skeletonHP))
+            {
+                Debug.Log(_target);
+                skeletonHP.Init(_damageTextPool);
+                skeleton.GetComponent<BaseEnemyAttack>().ReceiveTargetEnemy(_target);
+                skeleton.GetComponent<BaseEnemyMove>().ReceiveTargetEnemy(_target);
+                _spawnedSkeletons.Add(skeletonHP);
+            }
+        }
+
+        _cameraShake.Shake();
+        _canSummon = false;
     }
 
     public override void PerformRangeAttack()

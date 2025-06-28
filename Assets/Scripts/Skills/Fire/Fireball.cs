@@ -8,6 +8,7 @@ public class Fireball : MonoBehaviour
     [SerializeField] private float _speed;
     private SkillDamageType _skillDamageType;
     private float _damage;
+    private bool _canDamage = true;
     public void Init(float damage, float duration, SkillDamageType skillDamageType)
     {
         _damage = damage;
@@ -22,7 +23,7 @@ public class Fireball : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out IDamageable damageable))
+        if (other.TryGetComponent(out IDamageable damageable) && _canDamage)
         {
             damageable.ReceiveDamage(_damage, _skillDamageType);
             DestroyFireball();
@@ -31,6 +32,7 @@ public class Fireball : MonoBehaviour
 
     private async void DestroyFireball()
     {
+        _canDamage = false;
         _fireballHit.Play();
         _fireballParticles.gameObject.SetActive(false);
         _speed = 0;

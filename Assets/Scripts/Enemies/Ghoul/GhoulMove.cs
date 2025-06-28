@@ -6,6 +6,8 @@ public class GhoulMove : BaseEnemyMove
 
     private float _lastMeleeTime = -Mathf.Infinity;
     private float _lastRangedTime = -Mathf.Infinity;
+    private float _lastSummonTime = -Mathf.Infinity;
+
     private bool _isAttacking = false;
 
     protected void Awake()
@@ -16,7 +18,7 @@ public class GhoulMove : BaseEnemyMove
     private void Update()
     {
         if (_target == null) return;
-        
+
         if (_isAttacking)
         {
             StopChasing();
@@ -24,19 +26,28 @@ public class GhoulMove : BaseEnemyMove
         }
 
         float distance = Vector3.Distance(transform.position, _target.position);
-        
+
+        // Призыв скелетов по кулдауну
+        if (Time.time >= _lastSummonTime + _ghoulAttackHandler.SummonCooldown)
+        {
+            PerformSummonSkeletons();
+            return;
+        }
+
+        // Мили атака
         if (distance <= _ghoulAttackHandler.MeleeDistance && Time.time >= _lastMeleeTime + _ghoulAttackHandler.MeleeCooldown)
         {
             PerformMeleeAttack();
             return;
         }
-        
+
+        // Рендж атака
         if (distance > _ghoulAttackHandler.MeleeDistance && Time.time >= _lastRangedTime + _ghoulAttackHandler.RangeCooldown)
         {
             PerformRangedAttack();
             return;
         }
-        
+
         ChaseTarget();
     }
 
@@ -47,7 +58,6 @@ public class GhoulMove : BaseEnemyMove
         _lastMeleeTime = Time.time;
 
         _enemyAnimation.PlayMeleeAttack();
-        // _enemyAttack.PrepareAttack(_target);
 
         Invoke(nameof(EndAttack), _ghoulAttackHandler.StopDurationAfterAttack);
     }
@@ -59,9 +69,19 @@ public class GhoulMove : BaseEnemyMove
         _lastRangedTime = Time.time;
 
         _enemyAnimation.PlayRangedAttack();
-        // _enemyAttack.PerformRangeAttack();
 
         Invoke(nameof(EndAttack), _ghoulAttackHandler.StopDurationAfterAttack);
+    }
+
+    private void PerformSummonSkeletons()
+    {
+        _isAttacking = true;
+        StopChasing();
+        _lastSummonTime = Time.time;
+
+        _ghoulAttackHandler.SpawnSkeletons();
+
+        Invoke(nameof(EndAttack), _ghoulAttackHandler.StopDurationAfterSummon);
     }
 
     private void EndAttack()

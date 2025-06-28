@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,7 +14,7 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable
     [SerializeField] private Image _hpFillValue;
     [Inject] private DamageTextPool _damageTextPool;
 
-    public System.Action<Transform> OnEnemyDead { get; set; }
+    public Action<Transform> OnEnemyDead { get; set; }
 
     private Camera _mainCamera;
     private Coroutine _dotCoroutine;
@@ -23,6 +24,11 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable
         _mainCamera = Camera.main;
     }
 
+    public void Init(DamageTextPool damageTextPool)
+    {
+        _damageTextPool = damageTextPool;
+    }
+    
     public void ReceiveDamage(float damageValue, SkillDamageType type)
     {
         if (type == SkillDamageType.DOT)
