@@ -11,6 +11,7 @@ public class CardHandler : MonoBehaviour
     [SerializeField] private Chest _chest;
     [SerializeField] private CameraShake _cameraShake;
     [SerializeField] private CanvasGroup _canvasGroup;
+    [SerializeField] private SkillSelectionSaver _skillSelectionSaver;
     [SerializeField] private DotweenSettings _dotweenSettings;
     [Inject] private PlayerSkillHandler _playerSkillHandler;
     private void Awake()
@@ -49,7 +50,7 @@ public class CardHandler : MonoBehaviour
     {
         _cameraShake.Shake();
         _skillActions[skillID].Activate(_playerSkillHandler);
-
+        _skillSelectionSaver.SaveSelection(skillID);
         for (int i = 0; i < _allCards.Length; i++)
         {
             if (i == skillID) continue;

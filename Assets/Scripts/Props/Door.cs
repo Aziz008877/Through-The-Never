@@ -1,5 +1,7 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 public class Door : MonoBehaviour, IInteractable
@@ -24,11 +26,14 @@ public class Door : MonoBehaviour, IInteractable
         _doorMaterial.SetColor("_EmissionColor", _activeColor);
     }
 
-    public void PerformAction(GameObject player)
+    public async void PerformAction(GameObject player)
     {
         if (CanInteract)
         {
+            CanInteract = false;
             _fade.Fade(1);
+            await Task.Delay(1000);
+            SceneManager.LoadScene("FightScene");
         }
     }
 

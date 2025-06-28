@@ -451,9 +451,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 36d21378776404c4fb4a5177ee3781cb, type: 2}
   - {fileID: 11400000, guid: 3098c1beb0c493b40830bbe4fee0861f, type: 2}
   - {fileID: 11400000, guid: 32aca2a574eb654459ab07796cd80302, type: 2}
+  _skillActions:
+  - {fileID: 11400000, guid: 797e1ea3e53a8f2418908c40a449dabe, type: 2}
+  - {fileID: 11400000, guid: 135d322ba28c22742a967849a9e7e081, type: 2}
+  - {fileID: 11400000, guid: db1e3571fb18a804390b91045fb87c57, type: 2}
   _chest: {fileID: 919132148772704824}
   _cameraShake: {fileID: 116812684}
   _canvasGroup: {fileID: 205689847}
+  _skillSelectionSaver: {fileID: 11400000, guid: ec0deae7792665b4cb8b29e917157f6d, type: 2}
   _dotweenSettings:
     Duration: 0.5
     AnimationType: 19
@@ -2398,7 +2403,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 355627982}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1498669318}
+        m_TargetAssemblyTypeName: PlayerState, Assembly-CSharp
+        m_MethodName: ChangePlayerState
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &355627982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17598,7 +17615,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1406838308
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18813,6 +18830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8af5074418a8f41be67b901e4ac705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _firebeamSkill: {fileID: 807392346}
 --- !u!114 &1498669318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18825,7 +18843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2c2c4cad89e8ae4c94e31be8ccfe489, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentPlayerState: 0
+  _currentPlayerState: 1
 --- !u!114 &1498669319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43260,5 +43278,5 @@ SceneRoots:
   - {fileID: 1564362784}
   - {fileID: 269411997}
   - {fileID: 10420665}
-  - {fileID: 1849245035}
   - {fileID: 2075953562}
+  - {fileID: 1849245035}
