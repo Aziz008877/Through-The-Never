@@ -53,13 +53,12 @@ public class PlayerAnimator : MonoBehaviour
         _playerAnimator.SetBool(_isCrouching, crouchState);
     }
     
-
     public void CastBasics()
     {
         _playerAnimator.SetTrigger(_basicAttack);
     }
 
-    public void CastShield(bool state)
+    public void CastBeam(bool state)
     {
         _playerAnimator.SetBool(_isShield, state);
     }

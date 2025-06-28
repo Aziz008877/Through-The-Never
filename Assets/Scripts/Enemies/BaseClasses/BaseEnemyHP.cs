@@ -27,7 +27,9 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable
         else
         {
             CurrentHP -= damageValue;
+            damageValue = Mathf.Round(damageValue * 10f) / 10f;
             _damageTextPool.ShowDamage(damageValue, transform.position);
+
         }
 
         _hpFillValue.fillAmount = CurrentHP / MaxHP;

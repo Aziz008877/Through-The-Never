@@ -9,6 +9,7 @@ public class BaseSkill : MonoBehaviour
     [SerializeField] protected float _damage;
     [SerializeField] protected float _duration;
     [SerializeField] protected float _radius;
+    [SerializeField] protected float _range;
     protected float _cooldownTimer = 0f;
     public bool IsReady => _cooldownTimer <= 0f;
     public virtual void Init()

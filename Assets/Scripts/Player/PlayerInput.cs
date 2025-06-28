@@ -10,7 +10,7 @@ public class PlayerInput : MonoBehaviour
     public Action<Vector2> OnMovePressed;
     public Action<bool> OnSprintPressed;
     public Action<bool> OnCrouchPressed;
-    public Action<bool> OnShieldPressed;
+    public Action OnFireBeamPressed;
     public Action OnPlayerJump;
     public Action OnPlayerPressedBasic;
     public Action OnPlayerDash;
@@ -38,11 +38,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1))
         {
-            OnShieldPressed?.Invoke(true);
-        }
-        else if(Input.GetMouseButtonUp(1))
-        {
-            OnShieldPressed?.Invoke(false);
+            OnFireBeamPressed?.Invoke();
         }
     }
 

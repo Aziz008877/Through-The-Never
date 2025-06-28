@@ -1,3 +1,4 @@
+/*
 using System;
 using UnityEngine;
 using Zenject;
@@ -9,17 +10,18 @@ public class PlayerShield : MonoBehaviour
     [Inject] private PlayerAnimator _playerAnimator;
     private void Awake()
     {
-        _playerInput.OnShieldPressed += ReceiveShieldState;
+        _playerInput.OnFireBeamPressed += ReceiveShieldState;
     }
 
     private void ReceiveShieldState(bool state)
     {
         _shield.SetActive(state);
-        _playerAnimator.CastShield(state);
+        _playerAnimator.CastBeam(state);
     }
 
     private void OnDestroy()
     {
-        _playerInput.OnShieldPressed -= ReceiveShieldState;
+        _playerInput.OnFireBeamPressed -= ReceiveShieldState;
     }
 }
+*/
