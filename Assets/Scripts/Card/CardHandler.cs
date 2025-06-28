@@ -16,6 +16,7 @@ public class CardHandler : MonoBehaviour
     [SerializeField] private UnityEvent _onCardSelected;
     [SerializeField] private DotweenSettings _dotweenSettings;
     [Inject] private PlayerSkillHandler _playerSkillHandler;
+    [Inject] private PlayerState _playerState;
     private void Awake()
     {
         _chest.OnChestOpened += OnChestInteraction;
@@ -51,6 +52,7 @@ public class CardHandler : MonoBehaviour
     public void ApplySkill(int skillID)
     {
         _onCardSelected?.Invoke();
+        _playerState.ChangePlayerState(true);
         _cameraShake.Shake();
         _skillActions[skillID].Activate(_playerSkillHandler);
         _skillSelectionSaver.SaveSelection(skillID);

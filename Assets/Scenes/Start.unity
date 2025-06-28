@@ -765,10 +765,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healHPTaskText: {fileID: 666899620}
   _chestTaskText: {fileID: 792306149}
-  _doorTaskText: {fileID: 1517770034}
+  _npcTaskText: {fileID: 1517770034}
   _completedTextColor: {r: 0.5372549, g: 1, b: 0, a: 1}
   _fountain: {fileID: 914916168}
   _chest: {fileID: 919132148772704824}
+  _npcHandler: {fileID: 1804254282}
 --- !u!1 &169273977
 GameObject:
   m_ObjectHideFlags: 0

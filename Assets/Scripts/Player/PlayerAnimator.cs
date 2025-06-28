@@ -84,6 +84,11 @@ public class PlayerAnimator : MonoBehaviour
             _playerAnimator.SetFloat(_moveY, 0f);
         }
     }
+
+    public void DeactivatePlayerMove()
+    {
+        _playerAnimator.SetBool(_isMoving, false);
+    }
     
     private void OnDestroy()
     {
