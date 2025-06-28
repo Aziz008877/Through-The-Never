@@ -6,6 +6,7 @@ public class FireballSkill : BaseSkill
     [SerializeField] private Transform _spawnParent;
     [SerializeField] private FireballMode _fireballMode;
     [SerializeField] private AudioSource _fireballSound;
+    [SerializeField] private FirebeamSkill _firebeamSkill;
     [Inject] private PlayerAnimator _playerAnimator;
     [Inject] private CameraShake _cameraShake;
     [Inject] private PlayerInput _playerInput;
@@ -16,11 +17,10 @@ public class FireballSkill : BaseSkill
     
     public override void PerformSkill()
     {
-        if (!IsReady) return;
+        if (!IsReady || _firebeamSkill.IsCasting) return;
         
         base.PerformSkill();
         
-        //_playerAnimator.CastBasics();
         _cameraShake.Shake();
         _fireballSound.pitch = Random.Range(0.9f, 1.5f);
         _fireballSound.PlayOneShot(_fireballSound.clip);

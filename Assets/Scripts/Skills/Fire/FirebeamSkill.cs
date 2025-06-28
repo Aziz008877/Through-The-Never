@@ -13,6 +13,7 @@ public class FirebeamSkill : BaseSkill
     [Inject] private PlayerAnimator _playerAnimator;
 
     private bool _isCasting = false;
+    public bool IsCasting => _isCasting;
     private float _castTimer = 0f;
 
     private void Awake()

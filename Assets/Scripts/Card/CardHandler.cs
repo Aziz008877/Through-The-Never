@@ -1,6 +1,7 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Events;
 using Zenject;
 
 public class CardHandler : MonoBehaviour
@@ -12,6 +13,7 @@ public class CardHandler : MonoBehaviour
     [SerializeField] private CameraShake _cameraShake;
     [SerializeField] private CanvasGroup _canvasGroup;
     [SerializeField] private SkillSelectionSaver _skillSelectionSaver;
+    [SerializeField] private UnityEvent _onCardSelected;
     [SerializeField] private DotweenSettings _dotweenSettings;
     [Inject] private PlayerSkillHandler _playerSkillHandler;
     private void Awake()
@@ -48,6 +50,7 @@ public class CardHandler : MonoBehaviour
 
     public void ApplySkill(int skillID)
     {
+        _onCardSelected?.Invoke();
         _cameraShake.Shake();
         _skillActions[skillID].Activate(_playerSkillHandler);
         _skillSelectionSaver.SaveSelection(skillID);
