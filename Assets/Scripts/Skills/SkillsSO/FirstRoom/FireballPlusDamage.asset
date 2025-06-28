@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73af0116ee6af9f42b79ec44e8cf598f, type: 3}
   m_Name: FireballPlusDamage
   m_EditorClassIdentifier: 
-  SkillImage: {fileID: 21300000, guid: 00d93e870e281474eaffc504915561f0, type: 3}
+  SkillImage: {fileID: 21300000, guid: c408575c4b6b7b64fbeddd32ea17489f, type: 3}
   SkillName: + 20% Damage
   SkillDescription: Damage Increase for Basic Attack

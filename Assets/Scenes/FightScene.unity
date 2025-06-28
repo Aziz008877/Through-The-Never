@@ -508,7 +508,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 40be8921eaa3c3d45980551b8b1bdc05, type: 3}
+  m_Sprite: {fileID: 21300000, guid: af9f51a72fe53e94f98d9e9bc0c3e1ca, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -937,7 +937,7 @@ MonoBehaviour:
   _frontSprite: {fileID: 21300000, guid: d39ecee8ff8063541a59429bde19f85a, type: 3}
   _backSprite: {fileID: 21300000, guid: f76d1196bf88b564f93d487f2edad3d4, type: 3}
   _flipDuration: 0.5
-  _skillID: 3
+  _skillID: 0
   _cardHandler: {fileID: 655743455}
 --- !u!114 &129864774
 MonoBehaviour:
@@ -7200,7 +7200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8858051749441068820, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7592,7 +7592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <InteractionUI>k__BackingField: {fileID: 194755008}
-  <CanInteract>k__BackingField: 0
+  <CanInteract>k__BackingField: 1
   _chestUp: {fileID: 1166817847}
   _dotweenSettings:
     Duration: 1
@@ -18597,19 +18597,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 482ef734083aa9041a7c74c0edf13ea7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skillUIData: {fileID: 0}
+  _skillUIData: {fileID: 11400000, guid: 5581c102534d5884cb8bd2b7b9d7b2e2, type: 2}
   _skillType: 0
   _skillDamageType: 1
   _coolDown: 10
   _damage: 25
   _duration: 3
   _radius: 0
-  _range: 0
+  _range: 10
   _castParticles: {fileID: 1744850311}
   _firebeamParticles: {fileID: 1358412182}
   _hitParticles: {fileID: 588470772}
   _beamStartPoint: {fileID: 1177313804}
-  _beamMaxLength: 10
 --- !u!1 &640608446
 GameObject:
   m_ObjectHideFlags: 0
@@ -23673,9 +23672,9 @@ MonoBehaviour:
   - {fileID: 1974545724}
   - {fileID: 844451490}
   _skillDatas:
-  - {fileID: 11400000, guid: 36d21378776404c4fb4a5177ee3781cb, type: 2}
-  - {fileID: 11400000, guid: 3098c1beb0c493b40830bbe4fee0861f, type: 2}
-  - {fileID: 11400000, guid: 32aca2a574eb654459ab07796cd80302, type: 2}
+  - {fileID: 11400000, guid: 5581c102534d5884cb8bd2b7b9d7b2e2, type: 2}
+  - {fileID: 11400000, guid: 1089d46b7445eaf44bd0c6aca5be944a, type: 2}
+  - {fileID: 11400000, guid: c642fcbcde3a2a848a6a0ce021c04dfd, type: 2}
   _chest: {fileID: 365228963}
   _cameraShake: {fileID: 498861257}
   _canvasGroup: {fileID: 1827484599}
@@ -24667,7 +24666,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8858051749441068820, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -25201,7 +25200,7 @@ MonoBehaviour:
   _frontSprite: {fileID: 21300000, guid: d39ecee8ff8063541a59429bde19f85a, type: 3}
   _backSprite: {fileID: 21300000, guid: f76d1196bf88b564f93d487f2edad3d4, type: 3}
   _flipDuration: 0.5
-  _skillID: 5
+  _skillID: 2
   _cardHandler: {fileID: 655743455}
 --- !u!114 &844451492
 MonoBehaviour:
@@ -42082,7 +42081,7 @@ MonoBehaviour:
   _frontSprite: {fileID: 21300000, guid: d39ecee8ff8063541a59429bde19f85a, type: 3}
   _backSprite: {fileID: 21300000, guid: f76d1196bf88b564f93d487f2edad3d4, type: 3}
   _flipDuration: 0.5
-  _skillID: 4
+  _skillID: 1
   _cardHandler: {fileID: 655743455}
 --- !u!114 &1974545728
 MonoBehaviour:

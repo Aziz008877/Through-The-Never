@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73af0116ee6af9f42b79ec44e8cf598f, type: 3}
   m_Name: Dash
   m_EditorClassIdentifier: 
-  SkillImage: {fileID: 21300000, guid: b12502ba5c973e3488a651f1e7634829, type: 3}
+  SkillImage: {fileID: 21300000, guid: af9f51a72fe53e94f98d9e9bc0c3e1ca, type: 3}
   SkillName: Fire Dash
   SkillDescription: Adds Dash Ability

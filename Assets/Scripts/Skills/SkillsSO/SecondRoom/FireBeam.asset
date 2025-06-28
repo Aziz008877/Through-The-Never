@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73af0116ee6af9f42b79ec44e8cf598f, type: 3}
-  m_Name: TripleFireball
+  m_Name: FireBeam
   m_EditorClassIdentifier: 
-  SkillImage: {fileID: 21300000, guid: 4c5c6502bd585a84b9621cf9109d3549, type: 3}
-  SkillName: Triplet
-  SkillDescription: Launches 3 fireballs
+  SkillImage: {fileID: 21300000, guid: 8ebc2469233803443814bca2cb020543, type: 3}
+  SkillName: Fire Beam
+  SkillDescription: Adds Fire Beam Ability

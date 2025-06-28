@@ -9,7 +9,6 @@ public class FirebeamSkill : BaseSkill
     [SerializeField] private ParticleSystem _firebeamParticles;
     [SerializeField] private ParticleSystem _hitParticles;
     [SerializeField] private Transform _beamStartPoint;
-    [SerializeField] private float _beamMaxLength = 10f;
     [Inject] private PlayerInput _playerInput;
     [Inject] private PlayerAnimator _playerAnimator;
 
@@ -75,9 +74,9 @@ public class FirebeamSkill : BaseSkill
     {
         Vector3 direction = _beamStartPoint.forward;
         Vector3 startPoint = _beamStartPoint.position;
-        Vector3 endPoint = startPoint + direction * _beamMaxLength;
+        Vector3 endPoint = startPoint + direction * _range;
 
-        if (Physics.Raycast(startPoint, direction, out RaycastHit hit, _beamMaxLength))
+        if (Physics.Raycast(startPoint, direction, out RaycastHit hit, _range))
         {
             endPoint = hit.point;
 
