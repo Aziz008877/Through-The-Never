@@ -18,7 +18,7 @@ public abstract class BaseEnemyAttack : MonoBehaviour
     public float RangeCooldown => _rangeCooldown;
     public float StopDurationAfterAttack => _stopDurationAfterAttack;
 
-    public virtual void PrepareAttack(Transform target)
+    public virtual void ReceiveTargetEnemy(Transform target)
     {
         _target = target;
     }

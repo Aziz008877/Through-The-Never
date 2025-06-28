@@ -8,8 +8,8 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable
     [field: SerializeField] public float CurrentHP { get; set; }
     [field: SerializeField] public float MinHP { get; set; }
     [field: SerializeField] public float MaxHP { get; set; }
-    [SerializeField] private Image _hpFillValue;
     [SerializeField] private Canvas _enemyCanvas;
+    [SerializeField] private Image _hpFillValue;
     [Inject] private DamageTextPool _damageTextPool;
     public Action<Transform> OnEnemyDead { get; set; }
     private Camera _mainCamera;

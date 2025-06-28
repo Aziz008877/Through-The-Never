@@ -5,6 +5,7 @@ using UnityEngine.Events;
 public class SkeletonHandler : MonoBehaviour
 {
     [SerializeField] private BaseEnemyHP[] _allSkeletons;
+    [SerializeField] private Transform _player;
     [SerializeField] private UnityEvent _onAllSkeletonsDestroyed;
     private int _killCount;
     private void Awake()
@@ -12,6 +13,7 @@ public class SkeletonHandler : MonoBehaviour
         foreach (var skeleton in _allSkeletons)
         {
             skeleton.OnEnemyDead += ReceiveEnemyDeadState;
+            skeleton.GetComponent<SkeletonAttack>().ReceiveTargetEnemy(_player);
         }
     }
 

@@ -12,6 +12,7 @@ public class PlayerHP : MonoBehaviour
     [Header("HP Visuals")]
     [SerializeField] private Image _hpFillValue;
     [SerializeField] private GameObject _edgeGlowEffect;
+    [SerializeField] private ParticleSystem _healVFX;
 
     public Action<float> OnHpValueUpdated;
     public Action OnPlayerDead;
@@ -39,6 +40,7 @@ public class PlayerHP : MonoBehaviour
 
     public void ReceiveHP(float hpValue)
     {
+        _healVFX.Play();
         _currentHP += hpValue;
         UpdateHP();
     }

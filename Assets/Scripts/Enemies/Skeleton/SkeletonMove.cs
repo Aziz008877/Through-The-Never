@@ -1,35 +1,50 @@
 using UnityEngine;
+
 public class SkeletonMove : BaseEnemyMove
 {
-    [SerializeField] private float _attackDistance = 2f;
-    [SerializeField] private float _attackCooldown = 1.5f;
-    private float _lastAttackTime;
+    private float _lastMeleeTime = -Mathf.Infinity;
+    private bool _isAttacking = false;
+
     private void Update()
     {
         if (_target == null) return;
 
+        if (_isAttacking)
+        {
+            StopChasing();
+            return;
+        }
+
         float distance = Vector3.Distance(transform.position, _target.position);
-
-        if (distance > _attackDistance)
+        
+        if (distance <= _enemyAttack.MeleeDistance && Time.time >= _lastMeleeTime + _enemyAttack.MeleeCooldown)
         {
-            _agent.isStopped = false;
-            _agent.SetDestination(_target.position);
+            PerformMeleeAttack();
+            return;
         }
-        else
-        {
-            _agent.isStopped = true;
-
-            if (Time.time >= _lastAttackTime + _attackCooldown)
-            {
-                Attack();
-                _lastAttackTime = Time.time;
-            }
-        }
+        
+        ChaseTarget();
     }
 
-    private void Attack()
+    private void PerformMeleeAttack()
     {
-        _enemyAttack.PrepareAttack(_target);
+        _isAttacking = true;
+        StopChasing();
+        _lastMeleeTime = Time.time;
+
         _enemyAnimation.PlayMeleeAttack();
+
+        Invoke(nameof(EndAttack), _enemyAttack.StopDurationAfterAttack);
+    }
+
+    private void EndAttack()
+    {
+        _isAttacking = false;
+    }
+
+    protected override void ChaseTarget()
+    {
+        if (_isAttacking) return;
+        base.ChaseTarget();
     }
 }
