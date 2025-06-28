@@ -45,6 +45,11 @@ public class FireballSkill : BaseSkill
         _fireballMode = FireballMode.Triple;
     }
 
+    public void SetDotMode()
+    {
+        _skillDamageType = SkillDamageType.DOT;
+    }
+
     public void BuffDamage(float percents)
     {
         _damage *= 1f + percents / 100f;

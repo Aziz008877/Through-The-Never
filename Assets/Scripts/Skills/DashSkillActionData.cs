@@ -1,16 +1,13 @@
 using UnityEngine;
 
-public class DashSkillActionData : MonoBehaviour
+[CreateAssetMenu(fileName = "DashSkillActionData", menuName = "SkillActions/DashSkill")]
+public class DashSkillActionData : SkillActionData
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    public int skillIDForUI = 0;
 
-    // Update is called once per frame
-    void Update()
+    public override void Activate(PlayerSkillHandler handler)
     {
-        
+        handler.PlayerDash.gameObject.SetActive(true);
+        handler.SkillUIHandler.ShowUISkill(skillIDForUI);
     }
 }

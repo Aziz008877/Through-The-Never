@@ -7200,7 +7200,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8858051749441068820, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18569,7 +18569,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &634444535
 Transform:
   m_ObjectHideFlags: 0
@@ -23675,6 +23675,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 5581c102534d5884cb8bd2b7b9d7b2e2, type: 2}
   - {fileID: 11400000, guid: 1089d46b7445eaf44bd0c6aca5be944a, type: 2}
   - {fileID: 11400000, guid: c642fcbcde3a2a848a6a0ce021c04dfd, type: 2}
+  _skillActions:
+  - {fileID: 11400000, guid: 6fb228b821eda124eac72e7670b2e3dc, type: 2}
+  - {fileID: 11400000, guid: 0ccc5d2d0bcd39b4ea2fdd152398eb22, type: 2}
+  - {fileID: 11400000, guid: 518ef6d6c65259142af580c222def90f, type: 2}
   _chest: {fileID: 365228963}
   _cameraShake: {fileID: 498861257}
   _canvasGroup: {fileID: 1827484599}
@@ -24666,7 +24670,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8858051749441068820, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -26243,7 +26247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8858051749441068820, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -29532,6 +29536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd8af5074418a8f41be67b901e4ac705, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _firebeamSkill: {fileID: 634444536}
 --- !u!114 &1603916751
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ public class CardHandler : MonoBehaviour
 {
     [SerializeField] private CardUIData[] _allCards;
     [SerializeField] private SkillUIData[] _skillDatas;
+    [SerializeField] private SkillActionData[] _skillActions;
     [SerializeField] private Chest _chest;
     [SerializeField] private CameraShake _cameraShake;
     [SerializeField] private CanvasGroup _canvasGroup;
@@ -47,19 +48,16 @@ public class CardHandler : MonoBehaviour
     public void ApplySkill(int skillID)
     {
         _cameraShake.Shake();
-        _playerSkillHandler.ApplySelectedSkill(skillID);
-        
+        _skillActions[skillID].Activate(_playerSkillHandler);
+
         for (int i = 0; i < _allCards.Length; i++)
         {
-            if (i == skillID)
-            {
-                continue;
-            }
+            if (i == skillID) continue;
             _allCards[i].FadeOut(0.1f);
         }
 
         _allCards[skillID].GetComponent<RectTransform>().DOAnchorPosX(0, _dotweenSettings.Duration)
-            .OnComplete(delegate
+            .OnComplete(() =>
             {
                 _canvasGroup.DOFade(0, 0.5f);
                 _canvasGroup.blocksRaycasts = false;

@@ -46,6 +46,12 @@ public class PlayerMove : MonoBehaviour
         OnPlayerSprint?.Invoke(state);
     }
 
+    public void UpgradeMS()
+    {
+        _moveSpeed += 2;
+        _speed = _moveSpeed;
+    }
+
     private void ReceivePressedValue(Vector2 moveInput)
     {
         _isMoving = moveInput != Vector2.zero;
