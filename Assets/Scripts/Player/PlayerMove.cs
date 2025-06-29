@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _rotationSpeed = 10f;
     [SerializeField] private Camera _mainCamera;
     public Vector3 LastMoveDirection { get; private set; } = Vector3.forward;
+
     private PlayerInput _playerInput;
     private float _speed;
     private bool _isMoving;
@@ -18,6 +19,8 @@ public class PlayerMove : MonoBehaviour
     public Action<Vector3> OnPlayerMove;
     public Action<bool> OnPlayerSprint;
     public Action<bool> OnPlayerCrouch;
+
+    private float _xMin = -20f, _xMax = 20f, _zMin = -13f, _zMax = 29f;
 
     private void Start()
     {
@@ -60,11 +63,17 @@ public class PlayerMove : MonoBehaviour
         Vector3 inputDirection = new Vector3(moveInput.x, 0f, moveInput.y);
         Vector3 moveDir = Quaternion.Euler(0f, transform.eulerAngles.y, 0f) * inputDirection;
         LastMoveDirection = moveDir;
+
         if (_isMoving)
         {
             transform.position += moveDir.normalized * _speed * Time.deltaTime;
+            
+            Vector3 clampedPosition = transform.position;
+            clampedPosition.x = Mathf.Clamp(clampedPosition.x, _xMin, _xMax);
+            clampedPosition.z = Mathf.Clamp(clampedPosition.z, _zMin, _zMax);
+            transform.position = clampedPosition;
         }
-        
+
         OnPlayerMove?.Invoke(moveDir);
     }
 

@@ -8,7 +8,7 @@ public abstract class BaseEnemyMove : MonoBehaviour
     protected BaseEnemyAnimation _enemyAnimation;
     protected BaseEnemyAttack _enemyAttack;
     protected Transform _target;
-
+    protected bool _canChase = true;
     public virtual void ReceiveTargetEnemy(Transform target)
     {
         _target = target;

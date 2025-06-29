@@ -1,12 +1,26 @@
+using System;
 using UnityEngine;
 
 public class SkeletonMove : BaseEnemyMove
 {
+    private SkeletonHP _skeletonHp;
     private float _lastMeleeTime = -Mathf.Infinity;
     private bool _isAttacking = false;
+    private void Awake()
+    {
+        _skeletonHp = GetComponent<SkeletonHP>();
+        _skeletonHp.OnEnemyDead += Die;
+    }
+
+    private void Die(Transform obj)
+    {
+        _canChase = false;
+        StopChasing();
+    }
+
     private void Update()
     {
-        if (_target == null) return;
+        if (_target == null || !_canChase) return;
         
         if (_isAttacking)
         {
@@ -45,5 +59,10 @@ public class SkeletonMove : BaseEnemyMove
     {
         if (_isAttacking) return;
         base.ChaseTarget();
+    }
+
+    private void OnDestroy()
+    {
+        _skeletonHp.OnEnemyDead -= Die;
     }
 }

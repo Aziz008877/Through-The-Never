@@ -608,7 +608,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &112358824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6245,7 +6245,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &241090191
 Transform:
   m_ObjectHideFlags: 0
@@ -7591,6 +7591,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skillsVisuals:
   - {fileID: 1921689877}
+  - {fileID: 1240962458}
 --- !u!1001 &441054890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24912,7 +24913,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 32695f1744f4a7f419b32569a46faa4e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8ebc2469233803443814bca2cb020543, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -26472,7 +26473,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1117523934
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27149,7 +27150,7 @@ GameObject:
   - component: {fileID: 1240962461}
   - component: {fileID: 1240962460}
   m_Layer: 0
-  m_Name: ShieldSkillBG
+  m_Name: FireBeamSkillBG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29056,7 +29057,43 @@ MonoBehaviour:
   _maxHP: 100
   _onPlayerDead:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 468821556}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1603916751}
+        m_TargetAssemblyTypeName: PlayerState, Assembly-CSharp
+        m_MethodName: ChangePlayerState
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 795231411}
+        m_TargetAssemblyTypeName: FadeInOutEffect, Assembly-CSharp
+        m_MethodName: Fade
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _hpFillValue: {fileID: 1311587092}
   _edgeGlowEffect: {fileID: 1601854767}
   _healVFX: {fileID: 1008041840}
@@ -41315,6 +41352,45 @@ MonoBehaviour:
   <MaxHP>k__BackingField: 1000
   _enemyCanvas: {fileID: 860747839}
   _hpFillValue: {fileID: 504292731}
+  _onEnemyDead:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 468821556}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1603916751}
+        m_TargetAssemblyTypeName: PlayerState, Assembly-CSharp
+        m_MethodName: ChangePlayerState
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 795231411}
+        m_TargetAssemblyTypeName: FadeInOutEffect, Assembly-CSharp
+        m_MethodName: Fade
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!1 &1921689877
 GameObject:
   m_ObjectHideFlags: 0
@@ -42248,10 +42324,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healHPTaskText: {fileID: 865565036}
   _chestTaskText: {fileID: 130587754}
-  _doorTaskText: {fileID: 1926813290}
+  _npcTaskText: {fileID: 0}
   _completedTextColor: {r: 0.5372549, g: 1, b: 0, a: 1}
   _fountain: {fileID: 0}
   _chest: {fileID: 365228963}
+  _npcHandler: {fileID: 0}
 --- !u!1 &2042498663
 GameObject:
   m_ObjectHideFlags: 0

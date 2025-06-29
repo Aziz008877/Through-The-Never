@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Zenject;
 
@@ -9,9 +10,10 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable
     [field: SerializeField] public float CurrentHP { get; set; }
     [field: SerializeField] public float MinHP { get; set; }
     [field: SerializeField] public float MaxHP { get; set; }
-
+    public bool CanBeDamaged { get; set; } = true;
     [SerializeField] private Canvas _enemyCanvas;
     [SerializeField] private Image _hpFillValue;
+    [SerializeField] private UnityEvent _onEnemyDead;
     [Inject] private DamageTextPool _damageTextPool;
 
     public Action<Transform> OnEnemyDead { get; set; }
@@ -56,8 +58,12 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable
 
     private void ApplyDamage(float damageValue)
     {
+        if (!CanBeDamaged) return;
+        
         if (CurrentHP - damageValue <= MinHP)
         {
+            CurrentHP = MinHP;
+            CanBeDamaged = false;
             Die();
         }
         else
@@ -81,6 +87,13 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable
     private void Die()
     {
         OnEnemyDead?.Invoke(transform);
+        _onEnemyDead?.Invoke();
+        StartCoroutine(DestroySkeleton());
+    }
+
+    private IEnumerator DestroySkeleton()
+    {
+        yield return new WaitForSeconds(3);
         Destroy(gameObject);
     }
 }

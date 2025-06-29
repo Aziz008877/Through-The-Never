@@ -85,7 +85,6 @@ public class GhoulAttackHandler : BaseEnemyAttack
             GameObject skeleton = Instantiate(_skeletonPrefab, point.position, point.rotation);
             if (skeleton.TryGetComponent(out BaseEnemyHP skeletonHP))
             {
-                Debug.Log(_target);
                 skeletonHP.Init(_damageTextPool);
                 skeleton.GetComponent<BaseEnemyAttack>().ReceiveTargetEnemy(_target);
                 skeleton.GetComponent<BaseEnemyMove>().ReceiveTargetEnemy(_target);

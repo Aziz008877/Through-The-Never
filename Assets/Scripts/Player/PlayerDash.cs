@@ -17,6 +17,7 @@ public class PlayerDash : BaseSkill
     [Inject] private FireAOESkill _fireAoeSkillSkill;
     private Tween _dashTween;
     public Action OnPlayerDash;
+    private float _xMin = -20f, _xMax = 20f, _zMin = -13f, _zMax = 29f;
     private void Awake()
     {
         _playerInput.OnPlayerDash += HandleDash;
@@ -31,20 +32,25 @@ public class PlayerDash : BaseSkill
     {
         if (!IsReady) return;
         base.PerformSkill();
-        
+
         if (moveDir == Vector3.zero)
             moveDir = _player.forward;
-        
+
         _dashTween?.Kill();
         _dashSound.pitch = Random.Range(0.9f, 1.5f);
         _dashSound.PlayOneShot(_dashSound.clip);
+
         Vector3 dashTarget = _player.position + moveDir.normalized * _dashDistance;
+        
+        dashTarget.x = Mathf.Clamp(dashTarget.x, _xMin, _xMax);
+        dashTarget.z = Mathf.Clamp(dashTarget.z, _zMin, _zMax);
+
         OnPlayerDash?.Invoke();
         _dashParticles.Play();
 
         _dashTween = _player.DOMove(dashTarget, _dashDuration)
             .SetEase(Ease.OutQuad)
-            .OnComplete(delegate
+            .OnComplete(() =>
             {
                 _fireAoeSkillSkill.PerformSkill(_playerMove.gameObject);
             });

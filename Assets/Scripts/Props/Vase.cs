@@ -9,6 +9,7 @@ public class Vase : MonoBehaviour, IDamageable
     public float CurrentHP { get; set; }
     public float MinHP { get; set; }
     public float MaxHP { get; set; }
+    public bool CanBeDamaged { get; set; } = true;
     public Action<Transform> OnEnemyDead { get; set; }
     public void ReceiveDamage(float damageValue, SkillDamageType type)
     {
