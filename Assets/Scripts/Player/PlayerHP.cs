@@ -8,7 +8,7 @@ public class PlayerHP : MonoBehaviour
 {
     [SerializeField] private float _currentHP, _minHp, _maxHP;
     [SerializeField] private UnityEvent _onPlayerDead;
-
+    private bool _canBeDamaged = true;
     [Header("HP Visuals")]
     [SerializeField] private Image _hpFillValue;
     [SerializeField] private GameObject _edgeGlowEffect;
@@ -49,6 +49,11 @@ public class PlayerHP : MonoBehaviour
     {
         _currentHP -= damageValue;
         UpdateHP();
+    }
+
+    public void SetCanBeDamagedState(bool state)
+    {
+        _canBeDamaged = state;
     }
 
     private void ClampHP()

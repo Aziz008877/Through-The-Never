@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 using Zenject;
 
 public class GhoulAttackHandler : BaseEnemyAttack
@@ -11,6 +12,7 @@ public class GhoulAttackHandler : BaseEnemyAttack
     [SerializeField] private Transform _fireballSpawnPoint;
     [SerializeField] private GameObject _skeletonPrefab;
     [SerializeField] private Transform[] _summonPoints;
+    [SerializeField] private TextMeshProUGUI _currentAttackText;
     [Inject] private DamageTextPool _damageTextPool;
     public float SummonCooldown = 10f;
     public float StopDurationAfterSummon = 2f;
@@ -68,7 +70,7 @@ public class GhoulAttackHandler : BaseEnemyAttack
     private void ApplyMeleeDamage()
     {
         if (_target == null) return;
-
+        _currentAttackText.text = "Melee Attack";
         float distance = Vector3.Distance(transform.position, _target.position);
         if (distance <= _meleeDistance)
         {
@@ -80,6 +82,7 @@ public class GhoulAttackHandler : BaseEnemyAttack
     {
         if (!CanSummonSkeletons()) return;
 
+        _currentAttackText.text = "Summoning Skeletons";
         foreach (var point in _summonPoints)
         {
             GameObject skeleton = Instantiate(_skeletonPrefab, point.position, point.rotation);
@@ -98,6 +101,7 @@ public class GhoulAttackHandler : BaseEnemyAttack
 
     public override void PerformRangeAttack()
     {
+        _currentAttackText.text = "Range Attack";
         _cameraShake.Shake();
 
         if (_fireballSpawnPoint != null)

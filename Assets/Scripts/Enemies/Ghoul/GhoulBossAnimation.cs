@@ -11,4 +11,9 @@ public class GhoulBossAnimation : BaseEnemyAnimation
     {
         _enemyAnimator.SetTrigger("RangeAttack");
     }
+
+    public override void PlaySummonedAttack()
+    {
+        _enemyAnimator.SetTrigger("SummonAttack");
+    }
 }

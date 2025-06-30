@@ -78,7 +78,7 @@ public class GhoulMove : BaseEnemyMove
         _isAttacking = true;
         StopChasing();
         _lastSummonTime = Time.time;
-
+        _enemyAnimation.PlaySummonedAttack();
         _ghoulAttackHandler.SpawnSkeletons();
 
         Invoke(nameof(EndAttack), _ghoulAttackHandler.StopDurationAfterSummon);

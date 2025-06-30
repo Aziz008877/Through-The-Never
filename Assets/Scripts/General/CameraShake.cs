@@ -9,4 +9,9 @@ public class CameraShake : MonoBehaviour
     {
         _cinemachineImpulseSource.GenerateImpulse();
     }
+
+    public void ShakeWithDuration()
+    {
+        
+    }
 }

@@ -18,4 +18,10 @@ public abstract class BaseEnemyAnimation : MonoBehaviour
     {
 
     }
+    
+    
+    public virtual void PlaySummonedAttack()
+    {
+
+    }
 }
