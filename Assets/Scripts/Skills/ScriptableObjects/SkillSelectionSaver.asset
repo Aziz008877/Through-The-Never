@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea04dab972c570748866238ab58f6852, type: 3}
   m_Name: SkillSelectionSaver
   m_EditorClassIdentifier: 
-  SelectedSkillID: -1
+  _chosen: []

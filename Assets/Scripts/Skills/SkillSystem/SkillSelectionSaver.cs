@@ -5,7 +5,6 @@ using UnityEngine;
 public class SkillSelectionSaver : ScriptableObject
 {
     [SerializeField] private List<SkillDefinition> _chosen = new();
-
     public void Add(SkillDefinition definition) => _chosen.Add(definition);
     public List<SkillDefinition> GetChosenSkills() => new(_chosen);
     public void Clear() => _chosen.Clear();

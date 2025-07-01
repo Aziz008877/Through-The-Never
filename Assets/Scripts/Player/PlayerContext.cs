@@ -7,7 +7,7 @@ public class PlayerContext : MonoBehaviour
     [Inject] private PlayerMove _playerMove;
     [Inject] private PlayerHP _playerHp;
     [Inject] private PlayerAnimator _playerAnimator;
-    [Inject] private PlayerSkillHandler _playerSkillHandler;
+    [Inject] private PlayerSkillManager _playerSkillManager;
     [Inject] private DamageTextPool _damageTextPool;
     
 }

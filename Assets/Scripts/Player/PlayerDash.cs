@@ -4,7 +4,7 @@ using DG.Tweening;
 using Zenject;
 using Random = UnityEngine.Random;
 
-public class PlayerDash : BaseSkill
+public class PlayerDash : MonoBehaviour
 {
     [Header("Dash")]
     [SerializeField] private float _dashDistance = 5f;
@@ -14,7 +14,6 @@ public class PlayerDash : BaseSkill
     [SerializeField] private AudioSource _dashSound;
     [Inject] private PlayerMove _playerMove;
     [Inject] private PlayerInput _playerInput;
-    [Inject] private FireAOESkill _fireAoeSkillSkill;
     private Tween _dashTween;
     public Action OnPlayerDash;
     private float _xMin = -20f, _xMax = 20f, _zMin = -13f, _zMax = 29f;
@@ -30,9 +29,6 @@ public class PlayerDash : BaseSkill
 
     private void TryDash(Vector3 moveDir)
     {
-        if (!IsReady) return;
-        base.PerformSkill();
-
         if (moveDir == Vector3.zero)
             moveDir = _player.forward;
 
@@ -49,10 +45,6 @@ public class PlayerDash : BaseSkill
         _dashParticles.Play();
 
         _dashTween = _player.DOMove(dashTarget, _dashDuration)
-            .SetEase(Ease.OutQuad)
-            .OnComplete(() =>
-            {
-                _fireAoeSkillSkill.PerformSkill(_playerMove.gameObject);
-            });
+            .SetEase(Ease.OutQuad);
     }
 }
