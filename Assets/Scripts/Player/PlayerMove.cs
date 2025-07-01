@@ -15,10 +15,7 @@ public class PlayerMove : MonoBehaviour
     private bool _isMoving;
     private bool _isSprinting;
     private bool _isCrouching;
-
     public Action<Vector3> OnPlayerMove;
-    public Action<bool> OnPlayerSprint;
-    public Action<bool> OnPlayerCrouch;
 
     private float _xMin = -20f, _xMax = 20f, _zMin = -13f, _zMax = 29f;
 
@@ -29,24 +26,6 @@ public class PlayerMove : MonoBehaviour
         _mainCamera = Camera.main;
 
         _playerInput.OnMovePressed += ReceivePressedValue;
-        _playerInput.OnSprintPressed += Sprint;
-        _playerInput.OnCrouchPressed += Crouch;
-    }
-
-    private void Crouch(bool state)
-    {
-        _isCrouching = state;
-        _speed = state ? _crouchSpeed : _moveSpeed;
-        OnPlayerCrouch?.Invoke(state);
-    }
-
-    private void Sprint(bool state)
-    {
-        if (_isCrouching) return;
-
-        _isSprinting = state;
-        _speed = state ? _runSpeed : _moveSpeed;
-        OnPlayerSprint?.Invoke(state);
     }
 
     public void UpgradeMS()

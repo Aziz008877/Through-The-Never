@@ -12,7 +12,7 @@ public class FireballSkill : BaseSkill
     [Inject] private PlayerInput _playerInput;
     private void Awake()
     {
-        _playerInput.OnPlayerPressedBasic += PerformSkill;
+        _playerInput.OnBasicSkillPressed += PerformSkill;
     }
     
     public override void PerformSkill()
@@ -57,7 +57,7 @@ public class FireballSkill : BaseSkill
 
     private void OnDestroy()
     {
-        _playerInput.OnPlayerPressedBasic -= PerformSkill;
+        _playerInput.OnBasicSkillPressed -= PerformSkill;
     }
 }
 

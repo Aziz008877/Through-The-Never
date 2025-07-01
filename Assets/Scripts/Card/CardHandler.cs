@@ -57,7 +57,7 @@ public class CardHandler : MonoBehaviour
         _playerState.ChangePlayerState(true);
         _cameraShake.Shake();
         _skillActions[skillID].Activate(_playerSkillHandler);
-        _skillSelectionSaver.SaveSelection(skillID);
+        //_skillSelectionSaver.SaveSelection(skillID); NEED UPDATE
         for (int i = 0; i < _allCards.Length; i++)
         {
             if (i == skillID) continue;

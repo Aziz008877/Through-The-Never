@@ -20,7 +20,7 @@ public class PlayerDash : BaseSkill
     private float _xMin = -20f, _xMax = 20f, _zMin = -13f, _zMax = 29f;
     private void Awake()
     {
-        _playerInput.OnPlayerDash += HandleDash;
+        _playerInput.OnDashPressed += HandleDash;
     }
 
     private void HandleDash()

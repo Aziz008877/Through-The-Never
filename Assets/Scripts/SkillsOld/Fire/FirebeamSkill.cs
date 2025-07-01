@@ -18,12 +18,12 @@ public class FirebeamSkill : BaseSkill
 
     private void Awake()
     {
-        _playerInput.OnFireBeamPressed += FireBeamState;
+        _playerInput.OnDefensiveSkillPressed += FireBeamState;
     }
 
     private void OnDestroy()
     {
-        _playerInput.OnFireBeamPressed -= FireBeamState;
+        _playerInput.OnDefensiveSkillPressed -= FireBeamState;
     }
 
     private void FireBeamState()

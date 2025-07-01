@@ -8,19 +8,18 @@ public class PlayerInput : MonoBehaviour
     [Inject] private PlayerState _playerState;
     private Vector2 _moveInput;
     public Action<Vector2> OnMovePressed;
-    public Action<bool> OnSprintPressed;
-    public Action<bool> OnCrouchPressed;
-    public Action OnFireBeamPressed;
-    public Action OnPlayerJump;
-    public Action OnPlayerPressedBasic;
-    public Action OnPlayerDash;
+    public Action OnBasicSkillPressed;
+    public Action OnDefensiveSkillPressed;
+    public Action OnSpecialSkillPressed;
+    public Action OnDashPressed;
     private void Update()
     {
         if (_playerState.CurrentPlayerState == CurrentPlayerState.CanControl)
         {
             Move();
             BaseSkill();
-            Shield();
+            DefensiveSkill();
+            SpecialSkill();
             Dash();
         }
     }
@@ -34,19 +33,27 @@ public class PlayerInput : MonoBehaviour
         OnMovePressed?.Invoke(_moveInput);
     }
 
-    private void Shield()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            OnFireBeamPressed?.Invoke();
-        }
-    }
-
     private void BaseSkill()
     {
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
-            OnPlayerPressedBasic?.Invoke();
+            OnBasicSkillPressed?.Invoke();
+        }
+    }
+
+    private void DefensiveSkill()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            OnDefensiveSkillPressed?.Invoke();
+        }
+    }
+
+    private void SpecialSkill()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            OnSpecialSkillPressed?.Invoke();
         }
     }
 
@@ -54,31 +61,7 @@ public class PlayerInput : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            OnPlayerDash?.Invoke();
-        }
-    }
-
-    private void Sprint()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            OnSprintPressed?.Invoke(true);
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            OnSprintPressed?.Invoke(false);
-        }
-    }
-
-    private void Crouch()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            OnCrouchPressed?.Invoke(true);
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftControl))
-        {
-            OnCrouchPressed?.Invoke(false);
+            OnDashPressed?.Invoke();
         }
     }
 }

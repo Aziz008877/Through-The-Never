@@ -1,17 +1,12 @@
-using System;
 using UnityEngine;
 using Zenject;
-
 public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private Animator _playerAnimator;
-    [SerializeField] private Fountain _fountain;
     [Inject] private PlayerState _playerState;
     [Inject] private PlayerDash _playerDash;
     [Inject] private PlayerMove _playerMove;
     private readonly int _isMoving = Animator.StringToHash("IsMoving");
-    private readonly int _isRunning = Animator.StringToHash("IsRunning");
-    private readonly int _isCrouching = Animator.StringToHash("IsCrouching");
     private readonly int _moveX = Animator.StringToHash("X");
     private readonly int _moveY = Animator.StringToHash("Y");
     private readonly int _basicAttack = Animator.StringToHash("BasicAttack");
@@ -21,15 +16,8 @@ public class PlayerAnimator : MonoBehaviour
 
     private void Awake()
     {
-        if (_fountain != null)
-        {
-            _fountain.OnPlayerHealing += PlayerSitState;
-        }
-        
         _playerDash.OnPlayerDash += Dash;
         _playerMove.OnPlayerMove += ReceivePlayerMoveState;
-        _playerMove.OnPlayerSprint += Sprint;
-        _playerMove.OnPlayerCrouch += Crouch;
     }
 
     private void PlayerSitState(bool sitState)
@@ -48,11 +36,6 @@ public class PlayerAnimator : MonoBehaviour
         _playerAnimator.SetTrigger(_dash);
     }
 
-    private void Crouch(bool crouchState)
-    {
-        _playerAnimator.SetBool(_isCrouching, crouchState);
-    }
-    
     public void CastBasics()
     {
         _playerAnimator.SetTrigger(_basicAttack);
@@ -61,11 +44,6 @@ public class PlayerAnimator : MonoBehaviour
     public void CastBeam(bool state)
     {
         _playerAnimator.SetBool(_isShield, state);
-    }
-
-    private void Sprint(bool sprintState)
-    {
-        _playerAnimator.SetBool(_isRunning, sprintState);
     }
 
     private void ReceivePlayerMoveState(Vector3 direction)
@@ -92,11 +70,6 @@ public class PlayerAnimator : MonoBehaviour
     
     private void OnDestroy()
     {
-        if (_fountain != null)
-        {
-            _fountain.OnPlayerHealing -= PlayerSitState;
-        }
-        
         _playerMove.OnPlayerMove -= ReceivePlayerMoveState;
         _playerDash.OnPlayerDash -= Dash;
     }
