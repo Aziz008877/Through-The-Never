@@ -3,7 +3,7 @@ using UnityEngine;
 using Zenject;
 public class SkillSceneBootstrap : MonoBehaviour
 {
-    [Inject] private SkillSelectionSaver _saver;
+    [SerializeField] private SkillSelectionSaver _saver;
     [Inject] private PlayerSkillManager _skillManager;
     [Inject] private PlayerContext _context;
     private void Start()

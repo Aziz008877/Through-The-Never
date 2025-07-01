@@ -4,7 +4,6 @@ public class PlayerAnimator : MonoBehaviour
 {
     [SerializeField] private Animator _playerAnimator;
     [Inject] private PlayerState _playerState;
-    [Inject] private PlayerDash _playerDash;
     [Inject] private PlayerMove _playerMove;
     private readonly int _isMoving = Animator.StringToHash("IsMoving");
     private readonly int _moveX = Animator.StringToHash("X");
@@ -13,10 +12,8 @@ public class PlayerAnimator : MonoBehaviour
     private readonly int _isShield = Animator.StringToHash("IsShield");
     private readonly int _isSitting = Animator.StringToHash("IsSitting");
     private readonly int _dash = Animator.StringToHash("Dash");
-
     private void Awake()
     {
-        _playerDash.OnPlayerDash += Dash;
         _playerMove.OnPlayerMove += ReceivePlayerMoveState;
     }
 
@@ -71,6 +68,5 @@ public class PlayerAnimator : MonoBehaviour
     private void OnDestroy()
     {
         _playerMove.OnPlayerMove -= ReceivePlayerMoveState;
-        _playerDash.OnPlayerDash -= Dash;
     }
 }

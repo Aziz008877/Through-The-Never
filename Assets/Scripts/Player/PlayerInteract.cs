@@ -56,14 +56,14 @@ public class PlayerInteract : MonoBehaviour
 
     private void ShowCurrentUI()
     {
-        if (_currentInteractable != null)
-            _currentInteractable.InteractionUI.gameObject.SetActive(true);
+        /*if (_currentInteractable != null)
+            _currentInteractable.InteractionUI.gameObject.SetActive(true);*/
     }
 
     private void HideCurrentUI()
     {
-        if (_currentInteractable != null)
-            _currentInteractable.InteractionUI.gameObject.SetActive(false);
+        /*if (_currentInteractable != null)
+            _currentInteractable.InteractionUI.gameObject.SetActive(false);*/
     }
 
     private void RotateUIToCamera()
