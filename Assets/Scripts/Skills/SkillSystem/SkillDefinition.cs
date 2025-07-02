@@ -6,6 +6,7 @@ public class SkillDefinition : ScriptableObject
     [Header("General Data")]
     public string Id;
     public string DisplayName;
+    public string Description;
     public Sprite Icon;
     public SkillSlot Slot;
     public SkillKind Kind;

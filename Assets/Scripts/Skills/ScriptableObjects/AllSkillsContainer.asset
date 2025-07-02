@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea04dab972c570748866238ab58f6852, type: 3}
-  m_Name: SkillSelectionSaver
+  m_Script: {fileID: 11500000, guid: 9e169e5b9affb7444a6d5e006721cf57, type: 3}
+  m_Name: AllSkillsContainer
   m_EditorClassIdentifier: 
-  _chosen: []
-  _hasSchool: 0
-  _school: 0
+  _allDefinitions:
+  - {fileID: 11400000, guid: 441c66dc3d2923b4c8466412bea7b2b9, type: 2}
+  - {fileID: 11400000, guid: 821621941a17a924db8fa3e42d07abe1, type: 2}

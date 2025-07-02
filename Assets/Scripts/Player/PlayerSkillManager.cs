@@ -15,6 +15,11 @@ public class PlayerSkillManager : MonoBehaviour
         _input.OnSpecialSkillPressed += () => Cast(SkillSlot.Special);
         _input.OnDashPressed += () => Cast(SkillSlot.Dash);
     }
+    
+    public void AddSkills(List<SkillDefinition> newDefs)
+    {
+        Build(newDefs);
+    }
 
     public void Build(List<SkillDefinition> skillsDefinitions)
     {
@@ -32,8 +37,12 @@ public class PlayerSkillManager : MonoBehaviour
 
     private void Cast(SkillSlot slot)
     {
-        if (_actives.TryGetValue(slot, out var activeSkillBehaviour)) activeSkillBehaviour.TryCast();
+        if (_actives.TryGetValue(slot, out var activeSkill))
+        {
+            activeSkill.TryCast();
+        }
     }
+
 
     private void OnDestroy()
     {

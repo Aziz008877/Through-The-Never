@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -10,6 +11,11 @@ public class SkillSceneBootstrap : MonoBehaviour
     {
         List<SkillDefinition> list = _saver.GetChosenSkills();
         _skillManager.Build(list);
+        _saver.Clear();
+    }
+
+    private void OnDestroy()
+    {
         _saver.Clear();
     }
 }

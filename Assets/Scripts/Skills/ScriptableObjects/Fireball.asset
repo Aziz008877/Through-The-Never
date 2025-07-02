@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: fireball
   DisplayName: Fireball
+  Description: 
   Icon: {fileID: 0}
   Slot: 0
   Kind: 0
   School: 0
-  BehaviourPrefab: {fileID: 0}
+  BehaviourPrefab: {fileID: 818288682974214427, guid: 3d1a325f96533214581482f1c418da46, type: 3}
   Damage: 15
   Cooldown: 0.5
   Duration: 3
