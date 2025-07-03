@@ -28,7 +28,7 @@ public class PlayerAnimator : MonoBehaviour
         }
     }
 
-    private void Dash()
+    public void Dash()
     {
         _playerAnimator.SetTrigger(_dash);
     }

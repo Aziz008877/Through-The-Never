@@ -9,8 +9,10 @@ public class PlayerContext : MonoBehaviour
     public Transform PlayerCastPosition => _playerCastPosition;
 
     [Inject] private PlayerMove _playerMove;
+    public PlayerMove PlayerMove => _playerMove;
     [Inject] private PlayerHP _playerHp;
     [Inject] private PlayerAnimator _playerAnimator;
+    public PlayerAnimator PlayerAnimator => _playerAnimator;
     [Inject] private PlayerSkillManager _playerSkillManager;
     [Inject] private DamageTextPool _damageTextPool;
     private readonly List<IDamageModifier> _damageModifiers = new();
