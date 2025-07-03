@@ -1300,6 +1300,7 @@ MonoBehaviour:
   _starterBasic: {fileID: 11400000, guid: 821621941a17a924db8fa3e42d07abe1, type: 2}
   _starterInnate: {fileID: 11400000, guid: 441c66dc3d2923b4c8466412bea7b2b9, type: 2}
   _starterDash: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
+  _currentTestSpecial: {fileID: 11400000, guid: 98c32816e70cb3847ae1a42a82003a61, type: 2}
   _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
   _chooseVFX: {fileID: 0}
   <InteractionUI>k__BackingField: {fileID: 0}
@@ -2117,6 +2118,7 @@ MonoBehaviour:
   _starterBasic: {fileID: 0}
   _starterInnate: {fileID: 0}
   _starterDash: {fileID: 0}
+  _currentTestSpecial: {fileID: 0}
   _saver: {fileID: 0}
   _chooseVFX: {fileID: 0}
   <InteractionUI>k__BackingField: {fileID: 0}
@@ -5607,6 +5609,7 @@ MonoBehaviour:
   _starterBasic: {fileID: 0}
   _starterInnate: {fileID: 0}
   _starterDash: {fileID: 0}
+  _currentTestSpecial: {fileID: 0}
   _saver: {fileID: 0}
   _chooseVFX: {fileID: 0}
   <InteractionUI>k__BackingField: {fileID: 0}
@@ -10649,6 +10652,7 @@ MonoBehaviour:
   _starterBasic: {fileID: 0}
   _starterInnate: {fileID: 0}
   _starterDash: {fileID: 0}
+  _currentTestSpecial: {fileID: 0}
   _saver: {fileID: 0}
   _chooseVFX: {fileID: 0}
   <InteractionUI>k__BackingField: {fileID: 0}

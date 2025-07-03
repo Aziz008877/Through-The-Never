@@ -43,7 +43,6 @@ public class PlayerSkillManager : MonoBehaviour
         }
     }
 
-
     private void OnDestroy()
     {
         _input.OnBasicSkillPressed -= () => Cast(SkillSlot.Basic);

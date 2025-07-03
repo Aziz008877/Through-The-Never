@@ -66,5 +66,5 @@ public class TrainingEnemy : MonoBehaviour, IDamageable, IDotReceivable
     }
 
     private void UpdateBar() =>
-        _hpFillImage.fillAmount = CurrentHP / MaxHP;
+        _hpFillImage.fillAmount = Mathf.Clamp01(CurrentHP / MaxHP);
 }
