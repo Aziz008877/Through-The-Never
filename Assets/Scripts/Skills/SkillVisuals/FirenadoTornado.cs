@@ -5,13 +5,13 @@ using UnityEngine;
 public class FirenadoTornado : MonoBehaviour
 {
     [SerializeField] private float _radius = 4f;
-
+    [SerializeField] private float _dotPerSecond = 2f;
+    [SerializeField] private float _dotDuration = 3f;
     private float _damage;
     private float _pullForce;
     private PlayerContext _ctx;
-    private readonly HashSet<IDamageable> _hitAlready = new();
-
-    public void Init(float damage,float pullForce,float lifetime,PlayerContext context)
+    private readonly HashSet<IDamageable> _hit = new();
+    public void Init(float damage, float pullForce, float lifetime, PlayerContext context)
     {
         _damage = damage;
         _pullForce = pullForce;
@@ -32,13 +32,17 @@ public class FirenadoTornado : MonoBehaviour
             rb.AddForce(dir * _pullForce, ForceMode.Acceleration);
         }
 
-        if (other.TryGetComponent(out IDamageable target) && !_hitAlready.Contains(target))
+        if (other.TryGetComponent(out IDamageable target) && !_hit.Contains(target))
         {
-            float dmg = _damage;
+            float dmg  = _damage;
             SkillDamageType type = SkillDamageType.Basic;
             _ctx.ApplyDamageModifiers(ref dmg, ref type);
             target.ReceiveDamage(dmg, type);
-            _hitAlready.Add(target);
+
+            if (other.TryGetComponent(out IDotReceivable dotTarget))
+                dotTarget.ApplyDot(_dotPerSecond, _dotDuration);
+
+            _hit.Add(target);
         }
     }
 
