@@ -19,7 +19,7 @@ MonoBehaviour:
   Slot: 2
   Kind: 0
   School: 0
-  BehaviourPrefab: {fileID: 0}
+  BehaviourPrefab: {fileID: 8361261543459378349, guid: 9124301c82425284a860547a226766f9, type: 3}
   Damage: 0
   Cooldown: 0
   Duration: 0

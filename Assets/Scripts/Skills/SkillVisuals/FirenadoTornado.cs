@@ -1,48 +1,52 @@
-using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+
+[RequireComponent(typeof(SphereCollider))]
 public class FirenadoTornado : MonoBehaviour
 {
     [SerializeField] private float _radius = 4f;
-    [SerializeField] private float _tickInterval = 1f;
-    private float _dps, _pullForce;
-    private PlayerContext _context;
-    public void Init(float damagePerSecond, float pullForce, float lifetime, PlayerContext context)
-    {
-        _dps = damagePerSecond;
-        _pullForce = pullForce;
-        _context = context;
 
-        StartCoroutine(DestroySelf(lifetime));
-        InvokeRepeating(nameof(ApplyTick), 0f, _tickInterval);
+    private float _damage;
+    private float _pullForce;
+    private PlayerContext _ctx;
+    private readonly HashSet<IDamageable> _hitAlready = new();
+
+    public void Init(float damage,float pullForce,float lifetime,PlayerContext context)
+    {
+        _damage = damage;
+        _pullForce = pullForce;
+        _ctx = context;
+
+        var col = GetComponent<SphereCollider>();
+        col.isTrigger = true;
+        col.radius = _radius;
+
+        Invoke(nameof(DestroySelf), lifetime);
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.attachedRigidbody != null)
+        if (other.TryGetComponent(out Rigidbody rb))
         {
             Vector3 dir = (transform.position - other.transform.position).normalized;
-            other.attachedRigidbody.AddForce(dir * _pullForce, ForceMode.Acceleration);
+            rb.AddForce(dir * _pullForce, ForceMode.Acceleration);
         }
-    }
 
-    private void ApplyTick()
-    {
-        Collider[] hits = Physics.OverlapSphere(transform.position, _radius);
-        foreach (var h in hits)
+        if (other.TryGetComponent(out IDamageable target) && !_hitAlready.Contains(target))
         {
-            if (!h.TryGetComponent(out IDamageable dmg)) continue;
-
-            float tickDamage = _dps * _tickInterval;
+            float dmg = _damage;
             SkillDamageType type = SkillDamageType.Basic;
-            _context.ApplyDamageModifiers(ref tickDamage, ref type);
-            dmg.ReceiveDamage(tickDamage, type);
+            _ctx.ApplyDamageModifiers(ref dmg, ref type);
+            target.ReceiveDamage(dmg, type);
+            _hitAlready.Add(target);
         }
     }
 
-    private IEnumerator DestroySelf(float time)
+    private void DestroySelf() => Destroy(gameObject);
+
+    private void OnDrawGizmosSelected()
     {
-        yield return new WaitForSeconds(time); 
-        CancelInvoke(); 
-        Destroy(gameObject);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, _radius);
     }
 }

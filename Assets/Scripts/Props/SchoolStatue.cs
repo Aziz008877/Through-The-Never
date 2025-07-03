@@ -6,6 +6,7 @@ public class SchoolStatue : MonoBehaviour, IInteractable
     [SerializeField] private MagicSchool _school;
     [SerializeField] private SkillDefinition _starterBasic;
     [SerializeField] private InnateDefinition _starterInnate;
+    [SerializeField] private SkillDefinition _currentTestSkill;
     [SerializeField] private SkillSelectionSaver _saver;
     [SerializeField] private ParticleSystem _chooseVFX;
     [field: SerializeField] public Transform InteractionUI { get; set; }
@@ -19,9 +20,9 @@ public class SchoolStatue : MonoBehaviour, IInteractable
         
         _saver.AddSkill(_starterInnate);
         _saver.AddSkill(_starterBasic);
+        _saver.AddSkill(_currentTestSkill);
         
-        var list = new List<SkillDefinition> { _starterInnate, _starterBasic };
-        player.GetComponent<PlayerSkillManager>().AddSkills(list);
+        player.GetComponent<PlayerSkillManager>().AddSkills(_saver.GetChosenSkills());
 
         //_chooseVFX.Play();
         CanInteract = false;
