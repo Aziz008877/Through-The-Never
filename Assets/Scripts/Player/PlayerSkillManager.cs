@@ -5,6 +5,7 @@ public class PlayerSkillManager : MonoBehaviour
 {
     [SerializeField] private Transform _skillRoot;
     private readonly Dictionary<SkillSlot, ActiveSkillBehaviour> _actives = new();
+    public Dictionary<SkillSlot, ActiveSkillBehaviour> Actives => _actives;
     [Inject] private PlayerContext _context;
     [Inject] private PlayerInput _input;
     [Inject] private SkillRuntimeFactory _factory;

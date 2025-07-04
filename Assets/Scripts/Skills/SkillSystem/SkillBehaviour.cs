@@ -20,7 +20,17 @@ public abstract class ActiveSkillBehaviour : SkillBehaviour
     public float TotalCooldown => Definition.Cooldown;
     public abstract void TryCast();
     protected float _cooldownTimer;
+    public float CoolDownTimer => _cooldownTimer;
     public event Action<float> OnCooldownStarted;
+    
+    public void ReduceCooldownByPercent(float percent)
+    {
+        percent = Mathf.Clamp01(percent);
+        if (percent <= 0f || IsReady) return;
+
+        _cooldownTimer -= _cooldownTimer * percent;
+        if (_cooldownTimer < 0f) _cooldownTimer = 0f;
+    }
     
     private void Update()
     {

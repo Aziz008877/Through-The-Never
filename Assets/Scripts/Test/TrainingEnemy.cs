@@ -46,7 +46,7 @@ public class TrainingEnemy : MonoBehaviour, IDamageable, IDotReceivable
     private IEnumerator DotTick(float dps, float duration)
     {
         float elapsedTime = 0f;
-        while (elapsedTime < duration)
+        while (elapsedTime < duration && CanBeDamaged)
         {
             yield return new WaitForSeconds(1f);       // тик раз в секунду
             ApplyDamage(dps);                          // dps за 1 с
@@ -62,7 +62,10 @@ public class TrainingEnemy : MonoBehaviour, IDamageable, IDotReceivable
         UpdateBar();
 
         if (CurrentHP <= MinHP)
+        {
+            CanBeDamaged = false;
             OnEnemyDead?.Invoke(transform);
+        }
     }
 
     private void UpdateBar() =>

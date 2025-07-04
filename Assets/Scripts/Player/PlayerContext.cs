@@ -20,6 +20,11 @@ public class PlayerContext : MonoBehaviour
     [Inject] private PlayerAnimator _playerAnimator;
     public PlayerAnimator PlayerAnimator => _playerAnimator;
     [Inject] private PlayerSkillManager _playerSkillManager;
+    public PlayerSkillManager PlayerSkillManager => _playerSkillManager;
+    
+    [Inject] private PlayerEnemyHandler _playerEnemyHandler;
+    public PlayerEnemyHandler PlayerEnemyHandler => _playerEnemyHandler;
+    
     [Inject] private DamageTextPool _damageTextPool;
     public bool SolarFlareCharge { get; set; }
     private readonly List<IDamageModifier> _damageModifiers = new();

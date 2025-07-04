@@ -1301,7 +1301,7 @@ MonoBehaviour:
   _starterInnate: {fileID: 11400000, guid: 441c66dc3d2923b4c8466412bea7b2b9, type: 2}
   _starterDash: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
   _currentTestSpecial: {fileID: 11400000, guid: a96bdf9badbe9a544a3a1fafcc7d7095, type: 2}
-  _currentTestPassive: {fileID: 11400000, guid: 53a5e035ec3906a45b6cf147bb33319b, type: 2}
+  _currentTestPassive: {fileID: 11400000, guid: 7fe5fbc1a1a229841b37c2414f5a74d1, type: 2}
   _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
   _chooseVFX: {fileID: 0}
   <InteractionUI>k__BackingField: {fileID: 0}
@@ -4528,6 +4528,7 @@ GameObject:
   - component: {fileID: 1603916745}
   - component: {fileID: 1603916755}
   - component: {fileID: 1603916756}
+  - component: {fileID: 1603916757}
   m_Layer: 2
   m_Name: Player
   m_TagString: Untagged
@@ -4753,6 +4754,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillRoot: {fileID: 1544275402}
+--- !u!114 &1603916757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603916743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cd2515e53ff28d45add7ec104459224, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _baseEnemyHp: {fileID: 1127282088}
 --- !u!1 &1608828628
 GameObject:
   m_ObjectHideFlags: 0
