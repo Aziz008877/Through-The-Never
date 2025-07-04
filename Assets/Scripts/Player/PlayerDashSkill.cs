@@ -3,8 +3,6 @@ using UnityEngine;
 public class PlayerDashSkill : ActiveSkillBehaviour
 {
     [SerializeField] private float _distance = 5f;
-    [SerializeField] private float _duration = 0.15f;
-
     private bool _dashing;
     private Vector3 _start;
     private Vector3 _end;
@@ -15,7 +13,7 @@ public class PlayerDashSkill : ActiveSkillBehaviour
         if (!_dashing) return;
 
         _timer += Time.deltaTime;
-        float k = _timer / _duration;
+        float k = _timer / Definition.Duration;
         PlayerContext.transform.position = Vector3.Lerp(_start, _end, k);
 
         if (k >= 1f) _dashing = false;
