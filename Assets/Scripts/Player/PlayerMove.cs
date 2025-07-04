@@ -4,8 +4,6 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] private float _moveSpeed = 5f;
-    [SerializeField] private float _runSpeed = 8f;
-    [SerializeField] private float _crouchSpeed = 3f;
     [SerializeField] private float _rotationSpeed = 10f;
     [SerializeField] private Camera _mainCamera;
     public Vector3 LastMoveDirection { get; private set; } = Vector3.forward;
