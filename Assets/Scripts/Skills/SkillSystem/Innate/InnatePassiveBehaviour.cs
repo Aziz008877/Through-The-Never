@@ -1,12 +1,12 @@
 
 public class InnatePassiveBehaviour : PassiveSkillBehaviour
 {
-    public override void Enable()
+    public override void EnablePassive()
     {
         
     }
 
-    public override void Disable()
+    public override void DisablePassive()
     {
         
     }

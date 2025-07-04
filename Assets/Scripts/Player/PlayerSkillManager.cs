@@ -31,7 +31,7 @@ public class PlayerSkillManager : MonoBehaviour
                 _actives[skillDefinition.Slot] = activeSkillBehaviour;
 
             if (skillDefinition.Kind == SkillKind.Passive && behaviour is PassiveSkillBehaviour passiveSkillBehaviour)
-                passiveSkillBehaviour.Enable();
+                passiveSkillBehaviour.EnablePassive();
         }
     }
 

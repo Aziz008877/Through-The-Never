@@ -36,6 +36,6 @@ public abstract class ActiveSkillBehaviour : SkillBehaviour
 
 public abstract class PassiveSkillBehaviour : SkillBehaviour
 {
-    public abstract void Enable();
-    public abstract void Disable();
+    public abstract void EnablePassive();
+    public abstract void DisablePassive();
 }

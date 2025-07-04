@@ -8,6 +8,7 @@ public class SchoolStatue : MonoBehaviour, IInteractable
     [SerializeField] private InnateDefinition _starterInnate;
     [SerializeField] private SkillDefinition _starterDash;
     [SerializeField] private SkillDefinition _currentTestSpecial;
+    [SerializeField] private SkillDefinition _currentTestPassive;
     [SerializeField] private SkillSelectionSaver _saver;
     [SerializeField] private ParticleSystem _chooseVFX;
     [field: SerializeField] public Transform InteractionUI { get; set; }
@@ -23,6 +24,7 @@ public class SchoolStatue : MonoBehaviour, IInteractable
         _saver.AddSkill(_starterBasic);
         _saver.AddSkill(_starterDash);
         _saver.AddSkill(_currentTestSpecial);
+        _saver.AddSkill(_currentTestPassive);
         
         player.GetComponent<PlayerSkillManager>().AddSkills(_saver.GetChosenSkills());
 

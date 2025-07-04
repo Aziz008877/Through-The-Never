@@ -4,7 +4,7 @@ public class FireInnateSkill : PassiveSkillBehaviour, IDamageModifier
 {
     [SerializeField] private float _dotDuration = 3f;
     [SerializeField] private float _dotPerSecond = 2f;
-    public override void Enable()
+    public override void EnablePassive()
     {
         PlayerContext.RegisterModifier(this);
     }
@@ -15,7 +15,7 @@ public class FireInnateSkill : PassiveSkillBehaviour, IDamageModifier
         damage += dotTotal; 
     }
 
-    public override void Disable()
+    public override void DisablePassive()
     {
         PlayerContext.RegisterModifier(this);
     }

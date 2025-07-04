@@ -9,6 +9,7 @@ public class PlayerHP : MonoBehaviour
 
     public Action<float> OnHpValueUpdated;
     public Action OnPlayerDead;
+    public Action<float> OnPlayerReceivedDamage;
 
     private void Start()
     {
@@ -38,6 +39,7 @@ public class PlayerHP : MonoBehaviour
     public void ReceiveDamage(float damageValue)
     {
         _currentHP -= damageValue;
+        OnPlayerReceivedDamage?.Invoke(damageValue);
         UpdateHP();
     }
 
