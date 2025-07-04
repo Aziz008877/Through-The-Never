@@ -12,12 +12,12 @@ public class Fireball : MonoBehaviour
     [SerializeField] private float _speed = 25f;
 
     [Header("DOT data")]
-    [SerializeField] private float _dotPerSecond = 2f;
-    [SerializeField] private float _dotDuration = 3f;
+    [SerializeField] protected float _dotPerSecond = 2f;
+    [SerializeField] protected float _dotDuration = 3f;
 
-    private float _instantDamage;
+    protected float _instantDamage;
     private SkillDamageType _skillDamageType;
-    private PlayerContext _context;
+    protected PlayerContext _context;
     private bool _canDamage = true;
 
     public void Init(float damage,float lifeTime,SkillDamageType type,PlayerContext ctx)
@@ -50,7 +50,7 @@ public class Fireball : MonoBehaviour
         HitAndStop();
     }
 
-    private void HitAndStop()
+    protected virtual void HitAndStop()
     {
         _canDamage = false;
         _fireballParticles.gameObject.SetActive(false);
@@ -59,7 +59,7 @@ public class Fireball : MonoBehaviour
         Invoke(nameof(DestroyFireball), _dotDuration + 0.5f);
     }
 
-    private void DestroyFireball()
+    protected virtual void DestroyFireball()
     {
         if (this != null && gameObject != null) Destroy(gameObject);
     }

@@ -1,19 +1,26 @@
 using UnityEngine;
+
 public class FireballSkill : ActiveSkillBehaviour
 {
-    [Header("VFX & Spawn")]
-    [SerializeField] private Fireball _fireballPrefab;
-    [SerializeField] private float _projectileLifeTime = 3f;
+    [Header("Prefabs")]
+    [SerializeField] private Fireball _normalPrefab;
+    [SerializeField] private BigFireball _bigPrefab;
+    [SerializeField] private float _lifeTime = 3f;
+
     public override void TryCast()
     {
         if (!IsReady) return;
 
-        var projectile = Instantiate(_fireballPrefab,
+        bool empowered = PlayerContext.SolarFlareCharge;
+        Fireball prefab = empowered ? _bigPrefab : _normalPrefab;
+
+        var proj = Instantiate(prefab,
             PlayerContext.PlayerCastPosition.position,
             PlayerContext.PlayerCastPosition.rotation);
 
-        projectile.Init(Definition.Damage, _projectileLifeTime, SkillDamageType.Basic, PlayerContext);
+        proj.Init(Definition.Damage, _lifeTime, SkillDamageType.Basic, PlayerContext);
 
+        if (empowered) PlayerContext.SolarFlareCharge = false;
         StartCooldown();
     }
 }

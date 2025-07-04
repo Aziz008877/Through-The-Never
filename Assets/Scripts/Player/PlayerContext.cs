@@ -18,6 +18,7 @@ public class PlayerContext : MonoBehaviour
     public PlayerAnimator PlayerAnimator => _playerAnimator;
     [Inject] private PlayerSkillManager _playerSkillManager;
     [Inject] private DamageTextPool _damageTextPool;
+    public bool SolarFlareCharge { get; set; }
     private readonly List<IDamageModifier> _damageModifiers = new();
     public void RegisterModifier(IDamageModifier m)   => _damageModifiers.Add(m);
     public void UnregisterModifier(IDamageModifier m) => _damageModifiers.Remove(m);
