@@ -11,9 +11,6 @@ public class FireInnateSkill : PassiveSkillBehaviour, IDamageModifier
 
     public void Apply(ref float damage, ref SkillDamageType type)
     {
-        /*type = SkillDamageType.DOT;
-        damage = _dotPerSecond * _dotDuration;*/
-        
         float dotTotal = _dotPerSecond * _dotDuration;
         damage += dotTotal; 
     }

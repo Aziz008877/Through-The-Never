@@ -12,7 +12,6 @@ public class FirebreathSkill : ActiveSkillBehaviour
     [SerializeField] private float _coneRange = 8f;
 
     [Header("Timing & DPS")]
-    [SerializeField] private float _duration = 3f;
     [SerializeField] private float _tickDamage = 2f;
     [SerializeField] private float _tickRate = 0.25f;
     private readonly HashSet<IDamageable> _burning = new();
@@ -30,7 +29,7 @@ public class FirebreathSkill : ActiveSkillBehaviour
         float elapsed = 0f;
         var wait = new WaitForSeconds(_tickRate);
 
-        while (elapsed < _duration)
+        while (elapsed < Definition.Duration)
         {
             DealConeDamage();
             elapsed += _tickRate;
@@ -54,10 +53,9 @@ public class FirebreathSkill : ActiveSkillBehaviour
             if (dir.sqrMagnitude == 0f) continue;
             if (Vector3.Angle(fwd, dir) > _coneAngle) continue;
 
-            float dmg = _tickDamage * _tickRate;            // реальный урон-за-тик
+            float dmg = _tickDamage * _tickRate;
             SkillDamageType type = SkillDamageType.Basic;
-
-            // врождённая пассивка добавляет DOT только первой встрече
+            
             if (!_burning.Contains(target))
             {
                 PlayerContext.ApplyDamageModifiers(ref dmg, ref type);

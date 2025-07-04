@@ -3,10 +3,10 @@ public class SolarFlareSkill : ActiveSkillBehaviour
 {
     public override void TryCast()
     {
-        if (!IsReady) return;                  // идёт КД
-        if (PlayerContext.SolarFlareCharge) return; // заряд уже есть
+        if (!IsReady) return;
+        if (PlayerContext.SolarFlareCharge) return;
 
-        PlayerContext.SolarFlareCharge = true; // зачаровали следующую базу
+        PlayerContext.SolarFlareCharge = true;
         StartCooldown();
     }
 }
