@@ -956,6 +956,7 @@ GameObject:
   - component: {fileID: 436087288}
   - component: {fileID: 436087289}
   - component: {fileID: 436087290}
+  - component: {fileID: 436087291}
   m_Layer: 0
   m_Name: SkillHandler
   m_TagString: Untagged
@@ -1011,6 +1012,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
+--- !u!114 &436087291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 436087287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4bc48a9c609bf4aad84fa42bc07cce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &478154093
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1301,7 +1314,7 @@ MonoBehaviour:
   _starterInnate: {fileID: 11400000, guid: 441c66dc3d2923b4c8466412bea7b2b9, type: 2}
   _starterDash: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
   _currentTestSpecial: {fileID: 11400000, guid: a96bdf9badbe9a544a3a1fafcc7d7095, type: 2}
-  _currentTestPassive: {fileID: 11400000, guid: 7fe5fbc1a1a229841b37c2414f5a74d1, type: 2}
+  _currentTestPassive: {fileID: 11400000, guid: 74ba054a442dc4c45bf55d62f007af58, type: 2}
   _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
   _chooseVFX: {fileID: 0}
   <InteractionUI>k__BackingField: {fileID: 0}
@@ -4741,6 +4754,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPosition: {fileID: 1603916744}
   _playerCastPosition: {fileID: 1439481747}
+  _selectionSaver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
 --- !u!114 &1603916756
 MonoBehaviour:
   m_ObjectHideFlags: 0

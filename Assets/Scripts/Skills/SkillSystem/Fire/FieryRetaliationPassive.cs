@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class FieryRetaliationPassive : PassiveSkillBehaviour
+public class FieryRetaliationPassive : PassiveSkillBehaviour, ISkillModifier
 {
     [SerializeField] private float _radius  = 3f;
     [SerializeField] private float _damage  = 10f;
@@ -8,11 +8,13 @@ public class FieryRetaliationPassive : PassiveSkillBehaviour
 
     public override void EnablePassive()
     {
+        PlayerContext.SkillModifierHub.Register(this);
         PlayerContext.PlayerHp.OnPlayerReceivedDamage += TriggerPulse;
     }
 
     public override void DisablePassive()
     {
+        PlayerContext.SkillModifierHub.Unregister(this);
         PlayerContext.PlayerHp.OnPlayerReceivedDamage -= TriggerPulse;
     }
 
@@ -30,5 +32,10 @@ public class FieryRetaliationPassive : PassiveSkillBehaviour
             PlayerContext.ApplyDamageModifiers(ref dmg, ref type);
             target.ReceiveDamage(dmg, type);
         }
+    }
+
+    public float Evaluate(SkillKey key, float currentValue)
+    {
+        return currentValue;
     }
 }

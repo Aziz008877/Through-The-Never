@@ -10,6 +10,8 @@ public class PlayerDashSkill : ActiveSkillBehaviour
 
     private void Update()
     {
+        base.Update();                          // << обязательно, чтобы кулдаун считал
+
         if (!_dashing) return;
 
         _timer += Time.deltaTime;
@@ -18,6 +20,7 @@ public class PlayerDashSkill : ActiveSkillBehaviour
 
         if (k >= 1f) _dashing = false;
     }
+
 
     public override void TryCast()
     {

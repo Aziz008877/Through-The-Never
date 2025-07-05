@@ -17,5 +17,6 @@ public class GameInstaller : MonoInstaller
         Container.Bind<PlayerContext>().FromComponentInHierarchy().AsSingle();
         Container.Bind<PlayerSkillManager>().FromComponentInHierarchy().AsSingle();
         Container.Bind<PlayerEnemyHandler>().FromComponentInHierarchy().AsSingle();
+        Container.Bind<SkillModifierHub>().FromComponentInHierarchy().AsSingle();
     }
 }

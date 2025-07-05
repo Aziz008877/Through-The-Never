@@ -15,6 +15,8 @@ public abstract  class SkillBehaviour : MonoBehaviour
 
 public abstract class ActiveSkillBehaviour : SkillBehaviour
 {
+    protected float Cooldown => PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Cooldown), Definition.Cooldown);
+    protected float Damage => PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Damage), Definition.Damage);
     public bool IsReady => _cooldownTimer <= 0f;
     public float RemainingCooldown => _cooldownTimer;
     public float TotalCooldown => Definition.Cooldown;
@@ -32,7 +34,7 @@ public abstract class ActiveSkillBehaviour : SkillBehaviour
         if (_cooldownTimer < 0f) _cooldownTimer = 0f;
     }
     
-    private void Update()
+    protected virtual void Update()
     {
         if (_cooldownTimer > 0f) _cooldownTimer -= Time.deltaTime;
     }

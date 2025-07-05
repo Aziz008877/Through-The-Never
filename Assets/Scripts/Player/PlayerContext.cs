@@ -5,6 +5,8 @@ using Zenject;
 public class PlayerContext : MonoBehaviour
 {
     [SerializeField] private Transform _playerPosition, _playerCastPosition;
+    [SerializeField] private SkillSelectionSaver _selectionSaver;
+    public SkillSelectionSaver SkillSelectionSaver => _selectionSaver;
     public Transform PlayerPosition => _playerPosition;
     public Transform PlayerCastPosition => _playerCastPosition;
 
@@ -24,6 +26,9 @@ public class PlayerContext : MonoBehaviour
     
     [Inject] private PlayerEnemyHandler _playerEnemyHandler;
     public PlayerEnemyHandler PlayerEnemyHandler => _playerEnemyHandler;
+
+    [Inject] private SkillModifierHub _skillModifierHub;
+    public SkillModifierHub SkillModifierHub => _skillModifierHub;
     
     [Inject] private DamageTextPool _damageTextPool;
     public bool SolarFlareCharge { get; set; }
