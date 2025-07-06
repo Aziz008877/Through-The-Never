@@ -1314,7 +1314,7 @@ MonoBehaviour:
   _starterInnate: {fileID: 11400000, guid: 441c66dc3d2923b4c8466412bea7b2b9, type: 2}
   _starterDash: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
   _currentTestSpecial: {fileID: 11400000, guid: a78c7ffdf784c5b4aa85272c22c17b3a, type: 2}
-  _currentTestPassive: {fileID: 11400000, guid: 988029c1a49d11240b899c4ba2079cbf, type: 2}
+  _currentTestPassive: {fileID: 11400000, guid: dd16c95eb36064948afdecd734e7ce8b, type: 2}
   _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
   _chooseVFX: {fileID: 0}
   <InteractionUI>k__BackingField: {fileID: 0}

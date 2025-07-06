@@ -47,12 +47,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b560727ea04c3714ea4c0607ed49a41f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _castParticles: {fileID: 2314127630654801848}
-  _fireballParticles: {fileID: 8709532360526534148}
-  _fireballHit: {fileID: 5355286716345507341}
+  _castVfx: {fileID: 2314127630654801848}
+  _flightVfx: {fileID: 8709532360526534148}
+  _hitVfx: {fileID: 5355286716345507341}
   _speed: 25
   _dotPerSecond: 2
   _dotDuration: 3
+  _smallRadius: 2
+  _smallDamageMul: 0.5
+  _turnSpeedDeg: 360
+  _seekRadius: 12
+  _hitDistance: 0.25
   _explosionRadius: 6
   _aoeMultiplier: 2
 --- !u!65 &8298348892177709639
