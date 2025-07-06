@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -41,5 +42,4 @@ public class PlayerContext : MonoBehaviour
         foreach (var mod in _damageModifiers)
             mod.Apply(ref dmg, ref type);
     }
-    
 }

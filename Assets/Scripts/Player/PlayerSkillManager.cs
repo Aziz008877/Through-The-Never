@@ -2,54 +2,70 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+
 public class PlayerSkillManager : MonoBehaviour
 {
     [SerializeField] private Transform _skillRoot;
-    private readonly Dictionary<SkillSlot, ActiveSkillBehaviour> _actives = new();
-    public Dictionary<SkillSlot, ActiveSkillBehaviour> Actives => _actives;
+    readonly Dictionary<SkillSlot, ActiveSkillBehaviour> _actives = new();
+    public IReadOnlyDictionary<SkillSlot, ActiveSkillBehaviour> Actives => _actives;
+    public event Action<SkillSlot, ActiveSkillBehaviour> ActiveRegistered;
+
     [Inject] private PlayerContext _context;
     [Inject] private PlayerInput _input;
     [Inject] private SkillRuntimeFactory _factory;
+    
     private void OnEnable()
     {
-        _input.OnBasicSkillPressed += () => Cast(SkillSlot.Basic);
-        _input.OnDefensiveSkillPressed += () => Cast(SkillSlot.Defense);
-        _input.OnSpecialSkillPressed += () => Cast(SkillSlot.Special);
-        _input.OnDashPressed += () => Cast(SkillSlot.Dash);
+        _input.OnBasicSkillPressed    += CastBasic;
+        _input.OnDefensiveSkillPressed+= CastDefense;
+        _input.OnSpecialSkillPressed  += CastSpecial;
+        _input.OnDashPressed          += CastDash;
     }
+    private void OnDisable()
+    {
+        _input.OnBasicSkillPressed    -= CastBasic;
+        _input.OnDefensiveSkillPressed-= CastDefense;
+        _input.OnSpecialSkillPressed  -= CastSpecial;
+        _input.OnDashPressed          -= CastDash;
+    }
+
+    public void AddSkills(List<SkillDefinition> defs) => Build(defs);
     
-    public void AddSkills(List<SkillDefinition> newDefs)
+    public void Build(List<SkillDefinition> skillDefinitions)
     {
-        Build(newDefs);
-    }
-
-    public void Build(List<SkillDefinition> skillsDefinitions)
-    {
-        foreach (var skillDefinition in skillsDefinitions)
+        foreach (SkillDefinition definition in skillDefinitions)
         {
-            var behaviour = _factory.Spawn(skillDefinition, _context, _skillRoot);
+            if (definition.Kind == SkillKind.Active &&
+                !_actives.ContainsKey(definition.Slot))
+            {
+                ActiveSkillBehaviour behaviour =
+                    _factory.Spawn(definition, _context, _skillRoot) as ActiveSkillBehaviour;
 
-            if (skillDefinition.Kind == SkillKind.Active && behaviour is ActiveSkillBehaviour activeSkillBehaviour)
-                _actives[skillDefinition.Slot] = activeSkillBehaviour;
+                if (behaviour != null)
+                {
+                    _actives[definition.Slot] = behaviour;
+                    ActiveRegistered?.Invoke(definition.Slot, behaviour);
+                }
+                continue;
+            }
+            
+            if (definition.Kind == SkillKind.Passive)
+            {
+                PassiveSkillBehaviour passive =
+                    _factory.Spawn(definition, _context, _skillRoot) as PassiveSkillBehaviour;
 
-            if (skillDefinition.Kind == SkillKind.Passive && behaviour is PassiveSkillBehaviour passiveSkillBehaviour)
-                passiveSkillBehaviour.EnablePassive();
+                if (passive != null) passive.EnablePassive();
+            }
         }
     }
+    
+    private void CastBasic()   => Cast(SkillSlot.Basic);
+    private void CastDefense() => Cast(SkillSlot.Defense);
+    private void CastSpecial() => Cast(SkillSlot.Special);
+    private void CastDash()    => Cast(SkillSlot.Dash);
 
     private void Cast(SkillSlot slot)
     {
-        if (_actives.TryGetValue(slot, out var activeSkill))
-        {
-            activeSkill.TryCast();
-        }
-    }
-
-    private void OnDestroy()
-    {
-        _input.OnBasicSkillPressed -= () => Cast(SkillSlot.Basic);
-        _input.OnDefensiveSkillPressed -= () => Cast(SkillSlot.Defense);
-        _input.OnSpecialSkillPressed -= () => Cast(SkillSlot.Special);
-        _input.OnDashPressed -= () => Cast(SkillSlot.Dash);
+        if (_actives.TryGetValue(slot, out var a)) a.TryCast();
     }
 }

@@ -2,37 +2,45 @@ using UnityEngine;
 
 public class PlayerDashSkill : ActiveSkillBehaviour
 {
-    [SerializeField] private float _distance = 5f;
-    private bool _dashing;
-    private Vector3 _start;
-    private Vector3 _end;
-    private float _timer;
+    [SerializeField] private float _baseDistance = 5f;
+    [SerializeField] private float _speedMultiplier = 0.1f;
+    private bool _isDashing;
+    private Vector3 _startPosition;
+    private Vector3 _endPosition;
+    private float _elapsedTime;
 
-    private void Update()
+    public void SetSpeedMultiplier(float multiplier)
     {
-        base.Update();                          // << обязательно, чтобы кулдаун считал
-
-        if (!_dashing) return;
-
-        _timer += Time.deltaTime;
-        float k = _timer / Definition.Duration;
-        PlayerContext.transform.position = Vector3.Lerp(_start, _end, k);
-
-        if (k >= 1f) _dashing = false;
+        _speedMultiplier = Mathf.Max(0.1f, multiplier);
+        Debug.Log($"[Dash] speed multiplier set to {_speedMultiplier}");
     }
 
+    protected override void Update()
+    {
+        base.Update();
+
+        if (!_isDashing) return;
+
+        _elapsedTime += Time.deltaTime * _speedMultiplier;
+        float k = _elapsedTime / Definition.Duration;
+        PlayerContext.transform.position = Vector3.Lerp(_startPosition, _endPosition, k);
+
+        if (k >= 1f) _isDashing = false;
+    }
 
     public override void TryCast()
     {
-        if (!IsReady || _dashing) return;
-        PlayerContext.PlayerAnimator.Dash();
-        Vector3 dir = PlayerContext.PlayerMove.LastMoveDirection;
-        if (dir == Vector3.zero) dir = PlayerContext.transform.forward;
+        if (!IsReady || _isDashing) return;
 
-        _start = PlayerContext.transform.position;
-        _end = _start + dir.normalized * _distance;
-        _timer = 0f;
-        _dashing = true;
+        PlayerContext.PlayerAnimator.Dash();
+
+        Vector3 direction = PlayerContext.PlayerMove.LastMoveDirection;
+        if (direction == Vector3.zero) direction = PlayerContext.transform.forward;
+
+        _startPosition = PlayerContext.transform.position;
+        _endPosition = _startPosition + direction.normalized * _baseDistance;
+        _elapsedTime = 0f;
+        _isDashing = true;
 
         StartCooldown();
     }

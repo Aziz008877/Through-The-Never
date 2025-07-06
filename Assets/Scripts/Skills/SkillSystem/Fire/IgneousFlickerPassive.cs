@@ -22,10 +22,7 @@ public class IgneousFlickerPassive : PassiveSkillBehaviour, ISkillModifier
 
         foreach (var pair in _skillManager.Actives)
         {
-            Debug.Log(pair.Value.Definition.Id);
-            Debug.Log(pair.Value.CoolDownTimer);
             pair.Value.ReduceCooldownByPercent(percent);
-            Debug.Log(pair.Value.CoolDownTimer);
         }
     }
 

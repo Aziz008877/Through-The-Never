@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e787c973a008b574ab3b1509314dd261, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
+  _skillSelectionSaver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
 --- !u!114 &436087291
 MonoBehaviour:
   m_ObjectHideFlags: 0

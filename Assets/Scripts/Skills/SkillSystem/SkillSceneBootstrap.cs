@@ -1,21 +1,21 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+
 public class SkillSceneBootstrap : MonoBehaviour
 {
-    [SerializeField] private SkillSelectionSaver _saver;
+    [SerializeField] private SkillSelectionSaver _skillSelectionSaver;
     [Inject] private PlayerSkillManager _skillManager;
-    [Inject] private PlayerContext _context;
+
     private void Start()
     {
-        List<SkillDefinition> list = _saver.GetChosenSkills();
-        _skillManager.Build(list);
-        _saver.Clear();
+        List<SkillDefinition> skillDefinitions = _skillSelectionSaver.GetChosenSkills();
+        _skillManager.Build(skillDefinitions);
+        _skillSelectionSaver.Clear();
     }
 
     private void OnDestroy()
     {
-        _saver.Clear();
+        _skillSelectionSaver.Clear();
     }
 }
