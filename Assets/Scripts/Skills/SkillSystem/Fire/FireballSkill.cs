@@ -8,6 +8,7 @@ public class FireballSkill : ActiveSkillBehaviour
     [SerializeField] private float _lifeTime = 3f;
     [SerializeField] private float _sideOffset, _angleStep;
     private int _extraProjectiles;
+    private bool _smallExplosionEnabled = false; 
     public  void SetExtraProjectiles(int count) => _extraProjectiles = Mathf.Max(0, count);
     public override void TryCast()
     {
@@ -43,7 +44,12 @@ public class FireballSkill : ActiveSkillBehaviour
         Quaternion rot = Quaternion.LookRotation(shootDirection, Vector3.up);
 
         Fireball proj = Instantiate(prefab, pos, rot);
+        proj.EnableSmallExplosion(_smallExplosionEnabled);
         proj.Init(Damage, _lifeTime, SkillDamageType.Basic, PlayerContext);
     }
 
+    public void SetSmallExplosion(bool enable)
+    {
+        _smallExplosionEnabled = enable;
+    }
 }

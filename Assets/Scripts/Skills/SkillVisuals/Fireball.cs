@@ -14,12 +14,19 @@ public class Fireball : MonoBehaviour
     [Header("DOT data")]
     [SerializeField] protected float _dotPerSecond = 2f;
     [SerializeField] protected float _dotDuration = 3f;
-
+    
+    [Header("Small explosion (Fireblast)")]
+    [SerializeField] private float _smallExplosionRadius = 2f;
+    [SerializeField] private float _smallExplosionMul   = 0.5f;
+    private bool _enableSmallExplosion;
+    
     protected float _instantDamage;
     private SkillDamageType _skillDamageType;
     protected PlayerContext _context;
     private bool _canDamage = true;
 
+    public void EnableSmallExplosion(bool state) => _enableSmallExplosion = state;
+    
     public void Init(float damage,float lifeTime,SkillDamageType type,PlayerContext ctx)
     {
         _instantDamage = damage;
@@ -52,6 +59,7 @@ public class Fireball : MonoBehaviour
 
     protected virtual void HitAndStop()
     {
+        if (_enableSmallExplosion) SmallExplode();
         _canDamage = false;
         _fireballParticles.gameObject.SetActive(false);
         _fireballHit.Play();
@@ -59,6 +67,21 @@ public class Fireball : MonoBehaviour
         Invoke(nameof(DestroyFireball), _dotDuration + 0.5f);
     }
 
+    private void SmallExplode()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, _smallExplosionRadius);
+        foreach (var h in hits)
+        {
+            if (!h.TryGetComponent(out IDamageable damageable)) continue;
+
+            float damage = _instantDamage * _smallExplosionMul;
+            Debug.Log("Explosion Damage");
+            SkillDamageType type = SkillDamageType.Basic;
+            _context.ApplyDamageModifiers(ref damage, ref type);
+            damageable.ReceiveDamage(damage, type);
+        }
+    }
+    
     protected virtual void DestroyFireball()
     {
         if (this != null && gameObject != null) Destroy(gameObject);

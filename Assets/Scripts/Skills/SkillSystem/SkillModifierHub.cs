@@ -11,7 +11,7 @@ public class SkillModifierHub : MonoBehaviour
     {
         float value = baseValue;
         foreach (var m in _mods) value = m.Evaluate(key, value);
-        Debug.Log($"[ModHub] ({key.Slot}, {key.Stat}) → {value}");
+        //Debug.Log($"[ModHub] ({key.Slot}, {key.Stat}) → {value}");
         return value;
     }
 }
