@@ -4,15 +4,14 @@ public class BigFireball : Fireball
 {
     [Header("Explosion")]
     [SerializeField] private float _explosionRadius = 6f;
-    [SerializeField] private float _aoeMultiplier   = 2f; // × базовый урон
-
-    protected override void HitAndStop()            // вызывается из базового OnTriggerEnter
+    [SerializeField] private float _aoeMultiplier   = 2f;
+    protected override void HitAndStop()
     {
         Explode();
         base.HitAndStop();
     }
 
-    protected override void DestroyFireball()       // если lifetime истёк
+    protected override void DestroyFireball()
     {
         Explode();
         base.DestroyFireball();

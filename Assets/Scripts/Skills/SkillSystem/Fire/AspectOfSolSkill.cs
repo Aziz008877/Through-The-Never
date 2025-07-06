@@ -8,7 +8,7 @@ public class AspectOfSolSkill : ActiveSkillBehaviour
     {
         if (!IsReady) return;
         var orb = Instantiate(_orbPrefab, PlayerContext.transform.position, Quaternion.identity);
-        orb.Init(Definition.Damage, _projectileSpeed, _fireRate, Definition.Raduis, Definition.Duration, PlayerContext);
+        orb.Init(Damage, _projectileSpeed, _fireRate, Definition.Raduis, Definition.Duration, PlayerContext);
         StartCooldown();
     }
 }

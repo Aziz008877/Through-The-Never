@@ -18,7 +18,7 @@ public class FireballSkill : ActiveSkillBehaviour
             PlayerContext.PlayerCastPosition.position,
             PlayerContext.PlayerCastPosition.rotation);
 
-        proj.Init(Definition.Damage, _lifeTime, SkillDamageType.Basic, PlayerContext);
+        proj.Init(Damage, _lifeTime, SkillDamageType.Basic, PlayerContext);
 
         if (empowered) PlayerContext.SolarFlareCharge = false;
         StartCooldown();
