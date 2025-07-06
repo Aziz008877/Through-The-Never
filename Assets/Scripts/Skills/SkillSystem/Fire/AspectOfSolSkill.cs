@@ -7,8 +7,9 @@ public class AspectOfSolSkill : ActiveSkillBehaviour
     public override void TryCast()
     {
         if (!IsReady) return;
+
         var orb = Instantiate(_orbPrefab, PlayerContext.transform.position, Quaternion.identity);
-        orb.Init(Damage, _projectileSpeed, _fireRate, Definition.Raduis, Definition.Duration, PlayerContext);
+        orb.Init(Damage, _projectileSpeed, _fireRate, Radius, Definition.Duration, PlayerContext);
         StartCooldown();
     }
 }

@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
-  m_Name: AspectOfSol
+  m_Name: TripleStrike
   m_EditorClassIdentifier: 
-  Id: sol
-  DisplayName: Sol
+  Id: 
+  DisplayName: 
   Description: 
   Icon: {fileID: 0}
-  Slot: 2
-  Kind: 0
-  School: 0
-  BehaviourPrefab: {fileID: 5661319833831118056, guid: 8c6b9c2b654271b45838bd47ec66ffc9, type: 3}
+  Slot: 5
+  Kind: 1
+  School: 4
+  BehaviourPrefab: {fileID: 5290219643916097401, guid: 242b19d4312f7044c9f432c1346fa3e4, type: 3}
   Damage: 0
   Cooldown: 0
   Duration: 0
   Range: 0
-  Raduis: 5
+  Raduis: 0

@@ -68,4 +68,10 @@ public class PlayerSkillManager : MonoBehaviour
     {
         if (_actives.TryGetValue(slot, out var a)) a.TryCast();
     }
+    
+    public ActiveSkillBehaviour GetActive(SkillSlot slot)
+    {
+        _actives.TryGetValue(slot, out var beh);
+        return beh;
+    }
 }
