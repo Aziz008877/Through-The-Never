@@ -30,6 +30,8 @@ public class PlayerContext : MonoBehaviour
 
     [Inject] private SkillModifierHub _skillModifierHub;
     public SkillModifierHub SkillModifierHub => _skillModifierHub;
+    [Inject] private PlayerState _playerState;
+    public PlayerState PlayerState => _playerState;
     
     [Inject] private DamageTextPool _damageTextPool;
     public bool SolarFlareCharge { get; set; }
