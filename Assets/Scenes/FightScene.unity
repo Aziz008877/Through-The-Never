@@ -1313,9 +1313,9 @@ MonoBehaviour:
   _starterBasic: {fileID: 11400000, guid: 821621941a17a924db8fa3e42d07abe1, type: 2}
   _starterInnate: {fileID: 11400000, guid: 441c66dc3d2923b4c8466412bea7b2b9, type: 2}
   _starterDash: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
-  _currentTestSpecial: {fileID: 11400000, guid: f762f70e000b12743a9953ee055f61a7, type: 2}
+  _currentTestSpecial: {fileID: 11400000, guid: a96bdf9badbe9a544a3a1fafcc7d7095, type: 2}
   _currentTestPassive: {fileID: 11400000, guid: 988029c1a49d11240b899c4ba2079cbf, type: 2}
-  _currentTestDefensive: {fileID: 0}
+  _currentTestDefensive: {fileID: 11400000, guid: 459a2ceb0a3c88941b2be170fe39a7f8, type: 2}
   _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
   _chooseVFX: {fileID: 0}
   <InteractionUI>k__BackingField: {fileID: 0}

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
-  m_Name: PhoenixStance
+  m_Name: BlindingLights
   m_EditorClassIdentifier: 
   Id: 
   DisplayName: 
@@ -19,7 +19,7 @@ MonoBehaviour:
   Slot: 1
   Kind: 0
   School: 0
-  BehaviourPrefab: {fileID: 1451134601085303500, guid: 11ef33db7f1cb894692a1e78a13bdaad, type: 3}
+  BehaviourPrefab: {fileID: 5024260346843088713, guid: 71226915579679742b87b92cfd3657fd, type: 3}
   Damage: 0
   Cooldown: 0
   Duration: 0
