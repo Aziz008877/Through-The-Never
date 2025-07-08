@@ -49,7 +49,6 @@ public class Fireball : MonoBehaviour
             _target = FindClosestEnemy();
             if (_target != null)
             {
-                // НАЧАЛЬНОЕ направление — сразу на цель!
                 Vector3 toTarget = ((MonoBehaviour)_target).transform.position - transform.position;
                 _moveDirection = toTarget.normalized;
                 transform.rotation = Quaternion.LookRotation(_moveDirection, Vector3.up);
@@ -70,9 +69,9 @@ public class Fireball : MonoBehaviour
         if (_homingEnabled && _target != null)
         {
             var tgtMb = (MonoBehaviour)_target;
+            
             if (tgtMb == null || tgtMb.gameObject == null)
             {
-                // цель уничтожена
                 _target = null;
             }
             else
@@ -84,14 +83,12 @@ public class Fireball : MonoBehaviour
                     OnTriggerEnter(tgtMb.GetComponent<Collider>());
                     return;
                 }
-
-                // Корректируем направление не слишком резко, чтобы не было "залипания"
+                
                 Quaternion current = transform.rotation;
                 Quaternion want = Quaternion.LookRotation(toTarget.normalized, Vector3.up);
                 transform.rotation = Quaternion.RotateTowards(
                     current, want, _turnSpeedDeg * Time.deltaTime);
-
-                // Движение всегда вперёд
+                
                 _moveDirection = transform.forward;
             }
         }
@@ -122,8 +119,7 @@ public class Fireball : MonoBehaviour
         _context.ApplyDamageModifiers(ref dmg, ref type);
         tgt.ReceiveDamage(dmg, type);
 
-        if (other.TryGetComponent(out IDotReceivable dot))
-            dot.ApplyDot(_dotPerSecond, _dotDuration);
+        _context.FireOnDamageDealt(tgt, dmg, type);
 
         HitAndStop();
     }

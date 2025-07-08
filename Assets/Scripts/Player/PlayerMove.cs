@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     public Vector3 LastMoveDirection { get; private set; } = Vector3.forward;
 
     private PlayerInput _playerInput;
+    private float _speedMultiplier = 1f;
     private float _speed;
     private bool _isMoving;
     private bool _isSprinting;
@@ -26,7 +27,12 @@ public class PlayerMove : MonoBehaviour
         _playerInput.OnMovePressed += ReceivePressedValue;
     }
 
-    public void UpgradeMS()
+    public void SetSpeedMultiplier(float multiplier)
+    {
+        _speedMultiplier = Mathf.Max(0.1f, multiplier);
+    }
+
+    public void UpgradeMS(float speed)
     {
         _moveSpeed += 2;
         _speed = _moveSpeed;
@@ -43,7 +49,7 @@ public class PlayerMove : MonoBehaviour
 
         if (_isMoving)
         {
-            transform.position += moveDir.normalized * _speed * Time.deltaTime;
+            transform.position += moveDir.normalized * _speed * _speedMultiplier * Time.deltaTime;
             
             Vector3 clampedPosition = transform.position;
             clampedPosition.x = Mathf.Clamp(clampedPosition.x, _xMin, _xMax);

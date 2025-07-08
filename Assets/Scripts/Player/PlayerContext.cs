@@ -32,9 +32,9 @@ public class PlayerContext : MonoBehaviour
     public SkillModifierHub SkillModifierHub => _skillModifierHub;
     [Inject] private PlayerState _playerState;
     public PlayerState PlayerState => _playerState;
-    
     [Inject] private DamageTextPool _damageTextPool;
     public bool SolarFlareCharge { get; set; }
+    private readonly List<IOnDamageDealtModifier> _onDamageDealtModifiers = new();
     private readonly List<IDamageModifier> _damageModifiers = new();
     public void RegisterModifier(IDamageModifier m)   => _damageModifiers.Add(m);
     public void UnregisterModifier(IDamageModifier m) => _damageModifiers.Remove(m);
@@ -43,5 +43,22 @@ public class PlayerContext : MonoBehaviour
     {
         foreach (var mod in _damageModifiers)
             mod.Apply(ref dmg, ref type);
+    }
+
+    public void RegisterOnDamageDealtModifier(FireInnateSkill fireInnateSkill)
+    {
+        if (!_onDamageDealtModifiers.Contains(fireInnateSkill))
+            _onDamageDealtModifiers.Add(fireInnateSkill);
+    }
+
+    public void UnregisterOnDamageDealtModifier(FireInnateSkill fireInnateSkill)
+    {
+        _onDamageDealtModifiers.Remove(fireInnateSkill);
+    }
+    
+    public void FireOnDamageDealt(IDamageable target, float damage, SkillDamageType type)
+    {
+        foreach (var modifier in _onDamageDealtModifiers)
+            modifier.OnDamageDealt(target, damage, type, this);
     }
 }
