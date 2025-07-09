@@ -1,6 +1,4 @@
 using UnityEngine;
-using System.Collections;
-
 public class EmberGuardSkill : ActiveSkillBehaviour, ISkillModifier
 {
     [Header("Ember Guard Stats")]
@@ -22,7 +20,7 @@ public class EmberGuardSkill : ActiveSkillBehaviour, ISkillModifier
         else
             Activate();
 
-        StartCooldown();
+        _cooldownTimer = _toggleCooldown;
     }
 
     private void Activate()
@@ -57,13 +55,19 @@ public class EmberGuardSkill : ActiveSkillBehaviour, ISkillModifier
         if (!_active) return;
         float reflected = dmg * _reflectPercent;
         float reduced   = dmg * (1f - _damageReduction);
+
+        SkillDamageType reflectType = SkillDamageType.Basic;
+        PlayerContext.ApplyDamageModifiers(ref reflected, ref reflectType);
+
         dmg = reduced;
-        
+
         Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, 5f);
         foreach (var hit in hits)
         {
             if (!hit.TryGetComponent(out IDamageable enemy)) continue;
-            enemy.ReceiveDamage(reflected, SkillDamageType.Basic);
+            enemy.ReceiveDamage(reflected, reflectType);
+            
+            PlayerContext.FireOnDamageDealt(enemy, reflected, reflectType);
         }
     }
 

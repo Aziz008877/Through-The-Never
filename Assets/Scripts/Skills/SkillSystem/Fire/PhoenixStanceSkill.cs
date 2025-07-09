@@ -61,7 +61,10 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour
             _explosionVfx.transform.position = PlayerContext.transform.position;
             _explosionVfx.Play();
         }
-        Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, _aoeRadius);
+        
+        float aoeRadius = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), _aoeRadius);
+
+        Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, aoeRadius);
         foreach (var hit in hits)
         {
             if (!hit.TryGetComponent(out IDamageable enemy)) continue;
@@ -69,6 +72,9 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour
             SkillDamageType type = SkillDamageType.Basic;
             PlayerContext.ApplyDamageModifiers(ref damage, ref type);
             enemy.ReceiveDamage(damage, type);
+
+            PlayerContext.FireOnDamageDealt(enemy, damage, type);
+
             _totalDamageDone += damage;
         }
         float heal = _totalDamageDone * _healPercent;
