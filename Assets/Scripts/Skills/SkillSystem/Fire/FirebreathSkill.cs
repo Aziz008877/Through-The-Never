@@ -13,8 +13,9 @@ public class FirebreathSkill : ActiveSkillBehaviour
 
     [Header("Timing & DPS")]
     [SerializeField] private float _tickDamage = 2f;
-    [SerializeField] private float _tickRate = 0.25f;
-    private readonly HashSet<IDamageable> _burning = new();
+    [SerializeField] private float _tickRate   = 0.25f;
+
+    private readonly HashSet<IDamageable> _hitThisCast = new();
 
     public override void TryCast()
     {
@@ -37,12 +38,13 @@ public class FirebreathSkill : ActiveSkillBehaviour
         }
 
         _breathVfx.Stop();
+        _hitThisCast.Clear();
     }
 
     private void DealConeDamage()
     {
         Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, _coneRange);
-        Vector3 fwd = PlayerContext.transform.forward;
+        Vector3 forward = PlayerContext.transform.forward;
 
         foreach (var col in hits)
         {
@@ -51,18 +53,16 @@ public class FirebreathSkill : ActiveSkillBehaviour
             Vector3 dir = col.transform.position - PlayerContext.transform.position;
             dir.y = 0f;
             if (dir.sqrMagnitude == 0f) continue;
-            if (Vector3.Angle(fwd, dir) > _coneAngle) continue;
+            if (Vector3.Angle(forward, dir) > _coneAngle) continue;
 
-            float dmg = _tickDamage * _tickRate;
+            float dmg  = _tickDamage * _tickRate;
             SkillDamageType type = SkillDamageType.Basic;
             
-            if (!_burning.Contains(target))
-            {
-                PlayerContext.ApplyDamageModifiers(ref dmg, ref type);
-                _burning.Add(target);
-            }
+            PlayerContext.ApplyDamageModifiers(ref dmg, ref type);
 
             target.ReceiveDamage(dmg, type);
+            PlayerContext.FireOnDamageDealt(target, dmg, type);
+            _hitThisCast.Add(target);
         }
     }
 }

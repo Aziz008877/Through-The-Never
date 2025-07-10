@@ -1,39 +1,25 @@
 using UnityEngine;
-public class IgneousFlickerPassive : PassiveSkillBehaviour, ISkillModifier
+
+public class IgneousFlickerPassive : PassiveSkillBehaviour
 {
     [SerializeField] private float _reducePercent = 0.20f;
-    private PlayerSkillManager _skillManager;
+    private PlayerSkillManager _playerSkillManager;
     public override void EnablePassive()
     {
-        _skillManager = PlayerContext.PlayerSkillManager;
-        PlayerContext.SkillModifierHub.Register(this);
-        PlayerContext.PlayerEnemyHandler.OnEnemyKilled += HandleKill;
+        _playerSkillManager = PlayerContext.PlayerSkillManager;
+        PlayerContext.PlayerEnemyHandler.OnEnemyKilled += OnEnemyKilled;
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.SkillModifierHub.Unregister(this);
-        PlayerContext.PlayerEnemyHandler.OnEnemyKilled -= HandleKill;
+        PlayerContext.PlayerEnemyHandler.OnEnemyKilled -= OnEnemyKilled;
     }
-
-    private void HandleKill(Transform killedEnemy)
+    
+    private void OnEnemyKilled(Transform killedEnemy)
     {
         float percent = Mathf.Clamp01(_reducePercent);
 
-        foreach (var pair in _skillManager.Actives)
-        {
-            pair.Value.ReduceCooldownByPercent(percent);
-        }
-    }
-
-    public float Evaluate(SkillKey key, float currentValue)
-    {
-        if (key.Stat == SkillStat.Cooldown)
-        {
-            currentValue -= currentValue * _reducePercent;
-            return currentValue;
-        }
-            
-        return currentValue;
+        foreach (var kv in _playerSkillManager.Actives)
+            kv.Value.ReduceCooldownByPercent(percent);
     }
 }

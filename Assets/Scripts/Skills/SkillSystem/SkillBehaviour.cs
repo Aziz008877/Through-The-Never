@@ -18,6 +18,7 @@ public abstract class ActiveSkillBehaviour : SkillBehaviour
     protected float Cooldown => PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Cooldown), Definition.Cooldown);
     protected float Damage => PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Damage), Definition.Damage);
     protected float Radius => PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), Definition.Raduis);
+    protected float Duration => PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Duration), Definition.Duration);
 
     public  bool  IsReady => _cooldownTimer <= 0f;
     public  float RemainingCooldown => _cooldownTimer;

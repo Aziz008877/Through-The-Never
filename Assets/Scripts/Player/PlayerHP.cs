@@ -6,7 +6,9 @@ public class PlayerHP : MonoBehaviour
     [SerializeField] private float _currentHP, _minHp, _maxHP;
     [SerializeField] private UnityEvent _onPlayerDead;
     private bool _canBeDamaged = true;
-
+    public float CurrentHP => _currentHP;
+    public float MinHP => _minHp;
+    public float MaxHP => _maxHP;
     public Action<float> OnHpValueUpdated;
     public Action OnPlayerDead;
     public Action<float> OnPlayerReceivedDamage;

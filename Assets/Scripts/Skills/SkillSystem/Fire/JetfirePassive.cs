@@ -1,48 +1,57 @@
 using UnityEngine;
-
 public class JetfirePassive : PassiveSkillBehaviour, ISkillModifier
 {
-    [SerializeField] private float _speedMultiplier = 1.5f;
-
+    [Header("Jet-fire Settings")]
+    [SerializeField] private float _moveSpeedMultiplier = 1.5f;
+    [SerializeField] private float _cooldownMultiplier  = 0.75f;
+    [SerializeField] private float _buffDuration = 10f;
+    private bool  _buffActive;
+    private float _timeLeft;
     public override void EnablePassive()
     {
         PlayerContext.SkillModifierHub.Register(this);
-
-        AttachToExistingDash();
-        PlayerContext.PlayerSkillManager.ActiveRegistered += OnActiveRegistered;
+        //добавить ивент о начале боя и вызывать OnCombatStart
     }
 
     public override void DisablePassive()
     {
         PlayerContext.SkillModifierHub.Unregister(this);
-        PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
+
+        StopBuff();
+    }
+    
+    private void Update()
+    {
+        if (!_buffActive) return;
+
+        _timeLeft -= Time.deltaTime;
+        if (_timeLeft <= 0f)
+            StopBuff();
     }
 
-    void AttachToExistingDash()
+    private void OnCombatStart()
     {
-        if (PlayerContext.PlayerSkillManager.Actives.TryGetValue(
-                SkillSlot.Dash, out var behaviour) &&
-            behaviour.TryGetComponent<PlayerDashSkill>(out var dash))
-        {
-            dash.SetSpeedMultiplier(_speedMultiplier);
-        }
+        _buffActive = true;
+        _timeLeft = _buffDuration;
+
+        PlayerContext.PlayerMove.SetSpeedMultiplier(_moveSpeedMultiplier);
     }
 
-    void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour behaviour)
+    private void StopBuff()
     {
-        if (slot == SkillSlot.Dash &&
-            behaviour.TryGetComponent<PlayerDashSkill>(out var dash))
-        {
-            dash.SetSpeedMultiplier(_speedMultiplier);
-            Debug.Log("[Jetfire] multiplier applied via event");
-        }
-    }
+        if (!_buffActive) return;
 
-    // ——————————————— ISkillModifier ———————————————
-    public float Evaluate(SkillKey key, float currentValue)
+        _buffActive = false;
+        PlayerContext.PlayerMove.SetSpeedMultiplier(1f);
+    }
+    
+    public float Evaluate(SkillKey key, float baseValue)
     {
-        if (key.Slot == SkillSlot.Dash && key.Stat == SkillStat.Cooldown)
-            return currentValue / _speedMultiplier;      // быстрее → меньше КД
-        return currentValue;
+        if (!_buffActive) return baseValue;
+        
+        if (key.Stat == SkillStat.Cooldown && key.Slot != SkillSlot.Passive)
+            return baseValue * _cooldownMultiplier;
+
+        return baseValue;
     }
 }

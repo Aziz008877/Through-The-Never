@@ -14,9 +14,10 @@ public class PlayerEnemyHandler : MonoBehaviour
     public void RegisterEnemy(IDamageable dmg)
     {
         dmg.OnEnemyDead += HandleEnemyDead;
+        UnregisterEnemy(dmg);
     }
 
-    public void UnregisterEnemy(IDamageable dmg)
+    private void UnregisterEnemy(IDamageable dmg)
     {
         dmg.OnEnemyDead -= HandleEnemyDead;
     }

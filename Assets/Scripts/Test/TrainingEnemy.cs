@@ -37,7 +37,13 @@ public class TrainingEnemy : MonoBehaviour, IDamageable, IDotReceivable
         if (_dotRoutine != null) StopCoroutine(_dotRoutine);
         _dotRoutine = StartCoroutine(DotTick(dps, duration));
     }
-    
+
+    public bool IsDotActive { get; set; }
+    public void RefreshDot(float duration)
+    {
+        
+    }
+
     private IEnumerator DotTick(float dps, float duration)
     {
         float elapsedTime = 0f;
