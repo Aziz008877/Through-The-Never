@@ -3,44 +3,44 @@ using UnityEngine;
 public class PlayerDashSkill : ActiveSkillBehaviour
 {
     [SerializeField] private float _baseDistance = 5f;
-    [SerializeField] private float _speedMultiplier = 0.1f;
-    private bool _isDashing;
-    private Vector3 _startPosition;
-    private Vector3 _endPosition;
-    private float _elapsedTime;
-
-    public void SetSpeedMultiplier(float multiplier)
+    [SerializeField] private float _baseDuration = 0.25f;
+    [SerializeField] private float _speedScale = 1f;
+    private bool _dashing;
+    private Vector3 _startPos;
+    private Vector3 _endPos;
+    private float _time;
+    public void SetSpeedMultiplier(float scale)
     {
-        _speedMultiplier = Mathf.Max(0.1f, multiplier);
-        Debug.Log($"[Dash] speed multiplier set to {_speedMultiplier}");
+        _speedScale = Mathf.Max(0.1f, scale);
+        Debug.Log($"[Dash] speed scale set to {_speedScale}");
     }
-
+    
     protected override void Update()
     {
         base.Update();
 
-        if (!_isDashing) return;
+        if (!_dashing) return;
 
-        _elapsedTime += Time.deltaTime * _speedMultiplier;
-        float k = _elapsedTime / Definition.Duration;
-        PlayerContext.transform.position = Vector3.Lerp(_startPosition, _endPosition, k);
+        _time += Time.deltaTime * _speedScale;
+        float k = _time / _baseDuration;
+        PlayerContext.transform.position = Vector3.Lerp(_startPos, _endPos, k);
 
-        if (k >= 1f) _isDashing = false;
+        if (k >= 1f) _dashing = false;
     }
-
+    
     public override void TryCast()
     {
-        if (!IsReady || _isDashing) return;
+        if (!IsReady || _dashing) return;
 
         PlayerContext.PlayerAnimator.Dash();
 
-        Vector3 direction = PlayerContext.PlayerMove.LastMoveDirection;
-        if (direction == Vector3.zero) direction = PlayerContext.transform.forward;
+        Vector3 dir = PlayerContext.PlayerMove.LastMoveDirection;
+        if (dir == Vector3.zero) dir = PlayerContext.transform.forward;
 
-        _startPosition = PlayerContext.transform.position;
-        _endPosition = _startPosition + direction.normalized * _baseDistance;
-        _elapsedTime = 0f;
-        _isDashing = true;
+        _startPos = PlayerContext.transform.position;
+        _endPos = _startPos + dir.normalized * _baseDistance;
+        _time = 0f;
+        _dashing = true;
 
         StartCooldown();
     }
