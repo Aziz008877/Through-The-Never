@@ -25,7 +25,7 @@ public abstract class ActiveSkillBehaviour : SkillBehaviour
 
     protected float _cooldownTimer;
 
-    public event Action<float> OnCooldownStarted;
+    public Action<float> OnCooldownStarted;
 
     public abstract void TryCast();
     

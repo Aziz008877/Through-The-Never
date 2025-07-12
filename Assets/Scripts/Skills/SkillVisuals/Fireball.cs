@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Fireball : MonoBehaviour
+public class Fireball : MonoBehaviour, IProjectileBoostable
 {
     [Header("VFX")]
     [SerializeField] private ParticleSystem _castVfx;
@@ -13,6 +13,7 @@ public class Fireball : MonoBehaviour
     [Header("DOT")]
     [SerializeField] private float _dotPerSecond = 2f;
     [SerializeField] private float _dotDuration = 3f;
+    [SerializeField] private float _damageMul = 1f;
 
     [Header("Small explosion (Fireblast)")]
     [SerializeField] private float _smallRadius = 2f;
@@ -37,7 +38,7 @@ public class Fireball : MonoBehaviour
 
     public void Init(float damage, float lifeTime, SkillDamageType type, PlayerContext context)
     {
-        _instantDamage = damage;
+        _instantDamage = damage * _damageMul;
         _damageType = type;
         _context = context;
 
@@ -153,5 +154,10 @@ public class Fireball : MonoBehaviour
     private void DestroySelf()
     {
         if (this != null && gameObject != null) Destroy(gameObject);
+    }
+
+    public void BoostDamage(float mul)
+    {
+        _damageMul *= Mathf.Max(1f, mul);
     }
 }

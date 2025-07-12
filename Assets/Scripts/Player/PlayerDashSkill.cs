@@ -11,7 +11,7 @@ public class PlayerDashSkill : ActiveSkillBehaviour
     private Vector3 _endPos;
     private float _time;
     public event Action<Vector3> OnDashStarted;
-
+    public event Action<Vector3> OnDashEnded;
     public void SetSpeedMultiplier(float scale)
     {
         _speedScale = Mathf.Max(0.1f, scale);
@@ -28,7 +28,11 @@ public class PlayerDashSkill : ActiveSkillBehaviour
         float k = _time / _baseDuration;
         PlayerContext.transform.position = Vector3.Lerp(_startPos, _endPos, k);
 
-        if (k >= 1f) _dashing = false;
+        if (k >= 1f)
+        {
+            _dashing = false;
+            OnDashEnded?.Invoke(PlayerContext.transform.position);
+        }
     }
 
     public override void TryCast()
