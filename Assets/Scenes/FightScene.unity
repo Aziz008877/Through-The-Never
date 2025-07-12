@@ -4402,6 +4402,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1544275402}
+  - component: {fileID: 1544275403}
   m_Layer: 2
   m_Name: Skills
   m_TagString: Untagged
@@ -4424,6 +4425,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1603916744}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1544275403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544275401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e541d4e830f6d3844a8edca4645045b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ultimates: []
 --- !u!1001 &1568651875
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class FireballSkill : ActiveSkillBehaviour
         if (!IsReady) return;
 
         bool empowered = PlayerContext.SolarFlareCharge;
-        Debug.Log(empowered);
+
         Fireball prefabCtr = empowered ? _bigPrefab : _normalPrefab;
 
         Shoot(prefabCtr, Vector3.zero, PlayerContext.PlayerCastPosition.forward);

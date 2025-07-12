@@ -8,6 +8,8 @@ public class SkillDefinition : ScriptableObject
     public string DisplayName;
     public string Description;
     public Sprite Icon;
+    [Header("Aspects (stars)")]
+    public AspectStars[] Stars;
     public SkillSlot Slot;
     public SkillKind Kind;
     public MagicSchool School;

@@ -16,6 +16,9 @@ MonoBehaviour:
   DisplayName: 
   Description: 
   Icon: {fileID: 0}
+  Stars:
+  - Aspect: 1
+    Stars: 2
   Slot: 0
   Kind: 0
   School: 0

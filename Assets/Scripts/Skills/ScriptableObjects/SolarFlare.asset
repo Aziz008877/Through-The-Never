@@ -16,6 +16,11 @@ MonoBehaviour:
   DisplayName: Solar Flare
   Description: 
   Icon: {fileID: 0}
+  Stars:
+  - Aspect: 0
+    Stars: 1
+  - Aspect: 1
+    Stars: 1
   Slot: 2
   Kind: 0
   School: 0

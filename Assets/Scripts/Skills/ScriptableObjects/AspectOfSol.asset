@@ -16,6 +16,9 @@ MonoBehaviour:
   DisplayName: Sol
   Description: 
   Icon: {fileID: 0}
+  Stars:
+  - Aspect: 0
+    Stars: 2
   Slot: 2
   Kind: 0
   School: 0

@@ -14,6 +14,9 @@ public class PlayerSkillManager : MonoBehaviour
     [Inject] private PlayerInput _input;
     [Inject] private SkillRuntimeFactory _factory;
     
+    private readonly List<SkillDefinition> _chosenSkills = new();
+    public IReadOnlyList<SkillDefinition>  ChosenSkills => _chosenSkills;
+    
     private void OnEnable()
     {
         _input.OnBasicSkillPressed    += CastBasic;
@@ -35,11 +38,11 @@ public class PlayerSkillManager : MonoBehaviour
     {
         foreach (SkillDefinition definition in skillDefinitions)
         {
-            if (definition.Kind == SkillKind.Active &&
-                !_actives.ContainsKey(definition.Slot))
+            if (!_chosenSkills.Contains(definition)) _chosenSkills.Add(definition);
+            
+            if (definition.Kind == SkillKind.Active && !_actives.ContainsKey(definition.Slot))
             {
-                ActiveSkillBehaviour behaviour =
-                    _factory.Spawn(definition, _context, _skillRoot) as ActiveSkillBehaviour;
+                ActiveSkillBehaviour behaviour = _factory.Spawn(definition, _context, _skillRoot) as ActiveSkillBehaviour;
 
                 if (behaviour != null)
                 {
@@ -51,18 +54,17 @@ public class PlayerSkillManager : MonoBehaviour
             
             if (definition.Kind == SkillKind.Passive)
             {
-                PassiveSkillBehaviour passive =
-                    _factory.Spawn(definition, _context, _skillRoot) as PassiveSkillBehaviour;
+                PassiveSkillBehaviour passive = _factory.Spawn(definition, _context, _skillRoot) as PassiveSkillBehaviour;
 
                 if (passive != null) passive.EnablePassive();
             }
         }
     }
     
-    private void CastBasic()   => Cast(SkillSlot.Basic);
+    private void CastBasic() => Cast(SkillSlot.Basic);
     private void CastDefense() => Cast(SkillSlot.Defense);
     private void CastSpecial() => Cast(SkillSlot.Special);
-    private void CastDash()    => Cast(SkillSlot.Dash);
+    private void CastDash() => Cast(SkillSlot.Dash);
 
     private void Cast(SkillSlot slot)
     {

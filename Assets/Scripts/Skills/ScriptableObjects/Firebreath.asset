@@ -16,6 +16,11 @@ MonoBehaviour:
   DisplayName: Firebreath
   Description: 
   Icon: {fileID: 0}
+  Stars:
+  - Aspect: 1
+    Stars: 1
+  - Aspect: 2
+    Stars: 1
   Slot: 2
   Kind: 0
   School: 0

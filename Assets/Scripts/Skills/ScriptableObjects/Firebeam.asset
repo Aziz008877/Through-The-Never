@@ -16,6 +16,11 @@ MonoBehaviour:
   DisplayName: Firebeam
   Description: 
   Icon: {fileID: 0}
+  Stars:
+  - Aspect: 0
+    Stars: 1
+  - Aspect: 2
+    Stars: 1
   Slot: 2
   Kind: 0
   School: 0
