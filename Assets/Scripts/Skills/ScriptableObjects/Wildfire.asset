@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
-  m_Name: EmberGuard
+  m_Name: Wildfire
   m_EditorClassIdentifier: 
   Id: 
   DisplayName: 
   Description: 
   Icon: {fileID: 0}
-  Slot: 0
-  Kind: 0
+  Slot: 3
+  Kind: 1
   School: 0
-  BehaviourPrefab: {fileID: 857987728571200035, guid: c4b9276ec92fe9c41a774764a082993f, type: 3}
+  BehaviourPrefab: {fileID: 319881988678336425, guid: 44e7d13b27f88104aa4cd8cfae038778, type: 3}
   Damage: 0
   Cooldown: 0
   Duration: 0
