@@ -20,6 +20,7 @@ public class FirebreathSkill : ActiveSkillBehaviour
     public override void TryCast()
     {
         if (!IsReady) return;
+        base.TryCast();
         StartCoroutine(BreathRoutine());
         StartCooldown();
     }

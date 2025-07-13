@@ -14,6 +14,7 @@ public class EmberGuardSkill : ActiveSkillBehaviour, ISkillModifier
     public override void TryCast()
     {
         if (!IsReady) return;
+        base.TryCast();
 
         if (_active)
             Deactivate();
@@ -25,7 +26,6 @@ public class EmberGuardSkill : ActiveSkillBehaviour, ISkillModifier
 
     private void Activate()
     {
-        Debug.Log("Active");
         _active = true;
         PlayerContext.SkillModifierHub.Register(this);
         PlayerContext.PlayerHp.OnPlayerReceivedDamage += OnPlayerDamaged;
@@ -36,7 +36,6 @@ public class EmberGuardSkill : ActiveSkillBehaviour, ISkillModifier
 
     private void Deactivate()
     {
-        Debug.Log("Inactive");
         _active = false;
         PlayerContext.SkillModifierHub.Unregister(this);
         PlayerContext.PlayerHp.OnPlayerReceivedDamage -= OnPlayerDamaged;

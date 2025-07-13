@@ -32,13 +32,15 @@ public class Fireball : MonoBehaviour, IProjectileBoostable
     private bool _canDamage = true;
     private IDamageable _target;
     private Vector3 _moveDirection;
+    private float _startDamage;
 
     public void EnableSmallExplosion(bool state) => _smallExplosionEnabled = state;
     public void SetHoming(bool state) => _homingEnabled = state;
 
     public void Init(float damage, float lifeTime, SkillDamageType type, PlayerContext context)
     {
-        _instantDamage = damage * _damageMul;
+        _startDamage = damage;
+        _instantDamage = _startDamage * _damageMul;
         _damageType = type;
         _context = context;
 
@@ -159,5 +161,6 @@ public class Fireball : MonoBehaviour, IProjectileBoostable
     public void BoostDamage(float mul)
     {
         _damageMul *= Mathf.Max(1f, mul);
+        _instantDamage = _startDamage * _damageMul;
     }
 }

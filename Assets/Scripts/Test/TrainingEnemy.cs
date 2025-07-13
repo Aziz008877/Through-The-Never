@@ -22,7 +22,7 @@ public class TrainingEnemy : MonoBehaviour, IDamageable, IDotReceivable
     public void ReceiveDamage(float amount, SkillDamageType type)
     {
         if (!CanBeDamaged) return;
-
+        Debug.Log(amount);
         if (type == SkillDamageType.DOT)
         {
             ApplyDamage(amount);

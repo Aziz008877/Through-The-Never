@@ -26,8 +26,12 @@ public abstract class ActiveSkillBehaviour : SkillBehaviour
     protected float _cooldownTimer;
 
     public Action<float> OnCooldownStarted;
+    public Action<float> OnSkillActivated;
 
-    public abstract void TryCast();
+    public virtual void TryCast()
+    {
+        OnSkillActivated?.Invoke(Duration);
+    }
     
     public void ReduceCooldownByPercent(float percent01)
     {

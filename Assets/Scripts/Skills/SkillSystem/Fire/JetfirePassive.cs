@@ -11,6 +11,7 @@ public class JetfirePassive : PassiveSkillBehaviour, ISkillModifier
     {
         PlayerContext.SkillModifierHub.Register(this);
         //добавить ивент о начале боя и вызывать OnCombatStart
+        OnCombatStart();
     }
 
     public override void DisablePassive()

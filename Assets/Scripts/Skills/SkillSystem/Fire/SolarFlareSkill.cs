@@ -10,6 +10,7 @@ public class SolarFlareSkill : ActiveSkillBehaviour
         if (!IsReady) return;
         if (PlayerContext.SolarFlareCharge) return;
 
+        base.TryCast();
         PlayerContext.SolarFlareCharge = true;
 
         if (_activateVfx) _activateVfx.Play();

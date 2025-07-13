@@ -11,7 +11,7 @@ public class FirebeamSkill : ActiveSkillBehaviour
     public override void TryCast()
     {
         if (!IsReady) return;
-        
+        base.TryCast();
         float duration = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Duration), Definition.Duration);
         float range = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Range),    Definition.Range);
         

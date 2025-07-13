@@ -38,7 +38,7 @@ public class PlayerDashSkill : ActiveSkillBehaviour
     public override void TryCast()
     {
         if (!IsReady || _dashing) return;
-
+        base.TryCast();
         PlayerContext.PlayerAnimator.Dash();
         OnDashStarted?.Invoke(PlayerContext.transform.position);
         Vector3 dir = PlayerContext.PlayerMove.LastMoveDirection;

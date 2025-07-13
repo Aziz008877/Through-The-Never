@@ -12,7 +12,8 @@ public class BlindingLightSkill : ActiveSkillBehaviour
     public override void TryCast()
     {
         if (!IsReady) return;
-        
+        base.TryCast();
+
         StartCoroutine(BlindingRoutine());
         StartCooldown();
     }

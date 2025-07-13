@@ -21,6 +21,7 @@ public class FireballSkill : ActiveSkillBehaviour
     public override void TryCast()
     {
         if (!IsReady) return;
+        base.TryCast();
 
         bool empowered = PlayerContext.SolarFlareCharge;
 

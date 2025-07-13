@@ -22,6 +22,8 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour
     public override void TryCast()
     {
         if (!IsReady || _routine != null) return;
+
+        base.TryCast();
         _hitsLeft = _maxHits;
         _totalDamageDone = 0f;
         _routine = StartCoroutine(ShieldRoutine());

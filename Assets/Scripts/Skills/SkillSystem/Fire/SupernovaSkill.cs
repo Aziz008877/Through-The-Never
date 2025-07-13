@@ -23,6 +23,7 @@ public class SupernovaSkill : ActiveSkillBehaviour
     public override void TryCast()
     {
         if (!IsReady || _charging) return;
+        base.TryCast();
         _charging = true;
         _timer = 0f;
         _chargeVfx.Play();

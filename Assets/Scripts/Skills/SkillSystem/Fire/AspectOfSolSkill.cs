@@ -9,7 +9,8 @@ public class AspectOfSolSkill : ActiveSkillBehaviour
     public override void TryCast()
     {
         if (!IsReady) return;
-        
+        base.TryCast();
+
         float damage = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Damage), Definition.Damage);
         float duration = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Duration), Definition.Duration);
         float radius = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), Definition.Raduis);

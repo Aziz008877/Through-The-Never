@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
+
 public sealed class SolarBlessingPassive : PassiveSkillBehaviour
 {
     [Header("Regen")]
     [SerializeField] private float _healPerTick = 3f;
-    [SerializeField] private float _tickRate = 1f;
-    private ActiveSkillBehaviour _defenseSkill;
+    [SerializeField] private float _tickRate    = 1f;
+    private ActiveSkillBehaviour _defSkill;
     private Coroutine _regenRoutine;
     public override void EnablePassive()
     {
@@ -17,56 +18,59 @@ public sealed class SolarBlessingPassive : PassiveSkillBehaviour
     {
         PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
         StopRegen();
-    }
-    
-    private void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour behaviour)
-    {
-        if (slot == SkillSlot.Defense) TryAttach(behaviour);
+        Detach();
     }
 
-    private void TryAttach(ActiveSkillBehaviour behaviour)
+    private void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour beh)
     {
-        if (_defenseSkill != null)
-        {
-            _defenseSkill.OnCooldownStarted -= StartRegen;
-            StopRegen();
-        }
-
-        _defenseSkill = behaviour;
-        if (_defenseSkill == null) return;
-
-        if (!_defenseSkill.IsReady) StartRegen(_defenseSkill.Definition.Cooldown);
-
-        _defenseSkill.OnCooldownStarted += StartRegen;
+        if (slot == SkillSlot.Defense) TryAttach(beh);
     }
 
-    private void StartRegen(float totalCd)
+    private void TryAttach(ActiveSkillBehaviour beh)
     {
+        Detach();
+
+        _defSkill = beh;
+        if (_defSkill == null) return;
+
+        if (!_defSkill.IsReady)
+            StartRegen(_defSkill.RemainingCooldown);
+
+        _defSkill.OnSkillActivated += StartRegen;
+    }
+
+    private void Detach()
+    {
+        if (_defSkill == null) return;
+        _defSkill.OnSkillActivated -= StartRegen;
+        _defSkill = null;
+    }
+
+    private void StartRegen(float cdSeconds)
+    {
+        Debug.Log(cdSeconds);
         StopRegen();
-        _regenRoutine = StartCoroutine(RegenRoutine(totalCd));
+        _regenRoutine = StartCoroutine(RegenRoutine(cdSeconds));
     }
 
-    private IEnumerator RegenRoutine(float totalCd)
+    private IEnumerator RegenRoutine(float total)
     {
-        float elapsed = 0f;
         var wait = new WaitForSeconds(_tickRate);
+        float elapsed = 0f;
 
-        while (elapsed < totalCd)
+        while (elapsed < total)
         {
             PlayerContext.PlayerHp.ReceiveHP(_healPerTick);
             elapsed += _tickRate;
             yield return wait;
         }
-
         _regenRoutine = null;
     }
 
     private void StopRegen()
     {
-        if (_regenRoutine != null)
-        {
-            StopCoroutine(_regenRoutine);
-            _regenRoutine = null;
-        }
+        if (_regenRoutine == null) return;
+        StopCoroutine(_regenRoutine);
+        _regenRoutine = null;
     }
 }
