@@ -19,40 +19,43 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour
     private int _hitsLeft;
     private float _totalDamageDone;
     private Coroutine _routine;
+
     public override void TryCast()
     {
         if (!IsReady || _routine != null) return;
 
-        base.TryCast();
+        StartCooldown();
         _hitsLeft = _maxHits;
         _totalDamageDone = 0f;
         _routine = StartCoroutine(ShieldRoutine());
-        StartCooldown();
     }
 
     private IEnumerator ShieldRoutine()
     {
-        PlayerContext.PlayerHp.SetCanBeDamagedState(false);
-        PlayerContext.PlayerState.ChangePlayerState(false);
         if (_shieldVfx != null) _shieldVfx.Play();
-        PlayerContext.PlayerHp.OnPlayerReceivedDamage += OnPlayerDamaged;
+        PlayerContext.PlayerHp.OnIncomingDamage += OnIncomingDamage;
+        PlayerContext.PlayerState.ChangePlayerState(false);
+
         float timer = 0f;
         while (timer < _duration && _hitsLeft > 0)
         {
             timer += Time.deltaTime;
             yield return null;
         }
-        
-        PlayerContext.PlayerHp.OnPlayerReceivedDamage -= OnPlayerDamaged;
-        if (_shieldVfx != null) _shieldVfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+
+        PlayerContext.PlayerHp.OnIncomingDamage -= OnIncomingDamage;
+        if (_shieldVfx != null)
+            _shieldVfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+
         Explode();
         PlayerContext.PlayerState.ChangePlayerState(true);
-        PlayerContext.PlayerHp.SetCanBeDamagedState(true);
         _routine = null;
     }
 
-    private void OnPlayerDamaged(float damage)
+    private void OnIncomingDamage(ref float damage)
     {
+        if (_hitsLeft <= 0) return;
+        damage = 0f;
         _hitsLeft--;
     }
 
@@ -63,22 +66,25 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour
             _explosionVfx.transform.position = PlayerContext.transform.position;
             _explosionVfx.Play();
         }
-        
-        float aoeRadius = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), _aoeRadius);
 
-        Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, aoeRadius);
+        float radius = PlayerContext.SkillModifierHub.Apply(
+            new SkillKey(Definition.Slot, SkillStat.Radius), _aoeRadius);
+
+        Collider[] hits = Physics.OverlapSphere(
+            PlayerContext.transform.position, radius);
+
         foreach (var hit in hits)
         {
             if (!hit.TryGetComponent(out IDamageable enemy)) continue;
+
             float damage = _aoeDamage;
             SkillDamageType type = SkillDamageType.Basic;
             PlayerContext.ApplyDamageModifiers(ref damage, ref type);
             enemy.ReceiveDamage(damage, type);
-
             PlayerContext.FireOnDamageDealt(enemy, damage, type);
-
             _totalDamageDone += damage;
         }
+
         float heal = _totalDamageDone * _healPercent;
         PlayerContext.PlayerHp.ReceiveHP(heal);
     }

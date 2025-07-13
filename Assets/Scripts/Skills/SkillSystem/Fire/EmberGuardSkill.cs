@@ -9,28 +9,25 @@ public class EmberGuardSkill : ActiveSkillBehaviour, ISkillModifier
     [SerializeField] private ParticleSystem _guardVfx;
     [SerializeField] private float _toggleCooldown = 2f;
     private bool _active;
-    private Coroutine _routine;
-
     public override void TryCast()
     {
         if (!IsReady) return;
-        base.TryCast();
 
         if (_active)
             Deactivate();
         else
             Activate();
-
+        
         _cooldownTimer = _toggleCooldown;
+        OnCooldownStarted?.Invoke(_toggleCooldown);
     }
 
     private void Activate()
     {
         _active = true;
         PlayerContext.SkillModifierHub.Register(this);
-        PlayerContext.PlayerHp.OnPlayerReceivedDamage += OnPlayerDamaged;
-        if (_guardVfx) _guardVfx.Play();
-
+        PlayerContext.PlayerHp.OnIncomingDamage += OnIncomingDamage;
+        _guardVfx.Play();
         PlayerContext.PlayerMove.SetSpeedMultiplier(_selfSlow);
     }
 
@@ -38,42 +35,42 @@ public class EmberGuardSkill : ActiveSkillBehaviour, ISkillModifier
     {
         _active = false;
         PlayerContext.SkillModifierHub.Unregister(this);
-        PlayerContext.PlayerHp.OnPlayerReceivedDamage -= OnPlayerDamaged;
-        if (_guardVfx) _guardVfx.Stop();
+        PlayerContext.PlayerHp.OnIncomingDamage -= OnIncomingDamage;
+        _guardVfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
         PlayerContext.PlayerMove.SetSpeedMultiplier(1f);
     }
-    
-    public float Evaluate(SkillKey key, float currentValue)
-    {
-        if (_active && key.Stat == SkillStat.Damage && key.Slot != SkillSlot.Passive)
-            currentValue *= (1f + _damageBonus);
 
-        return currentValue;
-    }
-    
-    private void OnPlayerDamaged(float dmg)
+    private void OnIncomingDamage(ref float dmg)
     {
-        if (!_active) return;
+        if (!_active || dmg <= 0f) return;
+        
         float reflected = dmg * _reflectPercent;
-        float reduced   = dmg * (1f - _damageReduction);
-
         SkillDamageType reflectType = SkillDamageType.Basic;
         PlayerContext.ApplyDamageModifiers(ref reflected, ref reflectType);
+        
+        dmg *= 1f - _damageReduction;
 
-        dmg = reduced;
-
-        Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, 5f);
+        Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), 5f));
         foreach (var hit in hits)
         {
             if (!hit.TryGetComponent(out IDamageable enemy)) continue;
             enemy.ReceiveDamage(reflected, reflectType);
-            
             PlayerContext.FireOnDamageDealt(enemy, reflected, reflectType);
         }
     }
 
+    public float Evaluate(SkillKey key, float currentValue)
+    {
+        if (_active && key.Stat == SkillStat.Damage && key.Slot != SkillSlot.Passive)
+        {
+            return currentValue * (1f + _damageBonus);
+        }
+        return currentValue;
+    }
+
     private void OnDisable()
     {
-        if (_active) Deactivate();
+        if (_active)
+            Deactivate();
     }
 }

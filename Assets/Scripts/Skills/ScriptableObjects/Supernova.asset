@@ -16,12 +16,13 @@ MonoBehaviour:
   DisplayName: Supernova
   Description: 
   Icon: {fileID: 0}
+  Stars: []
   Slot: 2
   Kind: 0
   School: 0
   BehaviourPrefab: {fileID: 7014801617376528231, guid: 06b37b723f912404db7de6b8ded8759d, type: 3}
   Damage: 0
-  Cooldown: 0
-  Duration: 0
+  Cooldown: 10
+  Duration: 3
   Range: 0
   Raduis: 0

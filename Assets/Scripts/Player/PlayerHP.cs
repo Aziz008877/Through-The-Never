@@ -5,6 +5,7 @@ public class PlayerHP : MonoBehaviour
 {
     [SerializeField] private float _currentHP, _minHp, _maxHP;
     [SerializeField] private UnityEvent _onPlayerDead;
+    public delegate void IncomingDamageHandler(ref float damage);
     private bool _canBeDamaged = true;
     public float CurrentHP => _currentHP;
     public float MinHP => _minHp;
@@ -12,7 +13,7 @@ public class PlayerHP : MonoBehaviour
     public Action<float> OnHpValueUpdated;
     public Action OnPlayerDead;
     public Action<float> OnPlayerReceivedDamage;
-
+    public event IncomingDamageHandler OnIncomingDamage;
     private void Start()
     {
         ClampHP();
@@ -40,7 +41,12 @@ public class PlayerHP : MonoBehaviour
 
     public void ReceiveDamage(float damageValue)
     {
-        _currentHP -= damageValue;
+        if (!_canBeDamaged || damageValue <= 0) return;
+        
+        OnIncomingDamage?.Invoke(ref damageValue);
+        if (damageValue <= 0f) return;   
+        
+        _currentHP = Mathf.Max(_currentHP - damageValue, _minHp);
         OnPlayerReceivedDamage?.Invoke(damageValue);
         UpdateHP();
     }

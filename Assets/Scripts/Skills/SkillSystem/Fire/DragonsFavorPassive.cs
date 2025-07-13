@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public sealed class DragonsFavorPassive : PassiveSkillBehaviour, IDamageModifier
 {
     [Header("Shield formula")]
@@ -20,17 +21,17 @@ public sealed class DragonsFavorPassive : PassiveSkillBehaviour, IDamageModifier
         PlayerContext.UnregisterModifier(this);
         StopVfx();
     }
-    
+
     private void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour beh)
     {
-        if (slot == SkillSlot.Special) AttachTo(beh);
+        if (slot == SkillSlot.Special)
+            AttachTo(beh);
     }
 
     private void AttachTo(ActiveSkillBehaviour beh)
     {
         Detach();
         if (beh == null) return;
-
         _special = beh;
         _special.OnCooldownStarted += CreateShield;
     }
@@ -43,14 +44,14 @@ public sealed class DragonsFavorPassive : PassiveSkillBehaviour, IDamageModifier
             _special = null;
         }
     }
-    
-    private void CreateShield(float cdSeconds)
+
+    private void CreateShield(float cooldownSeconds)
     {
-        _shieldHp = cdSeconds * _shieldPerSecond;
+        _shieldHp = cooldownSeconds * _shieldPerSecond;
 
         if (_shieldVfx != null)
         {
-            _shieldVfx.transform.SetParent(PlayerContext.PlayerPosition);
+            _shieldVfx.transform.SetParent(PlayerContext.PlayerPosition, false);
             _shieldVfx.transform.localPosition = Vector3.zero;
             _shieldVfx.Play(true);
         }
@@ -58,18 +59,20 @@ public sealed class DragonsFavorPassive : PassiveSkillBehaviour, IDamageModifier
 
     private void StopVfx()
     {
-        if (_shieldVfx != null) _shieldVfx.Stop(true,
-            ParticleSystemStopBehavior.StopEmitting);
+        if (_shieldVfx != null)
+            _shieldVfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
-    
+
     public void Apply(ref float dmg, ref SkillDamageType type)
     {
-        if (_shieldHp <= 0f) return;
+        if (_shieldHp <= 0f)
+            return;
 
         float absorbed = Mathf.Min(dmg, _shieldHp);
-        _shieldHp -= absorbed;
-        dmg -= absorbed;
+        _shieldHp     -= absorbed;
+        dmg           -= absorbed;
 
-        if (_shieldHp <= 0f) StopVfx();
+        if (_shieldHp <= 0f)
+            StopVfx();
     }
 }
