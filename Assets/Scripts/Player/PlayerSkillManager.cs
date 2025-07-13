@@ -78,7 +78,7 @@ public class PlayerSkillManager : MonoBehaviour
     {
         if (_actives.TryGetValue(slot, out var a)) a.TryCast();
 
-        Debug.Log(a.Definition.DisplayName);
+        //Debug.Log(a.Definition.DisplayName);
     }
     
     public ActiveSkillBehaviour GetActive(SkillSlot slot)

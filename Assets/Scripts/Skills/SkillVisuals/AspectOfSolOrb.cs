@@ -11,7 +11,6 @@ public class AspectOfSolOrb : MonoBehaviour
 
     public void Init(float dmg, float speed, float rate, float radius, float life, PlayerContext ctx)
     {
-        Debug.Log(transform.position);
         _damage = dmg;
         _projSpeed = speed;
         _fireRate = rate;

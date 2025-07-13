@@ -34,12 +34,9 @@ public class BlindingLightSkill : ActiveSkillBehaviour
 
     private void ApplyBlindingEffect()
     {
-        float radius = PlayerContext.SkillModifierHub.Apply(
-            new SkillKey(Definition.Slot, SkillStat.Radius), _radius
-        );
-        float dps = PlayerContext.SkillModifierHub.Apply(
-            new SkillKey(Definition.Slot, SkillStat.Damage), _baseDps
-        );
+        float radius = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), _radius);
+        float dps = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Damage), _baseDps);
+        
         Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, radius);
         foreach (var col in hits)
         {

@@ -19,7 +19,7 @@ MonoBehaviour:
   Stars:
   - Aspect: 1
     Stars: 2
-  Slot: 0
+  Slot: 1
   Kind: 0
   School: 0
   BehaviourPrefab: {fileID: 857987728571200035, guid: c4b9276ec92fe9c41a774764a082993f, type: 3}

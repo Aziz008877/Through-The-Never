@@ -36,6 +36,11 @@ public abstract class ActiveSkillBehaviour : SkillBehaviour
         _cooldownTimer -= _cooldownTimer * percent01;
     }
 
+    public void SetCooldown(float seconds)
+    {
+        _cooldownTimer = Mathf.Max(0f, seconds);
+    }
+    
     protected virtual void Update()
     {
         if (_cooldownTimer > 0f) _cooldownTimer -= Time.deltaTime;
