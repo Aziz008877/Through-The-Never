@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: SmolderRing
   m_EditorClassIdentifier: 
   Id: 
-  DisplayName: 
+  DisplayName: Smolder Ring
   Description: 
   Icon: {fileID: 0}
+  Stars: []
   Slot: 3
   Kind: 1
   School: 0

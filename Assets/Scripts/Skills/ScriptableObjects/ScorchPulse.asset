@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: ScorchPulse
   m_EditorClassIdentifier: 
   Id: 
-  DisplayName: 
+  DisplayName: Scorch Pulse
   Description: 
   Icon: {fileID: 0}
+  Stars: []
   Slot: 3
   Kind: 1
   School: 0

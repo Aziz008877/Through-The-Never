@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhoenixDive
   m_EditorClassIdentifier: 
   Id: 
-  DisplayName: 
+  DisplayName: Phoenix Dive
   Description: 
   Icon: {fileID: 0}
   Stars:

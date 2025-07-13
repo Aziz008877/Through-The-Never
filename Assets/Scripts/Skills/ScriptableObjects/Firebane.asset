@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Firebane
   m_EditorClassIdentifier: 
   Id: 
-  DisplayName: 
+  DisplayName: Firebane
   Description: 
   Icon: {fileID: 0}
+  Stars: []
   Slot: 2
   Kind: 1
   School: 0

@@ -45,7 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _orbPrefab: {fileID: 6601337993877901623, guid: 77a3b42fde907c74abdec5d21790af12, type: 3}
-  _orbLifetime: 15
   _projectileSpeed: 14
   _fireRate: 0.8
-  _detectRadius: 12

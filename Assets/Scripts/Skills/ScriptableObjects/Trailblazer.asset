@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Trailblazer
   m_EditorClassIdentifier: 
   Id: 
-  DisplayName: 
+  DisplayName: Trailblazer
   Description: 
   Icon: {fileID: 0}
   Stars:

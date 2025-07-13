@@ -11,6 +11,7 @@ public class AspectOfSolOrb : MonoBehaviour
 
     public void Init(float dmg, float speed, float rate, float radius, float life, PlayerContext ctx)
     {
+        Debug.Log(transform.position);
         _damage = dmg;
         _projSpeed = speed;
         _fireRate = rate;
@@ -33,31 +34,17 @@ public class AspectOfSolOrb : MonoBehaviour
 
         while (true)
         {
-            IDamageable target = FindClosestEnemy();
-            if (target != null)
-            {
-                Vector3 dir = ((MonoBehaviour)target).transform.position - transform.position;
-                dir = dir.normalized;
+            Collider[] hits = Physics.OverlapSphere(transform.position, _radius);
 
-                var proj = Instantiate(_projectilePrefab, transform.position + dir * 1.2f, Quaternion.LookRotation(dir));
+            foreach (var h in hits)
+            {
+                if (!h.TryGetComponent(out IDamageable enemy)) continue;
+                Vector3 dir = (h.transform.position - transform.position).normalized;
+                Fireball proj = Instantiate(_projectilePrefab, transform.position + dir * 1.2f, Quaternion.LookRotation(dir));
                 proj.Init(_damage, 3f, SkillDamageType.Basic, _ctx);
-                proj.GetComponent<Rigidbody>()?.AddForce(dir * _projSpeed, ForceMode.VelocityChange);
             }
+
             yield return wait;
         }
-    }
-
-    private IDamageable FindClosestEnemy()
-    {
-        Collider[] hits = Physics.OverlapSphere(transform.position, _radius);
-        IDamageable best = null; float bestSqr = float.MaxValue;
-
-        foreach (var h in hits)
-        {
-            if (!h.TryGetComponent(out IDamageable d)) continue;
-            float sqr = (h.transform.position - transform.position).sqrMagnitude;
-            if (sqr < bestSqr) { best = d; bestSqr = sqr; }
-        }
-        return best;
     }
 }

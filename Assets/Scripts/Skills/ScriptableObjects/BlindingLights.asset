@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BlindingLights
   m_EditorClassIdentifier: 
   Id: 
-  DisplayName: 
+  DisplayName: Blinding Lights
   Description: 
   Icon: {fileID: 0}
   Stars:

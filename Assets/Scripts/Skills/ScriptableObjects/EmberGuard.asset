@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EmberGuard
   m_EditorClassIdentifier: 
   Id: 
-  DisplayName: 
+  DisplayName: Ember Guard
   Description: 
   Icon: {fileID: 0}
   Stars:

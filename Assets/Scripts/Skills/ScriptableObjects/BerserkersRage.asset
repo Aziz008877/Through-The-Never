@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: BerserkersRage
   m_EditorClassIdentifier: 
   Id: 
-  DisplayName: 
+  DisplayName: Berserkers Rage
   Description: 
   Icon: {fileID: 0}
+  Stars: []
   Slot: 5
   Kind: 1
   School: 4

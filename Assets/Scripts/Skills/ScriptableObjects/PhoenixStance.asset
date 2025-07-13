@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhoenixStance
   m_EditorClassIdentifier: 
   Id: 
-  DisplayName: 
+  DisplayName: Phoenix Stance
   Description: 
   Icon: {fileID: 0}
   Stars:

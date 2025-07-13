@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AspectOfSol
   m_EditorClassIdentifier: 
   Id: sol
-  DisplayName: Sol
+  DisplayName: Aspect of Sol
   Description: 
   Icon: {fileID: 0}
   Stars:
@@ -24,7 +24,7 @@ MonoBehaviour:
   School: 0
   BehaviourPrefab: {fileID: 5661319833831118056, guid: 8c6b9c2b654271b45838bd47ec66ffc9, type: 3}
   Damage: 0
-  Cooldown: 0
-  Duration: 0
+  Cooldown: 30
+  Duration: 15
   Range: 0
   Raduis: 5

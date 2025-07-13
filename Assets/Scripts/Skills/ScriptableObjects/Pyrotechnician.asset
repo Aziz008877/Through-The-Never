@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Pyrotechnician
   m_EditorClassIdentifier: 
   Id: 
-  DisplayName: 
+  DisplayName: Pyrotechnician
   Description: 
   Icon: {fileID: 0}
+  Stars: []
   Slot: 1
   Kind: 1
   School: 0

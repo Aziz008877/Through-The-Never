@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: Fireblast
   m_EditorClassIdentifier: 
   Id: 
-  DisplayName: 
+  DisplayName: Fireblast
   Description: 
   Icon: {fileID: 0}
+  Stars: []
   Slot: 5
   Kind: 1
   School: 0
