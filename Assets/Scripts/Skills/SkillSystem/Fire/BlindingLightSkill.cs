@@ -7,6 +7,8 @@ public class BlindingLightSkill : ActiveSkillBehaviour
     [SerializeField] private float _radius = 7f;
     [SerializeField] private float _duration = 5f;
     [SerializeField] private float _baseDps = 10f;
+    [SerializeField] private float _missPercent = 0.5f;
+    [SerializeField] private float _slowPercent = 0.5f;
     [SerializeField] private ParticleSystem _vfx;
 
     public override void TryCast()
@@ -46,7 +48,7 @@ public class BlindingLightSkill : ActiveSkillBehaviour
 
             if (col.TryGetComponent(out IBlindable enemy))
             {
-                enemy.ApplyBlind(_duration, 0.5f, 0.5f, dps * proximity);
+                enemy.ApplyBlind(_duration, _missPercent, _slowPercent, dps * proximity);
             }
 
             if (col.TryGetComponent(out IDamageable dmg))
