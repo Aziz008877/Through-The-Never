@@ -36,7 +36,7 @@ public class PlayerContext : MonoBehaviour
     public bool SolarFlareCharge { get; set; }
     private readonly List<IOnDamageDealtModifier> _onDamageDealtModifiers = new();
     private readonly List<IDamageModifier> _damageModifiers = new();
-    public void RegisterModifier(IDamageModifier m)   => _damageModifiers.Add(m);
+    public void RegisterModifier(IDamageModifier m) => _damageModifiers.Add(m);
     public void UnregisterModifier(IDamageModifier m) => _damageModifiers.Remove(m);
 
     public void ApplyDamageModifiers(ref float dmg, ref SkillDamageType type)
@@ -45,15 +45,15 @@ public class PlayerContext : MonoBehaviour
             mod.Apply(ref dmg, ref type);
     }
 
-    public void RegisterOnDamageDealtModifier(FireInnateSkill fireInnateSkill)
+    public void RegisterOnDamageDealtModifier(IOnDamageDealtModifier ioOnDamageDealtModifier)
     {
-        if (!_onDamageDealtModifiers.Contains(fireInnateSkill))
-            _onDamageDealtModifiers.Add(fireInnateSkill);
+        if (!_onDamageDealtModifiers.Contains(ioOnDamageDealtModifier))
+            _onDamageDealtModifiers.Add(ioOnDamageDealtModifier);
     }
 
-    public void UnregisterOnDamageDealtModifier(FireInnateSkill fireInnateSkill)
+    public void UnregisterOnDamageDealtModifier(IOnDamageDealtModifier ioOnDamageDealtModifier)
     {
-        _onDamageDealtModifiers.Remove(fireInnateSkill);
+        _onDamageDealtModifiers.Remove(ioOnDamageDealtModifier);
     }
     
     public void FireOnDamageDealt(IDamageable target, float damage, SkillDamageType type)

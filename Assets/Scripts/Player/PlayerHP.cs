@@ -42,7 +42,7 @@ public class PlayerHP : MonoBehaviour
     public void ReceiveDamage(float damageValue)
     {
         if (!_canBeDamaged || damageValue <= 0) return;
-        
+
         OnIncomingDamage?.Invoke(ref damageValue);
         if (damageValue <= 0f) return;   
         

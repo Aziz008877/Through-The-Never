@@ -8,6 +8,7 @@ public class TrainingEnemy : MonoBehaviour, IDamageable, IDotReceivable
     [field: SerializeField] public float CurrentHP { get; set; }
     [field: SerializeField] public float MinHP { get; set; }
     [field: SerializeField] public float MaxHP { get; set; }
+    [field: SerializeField] public bool IsDotActive { get; set; }
 
     [Header("UI")]
     [SerializeField] private Image _hpFillImage;
@@ -18,7 +19,8 @@ public class TrainingEnemy : MonoBehaviour, IDamageable, IDotReceivable
     private Coroutine _dotRoutine;
 
     private void Awake() => UpdateBar();
-    
+
+
     public void ReceiveDamage(float amount, SkillDamageType type)
     {
         if (!CanBeDamaged) return;
@@ -38,7 +40,6 @@ public class TrainingEnemy : MonoBehaviour, IDamageable, IDotReceivable
         _dotRoutine = StartCoroutine(DotTick(dps, duration));
     }
 
-    public bool IsDotActive { get; set; }
     public void RefreshDot(float duration)
     {
         

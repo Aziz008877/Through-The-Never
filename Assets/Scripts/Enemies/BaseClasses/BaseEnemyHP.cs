@@ -9,16 +9,18 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
     [field: SerializeField] public float CurrentHP { get; set; }
     [field: SerializeField] public float MinHP { get; set; }
     [field: SerializeField] public float MaxHP { get; set; }
+    public bool IsDotActive { get; set; }
     public bool CanBeDamaged { get; set; } = true;
     [SerializeField] private UnityEvent _onEnemyDead;
     [Inject] private DamageTextPool _damageTextPool;
     public Action<Transform> OnEnemyDead { get; set; }
     private Coroutine _dotCoroutine;
+
     public void Init(DamageTextPool damageTextPool)
     {
         _damageTextPool = damageTextPool;
     }
-    
+
     public void ReceiveDamage(float damageValue, SkillDamageType type)
     {
         if (type == SkillDamageType.DOT)
@@ -78,6 +80,11 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
     }
 
     public void ApplyDot(float dps, float duration)
+    {
+        
+    }
+
+    public void RefreshDot(float duration)
     {
         
     }
