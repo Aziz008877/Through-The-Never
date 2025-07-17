@@ -19,7 +19,6 @@ public sealed class ImmolateUltimatePassive : PassiveSkillBehaviour
 
     public override void EnablePassive()
     {
-        Debug.Log("CALLED");
         PlayerContext.PlayerHp.OnIncomingDamage += OnIncomingDamage;
         _hitCounter = 0;
     }
@@ -31,7 +30,6 @@ public sealed class ImmolateUltimatePassive : PassiveSkillBehaviour
 
     private void OnIncomingDamage(ref float dmg)
     {
-        Debug.Log("YES");
         TriggerPulse();
         _hitCounter++;
         

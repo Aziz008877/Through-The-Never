@@ -15,6 +15,14 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
     [Inject] private DamageTextPool _damageTextPool;
     public Action<Transform> OnEnemyDead { get; set; }
     private Coroutine _dotCoroutine;
+    private BaseEnemyAnimation _enemyAnimation;
+    private BaseEnemyMove _enemyMove;
+
+    private void Start()
+    {
+        _enemyAnimation = GetComponent<BaseEnemyAnimation>();
+        _enemyMove = GetComponent<BaseEnemyMove>();
+    }
 
     public void Init(DamageTextPool damageTextPool)
     {
@@ -70,6 +78,8 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
     {
         OnEnemyDead?.Invoke(transform);
         _onEnemyDead?.Invoke();
+        _enemyAnimation.PlayDeath();
+        _enemyMove.StopChasing();
         StartCoroutine(DestroySkeleton());
     }
 

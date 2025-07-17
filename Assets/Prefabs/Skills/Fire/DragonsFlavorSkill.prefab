@@ -19543,7 +19543,7 @@ GameObject:
   - component: {fileID: 5124165849051392992}
   - component: {fileID: 4144015922488211019}
   m_Layer: 0
-  m_Name: DragonsFlareSkill
+  m_Name: DragonsFlavorSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

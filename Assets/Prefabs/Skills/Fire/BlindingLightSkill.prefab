@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 5024260346843088713}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -48,7 +48,9 @@ MonoBehaviour:
   _radius: 7
   _duration: 5
   _baseDps: 10
-  _vfx: {fileID: 0}
+  _missPercent: 0.5
+  _slowPercent: 0.5
+  _sun: {fileID: 7625447660918239547}
 --- !u!1001 &3729878216131983437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -101,12 +103,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: AspectOfSolOrb
       objectReference: {fileID: 0}
+    - target: {fileID: 6489748940003395958, guid: 77a3b42fde907c74abdec5d21790af12, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6601337993877901623, guid: 77a3b42fde907c74abdec5d21790af12, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 77a3b42fde907c74abdec5d21790af12, type: 3}
+--- !u!1 &7625447660918239547 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6489748940003395958, guid: 77a3b42fde907c74abdec5d21790af12, type: 3}
+  m_PrefabInstance: {fileID: 3729878216131983437}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8507600911431183029 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5031120627372036856, guid: 77a3b42fde907c74abdec5d21790af12, type: 3}

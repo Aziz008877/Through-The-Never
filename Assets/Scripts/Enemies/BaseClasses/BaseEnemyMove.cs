@@ -21,6 +21,7 @@ public abstract class BaseEnemyMove : MonoBehaviour
     protected bool _isMoving;
     protected int _patrolIndex;
     protected float _pauseTimer;
+    protected bool _canMove = true;
     public virtual void ReceiveTargetEnemy(Transform target)
     {
         _target = target;
@@ -36,8 +37,15 @@ public abstract class BaseEnemyMove : MonoBehaviour
         _agent.stoppingDistance = _stopDistance;
     }
 
+    public void StopChasing()
+    {
+        _canMove = false;
+    }
+
     protected virtual void Update()
     {
+        if (!_canMove) return;
+        
         switch (_behaviour)
         {
             case MoveBehaviour.Idle:

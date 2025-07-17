@@ -9,7 +9,7 @@ public class BlindingLightSkill : ActiveSkillBehaviour
     [SerializeField] private float _baseDps = 10f;
     [SerializeField] private float _missPercent = 0.5f;
     [SerializeField] private float _slowPercent = 0.5f;
-    [SerializeField] private ParticleSystem _vfx;
+    [SerializeField] private GameObject _sun;
 
     public override void TryCast()
     {
@@ -22,7 +22,7 @@ public class BlindingLightSkill : ActiveSkillBehaviour
 
     private IEnumerator BlindingRoutine()
     {
-        if (_vfx) _vfx.Play();
+        _sun.gameObject.SetActive(true);
 
         float timer = 0f;
         while (timer < _duration)
@@ -32,7 +32,7 @@ public class BlindingLightSkill : ActiveSkillBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-        if (_vfx) _vfx.Stop();
+        _sun.gameObject.SetActive(false);
     }
 
     private void ApplyBlindingEffect()

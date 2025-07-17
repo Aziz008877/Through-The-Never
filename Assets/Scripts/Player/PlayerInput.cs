@@ -49,10 +49,14 @@ public class PlayerInput : MonoBehaviour
     private void SpecialSkill()
     {
         if (Input.GetKeyDown(KeyCode.F))
+        {
             OnSpecialSkillPressed?.Invoke();
+        }
 
         if (Input.GetKeyUp(KeyCode.F))
+        {
             OnSpecialSkillReleased?.Invoke();
+        }
     }
 
     private void Dash()

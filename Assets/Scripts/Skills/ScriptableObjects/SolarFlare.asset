@@ -26,7 +26,7 @@ MonoBehaviour:
   School: 0
   BehaviourPrefab: {fileID: 492651827271591149, guid: fbe16523f0a836f4a92dea0e77dbbe38, type: 3}
   Damage: 0
-  Cooldown: 0
+  Cooldown: 6
   Duration: 0
   Range: 0
   Raduis: 0

@@ -1,27 +1,28 @@
 using UnityEngine;
-
-public sealed class DragonsFavorPassive : PassiveSkillBehaviour, IDamageModifier
+public sealed class DragonsFavorPassive : PassiveSkillBehaviour
 {
     [Header("Shield formula")]
     [SerializeField] private float _shieldPerSecond = 8f;
     [SerializeField] private ParticleSystem _shieldVfx;
-    private float _shieldHp;
     private ActiveSkillBehaviour _special;
+    private float _shieldHp;
     public override void EnablePassive()
     {
-        AttachTo(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Special));
         PlayerContext.PlayerSkillManager.ActiveRegistered += OnActiveRegistered;
-        PlayerContext.RegisterModifier(this);
+        AttachTo(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Special));
+        PlayerContext.PlayerHp.OnIncomingDamage += AbsorbDamage;
     }
 
     public override void DisablePassive()
     {
-        Detach();
         PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
-        PlayerContext.UnregisterModifier(this);
-        StopVfx();
-    }
+        PlayerContext.PlayerHp.OnIncomingDamage           -= AbsorbDamage;
 
+        Detach();
+        StopVfx();
+        _shieldHp = 0f;
+    }
+    
     private void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour beh)
     {
         if (slot == SkillSlot.Special)
@@ -32,6 +33,7 @@ public sealed class DragonsFavorPassive : PassiveSkillBehaviour, IDamageModifier
     {
         Detach();
         if (beh == null) return;
+
         _special = beh;
         _special.OnCooldownStarted += CreateShield;
     }
@@ -47,8 +49,10 @@ public sealed class DragonsFavorPassive : PassiveSkillBehaviour, IDamageModifier
 
     private void CreateShield(float cooldownSeconds)
     {
-        _shieldHp = cooldownSeconds * _shieldPerSecond;
+        if (_shieldHp > 0f) StopVfx();
 
+        _shieldHp = cooldownSeconds * _shieldPerSecond;
+        
         if (_shieldVfx != null)
         {
             _shieldVfx.transform.SetParent(PlayerContext.PlayerPosition, false);
@@ -59,20 +63,21 @@ public sealed class DragonsFavorPassive : PassiveSkillBehaviour, IDamageModifier
 
     private void StopVfx()
     {
-        if (_shieldVfx != null)
+        if (_shieldVfx != null && _shieldVfx.isPlaying)
             _shieldVfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
 
-    public void Apply(ref float dmg, ref SkillDamageType type)
+    private void AbsorbDamage(ref float dmg)
     {
-        if (_shieldHp <= 0f)
-            return;
+        if (_shieldHp <= 0f) return;
 
         float absorbed = Mathf.Min(dmg, _shieldHp);
-        _shieldHp     -= absorbed;
-        dmg           -= absorbed;
+        _shieldHp -= absorbed;
+        dmg -= absorbed;
 
         if (_shieldHp <= 0f)
+        {
             StopVfx();
+        }
     }
 }
