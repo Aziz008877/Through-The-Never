@@ -17,10 +17,10 @@ MonoBehaviour:
   Description: 
   Icon: {fileID: 0}
   Stars: []
-  Slot: 6
+  Slot: 5
   Kind: 1
   School: 0
-  BehaviourPrefab: {fileID: 0}
+  BehaviourPrefab: {fileID: 7222045653224661854, guid: 60b526615f9e8fc4493d26385de5718e, type: 3}
   Damage: 0
   Cooldown: 0
   Duration: 0
