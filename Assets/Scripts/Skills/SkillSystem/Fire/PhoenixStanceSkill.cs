@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-public class PhoenixStanceSkill : ActiveSkillBehaviour
+public class PhoenixStanceSkill : ActiveSkillBehaviour, IDefenceDurationSkill
 {
     [Header("Shield stats")]
     [SerializeField] private int   _maxHits  = 4;
@@ -19,10 +20,12 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour
     private int _hitsLeft;
     private float _totalDamageDone;
     private Coroutine _routine;
+    public event Action OnDefenceStarted;
+    public event Action OnDefenceFinished;
     public override void TryCast()
     {
         if (!IsReady || _routine != null) return;
-
+        
         StartCooldown();
         _hitsLeft        = _maxHits;
         _totalDamageDone = 0f;
@@ -30,13 +33,14 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour
 
         Debug.Log($"<color=orange>[Phoenix Stance]</color> activated: {_maxHits} hits / {_duration}s");
     }
-    
+
     private IEnumerator ShieldRoutine()
     {
         if (_shieldVfx) _shieldVfx.Play();
 
         PlayerContext.PlayerHp.OnIncomingDamage += OnIncomingDamage;
         PlayerContext.PlayerState.ChangePlayerState(false);
+        OnDefenceStarted?.Invoke();
 
         float timer = 0f;
         while (timer < _duration && _hitsLeft > 0)
@@ -45,6 +49,7 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour
             yield return null;
         }
 
+        OnDefenceFinished?.Invoke();
         CleanupShield();
         Explode();
         _routine = null;
@@ -96,10 +101,10 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour
         float heal = _totalDamageDone * _healPercent;
         PlayerContext.PlayerHp.ReceiveHP(heal);
 
-        Debug.Log($"<color=orange>[Phoenix Stance]</color> exploded for {_totalDamageDone:F0} " +
-                  $"(heal {heal:F0})");
+        /*Debug.Log($"<color=orange>[Phoenix Stance]</color> exploded for {_totalDamageDone:F0} " +
+                  $"(heal {heal:F0})");*/
     }
-    
+
     private void CleanupShield()
     {
         PlayerContext.PlayerHp.OnIncomingDamage -= OnIncomingDamage;

@@ -1120,7 +1120,7 @@ MonoBehaviour:
   _starterInnate: {fileID: 11400000, guid: 441c66dc3d2923b4c8466412bea7b2b9, type: 2}
   _starterDash: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
   _currentTestSpecial: {fileID: 11400000, guid: f762f70e000b12743a9953ee055f61a7, type: 2}
-  _currentTestPassive: {fileID: 11400000, guid: 633dcc8415352a046b7f0315e72cd8f3, type: 2}
+  _currentTestPassive: {fileID: 11400000, guid: 0ade6acca7e2f924d8a8e355459c78e8, type: 2}
   _currentTestDefensive: {fileID: 11400000, guid: 459a2ceb0a3c88941b2be170fe39a7f8, type: 2}
   _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
   _chooseVFX: {fileID: 0}
@@ -2269,9 +2269,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6efa46cb393afb4b831d37e752e8c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentHP>k__BackingField: 100
+  <CurrentHP>k__BackingField: 1000
   <MinHP>k__BackingField: 0
-  <MaxHP>k__BackingField: 100
+  <MaxHP>k__BackingField: 1000
   _onEnemyDead:
     m_PersistentCalls:
       m_Calls: []

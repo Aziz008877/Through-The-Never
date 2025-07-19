@@ -14,10 +14,11 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
     [SerializeField] private UnityEvent _onEnemyDead;
     [Inject] private DamageTextPool _damageTextPool;
     public Action<Transform> OnEnemyDead { get; set; }
-    private Coroutine _dotCoroutine;
     private BaseEnemyAnimation _enemyAnimation;
     private BaseEnemyMove _enemyMove;
-
+    private Coroutine _dotCoroutine;
+    private float _dotDps;
+    private float _dotTickRate = 1;
     private void Start()
     {
         _enemyAnimation = GetComponent<BaseEnemyAnimation>();
@@ -38,26 +39,31 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
                 StopCoroutine(_dotCoroutine);
             }
             
-            _dotCoroutine = StartCoroutine(ApplyDot(damageValue, 3, 1f));
+            _dotCoroutine = StartCoroutine(DotRoutine(3));
             return;
         }
 
         ApplyDamage(damageValue);
     }
 
-    private IEnumerator ApplyDot(float damagePerTick, float duration, float tickRate)
+    private IEnumerator DotRoutine(float duration)
     {
         float elapsed = 0f;
         while (elapsed < duration)
         {
-            ApplyDamage(damagePerTick);
-            yield return new WaitForSeconds(1f / tickRate);
-            elapsed += 1f / tickRate;
+            ApplyDamage(_dotDps);
+            yield return new WaitForSeconds(1f / _dotTickRate);
+            elapsed += 1f / _dotTickRate;
         }
+
+        IsDotActive  = false;
+        _dotCoroutine = null;
+        //Debug.Log("<color=orange>[Ignite]</color> expired");
     }
 
     private void ApplyDamage(float damageValue)
     {
+        //Debug.Log(damageValue);
         if (!CanBeDamaged) return;
         
         if (CurrentHP - damageValue <= MinHP)
@@ -91,11 +97,18 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
 
     public void ApplyDot(float dps, float duration)
     {
-        
+        _dotDps = dps;
+        RefreshDot(duration); 
     }
 
     public void RefreshDot(float duration)
     {
+        if (duration <= 0f) return;
         
+        if (_dotCoroutine != null) StopCoroutine(_dotCoroutine);
+        _dotCoroutine = StartCoroutine(DotRoutine(duration));
+
+        IsDotActive = true;
+        //Debug.Log($"<color=orange>[Ignite]</color> applied {_dotDps:F1} DPS for {duration:F1}s");
     }
 }

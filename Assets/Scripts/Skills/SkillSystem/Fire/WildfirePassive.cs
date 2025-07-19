@@ -1,50 +1,53 @@
 using UnityEngine;
 public class WildfirePassive : PassiveSkillBehaviour
 {
-    private PlayerDashSkill _attachedDash;
+    private PlayerDashSkill _dash;
 
     public override void EnablePassive()
     {
-        TryAttach(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Dash));
+        Attach(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Dash));
         PlayerContext.PlayerSkillManager.ActiveRegistered += OnActiveRegistered;
     }
 
     public override void DisablePassive()
     {
-        Detach();
         PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
+        Detach();
     }
 
     private void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour beh)
     {
-        if (slot == SkillSlot.Dash) TryAttach(beh);
+        if (slot == SkillSlot.Dash) Attach(beh);
     }
 
-    private void TryAttach(ActiveSkillBehaviour dashSkill)
+    private void Attach(ActiveSkillBehaviour beh)
     {
         Detach();
 
-        if (dashSkill != null && dashSkill.TryGetComponent<PlayerDashSkill>(out var dash))
+        if (beh && beh.TryGetComponent(out PlayerDashSkill dash))
         {
-            dash.OnDashStarted += FireBasicSkill;
-            _attachedDash = dash;
+            _dash = dash;
+            _dash.OnDashStarted += FireSeekingFireball;
         }
     }
 
     private void Detach()
     {
-        if (_attachedDash != null)
-        {
-            _attachedDash.OnDashStarted -= FireBasicSkill;
-            _attachedDash = null;
-        }
+        if (_dash == null) return;
+        _dash.OnDashStarted -= FireSeekingFireball;
+        _dash = null;
     }
-
-    private void FireBasicSkill(Vector3 startPosition)
+    
+    private void FireSeekingFireball(Vector3 startPos)
     {
-        var basic = PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Basic);
-        if (basic == null) return;
+        if (PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Basic) is not FireballSkill fb)
+            return;
         
-        basic.TryCast();
+        fb.SetHomingProjectiles(true);
+        
+        fb.TryCast();
+        Debug.Log("<color=orange>[Wildfire]</color> homing fireball cast");
+
+        fb.SetHomingProjectiles(false);
     }
 }

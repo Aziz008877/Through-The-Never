@@ -4,16 +4,15 @@ using UnityEngine;
 public sealed class IfritRagePassive : PassiveSkillBehaviour,
                                        ISkillModifier, IDamageModifier
 {
-    /*──────── настройки ────────*/
     [Header("Rage settings")]
-    [SerializeField] private float _buffDuration      = 5f;
-    [SerializeField] private float _outgoingBonusPct  = .30f;   // +30 % к нашему урону
-    [SerializeField] private float _incomingBonusPct  = .30f;   // +30 % входящего
+    [SerializeField] private float _buffDuration     = 5f;   // секунд
+    [SerializeField] private float _outgoingBonusPct = .30f; // +30 % урон игрока
+    [SerializeField] private float _incomingBonusPct = .30f; // +30 % входящий урон
 
-    private Coroutine              _buffRoutine;
-    private IDefenceDurationSkill  _attachedDef;
+    private Coroutine             _buffRoutine;
+    private IDefenceDurationSkill _defSkill;
 
-    /*──────── включение / выключение пассивки ────────*/
+    /* ───────── Enable / Disable ───────── */
     public override void EnablePassive()
     {
         Debug.Log("<color=orange>[Ifrit’s Rage]</color> enabled");
@@ -23,57 +22,75 @@ public sealed class IfritRagePassive : PassiveSkillBehaviour,
 
     public override void DisablePassive()
     {
+        Debug.Log("<color=orange>[Ifrit’s Rage]</color> disabled");
         PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
         StopBuff();
         Detach();
     }
 
-    /*──────── привязка к текущему DEF-скиллу ────────*/
+    /* ───────── привязка к DEF-скиллу ───────── */
     private void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour beh)
     {
         if (slot == SkillSlot.Defense) TryAttach(beh);
     }
 
-    private void TryAttach(ActiveSkillBehaviour defenceSkill)
+    private void TryAttach(ActiveSkillBehaviour beh)
     {
         Detach();
 
-        if (defenceSkill != null && defenceSkill.TryGetComponent<IDefenceDurationSkill>(out var def))
+        if (!beh)
         {
-            Debug.Log("<color=orange>[Ifrit’s Rage]</color> attached to DEF skill");
-            def.OnDefenceFinished += HandleDefenceFinished;
-            _attachedDef = def;
+            Debug.Log("<color=orange>[Ifrit’s Rage]</color> no DEF skill");
+            return;
         }
+
+        if (!beh.TryGetComponent(out IDefenceDurationSkill def))
+        {
+            Debug.Log("<color=orange>[Ifrit’s Rage]</color> DEF has no IDefenceDurationSkill");
+            return;
+        }
+
+        _defSkill = def;
+        _defSkill.OnDefenceStarted  += HandleDefenceStarted;
+        _defSkill.OnDefenceFinished += HandleDefenceFinished;
+
+        HandleDefenceStarted();
     }
 
     private void Detach()
     {
-        if (_attachedDef != null)
-        {
-            _attachedDef.OnDefenceFinished -= HandleDefenceFinished;
-            _attachedDef = null;
-        }
+        if (_defSkill == null) return;
+        _defSkill.OnDefenceStarted  -= HandleDefenceStarted;
+        _defSkill.OnDefenceFinished -= HandleDefenceFinished;
+        _defSkill = null;
     }
 
-    /*──────── DEF-скилл закончился ────────*/
+    /* ───────── события DEF-скилла ───────── */
+    private void HandleDefenceStarted()
+    {
+        Debug.Log("<color=orange>[Ifrit’s Rage]</color> DEF started → rage armed");
+        StartOrRestartBuff();
+    }
+
     private void HandleDefenceFinished()
     {
-        Debug.Log("<color=orange>[Ifrit’s Rage]</color> DEF finished → start rage");
-        StopBuff();                                   // перестраховка
+        Debug.Log("<color=orange>[Ifrit’s Rage]</color> DEF finished → rage timer reset");
+        StartOrRestartBuff();
+    }
+
+    private void StartOrRestartBuff()
+    {
+        StopBuff();                                 // сбрасываем старый таймер, если был
         _buffRoutine = StartCoroutine(RageBuffRoutine());
     }
 
     private IEnumerator RageBuffRoutine()
     {
-        PlayerContext.SkillModifierHub.Register(this);      // + outgoing
-        PlayerContext.RegisterModifier(this);               // + incoming
+        PlayerContext.SkillModifierHub.Register(this); // outgoing
+        PlayerContext.RegisterModifier(this);          // incoming
+        Debug.Log("<color=orange>[Ifrit’s Rage]</color> RAGE ON");
 
-        float timer = 0f;
-        while (timer < _buffDuration)
-        {
-            timer += Time.deltaTime;
-            yield return null;
-        }
+        yield return new WaitForSeconds(_buffDuration);
 
         Debug.Log("<color=orange>[Ifrit’s Rage]</color> rage expired");
         StopBuff();
@@ -90,21 +107,21 @@ public sealed class IfritRagePassive : PassiveSkillBehaviour,
         PlayerContext.UnregisterModifier(this);
     }
 
-    /*──────── ISkillModifier – повышаем свой урон ────────*/
-    public float Evaluate(SkillKey key, float currentValue)
+    /* ───────── ISkillModifier: наш урон ───────── */
+    public float Evaluate(SkillKey key, float value)
     {
         if (_buffRoutine != null &&
             key.Stat == SkillStat.Damage &&
             key.Slot != SkillSlot.Passive)
         {
-            float boosted = currentValue * (1f + _outgoingBonusPct);
+            float boosted = value * (1f + _outgoingBonusPct);
             Debug.Log($"<color=orange>[Ifrit’s Rage]</color> OUT +{_outgoingBonusPct:P0} → {boosted:F1}");
             return boosted;
         }
-        return currentValue;
+        return value;
     }
 
-    /*──────── IDamageModifier – усиливаем входящий урон ────────*/
+    /* ───────── IDamageModifier: входящий урон ───────── */
     public void Apply(ref float dmg, ref SkillDamageType type)
     {
         if (_buffRoutine == null) return;
@@ -114,13 +131,10 @@ public sealed class IfritRagePassive : PassiveSkillBehaviour,
         Debug.Log($"<color=orange>[Ifrit’s Rage]</color> IN +{_incomingBonusPct:P0} → {dmg:F1}");
     }
 
-    private void OnDisable()
-    {
-        if (_buffRoutine != null || _attachedDef != null)
-            DisablePassive();
-    }
+    private void OnDisable() => DisablePassive();   // гарантируем очистку
 }
 
+/* интерфейс DEF-скилла без изменений */
 public interface IDefenceDurationSkill
 {
     event System.Action OnDefenceStarted;
