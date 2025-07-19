@@ -1120,7 +1120,7 @@ MonoBehaviour:
   _starterInnate: {fileID: 11400000, guid: 441c66dc3d2923b4c8466412bea7b2b9, type: 2}
   _starterDash: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
   _currentTestSpecial: {fileID: 11400000, guid: f762f70e000b12743a9953ee055f61a7, type: 2}
-  _currentTestPassive: {fileID: 11400000, guid: 2615d396d7d7bf8468cd27840b3ec68b, type: 2}
+  _currentTestPassive: {fileID: 11400000, guid: 2b6c9e5fd577ee445afb6083d5b7d5ef, type: 2}
   _currentTestDefensive: {fileID: 11400000, guid: 459a2ceb0a3c88941b2be170fe39a7f8, type: 2}
   _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
   _chooseVFX: {fileID: 0}
@@ -1213,6 +1213,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8858051749441068820, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 846569870}
+    - targetCorrespondingSourceObject: {fileID: 8858051749441068820, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 846569871}
   m_SourcePrefab: {fileID: 100100000, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
 --- !u!1 &570468012
 GameObject:
@@ -2076,53 +2079,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemies:
   - {fileID: 846569862}
---- !u!1 &747614653
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 747614655}
-  - component: {fileID: 747614654}
-  m_Layer: 0
-  m_Name: PhoenixSecondBreathUltimate
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &747614654
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 747614653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19deedbcb12b12149a22783ede717e55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _healPercent: 0.25
-  _maxHealPerHit: 0
-  _healVfx: {fileID: 0}
---- !u!4 &747614655
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 747614653}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &783197702
 GameObject:
   m_ObjectHideFlags: 0
@@ -2485,6 +2441,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e1e847247a20024fa6b0d0f678f5573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &846569871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846569858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e727d9d767a8bb4587669452eb6fafa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &896054175
@@ -4169,7 +4137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99a5385a414d35f468026185f23a8253, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHP: 10
+  _currentHP: 100
   _minHp: 0
   _maxHP: 100
   _onPlayerDead:
@@ -6279,4 +6247,3 @@ SceneRoots:
   - {fileID: 1569960997}
   - {fileID: 1095996387}
   - {fileID: 522706692}
-  - {fileID: 747614655}
