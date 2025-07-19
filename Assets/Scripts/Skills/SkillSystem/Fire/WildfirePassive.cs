@@ -46,7 +46,6 @@ public class WildfirePassive : PassiveSkillBehaviour
         fb.SetHomingProjectiles(true);
         
         fb.TryCast();
-        Debug.Log("<color=orange>[Wildfire]</color> homing fireball cast");
 
         fb.SetHomingProjectiles(false);
     }
