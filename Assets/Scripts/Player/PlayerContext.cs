@@ -8,6 +8,8 @@ public class PlayerContext : MonoBehaviour
     [SerializeField] private Transform _playerPosition, _playerCastPosition;
     [SerializeField] private SkillSelectionSaver _selectionSaver;
     public SkillSelectionSaver SkillSelectionSaver => _selectionSaver;
+    public Renderer[] PlayerMeshes;
+    public GameObject FireballModel;
     public Transform PlayerPosition => _playerPosition;
     public Transform PlayerCastPosition => _playerCastPosition;
 

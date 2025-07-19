@@ -4,35 +4,37 @@ using UnityEngine;
 public class PhoenixStanceSkill : ActiveSkillBehaviour
 {
     [Header("Shield stats")]
-    [SerializeField] private int _maxHits = 4;
+    [SerializeField] private int   _maxHits  = 4;
     [SerializeField] private float _duration = 5f;
 
     [Header("Explosion")]
-    [SerializeField] private float _aoeRadius = 6f;
-    [SerializeField] private float _aoeDamage = 40f;
+    [SerializeField] private float _aoeRadius   = 6f;
+    [SerializeField] private float _aoeDamage   = 40f;
     [SerializeField] private float _healPercent = .3f;
 
     [Header("VFX / SFX")]
     [SerializeField] private ParticleSystem _shieldVfx;
     [SerializeField] private ParticleSystem _explosionVfx;
-
+    
     private int _hitsLeft;
     private float _totalDamageDone;
     private Coroutine _routine;
-
     public override void TryCast()
     {
         if (!IsReady || _routine != null) return;
 
         StartCooldown();
-        _hitsLeft = _maxHits;
+        _hitsLeft        = _maxHits;
         _totalDamageDone = 0f;
-        _routine = StartCoroutine(ShieldRoutine());
-    }
+        _routine         = StartCoroutine(ShieldRoutine());
 
+        Debug.Log($"<color=orange>[Phoenix Stance]</color> activated: {_maxHits} hits / {_duration}s");
+    }
+    
     private IEnumerator ShieldRoutine()
     {
-        if (_shieldVfx != null) _shieldVfx.Play();
+        if (_shieldVfx) _shieldVfx.Play();
+
         PlayerContext.PlayerHp.OnIncomingDamage += OnIncomingDamage;
         PlayerContext.PlayerState.ChangePlayerState(false);
 
@@ -43,49 +45,75 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour
             yield return null;
         }
 
-        PlayerContext.PlayerHp.OnIncomingDamage -= OnIncomingDamage;
-        if (_shieldVfx != null)
-            _shieldVfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-
+        CleanupShield();
         Explode();
-        PlayerContext.PlayerState.ChangePlayerState(true);
         _routine = null;
     }
 
     private void OnIncomingDamage(ref float damage)
     {
         if (_hitsLeft <= 0) return;
+
         damage = 0f;
         _hitsLeft--;
+
+        Debug.Log($"<color=orange>[Phoenix Stance]</color> blocked hit, left: {_hitsLeft}");
+
+        if (_hitsLeft == 0)
+        {
+            StopCoroutine(_routine);
+            CleanupShield();
+            Explode();
+            _routine = null;
+        }
     }
 
     private void Explode()
     {
-        if (_explosionVfx != null)
+        if (_explosionVfx)
         {
             _explosionVfx.transform.position = PlayerContext.transform.position;
             _explosionVfx.Play();
         }
 
-        float radius = PlayerContext.SkillModifierHub.Apply(
-            new SkillKey(Definition.Slot, SkillStat.Radius), _aoeRadius);
+        float radius = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), _aoeRadius);
 
-        Collider[] hits = Physics.OverlapSphere(
-            PlayerContext.transform.position, radius);
+        Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, radius);
 
         foreach (var hit in hits)
         {
             if (!hit.TryGetComponent(out IDamageable enemy)) continue;
 
-            float damage = _aoeDamage;
+            float dmg  = _aoeDamage;
             SkillDamageType type = SkillDamageType.Basic;
-            PlayerContext.ApplyDamageModifiers(ref damage, ref type);
-            enemy.ReceiveDamage(damage, type);
-            PlayerContext.FireOnDamageDealt(enemy, damage, type);
-            _totalDamageDone += damage;
+            PlayerContext.ApplyDamageModifiers(ref dmg, ref type);
+
+            enemy.ReceiveDamage(dmg, type);
+            PlayerContext.FireOnDamageDealt(enemy, dmg, type);
+            _totalDamageDone += dmg;
         }
 
         float heal = _totalDamageDone * _healPercent;
         PlayerContext.PlayerHp.ReceiveHP(heal);
+
+        Debug.Log($"<color=orange>[Phoenix Stance]</color> exploded for {_totalDamageDone:F0} " +
+                  $"(heal {heal:F0})");
+    }
+    
+    private void CleanupShield()
+    {
+        PlayerContext.PlayerHp.OnIncomingDamage -= OnIncomingDamage;
+        PlayerContext.PlayerState.ChangePlayerState(true);
+        if (_shieldVfx) _shieldVfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
+    }
+
+    private void OnDisable()
+    {
+        if (_routine != null)
+        {
+            StopCoroutine(_routine);
+            _routine = null;
+        }
+        CleanupShield();
     }
 }

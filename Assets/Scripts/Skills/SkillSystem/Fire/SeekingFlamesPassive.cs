@@ -14,12 +14,12 @@ public sealed class SeekingFlamesPassive : PassiveSkillBehaviour
             fb.SetHomingProjectiles(false);
     }
 
-    void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour beh)
+    private void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour beh)
     {
         if (slot == SkillSlot.Basic) TryAttach(beh);
     }
 
-    void TryAttach(ActiveSkillBehaviour beh)
+    private void TryAttach(ActiveSkillBehaviour beh)
     {
         if (beh is FireballSkill fb) fb.SetHomingProjectiles(true);
     }

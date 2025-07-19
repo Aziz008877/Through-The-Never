@@ -3,9 +3,10 @@ using UnityEngine;
 public sealed class PyrotechnicianPassive : PassiveSkillBehaviour, ISkillModifier
 {
     [SerializeField] private float _damageBonusPercent = 0.30f;
-    private ActiveSkillBehaviour _defenseSkill;
-    private Coroutine _bonusRoutine;
+
+    private IDefenceDurationSkill _def;
     private bool _bonusActive;
+
     public override void EnablePassive()
     {
         PlayerContext.PlayerSkillManager.ActiveRegistered += OnActiveRegistered;
@@ -16,66 +17,56 @@ public sealed class PyrotechnicianPassive : PassiveSkillBehaviour, ISkillModifie
     {
         DeactivateBonus();
         PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
+        Detach();
     }
 
-    public float Evaluate(SkillKey key, float currentValue)
+    /*──────── ISkillModifier ────────*/
+    public float Evaluate(SkillKey key, float value)
     {
-        if (_bonusActive &&
-            key.Stat == SkillStat.Damage &&
-            key.Slot != SkillSlot.Passive)
+        if (_bonusActive && key.Stat == SkillStat.Damage && key.Slot != SkillSlot.Passive)
+            return value * (1f + _damageBonusPercent);
+        return value;
+    }
+
+    /*──────── подписка на DEF ────────*/
+    private void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour beh)
+    {
+        if (slot == SkillSlot.Defense) TryAttach(beh);
+    }
+
+    private void TryAttach(ActiveSkillBehaviour beh)
+    {
+        Detach();
+        if (beh && beh.TryGetComponent(out IDefenceDurationSkill def))
         {
-            currentValue *= 1f + Mathf.Max(0f, _damageBonusPercent);
+            _def = def;
+            _def.OnDefenceStarted  += ActivateBonus;
+            _def.OnDefenceFinished += DeactivateBonus;
         }
-        return currentValue;
     }
 
-    private void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour behaviour)
+    private void Detach()
     {
-        if (slot == SkillSlot.Defense) TryAttach(behaviour);
+        if (_def == null) return;
+        _def.OnDefenceStarted  -= ActivateBonus;
+        _def.OnDefenceFinished -= DeactivateBonus;
+        _def = null;
     }
 
-    private void TryAttach(ActiveSkillBehaviour behaviour)
+    /*──────── бонус ────────*/
+    private void ActivateBonus()
     {
-        if (_defenseSkill != null)
-        {
-            _defenseSkill.OnCooldownStarted -= ActivateBonus;
-            DeactivateBonus();
-        }
-
-        _defenseSkill = behaviour;
-        if (_defenseSkill == null) return;
-        
-        if (!_defenseSkill.IsReady) ActivateBonus(_defenseSkill.Definition.Cooldown);
-
-        _defenseSkill.OnCooldownStarted += ActivateBonus;
-    }
-
-    private void ActivateBonus(float totalCd)
-    {
-        if (_bonusActive) DeactivateBonus();
-
+        if (_bonusActive) return;
         _bonusActive = true;
         PlayerContext.SkillModifierHub.Register(this);
-        _bonusRoutine = StartCoroutine(BonusTimer(totalCd));
-    }
-
-    private IEnumerator BonusTimer(float totalCd)
-    {
-        yield return new WaitForSeconds(totalCd);
-        DeactivateBonus();
+        Debug.Log("<color=orange>[Pyrotechnician]</color> bonus ON");
     }
 
     private void DeactivateBonus()
     {
         if (!_bonusActive) return;
-
         _bonusActive = false;
         PlayerContext.SkillModifierHub.Unregister(this);
-
-        if (_bonusRoutine != null)
-        {
-            StopCoroutine(_bonusRoutine);
-            _bonusRoutine = null;
-        }
+        Debug.Log("<color=orange>[Pyrotechnician]</color> bonus OFF");
     }
 }

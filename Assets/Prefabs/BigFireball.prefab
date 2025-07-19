@@ -18,7 +18,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &566408253448405344
 Transform:
   m_ObjectHideFlags: 0
@@ -53,6 +53,7 @@ MonoBehaviour:
   _speed: 25
   _dotPerSecond: 2
   _dotDuration: 3
+  _damageMul: 1
   _smallRadius: 2
   _smallDamageMul: 0.5
   _turnSpeedDeg: 360

@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
-public class BlindingLightSkill : ActiveSkillBehaviour
+public class BlindingLightSkill : ActiveSkillBehaviour, IDefenceDurationSkill
 {
     [Header("Blinding Light Settings")]
     [SerializeField] private float _radius = 7f;
@@ -10,6 +11,8 @@ public class BlindingLightSkill : ActiveSkillBehaviour
     [SerializeField] private float _missPercent = 0.5f;
     [SerializeField] private float _slowPercent = 0.5f;
     [SerializeField] private GameObject _sun;
+    public event Action OnDefenceStarted;
+    public event Action OnDefenceFinished;
 
     public override void TryCast()
     {
@@ -22,8 +25,9 @@ public class BlindingLightSkill : ActiveSkillBehaviour
 
     private IEnumerator BlindingRoutine()
     {
+        OnDefenceStarted?.Invoke();
         _sun.gameObject.SetActive(true);
-
+        
         float timer = 0f;
         while (timer < _duration)
         {
@@ -33,6 +37,7 @@ public class BlindingLightSkill : ActiveSkillBehaviour
         }
 
         _sun.gameObject.SetActive(false);
+        OnDefenceFinished?.Invoke();
     }
 
     private void ApplyBlindingEffect()

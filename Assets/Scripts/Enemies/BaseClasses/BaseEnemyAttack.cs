@@ -79,7 +79,6 @@ public abstract class BaseEnemyAttack : MonoBehaviour
         float sqr = (transform.position - _target.position).sqrMagnitude;
         if (sqr > maxDist * maxDist)
         {
-            Debug.Log($"{name}: MISS – out of range");
             return false;
         }
 

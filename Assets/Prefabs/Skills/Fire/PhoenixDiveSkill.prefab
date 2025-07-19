@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _diveVfx: {fileID: 0}
   _impactVfx: {fileID: 0}
+  _fireballModel: {fileID: 9179738906130685263, guid: f5f328de115cbf744bda8394449c5a20, type: 3}
   _impactRadius: 3
   _impactDamage: 20
   _distanceMultiplier: 1.4
