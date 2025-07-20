@@ -1,12 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-
 public class RecipeBook : MonoBehaviour
 {
-    private readonly HashSet<RecipeSO> _known = new();
-    public IEnumerable<RecipeSO> Known => _known;
-
-    public bool IsKnown(RecipeSO r) => _known.Contains(r);
-
-    public void Unlock(RecipeSO r)   => _known.Add(r);
+    [SerializeField] private RecipeSO[] _allRecipes;
+    public IEnumerable<RecipeSO> All => _allRecipes;
 }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f59c56f341f75d4429374b601e6009c6, type: 3}
   m_Name: FireCharm
   m_EditorClassIdentifier: 
-  DisplayName: Fire School Charm
+  DisplayName: Fire Charm
   Icon: {fileID: 0}

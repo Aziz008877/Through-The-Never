@@ -1,13 +1,16 @@
 using UnityEngine;
+
 public class CharmDrop : MonoBehaviour
 {
-    public CharmSO School;
-    public int Amount = 10;
+    [SerializeField] private CharmSO _charmSO;
+    [SerializeField] private int _amount = 10;
+    [SerializeField] private CharmBank _charmBank;
+    [SerializeField] private CharmBankDisplay _displayUI; // UI для обновления
 
-    private void Start()
+    private void OnTriggerEnter(Collider other)
     {
-        /*var bank = FindObjectOfType<CharmBank>();
-        if (bank != null) bank.Add(School, Amount);
-        Destroy(gameObject);            // сразу удаляем*/
+        _charmBank.Add(_charmSO, _amount);
+        _displayUI.Rebuild(); // Обновить UI
+        Destroy(gameObject);
     }
 }
