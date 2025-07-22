@@ -16,4 +16,4 @@ MonoBehaviour:
   Charms:
   - CharmType: {fileID: 11400000, guid: 5c6bd5c3506778e49878e06d52ee1a75, type: 2}
     Amount: 500
-  ResultItem: {fileID: 11400000, guid: cd60a842a855c2a4cbe88b7db8199e80, type: 2}
+  ResultItem: {fileID: 11400000, guid: 01c2eec977dd7ae419e754c81b0835b4, type: 2}

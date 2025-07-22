@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CharmBankDisplay : MonoBehaviour
@@ -23,7 +22,7 @@ public class CharmBankDisplay : MonoBehaviour
         {
             var obj = Instantiate(_counterPrefab, _container);
             var counter = obj.GetComponent<CharmCounterUI>();
-            counter.Init(pair.Key, pair.Value, _craftingUI);
+            counter.Init(pair.Key, pair.Value, _craftingUI, _charmBank);
         }
     }
 }

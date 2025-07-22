@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,4 +8,5 @@ public class RecipeSO : ScriptableObject
     public ItemSO RequiredItem;
     public List<CharmCost> Charms;
     public ItemSO ResultItem;
+    [NonSerialized] public bool IsDiscovered;
 }

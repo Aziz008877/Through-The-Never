@@ -23,7 +23,7 @@ public class CraftingHandler : MonoBehaviour
             _charmBank.Spend(recipe.Charms);
             _itemInventory.Remove(inputItem);
             _itemInventory.Add(recipe.ResultItem);
-
+            _recipeBook.MarkDiscovered(recipe);
             Debug.Log($"Crafted: {recipe.ResultItem.DisplayName}");
             return true;
         }
@@ -34,16 +34,14 @@ public class CraftingHandler : MonoBehaviour
 
     private bool MatchCosts(List<CharmCost> recipe, List<CharmCost> input)
     {
-        if (recipe.Count != input.Count)
-            return false;
-
         foreach (var r in recipe)
         {
             var match = input.Find(c => c.CharmType == r.CharmType);
-            if (match.CharmType == null || match.Amount != r.Amount)
+            if (match.CharmType == null || match.Amount < r.Amount)
                 return false;
         }
 
         return true;
     }
+
 }

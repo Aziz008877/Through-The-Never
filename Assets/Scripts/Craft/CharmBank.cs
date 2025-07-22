@@ -27,14 +27,21 @@ public class CharmBank : MonoBehaviour
         return true;
     }
 
-    public void Spend(IEnumerable<CharmCost> costs)
+    public bool Spend(IEnumerable<CharmCost> costs)
     {
+        if (!CanAfford(costs))
+            return false;
+        
         foreach (var cost in costs)
         {
-            _bank[cost.CharmType] -= cost.Amount;
+            int newValue = _bank[cost.CharmType] - cost.Amount;
+            _bank[cost.CharmType] = Mathf.Max(0, newValue);
             OnCharmChanged?.Invoke(cost.CharmType, _bank[cost.CharmType]);
         }
+
+        return true;
     }
+
 
     public int GetAmount(CharmSO school) =>
         _bank.TryGetValue(school, out var value) ? value : 0;
