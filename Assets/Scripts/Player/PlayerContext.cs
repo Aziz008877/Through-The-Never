@@ -39,7 +39,7 @@ public class PlayerContext : MonoBehaviour
     private readonly List<IOnDamageDealtModifier> _onDamageDealtModifiers = new();
     private readonly List<IDamageModifier> _damageModifiers = new();
     
-    public float CritChance { get; private set; } = 100f;
+    public float CritChance { get; private set; } = 0;
     public float CritMultiplier { get; private set; } = 2f;
     public void RegisterModifier(IDamageModifier m) => _damageModifiers.Add(m);
     public void UnregisterModifier(IDamageModifier m) => _damageModifiers.Remove(m);
