@@ -16,7 +16,7 @@ public sealed class DragonsFavorPassive : PassiveSkillBehaviour
     public override void DisablePassive()
     {
         PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
-        PlayerContext.PlayerHp.OnIncomingDamage           -= AbsorbDamage;
+        PlayerContext.PlayerHp.OnIncomingDamage -= AbsorbDamage;
 
         Detach();
         StopVfx();
@@ -67,7 +67,7 @@ public sealed class DragonsFavorPassive : PassiveSkillBehaviour
             _shieldVfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
 
-    private void AbsorbDamage(ref float dmg)
+    private void AbsorbDamage(ref float dmg, IDamageable source)
     {
         if (_shieldHp <= 0f) return;
 

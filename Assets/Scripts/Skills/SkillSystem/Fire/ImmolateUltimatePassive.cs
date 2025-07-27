@@ -28,7 +28,7 @@ public sealed class ImmolateUltimatePassive : PassiveSkillBehaviour
         PlayerContext.PlayerHp.OnIncomingDamage -= OnIncomingDamage;
     }
 
-    private void OnIncomingDamage(ref float dmg)
+    private void OnIncomingDamage(ref float dmg, IDamageable source)
     {
         TriggerPulse();
         _hitCounter++;

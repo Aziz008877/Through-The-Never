@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Crafting/Charm SchoolSO", fileName = "CharmSchoolSO")]
+[CreateAssetMenu(menuName = "Crafting/Charm", fileName = "Charm")]
 public class CharmSO : ScriptableObject
 {
     public string DisplayName;

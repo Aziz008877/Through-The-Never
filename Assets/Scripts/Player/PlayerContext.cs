@@ -1,7 +1,7 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using Random = UnityEngine.Random;
 
 public class PlayerContext : MonoBehaviour
 {
@@ -38,6 +38,9 @@ public class PlayerContext : MonoBehaviour
     public bool SolarFlareCharge { get; set; }
     private readonly List<IOnDamageDealtModifier> _onDamageDealtModifiers = new();
     private readonly List<IDamageModifier> _damageModifiers = new();
+    
+    public float CritChance { get; private set; } = 100f;
+    public float CritMultiplier { get; private set; } = 2f;
     public void RegisterModifier(IDamageModifier m) => _damageModifiers.Add(m);
     public void UnregisterModifier(IDamageModifier m) => _damageModifiers.Remove(m);
 
@@ -45,6 +48,11 @@ public class PlayerContext : MonoBehaviour
     {
         foreach (var mod in _damageModifiers)
             mod.Apply(ref dmg, ref type);
+        
+        if (CritChance > 0f && Random.value <= CritChance)
+        {
+            dmg *= CritMultiplier;
+        }
     }
 
     public void RegisterOnDamageDealtModifier(IOnDamageDealtModifier ioOnDamageDealtModifier)
@@ -62,5 +70,15 @@ public class PlayerContext : MonoBehaviour
     {
         foreach (var modifier in _onDamageDealtModifiers)
             modifier.OnDamageDealt(target, damage, type, this);
+    }
+
+    public void AddCritChance(float delta)
+    {
+        CritChance = Mathf.Max(0, CritChance + delta);
+    }
+
+    public void AddCritMultiplier(float delta)
+    {
+        CritMultiplier += delta;
     }
 }

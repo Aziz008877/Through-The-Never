@@ -8,7 +8,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private CanvasGroup _canvasGroup;
     private RectTransform _rectTransform;
     private Transform _originalParent;
-
+    private bool _placed;
     public void Init(ItemSO item)
     {
         Debug.Log(item.DisplayName);
@@ -24,6 +24,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        _placed = false;
         _originalParent = transform.parent;
         _canvasGroup.blocksRaycasts = false;
         transform.SetParent(_originalParent.root);
@@ -37,7 +38,18 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void OnEndDrag(PointerEventData eventData)
     {
         _canvasGroup.blocksRaycasts = true;
-        transform.SetParent(_originalParent);
+
+        if (!_placed)
+        {
+            transform.SetParent(_originalParent);
+            transform.localPosition = Vector3.zero;
+        }
+    }
+    
+    public void MarkPlaced(Transform newParent)
+    {
+        _placed = true;
+        transform.SetParent(newParent);
         transform.localPosition = Vector3.zero;
     }
 }

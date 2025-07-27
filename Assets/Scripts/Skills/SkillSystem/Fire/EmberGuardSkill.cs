@@ -54,7 +54,7 @@ public class EmberGuardSkill : ActiveSkillBehaviour, ISkillModifier, IDefenceDur
         if (_active) Deactivate();
     }
     
-    private void OnIncomingDamage(ref float dmg)
+    private void OnIncomingDamage(ref float dmg, IDamageable source)
     {
         if (!_active || dmg <= 0f) return;
 

@@ -14,7 +14,7 @@ public class FieryRetaliationPassive : PassiveSkillBehaviour
         PlayerContext.PlayerHp.OnPlayerReceivedDamage -= TriggerPulse;
     }
 
-    private void TriggerPulse(float incomingDamage)
+    private void TriggerPulse(float incomingDamage, IDamageable source)
     {
         if (_pulseVfx) _pulseVfx.Play();
 

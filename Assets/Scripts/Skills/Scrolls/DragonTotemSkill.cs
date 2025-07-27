@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,20 +7,19 @@ public class DragonTotemSkill : ActiveSkillBehaviour
 {
     private enum DragonState { Ice, Fire }
 
-    [Header("Prefabs / FX")]
+    [Header("Scene Objects")]
     [SerializeField] private GameObject _totemPrefab;
-    [SerializeField] private GameObject _iceWavePrefab;
-    [SerializeField] private GameObject _fireWavePrefab;
-    [SerializeField] private GameObject _explosionPrefab;
+    [SerializeField] private ParticleSystem _iceWaveFx;
+    [SerializeField] private ParticleSystem _fireWaveFx;
+    [SerializeField] private ParticleSystem _explosionFx;
 
-    [Header("Logic")]
+    [Header("Settings")]
     [SerializeField] private float _swapInterval = 2.5f;
-    [SerializeField] private int   _swapsTotal = 5;
-    [SerializeField] private float _waveRadius = 4f;
+    [SerializeField] private int _swapsTotal = 5;
+    [SerializeField] private float _radius = 4f;
     [SerializeField] private float _fireDamage = 40f;
-    [SerializeField] private LayerMask _enemyMask;
 
-    private readonly List<IDamageable> _buffer = new();
+    private readonly List<IDamageable> _targets = new();
 
     public override void TryCast()
     {
@@ -34,43 +34,41 @@ public class DragonTotemSkill : ActiveSkillBehaviour
 
     private IEnumerator TotemRoutine(Vector3 pos)
     {
-        GameObject totem = _totemPrefab ? Instantiate(_totemPrefab, pos, Quaternion.identity) : null;
-
+        var totem = _totemPrefab ? Instantiate(_totemPrefab, pos, Quaternion.identity) : null;
         DragonState state = DragonState.Ice;
+
+        float pause = Mathf.Max(1f, _swapInterval);
 
         for (int i = 0; i < _swapsTotal; i++)
         {
+            PlayWave(state, pos);
             yield return new WaitForSeconds(1f);
+            _explosionFx.Play();
             
-            SpawnWave(state, pos);
-            if (_explosionPrefab) Instantiate(_explosionPrefab, pos, Quaternion.identity);
+            yield return new WaitForSeconds(pause - 1f);
+
             state = state == DragonState.Ice ? DragonState.Fire : DragonState.Ice;
         }
 
         if (totem) Destroy(totem);
     }
 
-    private void SpawnWave(DragonState state, Vector3 center)
+    private void PlayWave(DragonState state, Vector3 center)
     {
-        if (state == DragonState.Ice && _iceWavePrefab)
-            Instantiate(_iceWavePrefab, center, Quaternion.identity)
-                     .transform.localScale = Vector3.one * _waveRadius;
-        if (state == DragonState.Fire && _fireWavePrefab)
-            Instantiate(_fireWavePrefab, center, Quaternion.identity)
-                     .transform.localScale = Vector3.one * _waveRadius;
+        if (state == DragonState.Ice)
+            _iceWaveFx.Play();
+        else                           
+            _fireWaveFx.Play();
         
-        _buffer.Clear();
-        Collider[] cols = Physics.OverlapSphere(center, _waveRadius, _enemyMask);
-        foreach (var col in cols)
-            if (col.TryGetComponent(out IDamageable d) && !_buffer.Contains(d))
-                _buffer.Add(d);
+        _targets.Clear();
+        foreach (var col in Physics.OverlapSphere(center, _radius))
+            if (col.TryGetComponent(out IDamageable d) && !_targets.Contains(d))
+                _targets.Add(d);
 
-        foreach (var tgt in _buffer)
+        foreach (var tgt in _targets)
         {
-            if (state == DragonState.Fire)
-                DealFireDamage(tgt);
-            else
-                ApplyFreeze(tgt);
+            if (state == DragonState.Fire) DealFireDamage(tgt);
+            else                           ApplyFreeze(tgt);
         }
     }
 
@@ -86,28 +84,18 @@ public class DragonTotemSkill : ActiveSkillBehaviour
 
     private void ApplyFreeze(IDamageable target)
     {
-        if (target is IFreezable freezable)
-            freezable.ApplyFreeze(3f);
+        if (target is IFreezable f) f.ApplyFreeze(3f);
     }
 
     private bool GetAimPoint(out Vector3 point)
     {
         Ray ray = Camera.main.ViewportPointToRay(new(.5f, .5f));
-        if (Physics.Raycast(ray, out var hit,
-                Definition.Range > 0 ? Definition.Range : 30f,
-                Physics.AllLayers, QueryTriggerInteraction.Ignore))
-        {
-            point = hit.point;
-            return true;
-        }
+        if (Physics.Raycast(ray, out var hit, Definition.Range > 0 ? Definition.Range : 30f,
+                            Physics.AllLayers, QueryTriggerInteraction.Ignore))
+        { point = hit.point; return true; }
 
-        point = Vector3.zero;
-        return false;
+        point = Vector3.zero; return false;
     }
 }
 
-
-public interface IFreezable
-{
-    void ApplyFreeze(float seconds);
-}
+public interface IFreezable { void ApplyFreeze(float seconds); }

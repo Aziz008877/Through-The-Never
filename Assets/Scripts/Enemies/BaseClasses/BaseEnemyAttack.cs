@@ -20,15 +20,19 @@ public abstract class BaseEnemyAttack : MonoBehaviour
     [Header("Behaviour")]
     [SerializeField] private float _stopAfterCast = .8f;
 
-    private Transform          _target;
+    private Transform _target;
     private BaseEnemyAnimation _anim;
+    private BaseEnemyHP _baseEnemyHp;
     private float _meleeTimer, _rangedTimer, _lockTimer;
 
     public  bool IsCasting { get; private set; }
     public  event Action<float> OnAttackStarted;
-    
-    private void Awake() => _anim = GetComponent<BaseEnemyAnimation>();
 
+    private void Awake()
+    {
+        _baseEnemyHp = GetComponent<BaseEnemyHP>();
+        _anim = GetComponent<BaseEnemyAnimation>();
+    }
     private void Update()
     {
         if (_target == null) return;
@@ -94,9 +98,9 @@ public abstract class BaseEnemyAttack : MonoBehaviour
         return true;
     }
     
-    private static void ApplyDamage(PlayerHP player, BaseEnemyHP enemy, float dmg)
+    private void ApplyDamage(PlayerHP player, BaseEnemyHP enemy, float dmg)
     {
-        if (player) player.ReceiveDamage(dmg);
+        if (player) player.ReceiveDamage(dmg, _baseEnemyHp);
         else enemy.ReceiveDamage(dmg, SkillDamageType.Basic);
     }
     

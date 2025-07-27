@@ -9,12 +9,14 @@ public class DropSlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        var dragItem = eventData.pointerDrag?.GetComponent<DragItem>();
+        var dragItem = eventData.pointerDrag.GetComponent<DragItem>();
         if (dragItem == null) return;
-
-        _icon.sprite = dragItem.ItemData.Icon;
-        _icon.enabled = true;
-
+        
+        dragItem.MarkPlaced(transform);
+        
+        _icon.sprite   = dragItem.ItemData.Icon;
+        _icon.enabled  = true;
+        
         _craftingUI.SelectItem(dragItem.ItemData);
     }
 }

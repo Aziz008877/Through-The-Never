@@ -55,7 +55,7 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour, IDefenceDurationSkill
         _routine = null;
     }
 
-    private void OnIncomingDamage(ref float damage)
+    private void OnIncomingDamage(ref float damage, IDamageable source)
     {
         if (_hitsLeft <= 0) return;
 
