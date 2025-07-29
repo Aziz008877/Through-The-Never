@@ -16,5 +16,5 @@ MonoBehaviour:
   Icon: {fileID: 0}
   Role: 3
   Behaviour: 2
-  Skill: {fileID: 0}
+  Skill: {fileID: 1352926526370754804, guid: 208cf702a19309d48a4592aa9882b2bc, type: 3}
   Charges: 1
