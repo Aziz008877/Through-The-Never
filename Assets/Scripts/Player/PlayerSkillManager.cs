@@ -19,17 +19,17 @@ public class PlayerSkillManager : MonoBehaviour
     
     private void OnEnable()
     {
-        _input.OnBasicSkillPressed    += CastBasic;
-        _input.OnDefensiveSkillPressed+= CastDefense;
-        _input.OnSpecialSkillPressed  += CastSpecial;
-        _input.OnDashPressed          += CastDash;
+        _input.OnBasicSkillPressed += CastBasic;
+        _input.OnDefensiveSkillPressed += CastDefense;
+        _input.OnSpecialSkillPressed += CastSpecial;
+        _input.OnDashPressed += CastDash;
     }
     private void OnDisable()
     {
-        _input.OnBasicSkillPressed    -= CastBasic;
-        _input.OnDefensiveSkillPressed-= CastDefense;
-        _input.OnSpecialSkillPressed  -= CastSpecial;
-        _input.OnDashPressed          -= CastDash;
+        _input.OnBasicSkillPressed -= CastBasic;
+        _input.OnDefensiveSkillPressed -= CastDefense;
+        _input.OnSpecialSkillPressed -= CastSpecial;
+        _input.OnDashPressed -= CastDash;
     }
 
     public void AddSkills(List<SkillDefinition> defs)

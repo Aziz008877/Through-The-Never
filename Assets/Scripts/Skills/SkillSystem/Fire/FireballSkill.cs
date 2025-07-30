@@ -15,14 +15,15 @@ public class FireballSkill : ActiveSkillBehaviour
     private bool _smallExplosionEnabled;
     private bool _homingEnabled;
 
-    public void SetExtraProjectiles(int count)   => _extraProjectiles = Mathf.Max(0, count);
-    public void SetSmallExplosion   (bool state) => _smallExplosionEnabled = state;
-    public void SetHomingProjectiles(bool state) => _homingEnabled = state;
+    public void SetExtraProjectiles (int count) => _extraProjectiles = Mathf.Max(0, count);
+    public void SetSmallExplosion (bool state) => _smallExplosionEnabled = state;
+    public void SetHomingProjectiles (bool state) => _homingEnabled = state;
     public override void TryCast()
     {
         if (!IsReady) return;
         base.TryCast();
 
+        PlayerContext.PlayerMove.RotateTowardsMouse(); 
         bool empowered = PlayerContext.SolarFlareCharge;
 
         Fireball prefabCtr = empowered ? _bigPrefab : _normalPrefab;

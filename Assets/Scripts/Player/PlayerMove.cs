@@ -42,39 +42,49 @@ public class PlayerMove : MonoBehaviour
     {
         _isMoving = moveInput != Vector2.zero;
 
-        RotateTowardsMouse();
-        Vector3 inputDirection = new Vector3(moveInput.x, 0f, moveInput.y);
-        Vector3 moveDir = Quaternion.Euler(0f, transform.eulerAngles.y, 0f) * inputDirection;
+        Vector3 camForward = _mainCamera.transform.forward;
+        camForward.y = 0f;
+        camForward.Normalize();
+
+        Vector3 camRight = _mainCamera.transform.right;
+        camRight.y = 0f;
+        camRight.Normalize();
+
+        Vector3 moveDir = camRight * moveInput.x + camForward * moveInput.y;
         LastMoveDirection = moveDir;
 
         if (_isMoving)
         {
             transform.position += moveDir.normalized * _speed * _speedMultiplier * Time.deltaTime;
-            
-            Vector3 clampedPosition = transform.position;
-            clampedPosition.x = Mathf.Clamp(clampedPosition.x, _xMin, _xMax);
-            clampedPosition.z = Mathf.Clamp(clampedPosition.z, _zMin, _zMax);
-            transform.position = clampedPosition;
+
+            Vector3 p = transform.position;
+            p.x = Mathf.Clamp(p.x, _xMin, _xMax);
+            p.z = Mathf.Clamp(p.z, _zMin, _zMax);
+            transform.position = p;
+
+            if (moveDir.sqrMagnitude > 0.01f)
+            {
+                Quaternion target = Quaternion.LookRotation(moveDir);
+                transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * _rotationSpeed);
+            }
         }
 
         OnPlayerMove?.Invoke(moveDir);
     }
-
-    private void RotateTowardsMouse()
+    
+    public void RotateTowardsMouse()
     {
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         Plane plane = new Plane(Vector3.up, transform.position);
 
-        if (plane.Raycast(ray, out float distance))
+        if (plane.Raycast(ray, out float dist))
         {
-            Vector3 hitPoint = ray.GetPoint(distance);
-            Vector3 lookDirection = hitPoint - transform.position;
-            lookDirection.y = 0f;
+            Vector3 look = ray.GetPoint(dist) - transform.position;
+            look.y = 0f;
 
-            if (lookDirection.sqrMagnitude > 0.01f)
+            if (look.sqrMagnitude > 0.01f)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * _rotationSpeed);
+                transform.rotation = Quaternion.LookRotation(look);
             }
         }
     }
