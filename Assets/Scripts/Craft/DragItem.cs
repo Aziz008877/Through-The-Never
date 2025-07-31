@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
+    [SerializeField] private Image _itemIconImage;
     public ItemSO ItemData { get; private set; }
     private CanvasGroup _canvasGroup;
     private RectTransform _rectTransform;
@@ -13,7 +14,7 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     {
         Debug.Log(item.DisplayName);
         ItemData = item;
-        GetComponent<Image>().sprite = item.Icon;
+        _itemIconImage.sprite = item.Icon;
     }
 
     private void Awake()
