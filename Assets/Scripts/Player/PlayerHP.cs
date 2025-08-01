@@ -1,8 +1,12 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 public class PlayerHP : MonoBehaviour
 {
+    [SerializeField] private TMP_Text _hpText;
+    [SerializeField] private Image _hpFillValue;
     [SerializeField] private float _currentHP, _minHp, _maxHP;
     [SerializeField] private UnityEvent _onPlayerDead;
     public delegate void IncomingDamageHandler(ref float damage, IDamageable source);
@@ -31,6 +35,9 @@ public class PlayerHP : MonoBehaviour
             OnPlayerDead?.Invoke();
             _onPlayerDead?.Invoke();
         }
+
+        _hpText.text = $"{_currentHP} / {_maxHP}";
+        _hpFillValue.fillAmount = Mathf.Clamp01(CurrentHP / MaxHP);
     }
 
     public void ReceiveHP(float hpValue)

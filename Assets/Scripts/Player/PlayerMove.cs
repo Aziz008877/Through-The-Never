@@ -6,6 +6,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float _moveSpeed = 5f;
     [SerializeField] private float _rotationSpeed = 10f;
     [SerializeField] private Camera _mainCamera;
+    [SerializeField] private float _aimLockDuration = 0.25f;
+    private float _aimLockTimer;   
     public Vector3 LastMoveDirection { get; private set; } = Vector3.forward;
 
     private PlayerInput _playerInput;
@@ -42,15 +44,14 @@ public class PlayerMove : MonoBehaviour
     {
         _isMoving = moveInput != Vector2.zero;
 
-        Vector3 camForward = _mainCamera.transform.forward;
-        camForward.y = 0f;
-        camForward.Normalize();
+        // декремент таймера
+        if (_aimLockTimer > 0f) _aimLockTimer -= Time.deltaTime;
 
-        Vector3 camRight = _mainCamera.transform.right;
-        camRight.y = 0f;
-        camRight.Normalize();
+        /* --- направление относительно камеры --- */
+        Vector3 camF = _mainCamera.transform.forward; camF.y = 0; camF.Normalize();
+        Vector3 camR = _mainCamera.transform.right;   camR.y = 0; camR.Normalize();
 
-        Vector3 moveDir = camRight * moveInput.x + camForward * moveInput.y;
+        Vector3 moveDir = camR * moveInput.x + camF * moveInput.y;
         LastMoveDirection = moveDir;
 
         if (_isMoving)
@@ -62,7 +63,8 @@ public class PlayerMove : MonoBehaviour
             p.z = Mathf.Clamp(p.z, _zMin, _zMax);
             transform.position = p;
 
-            if (moveDir.sqrMagnitude > 0.01f)
+            /* поворачиваем к движению, только если замка нет */
+            if (_aimLockTimer <= 0f && moveDir.sqrMagnitude > 0.01f)
             {
                 Quaternion target = Quaternion.LookRotation(moveDir);
                 transform.rotation = Quaternion.Slerp(transform.rotation, target, Time.deltaTime * _rotationSpeed);
@@ -71,8 +73,9 @@ public class PlayerMove : MonoBehaviour
 
         OnPlayerMove?.Invoke(moveDir);
     }
+
     
-    public void RotateTowardsMouse()
+    public void RotateTowardsMouse(float customDuration = -1f)
     {
         Ray ray = _mainCamera.ScreenPointToRay(Input.mousePosition);
         Plane plane = new Plane(Vector3.up, transform.position);
@@ -83,9 +86,11 @@ public class PlayerMove : MonoBehaviour
             look.y = 0f;
 
             if (look.sqrMagnitude > 0.01f)
-            {
                 transform.rotation = Quaternion.LookRotation(look);
-            }
         }
+
+        // ставим замок
+        _aimLockTimer = customDuration > 0f ? customDuration : _aimLockDuration;
     }
+
 }
