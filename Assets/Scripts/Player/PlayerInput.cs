@@ -16,6 +16,7 @@ public class PlayerInput : MonoBehaviour
     public Action OnSpecialSkillPressed;
     public Action OnSpecialSkillReleased;
     public Action OnDashPressed;
+    public Action ChangeInventoryState;
 
     private void Update()
     {
@@ -26,6 +27,7 @@ public class PlayerInput : MonoBehaviour
         DefensiveSkill();
         SpecialSkill();
         Dash();
+        OpenInventory();
     }
 
     private void Move()
@@ -56,6 +58,14 @@ public class PlayerInput : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.F))
         {
             OnSpecialSkillReleased?.Invoke();
+        }
+    }
+
+    private void OpenInventory()
+    {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            ChangeInventoryState?.Invoke();
         }
     }
 
