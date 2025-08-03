@@ -59,7 +59,7 @@ public class CharmCounterUI : MonoBehaviour
             RemoveOne();
     }
     
-    private void OnDestroy()                   // снимаем подписку
+    private void OnDestroy()
     {
         if (_charmBank != null)
             _charmBank.OnCharmChanged -= OnBankChanged;

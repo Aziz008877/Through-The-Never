@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public abstract  class SkillBehaviour : MonoBehaviour
+public abstract class SkillBehaviour : MonoBehaviour
 {
     public SkillDefinition Definition { get; private set; }
     protected PlayerContext PlayerContext { get; private set; }

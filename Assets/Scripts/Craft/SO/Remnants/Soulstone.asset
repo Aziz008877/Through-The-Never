@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Soulstone
   m_EditorClassIdentifier: 
   DisplayName: Soulstone
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 2c9e1e10abb92f34f9a160b63dbe8ff1, type: 3}
   Role: 0
   Behaviour: 0
   Skill: {fileID: 0}

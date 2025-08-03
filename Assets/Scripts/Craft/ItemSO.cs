@@ -7,8 +7,12 @@ public class ItemSO : ScriptableObject
     public Sprite Icon;
     public ItemRole Role;
     public UseBehaviour Behaviour;
-    public SkillBehaviour Skill;
+    //public SkillBehaviour Skill;
+    public SkillDefinition Skill;
     public int Charges = 1;
+    
+    [Tooltip("Только для Role = Charm")]
+    public CharmSO CharmRef;
 }
 
 public enum ItemRole { Remnant, Charm, Scroll, Stone }

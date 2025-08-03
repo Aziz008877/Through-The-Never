@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class CharmBank : MonoBehaviour
 {
     public event Action<CharmSO, int> OnCharmChanged;
@@ -50,5 +49,4 @@ public class CharmBank : MonoBehaviour
     {
         return _bank;
     }
-
 }

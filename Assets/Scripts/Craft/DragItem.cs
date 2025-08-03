@@ -1,20 +1,22 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-
-public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image _itemIconImage;
+    [SerializeField] private TMP_Text _stackText; 
     public ItemSO ItemData { get; private set; }
     private CanvasGroup _canvasGroup;
     private RectTransform _rectTransform;
     private Transform _originalParent;
     private bool _placed;
-    public void Init(ItemSO item)
+    public void Init(ItemSO item, int stackCount = 1)
     {
-        Debug.Log(item.DisplayName);
+        //Debug.Log(item.DisplayName);
         ItemData = item;
         _itemIconImage.sprite = item.Icon;
+        _stackText.text = stackCount > 1 ? stackCount.ToString() : "";
     }
 
     private void Awake()
@@ -46,6 +48,15 @@ public class DragItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             transform.localPosition = Vector3.zero;
         }
     }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        Vector3 pos = ((RectTransform)transform).TransformPoint(GetComponent<RectTransform>().rect.center);
+        TooltipUI.Show(ItemData.DisplayName, pos);
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+        => TooltipUI.Hide();
     
     public void MarkPlaced(Transform newParent)
     {

@@ -9,13 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4bb67a4e978c7d47bcae69123b12e8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: Scroll of Scorching Spire
   m_EditorClassIdentifier: 
-  DisplayName: Scroll of Scorching Spire
+  Id: 
+  DisplayName: Scroll of Dragon Totem
+  Description: 
   Icon: {fileID: 0}
-  Role: 2
-  Behaviour: 1
-  Skill: {fileID: 11400000, guid: 70df296f29e169c4dba578b8f7a48ecd, type: 2}
-  Charges: 1
-  CharmRef: {fileID: 0}
+  Stars: []
+  Slot: 7
+  Kind: 0
+  School: 0
+  BehaviourPrefab: {fileID: 4259108094449419617, guid: 8464ea8dc3c73464ba52ff51e3805d34, type: 3}
+  Damage: 15
+  Cooldown: 0
+  Duration: 3
+  Range: 0
+  Raduis: 0

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Divine Droplet
   m_EditorClassIdentifier: 
   DisplayName: Divine Droplet
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 2b05963f8be17e74d821b71ed8aa20a0, type: 3}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Parchment
   m_EditorClassIdentifier: 
   DisplayName: Parchment
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 271ed95940e731f428772b3e59f1762a, type: 3}
   Role: 0
   Behaviour: 1
   Skill: {fileID: 0}

@@ -1,18 +1,24 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-
 public class CraftingUI : MonoBehaviour
 {
     [SerializeField] private CraftingHandler _handler;
-    private ItemSO _inputItem;
     private readonly List<CharmCost> _charmInputs = new();
-
-    public void SelectItem(ItemSO item)
+    private ItemSO _inputItem;
+    public void HandleDrop(SlotKind kind, ItemSO item)
     {
-        _inputItem = item;
-        Debug.Log("Выбран предмет: " + item.DisplayName);
+        switch (kind)
+        {
+            case SlotKind.Remnant:
+                _inputItem = item;
+                break;
+            case SlotKind.Charm:
+                SetCharmAmount(item.GetComponent<CharmSO>(), 500);
+                break;
+        }
     }
-
+    
     public void SetCharmAmount(CharmSO charm, int amount)
     {
         var i = _charmInputs.FindIndex(c => c.CharmType == charm);

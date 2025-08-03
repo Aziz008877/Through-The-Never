@@ -9,10 +9,10 @@ public class RecipeBook : MonoBehaviour
     
     public void MarkDiscovered(RecipeSO recipe)
     {
-        if (recipe.IsDiscovered)                     // уже открыт
+        if (recipe.IsDiscovered)
             return;
 
         recipe.IsDiscovered = true;
-        OnRecipeDiscovered?.Invoke(recipe);          // уведомляем UI
+        OnRecipeDiscovered?.Invoke(recipe);
     }
 }

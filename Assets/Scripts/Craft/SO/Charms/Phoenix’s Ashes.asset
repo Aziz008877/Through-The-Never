@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: "Phoenix\u2019s Ashes"
   m_EditorClassIdentifier: 
   DisplayName: "Phoenix\u2019s Ashes"
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 92d2b7b7641f92f47b7eea0246d85c93, type: 3}

@@ -1,12 +1,10 @@
 using System.Collections.Generic;
 using UnityEngine;
-
 public class CraftingHandler : MonoBehaviour
 {
-    [SerializeField] private CharmBank     _charmBank;
+    [SerializeField] private CharmBank _charmBank;
     [SerializeField] private ItemInventory _itemInventory;
-    [SerializeField] private RecipeBook    _recipeBook;
-
+    [SerializeField] private RecipeBook _recipeBook;
     public bool TryCraft(ItemSO inputItem, List<CharmCost> inputCharms)
     {
         foreach (var recipe in _recipeBook.All)
@@ -46,5 +44,4 @@ public class CraftingHandler : MonoBehaviour
         
         return true;
     }
-
 }

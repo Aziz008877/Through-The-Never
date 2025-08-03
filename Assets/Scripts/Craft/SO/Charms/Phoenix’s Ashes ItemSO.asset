@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4bb67a4e978c7d47bcae69123b12e8f, type: 3}
-  m_Name: Scroll of Scorching Spire
+  m_Name: "Phoenix\u2019s Ashes ItemSO"
   m_EditorClassIdentifier: 
-  DisplayName: Scroll of Scorching Spire
-  Icon: {fileID: 0}
-  Role: 2
-  Behaviour: 1
-  Skill: {fileID: 11400000, guid: 70df296f29e169c4dba578b8f7a48ecd, type: 2}
+  DisplayName: "Phoenix\u2019s Ashes"
+  Icon: {fileID: 21300000, guid: 92d2b7b7641f92f47b7eea0246d85c93, type: 3}
+  Role: 1
+  Behaviour: 0
+  Skill: {fileID: 0}
   Charges: 1
-  CharmRef: {fileID: 0}
+  CharmRef: {fileID: 11400000, guid: 2123b806c18bfe344a8d7b3f7997641d, type: 2}
