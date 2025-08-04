@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public sealed class CombustPassiveUltimate : PassiveSkillBehaviour,
-                                            IOnDamageDealtModifier
+public sealed class CombustPassiveUltimate : PassiveSkillBehaviour, IOnDamageDealtModifier
 {
     [Header("Combust parameters")]
     [SerializeField] private float      _duration        = 2f;
@@ -13,15 +12,12 @@ public sealed class CombustPassiveUltimate : PassiveSkillBehaviour,
     private bool _addingBonus;             // защита от рекурсии
 
     public override void EnablePassive()  =>
-        PlayerContext.RegisterOnDamageDealtModifier(this);
+        Context.RegisterOnDamageDealtModifier(this);
 
     public override void DisablePassive() =>
-        PlayerContext.UnregisterOnDamageDealtModifier(this);
+        Context.UnregisterOnDamageDealtModifier(this);
 
-    public void OnDamageDealt(IDamageable target,
-                              float        damage,
-                              SkillDamageType type,
-                              PlayerContext ctx)
+    public void OnDamageDealt(IDamageable target, float damage, SkillDamageType type, ActorContext ctx)
     {
         if (_addingBonus) return;                       // избегаем StackOverflow
         if (target is not BaseEnemyHP hp) return;
@@ -31,8 +27,7 @@ public sealed class CombustPassiveUltimate : PassiveSkillBehaviour,
             return;                                     // защита на случай пропуска
 
         /* а) попытка активировать бомбу */
-        if (combust.Activate(_duration, _explosionDamage,
-                             _explosionRadius, _vfxPrefab, ctx))
+        if (combust.Activate(_duration, _explosionDamage, _explosionRadius, _vfxPrefab, ctx))
         {
             Debug.Log($"<color=orange>[Combust]</color> applied to {hp.name}");
             return;     // только что наложили – базовый урон уже прошёл

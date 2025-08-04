@@ -11,12 +11,12 @@ public class AspectOfSolSkill : ActiveSkillBehaviour
         if (!IsReady) return;
         base.TryCast();
 
-        float damage = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Damage), Definition.Damage);
-        float duration = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Duration), Definition.Duration);
-        float radius = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), Definition.Raduis);
+        float damage = Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Damage), Definition.Damage);
+        float duration = Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Duration), Definition.Duration);
+        float radius = Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), Definition.Raduis);
 
-        var orb = Instantiate(_orbPrefab, PlayerContext.PlayerCastPosition.position, Quaternion.identity);
-        orb.Init(damage, _projectileSpeed, _fireRate, radius, duration, PlayerContext);
+        var orb = Instantiate(_orbPrefab, Context.CastPivot.position, Quaternion.identity);
+        orb.Init(damage, _projectileSpeed, _fireRate, radius, duration, Context);
         StartCooldown();
     }
 }

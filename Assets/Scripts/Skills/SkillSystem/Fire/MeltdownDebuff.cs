@@ -11,18 +11,14 @@ public class MeltdownDebuff : MonoBehaviour
     private float            _stackLife;
     private FireTrailPuddle  _puddlePrefab;
     private float            _puddleDps, _puddleRate, _puddleRad, _puddleLife;
-    private PlayerContext    _ctx;
+    private ActorContext    _ctx;
 
     /* внутреннее состояние */
     private Coroutine  _decayRoutine;
     private Coroutine  _trailRoutine;
 
     /* ───────── настройка (вызывается единожды) ───────── */
-    public void Configure(float stackLife,
-                          FireTrailPuddle prefab,
-                          float dps, float rate,
-                          float radius, float life,
-                          PlayerContext ctx)
+    public void Configure(float stackLife, FireTrailPuddle prefab, float dps, float rate, float radius, float life, ActorContext ctx)
     {
         _stackLife     = stackLife;
         _puddlePrefab  = prefab;

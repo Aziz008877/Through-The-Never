@@ -28,7 +28,7 @@ public class RegenerationPassive : PassiveSkillBehaviour
 
         while (true)
         {
-            PlayerContext.PlayerHp.ReceiveHP(healPerTick);
+            Context.Hp.ReceiveHP(healPerTick);
             yield return wait;
         }
     }

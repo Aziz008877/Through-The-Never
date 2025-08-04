@@ -26,11 +26,11 @@ public class EmberGuardSkill : ActiveSkillBehaviour, ISkillModifier, IDefenceDur
     private void Activate()
     {
         _active = true;
-        PlayerContext.SkillModifierHub.Register(this);
-        PlayerContext.PlayerHp.OnIncomingDamage += OnIncomingDamage;
+        Context.SkillModifierHub.Register(this);
+        Context.Hp.OnIncomingDamage += OnIncomingDamage;
 
         if (_guardVfx) _guardVfx.Play();
-        PlayerContext.PlayerMove.SetSpeedMultiplier(_selfSlow);
+        Context.Move.SetSpeedMultiplier(_selfSlow);
 
         Debug.Log("<color=orange>[Ember Guard]</color> ACTIVATED");
         OnDefenceStarted?.Invoke();
@@ -39,11 +39,11 @@ public class EmberGuardSkill : ActiveSkillBehaviour, ISkillModifier, IDefenceDur
     private void Deactivate()
     {
         _active = false;
-        PlayerContext.SkillModifierHub.Unregister(this);
-        PlayerContext.PlayerHp.OnIncomingDamage -= OnIncomingDamage;
+        Context.SkillModifierHub.Unregister(this);
+        Context.Hp.OnIncomingDamage -= OnIncomingDamage;
 
         if (_guardVfx) _guardVfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-        PlayerContext.PlayerMove.SetSpeedMultiplier(1f);
+        Context.Move.SetSpeedMultiplier(1f);
 
         Debug.Log("<color=orange>[Ember Guard]</color> deactivated");
         OnDefenceFinished?.Invoke();
@@ -63,19 +63,18 @@ public class EmberGuardSkill : ActiveSkillBehaviour, ISkillModifier, IDefenceDur
         float reflected = dmg * _reflectPercent;
         SkillDamageType reflectType = SkillDamageType.Basic;
 
-        PlayerContext.ApplyDamageModifiers(ref reflected, ref reflectType);
+        Context.ApplyDamageModifiers(ref reflected, ref reflectType);
         dmg *= 1f - _damageReduction;
 
-        float radius = PlayerContext.SkillModifierHub
-                       .Apply(new SkillKey(Definition.Slot, SkillStat.Radius), 5f);
+        float radius = Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), 5f);
 
-        Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, radius);
+        Collider[] hits = Physics.OverlapSphere(Context.transform.position, radius);
         foreach (var hit in hits)
         {
             if (!hit.TryGetComponent(out IDamageable enemy)) continue;
 
             enemy.ReceiveDamage(reflected, reflectType);
-            PlayerContext.FireOnDamageDealt(enemy, reflected, reflectType);
+            Context.FireOnDamageDealt(enemy, reflected, reflectType);
         }
 
         Debug.Log(

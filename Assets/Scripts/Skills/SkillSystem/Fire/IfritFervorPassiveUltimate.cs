@@ -8,17 +8,17 @@ public sealed class IfritFervorPassiveUltimate : PassiveSkillBehaviour, IOnDamag
 
     public override void EnablePassive()
     {
-        PlayerContext.RegisterOnDamageDealtModifier(this);
+        Context.RegisterOnDamageDealtModifier(this);
         Debug.Log("<color=orange>[Fervor]</color> passive enabled");
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.UnregisterOnDamageDealtModifier(this);
+        Context.UnregisterOnDamageDealtModifier(this);
     }
     
     public void OnDamageDealt(IDamageable target, float damage,
-        SkillDamageType type, PlayerContext ctx)
+        SkillDamageType type, ActorContext ctx)
     {
         if (target is not BaseEnemyHP hp) return;
         

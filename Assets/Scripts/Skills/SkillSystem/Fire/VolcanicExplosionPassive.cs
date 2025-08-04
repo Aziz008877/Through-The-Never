@@ -1,8 +1,5 @@
 using UnityEngine;
 
-/// <summary>
-/// Volcanic Explosion – увеличивает радиус всех атакующих AOE-умений.
-/// </summary>
 public sealed class VolcanicExplosionPassive : PassiveSkillBehaviour, ISkillModifier
 {
     [SerializeField] [Range(0f, 2f)]
@@ -13,14 +10,14 @@ public sealed class VolcanicExplosionPassive : PassiveSkillBehaviour, ISkillModi
     /* ───────── lifecycle ───────── */
     public override void EnablePassive()
     {
-        PlayerContext.SkillModifierHub.Register(this);
+        Context.SkillModifierHub.Register(this);
         Debug.Log($"<color=orange>[Volcanic Explosion]</color> enabled " +
                   $"(+{_radiusBonusPercent:P0} radius)");
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.SkillModifierHub.Unregister(this);
+        Context.SkillModifierHub.Unregister(this);
         Debug.Log("<color=orange>[Volcanic Explosion]</color> disabled");
     }
 

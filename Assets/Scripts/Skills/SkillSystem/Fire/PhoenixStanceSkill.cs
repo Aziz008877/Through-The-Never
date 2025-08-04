@@ -38,8 +38,8 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour, IDefenceDurationSkill
     {
         if (_shieldVfx) _shieldVfx.Play();
 
-        PlayerContext.PlayerHp.OnIncomingDamage += OnIncomingDamage;
-        PlayerContext.PlayerState.ChangePlayerState(false);
+        Context.Hp.OnIncomingDamage += OnIncomingDamage;
+        Context.State.ChangePlayerState(false);
         OnDefenceStarted?.Invoke();
 
         float timer = 0f;
@@ -77,13 +77,13 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour, IDefenceDurationSkill
     {
         if (_explosionVfx)
         {
-            _explosionVfx.transform.position = PlayerContext.transform.position;
+            _explosionVfx.transform.position = Context.transform.position;
             _explosionVfx.Play();
         }
 
-        float radius = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), _aoeRadius);
+        float radius = Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), _aoeRadius);
 
-        Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, radius);
+        Collider[] hits = Physics.OverlapSphere(Context.transform.position, radius);
 
         foreach (var hit in hits)
         {
@@ -91,15 +91,15 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour, IDefenceDurationSkill
 
             float dmg  = _aoeDamage;
             SkillDamageType type = SkillDamageType.Basic;
-            PlayerContext.ApplyDamageModifiers(ref dmg, ref type);
+            Context.ApplyDamageModifiers(ref dmg, ref type);
 
             enemy.ReceiveDamage(dmg, type);
-            PlayerContext.FireOnDamageDealt(enemy, dmg, type);
+            Context.FireOnDamageDealt(enemy, dmg, type);
             _totalDamageDone += dmg;
         }
 
         float heal = _totalDamageDone * _healPercent;
-        PlayerContext.PlayerHp.ReceiveHP(heal);
+        Context.Hp.ReceiveHP(heal);
 
         /*Debug.Log($"<color=orange>[Phoenix Stance]</color> exploded for {_totalDamageDone:F0} " +
                   $"(heal {heal:F0})");*/
@@ -107,8 +107,8 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour, IDefenceDurationSkill
 
     private void CleanupShield()
     {
-        PlayerContext.PlayerHp.OnIncomingDamage -= OnIncomingDamage;
-        PlayerContext.PlayerState.ChangePlayerState(true);
+        Context.Hp.OnIncomingDamage -= OnIncomingDamage;
+        Context.State.ChangePlayerState(true);
         if (_shieldVfx) _shieldVfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
     }
 

@@ -7,7 +7,7 @@ public class FirebeamBeam : MonoBehaviour
     [SerializeField] private ParticleSystem _hitVfx;
     [SerializeField] private ParticleSystem _mainVfx;
     
-    private PlayerContext _playerContext;
+    private ActorContext _playerContext;
     private float _lifeTime;
     private float _range;
     private float _tickRate;
@@ -19,7 +19,7 @@ public class FirebeamBeam : MonoBehaviour
     private bool _running;
     private Vector3 _baseScale;
     
-    public void Init(PlayerContext ctx, float duration, float range, float tickRate, float baseDps, float maxDps)
+    public void Init(ActorContext ctx, float duration, float range, float tickRate, float baseDps, float maxDps)
     {
         _baseScale = _beamVfx.transform.localScale;
         _playerContext = ctx;
@@ -42,7 +42,7 @@ public class FirebeamBeam : MonoBehaviour
     {
         if (!_running) return;
 
-        var playerPos = _playerContext.PlayerPosition.position;
+        var playerPos = _playerContext.ActorPosition.position;
         transform.position = new Vector3(playerPos.x, playerPos.y + 2, playerPos.z);
 
         IDamageable target = FindClosest(_range);

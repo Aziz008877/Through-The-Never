@@ -76,10 +76,10 @@ public class DragonTotemSkill : ActiveSkillBehaviour
     {
         float dmg = _fireDamage;
         SkillDamageType type = SkillDamageType.Basic;
-        PlayerContext.ApplyDamageModifiers(ref dmg, ref type);
+        Context.ApplyDamageModifiers(ref dmg, ref type);
 
         target.ReceiveDamage(dmg, type);
-        PlayerContext.FireOnDamageDealt(target, dmg, type);
+        Context.FireOnDamageDealt(target, dmg, type);
     }
 
     private void ApplyFreeze(IDamageable target)

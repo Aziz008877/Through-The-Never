@@ -8,15 +8,15 @@ public sealed class DragonsFavorPassive : PassiveSkillBehaviour
     private float _shieldHp;
     public override void EnablePassive()
     {
-        PlayerContext.PlayerSkillManager.ActiveRegistered += OnActiveRegistered;
-        AttachTo(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Special));
-        PlayerContext.PlayerHp.OnIncomingDamage += AbsorbDamage;
+        Context.SkillManager.ActiveRegistered += OnActiveRegistered;
+        AttachTo(Context.SkillManager.GetActive(SkillSlot.Special));
+        Context.Hp.OnIncomingDamage += AbsorbDamage;
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
-        PlayerContext.PlayerHp.OnIncomingDamage -= AbsorbDamage;
+        Context.SkillManager.ActiveRegistered -= OnActiveRegistered;
+        Context.Hp.OnIncomingDamage -= AbsorbDamage;
 
         Detach();
         StopVfx();
@@ -55,7 +55,7 @@ public sealed class DragonsFavorPassive : PassiveSkillBehaviour
         
         if (_shieldVfx != null)
         {
-            _shieldVfx.transform.SetParent(PlayerContext.PlayerPosition, false);
+            _shieldVfx.transform.SetParent(Context.ActorPosition, false);
             _shieldVfx.transform.localPosition = Vector3.zero;
             _shieldVfx.Play(true);
         }

@@ -9,14 +9,14 @@ public class JetfirePassive : PassiveSkillBehaviour, ISkillModifier
     private float _timeLeft;
     public override void EnablePassive()
     {
-        PlayerContext.SkillModifierHub.Register(this);
+        Context.SkillModifierHub.Register(this);
         //добавить ивент о начале боя и вызывать OnCombatStart
         OnCombatStart();
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.SkillModifierHub.Unregister(this);
+        Context.SkillModifierHub.Unregister(this);
 
         StopBuff();
     }
@@ -35,7 +35,7 @@ public class JetfirePassive : PassiveSkillBehaviour, ISkillModifier
         _buffActive = true;
         _timeLeft = _buffDuration;
 
-        PlayerContext.PlayerMove.SetSpeedMultiplier(_moveSpeedMultiplier);
+        Context.Move.SetSpeedMultiplier(_moveSpeedMultiplier);
     }
 
     private void StopBuff()
@@ -43,7 +43,7 @@ public class JetfirePassive : PassiveSkillBehaviour, ISkillModifier
         if (!_buffActive) return;
 
         _buffActive = false;
-        PlayerContext.PlayerMove.SetSpeedMultiplier(1f);
+        Context.Move.SetSpeedMultiplier(1f);
     }
     
     public float Evaluate(SkillKey key, float baseValue)

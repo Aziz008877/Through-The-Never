@@ -71,9 +71,9 @@ public class ScorchingSpireSkill : ActiveSkillBehaviour
         foreach (var tgt in _targets)
         {
             float dmg = each;
-            PlayerContext.ApplyDamageModifiers(ref dmg, ref type);
+            Context.ApplyDamageModifiers(ref dmg, ref type);
             tgt.ReceiveDamage(dmg, type);
-            PlayerContext.FireOnDamageDealt(tgt, dmg, type);
+            Context.FireOnDamageDealt(tgt, dmg, type);
         }
     }
 

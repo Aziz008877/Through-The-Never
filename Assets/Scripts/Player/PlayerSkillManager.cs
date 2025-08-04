@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class PlayerSkillManager : MonoBehaviour
+public class PlayerSkillManager : MonoBehaviour, ISkillManager
 {
     [SerializeField] private Transform _skillRoot;
     readonly Dictionary<SkillSlot, ActiveSkillBehaviour> _actives = new();

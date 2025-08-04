@@ -19,13 +19,13 @@ public sealed class ImmolateUltimatePassive : PassiveSkillBehaviour
 
     public override void EnablePassive()
     {
-        PlayerContext.PlayerHp.OnIncomingDamage += OnIncomingDamage;
+        Context.Hp.OnIncomingDamage += OnIncomingDamage;
         _hitCounter = 0;
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.PlayerHp.OnIncomingDamage -= OnIncomingDamage;
+        Context.Hp.OnIncomingDamage -= OnIncomingDamage;
     }
 
     private void OnIncomingDamage(ref float dmg, IDamageable source)
@@ -44,11 +44,11 @@ public sealed class ImmolateUltimatePassive : PassiveSkillBehaviour
     {
         if (_pulseVfx != null)
         {
-            _pulseVfx.transform.position = PlayerContext.transform.position;
+            _pulseVfx.transform.position = Context.transform.position;
             _pulseVfx.Play();
         }
 
-        Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, _radius);
+        Collider[] hits = Physics.OverlapSphere(Context.transform.position, _radius);
 
         foreach (Collider col in hits)
         {
@@ -56,13 +56,13 @@ public sealed class ImmolateUltimatePassive : PassiveSkillBehaviour
             
             float dmg  = _damage;
             SkillDamageType type = SkillDamageType.Basic;
-            PlayerContext.ApplyDamageModifiers(ref dmg, ref type);
+            Context.ApplyDamageModifiers(ref dmg, ref type);
             enemy.ReceiveDamage(dmg, type);
-            PlayerContext.FireOnDamageDealt(enemy, dmg, type);
+            Context.FireOnDamageDealt(enemy, dmg, type);
 
             if (col.attachedRigidbody != null)
             {
-                Vector3 dir = (col.transform.position - PlayerContext.transform.position).normalized;
+                Vector3 dir = (col.transform.position - Context.transform.position).normalized;
                 col.attachedRigidbody.AddForce(dir * _pushForce, ForceMode.VelocityChange);
             }
         }
@@ -74,7 +74,7 @@ public sealed class ImmolateUltimatePassive : PassiveSkillBehaviour
         
         List<ActiveSkillBehaviour> readySpecials = new();
 
-        if (PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Special) is { } sp0 && sp0.IsReady)
+        if (Context.SkillManager.GetActive(SkillSlot.Special) is { } sp0 && sp0.IsReady)
             readySpecials.Add(sp0);
 
         if (readySpecials.Count == 0) yield break;

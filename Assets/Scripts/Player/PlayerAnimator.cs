@@ -1,6 +1,6 @@
 using UnityEngine;
 using Zenject;
-public class PlayerAnimator : MonoBehaviour
+public class PlayerAnimator : MonoBehaviour, IActorAnim
 {
     [SerializeField] private Animator _playerAnimator;
     [Inject] private PlayerState _playerState;

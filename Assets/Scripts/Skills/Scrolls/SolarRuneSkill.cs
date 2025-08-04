@@ -49,8 +49,8 @@ public class SolarRuneSkill : ActiveSkillBehaviour
 
     private void Tick(Vector3 center, float radius, float dmgTick, float healTick)
     {
-        if (Vector3.Distance(PlayerContext.transform.position, center) <= radius)
-            PlayerContext.PlayerHp.ReceiveHP(healTick);
+        if (Vector3.Distance(Context.transform.position, center) <= radius)
+            Context.Hp.ReceiveHP(healTick);
 
         _enemies.Clear();
         Collider[] cols = Physics.OverlapSphere(center, radius);
@@ -62,10 +62,10 @@ public class SolarRuneSkill : ActiveSkillBehaviour
         foreach (var enemy in _enemies)
         {
             float dmg = dmgTick;
-            PlayerContext.ApplyDamageModifiers(ref dmg, ref type);
+            Context.ApplyDamageModifiers(ref dmg, ref type);
 
             enemy.ReceiveDamage(dmg, type);
-            PlayerContext.FireOnDamageDealt(enemy, dmg, type);
+            Context.FireOnDamageDealt(enemy, dmg, type);
         }
     }
 

@@ -42,13 +42,13 @@ public class BlindingLightSkill : ActiveSkillBehaviour, IDefenceDurationSkill
 
     private void ApplyBlindingEffect()
     {
-        float radius = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), _radius);
-        float dps = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Damage), _baseDps);
+        float radius = Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), _radius);
+        float dps = Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Damage), _baseDps);
         
-        Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, radius);
+        Collider[] hits = Physics.OverlapSphere(Context.transform.position, radius);
         foreach (var col in hits)
         {
-            float dist = Vector3.Distance(PlayerContext.transform.position, col.transform.position);
+            float dist = Vector3.Distance(Context.transform.position, col.transform.position);
             float proximity = Mathf.Clamp01(1f - dist / radius);
 
             if (col.TryGetComponent(out IBlindable enemy))
@@ -60,9 +60,9 @@ public class BlindingLightSkill : ActiveSkillBehaviour, IDefenceDurationSkill
             {
                 float tickDmg = dps * proximity;
                 SkillDamageType type = SkillDamageType.Basic;
-                PlayerContext.ApplyDamageModifiers(ref tickDmg, ref type);
+                Context.ApplyDamageModifiers(ref tickDmg, ref type);
                 dmg.ReceiveDamage(tickDmg, type);
-                PlayerContext.FireOnDamageDealt(dmg, tickDmg, type);
+                Context.FireOnDamageDealt(dmg, tickDmg, type);
             }
         }
     }

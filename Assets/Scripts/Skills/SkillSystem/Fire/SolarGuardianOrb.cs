@@ -12,10 +12,10 @@ public class SolarGuardianOrb : MonoBehaviour
     private float         _damage;
     private float         _interval;
     private float         _radius;
-    private PlayerContext _ctx;
+    private ActorContext _ctx;
 
     /*──────────── public API ───────────*/
-    public void Init(float dmg, float interval, float radius, float life, PlayerContext ctx)
+    public void Init(float dmg, float interval, float radius, float life, ActorContext ctx)
     {
         _damage    = dmg;
         _interval  = interval;

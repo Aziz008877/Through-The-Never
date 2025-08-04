@@ -9,14 +9,14 @@ public sealed class PyrotechnicianPassive : PassiveSkillBehaviour, ISkillModifie
 
     public override void EnablePassive()
     {
-        PlayerContext.PlayerSkillManager.ActiveRegistered += OnActiveRegistered;
-        TryAttach(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Defense));
+        Context.SkillManager.ActiveRegistered += OnActiveRegistered;
+        TryAttach(Context.SkillManager.GetActive(SkillSlot.Defense));
     }
 
     public override void DisablePassive()
     {
         DeactivateBonus();
-        PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
+        Context.SkillManager.ActiveRegistered -= OnActiveRegistered;
         Detach();
     }
 
@@ -58,7 +58,7 @@ public sealed class PyrotechnicianPassive : PassiveSkillBehaviour, ISkillModifie
     {
         if (_bonusActive) return;
         _bonusActive = true;
-        PlayerContext.SkillModifierHub.Register(this);
+        Context.SkillModifierHub.Register(this);
         Debug.Log("<color=orange>[Pyrotechnician]</color> bonus ON");
     }
 
@@ -66,7 +66,7 @@ public sealed class PyrotechnicianPassive : PassiveSkillBehaviour, ISkillModifie
     {
         if (!_bonusActive) return;
         _bonusActive = false;
-        PlayerContext.SkillModifierHub.Unregister(this);
+        Context.SkillModifierHub.Unregister(this);
         Debug.Log("<color=orange>[Pyrotechnician]</color> bonus OFF");
     }
 }

@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
-public class PlayerState : MonoBehaviour
+public class PlayerState : MonoBehaviour, IActorState
 {
     [SerializeField] private CurrentPlayerState _currentPlayerState;
     public CurrentPlayerState CurrentPlayerState => _currentPlayerState;

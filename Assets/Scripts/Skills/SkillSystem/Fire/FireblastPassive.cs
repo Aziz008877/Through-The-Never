@@ -3,14 +3,14 @@ public sealed class FireblastPassive : PassiveSkillBehaviour
 {
     public override void EnablePassive()
     {
-        PlayerContext.PlayerSkillManager.ActiveRegistered += OnActive;
-        TryAttach(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Basic));
+        Context.SkillManager.ActiveRegistered += OnActive;
+        TryAttach(Context.SkillManager.GetActive(SkillSlot.Basic));
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActive;
-        TryDetach(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Basic));
+        Context.SkillManager.ActiveRegistered -= OnActive;
+        TryDetach(Context.SkillManager.GetActive(SkillSlot.Basic));
     }
 
     private void OnActive(SkillSlot slot, ActiveSkillBehaviour beh)

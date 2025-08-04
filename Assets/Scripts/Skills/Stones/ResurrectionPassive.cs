@@ -9,19 +9,19 @@ public class ResurrectionPassive : PassiveSkillBehaviour
 
     public override void EnablePassive()
     {
-        PlayerContext.PlayerHp.OnPlayerDead += OnPlayerDead;
+        Context.Hp.OnActorDead += OnPlayerDead;
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.PlayerHp.OnPlayerDead -= OnPlayerDead;
+        Context.Hp.OnActorDead -= OnPlayerDead;
     }
 
     private void OnPlayerDead()
     {
         if (_used) return;
         _used = true;
-        PlayerContext.PlayerHp.Revive(_healPercent);
+        Context.Hp.Revive(_healPercent);
         OnResurrected?.Invoke(this);
     }
 }

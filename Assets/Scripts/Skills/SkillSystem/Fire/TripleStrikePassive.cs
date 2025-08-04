@@ -6,14 +6,14 @@ public sealed class TripleStrikePassive : PassiveSkillBehaviour
 
     public override void EnablePassive()
     {
-        PlayerContext.PlayerSkillManager.ActiveRegistered += OnActiveRegistered;
-        AttachIfFireball(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Basic));
+        Context.SkillManager.ActiveRegistered += OnActiveRegistered;
+        AttachIfFireball(Context.SkillManager.GetActive(SkillSlot.Basic));
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
-        if (PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Basic) is FireballSkill fb)
+        Context.SkillManager.ActiveRegistered -= OnActiveRegistered;
+        if (Context.SkillManager.GetActive(SkillSlot.Basic) is FireballSkill fb)
             fb.SetExtraProjectiles(0);
     }
     

@@ -6,11 +6,11 @@ public class RejuvenationPassive : PassiveSkillBehaviour
     [SerializeField] private bool _healToFull;
     public override void EnablePassive()
     {
-        PlayerContext.PlayerHp.AddMaxHP(_bonusHP, healToFull: _healToFull);
+        Context.Hp.AddMaxHP(_bonusHP, healToFull: _healToFull);
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.PlayerHp.RemoveMaxHP(_bonusHP);
+        Context.Hp.RemoveMaxHP(_bonusHP);
     }
 }

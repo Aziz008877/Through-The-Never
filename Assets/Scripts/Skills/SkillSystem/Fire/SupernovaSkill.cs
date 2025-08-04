@@ -13,11 +13,15 @@ public class SupernovaSkill : ActiveSkillBehaviour
     private bool _charging;
     private float _timer;
 
-    public override void Inject(SkillDefinition definition, PlayerContext context)
+    public override void Inject(SkillDefinition definition, ActorContext context)
     {
         base.Inject(definition, context);
-        PlayerContext.PlayerInput.OnSpecialSkillPressed += TryCast;
-        PlayerContext.PlayerInput.OnSpecialSkillReleased += Release;
+        
+        if (context is PlayerContext pc)
+        {
+            pc.PlayerInput.OnSpecialSkillPressed  += TryCast;
+            pc.PlayerInput.OnSpecialSkillReleased += Release;
+        }
     }
 
     public override void TryCast()
@@ -47,23 +51,23 @@ public class SupernovaSkill : ActiveSkillBehaviour
 
         float radius = Mathf.Lerp(_minRadius, _maxRadius, t);
 
-        radius = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), radius);
+        radius = Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), radius);
 
         float damage = Mathf.Lerp(_minDamage, _maxDamage, t);
         SkillDamageType type = SkillDamageType.Basic;
-        PlayerContext.ApplyDamageModifiers(ref damage, ref type);
+        Context.ApplyDamageModifiers(ref damage, ref type);
 
-        Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, radius);
+        Collider[] hits = Physics.OverlapSphere(Context.transform.position, radius);
         foreach (var h in hits)
         {
             if (!h.TryGetComponent(out IDamageable d)) continue;
             d.ReceiveDamage(damage, type);
-            PlayerContext.FireOnDamageDealt(d, damage, type);
+            Context.FireOnDamageDealt(d, damage, type);
         }
 
         if (_blastVfx != null)
         {
-            _blastVfx.transform.position = PlayerContext.transform.position;
+            _blastVfx.transform.position = Context.transform.position;
             _blastVfx.transform.localScale = Vector3.one * radius * 0.5f;
             _blastVfx.Play();
         }
@@ -73,7 +77,10 @@ public class SupernovaSkill : ActiveSkillBehaviour
 
     private void OnDisable()
     {
-        PlayerContext.PlayerInput.OnSpecialSkillPressed -= TryCast;
-        PlayerContext.PlayerInput.OnSpecialSkillReleased -= Release;
+        if (PlayerCtx != null)
+        {
+            PlayerCtx.PlayerInput.OnSpecialSkillPressed  -= TryCast;
+            PlayerCtx.PlayerInput.OnSpecialSkillReleased -= Release;
+        }
     }
 }

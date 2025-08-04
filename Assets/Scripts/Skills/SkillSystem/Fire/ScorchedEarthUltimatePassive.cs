@@ -24,26 +24,26 @@ public sealed class ScorchedEarthUltimatePassive : PassiveSkillBehaviour, ISkill
     public override void EnablePassive()
     {
         AttachToExistingSkills();
-        PlayerContext.PlayerSkillManager.ActiveRegistered += OnSkillRegistered;
+        Context.SkillManager.ActiveRegistered += OnSkillRegistered;
         _tickRoutine = StartCoroutine(CoAuraTick());
         if (_auraVfx != null) _auraVfx.Play(true);
-        PlayerContext.SkillModifierHub.Register(this);
+        Context.SkillModifierHub.Register(this);
     }
 
     public override void DisablePassive()
     {
         DetachFromSkills();
-        PlayerContext.PlayerSkillManager.ActiveRegistered -= OnSkillRegistered;
+        Context.SkillManager.ActiveRegistered -= OnSkillRegistered;
 
         if (_tickRoutine != null) StopCoroutine(_tickRoutine);
         if (_auraVfx != null) _auraVfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
 
-        PlayerContext.SkillModifierHub.Unregister(this);
+        Context.SkillModifierHub.Unregister(this);
     }
 
     private void AttachToExistingSkills()
     {
-        foreach (var kv in PlayerContext.PlayerSkillManager.Actives)
+        foreach (var kv in Context.SkillManager.Actives)
             Attach(kv.Value);
     }
 
@@ -101,17 +101,17 @@ public sealed class ScorchedEarthUltimatePassive : PassiveSkillBehaviour, ISkill
         if (_auraVfx != null)
             _auraVfx.transform.localScale = Vector3.one * radius * 0.5f;
 
-        Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, radius);
+        Collider[] hits = Physics.OverlapSphere(Context.transform.position, radius);
         foreach (Collider col in hits)
         {
             if (!col.TryGetComponent(out IDamageable enemy)) continue;
 
             SkillDamageType type = SkillDamageType.Basic;
             float dmg = tickDmg;
-            PlayerContext.ApplyDamageModifiers(ref dmg, ref type);
+            Context.ApplyDamageModifiers(ref dmg, ref type);
             enemy.ReceiveDamage(dmg, type);
 
-            PlayerContext.FireOnDamageDealt(enemy, dmg, type);
+            Context.FireOnDamageDealt(enemy, dmg, type);
         }
     }
 

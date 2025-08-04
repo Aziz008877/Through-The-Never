@@ -6,9 +6,9 @@ public class LavaPoolArea : MonoBehaviour
 {
     private float _dps;
     private float _lifeTime;
-    private PlayerContext _ctx;
+    private ActorContext _ctx;
     private readonly HashSet<IDamageable> _inside = new();
-    public void Init(float dps, float radius, float lifeTime, PlayerContext ctx)
+    public void Init(float dps, float radius, float lifeTime, ActorContext ctx)
     {
         _dps = dps;
         _lifeTime = lifeTime;

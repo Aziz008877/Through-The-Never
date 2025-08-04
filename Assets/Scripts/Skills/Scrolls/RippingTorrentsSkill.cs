@@ -67,10 +67,10 @@ public class RippingTorrentsSkill : ActiveSkillBehaviour
         foreach (var tgt in _buffer)
         {
             float dmg = _geyserDamage;
-            PlayerContext.ApplyDamageModifiers(ref dmg, ref type);
+            Context.ApplyDamageModifiers(ref dmg, ref type);
 
             tgt.ReceiveDamage(dmg, type);
-            PlayerContext.FireOnDamageDealt(tgt, dmg, type);
+            Context.FireOnDamageDealt(tgt, dmg, type);
         }
     }
 
@@ -82,9 +82,9 @@ public class RippingTorrentsSkill : ActiveSkillBehaviour
         {
             life -= Time.deltaTime;
 
-            if (!healed && Vector3.Distance(PlayerContext.transform.position, pos) < 1.5f)
+            if (!healed && Vector3.Distance(Context.transform.position, pos) < 1.5f)
             {
-                PlayerContext.PlayerHp.ReceiveHP(_healAmount);
+                Context.Hp.ReceiveHP(_healAmount);
                 healed = true;
             }
 

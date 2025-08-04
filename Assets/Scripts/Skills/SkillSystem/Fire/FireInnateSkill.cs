@@ -6,13 +6,13 @@ public class FireInnateSkill : PassiveSkillBehaviour, IOnDamageDealtModifier
     [SerializeField] private float _dotDuration = 3f;
     public override void EnablePassive()
     {
-        PlayerContext.RegisterOnDamageDealtModifier(this);
+        Context.RegisterOnDamageDealtModifier(this);
     }
     public override void DisablePassive()
     {
-        PlayerContext.UnregisterOnDamageDealtModifier(this);
+        Context.UnregisterOnDamageDealtModifier(this);
     }
-    public void OnDamageDealt(IDamageable target, float damage, SkillDamageType type, PlayerContext context)
+    public void OnDamageDealt(IDamageable target, float damage, SkillDamageType type, ActorContext context)
     {
         if (type == SkillDamageType.Basic)
         {

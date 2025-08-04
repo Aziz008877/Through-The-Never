@@ -8,13 +8,13 @@ public sealed class ScorchPulsePassive : PassiveSkillBehaviour
     private PlayerDashSkill _dash;
     public override void EnablePassive()
     {
-        PlayerContext.PlayerSkillManager.ActiveRegistered += OnActiveRegistered;
-        TryAttach(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Dash));
+        Context.SkillManager.ActiveRegistered += OnActiveRegistered;
+        TryAttach(Context.SkillManager.GetActive(SkillSlot.Dash));
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
+        Context.SkillManager.ActiveRegistered -= OnActiveRegistered;
         Detach();
     }
 
@@ -55,7 +55,7 @@ public sealed class ScorchPulsePassive : PassiveSkillBehaviour
 
             float dmg  = _damage;
             SkillDamageType type = SkillDamageType.Basic;
-            PlayerContext.ApplyDamageModifiers(ref dmg, ref type);
+            Context.ApplyDamageModifiers(ref dmg, ref type);
             target.ReceiveDamage(dmg, type);
         }
     }

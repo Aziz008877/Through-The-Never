@@ -10,17 +10,17 @@ public sealed class FirebanePassive : PassiveSkillBehaviour, ISkillModifier
     private readonly Dictionary<ActiveSkillBehaviour, System.Action<float>> _handlers = new();
     public override void EnablePassive()
     {
-        PlayerContext.SkillModifierHub.Register(this);
+        Context.SkillModifierHub.Register(this);
         
-        if (PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Special) is { } s)
+        if (Context.SkillManager.GetActive(SkillSlot.Special) is { } s)
             Hook(s);
-        PlayerContext.PlayerSkillManager.ActiveRegistered += OnActiveRegistered;
+        Context.SkillManager.ActiveRegistered += OnActiveRegistered;
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.SkillModifierHub.Unregister(this);
-        PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
+        Context.SkillModifierHub.Unregister(this);
+        Context.SkillManager.ActiveRegistered -= OnActiveRegistered;
 
         foreach (var kv in _handlers)
             kv.Key.OnCooldownStarted -= kv.Value;
@@ -53,7 +53,7 @@ public sealed class FirebanePassive : PassiveSkillBehaviour, ISkillModifier
     private void RepeatCast(ActiveSkillBehaviour skill)
     {
         if (!enabled || skill == null) return;
-        PlayerContext.StartCoroutine(DuplicateRoutine(skill));
+        Context.StartCoroutine(DuplicateRoutine(skill));
     }
 
     private IEnumerator DuplicateRoutine(ActiveSkillBehaviour skill)

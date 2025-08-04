@@ -55,10 +55,10 @@ public class IceSpikesSkill : ActiveSkillBehaviour
         foreach (var tgt in _targets)
         {
             float dealt = dmg;
-            PlayerContext.ApplyDamageModifiers(ref dealt, ref type);
+            Context.ApplyDamageModifiers(ref dealt, ref type);
 
             tgt.ReceiveDamage(dealt, type);
-            PlayerContext.FireOnDamageDealt(tgt, dealt, type);
+            Context.FireOnDamageDealt(tgt, dealt, type);
         }
     }
 

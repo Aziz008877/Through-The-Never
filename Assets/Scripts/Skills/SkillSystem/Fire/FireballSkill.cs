@@ -22,41 +22,44 @@ public class FireballSkill : ActiveSkillBehaviour
     {
         if (!IsReady) return;
         base.TryCast();
+        
+        if (PlayerCtx != null)
+            PlayerCtx.Move.RotateTowardsMouse();
 
-        PlayerContext.PlayerMove.RotateTowardsMouse(); 
-        bool empowered = PlayerContext.SolarFlareCharge;
-
+        bool empowered = Context.SolarFlareCharge;
         Fireball prefabCtr = empowered ? _bigPrefab : _normalPrefab;
-
-        Shoot(prefabCtr, Vector3.zero, PlayerContext.PlayerCastPosition.forward);
-
+        
+        Vector3 mainDir = Context.CastPivot.forward;
+        Shoot(prefabCtr, Vector3.zero, mainDir);
+        
+        Vector3 firePoint = Context.CastPivot.position + mainDir * 5;
+        PlayerBasicAttackEvents.Fire(firePoint);
+        
         if (_extraProjectiles > 0)
         {
-            Vector3 baseDir = PlayerContext.PlayerCastPosition.forward;
-            Vector3 right   = PlayerContext.transform.right;
-
+            Vector3 right = Context.transform.right;
             for (int i = 1; i <= _extraProjectiles; i++)
             {
-                Vector3 dirR = Quaternion.AngleAxis(+_angleStep * i, Vector3.up) * baseDir;
-                Vector3 dirL = Quaternion.AngleAxis(-_angleStep * i, Vector3.up) * baseDir;
+                Vector3 dirR = Quaternion.AngleAxis(+_angleStep * i, Vector3.up) * mainDir;
+                Vector3 dirL = Quaternion.AngleAxis(-_angleStep * i, Vector3.up) * mainDir;
 
                 Shoot(_normalPrefab,  right * _sideOffset * i, dirR);
                 Shoot(_normalPrefab, -right * _sideOffset * i, dirL);
             }
         }
 
-        if (empowered) PlayerContext.SolarFlareCharge = false;
+        if (empowered) Context.SolarFlareCharge = false;
         StartCooldown();
     }
 
     private void Shoot(Fireball prefab, Vector3 spawnOffset, Vector3 shootDir)
     {
-        Vector3 pos = PlayerContext.PlayerCastPosition.position + spawnOffset;
+        Vector3 pos = Context.CastPivot.position + spawnOffset;
         Quaternion rot = Quaternion.LookRotation(shootDir, Vector3.up);
 
         Fireball proj = Instantiate(prefab, pos, rot);
         proj.EnableSmallExplosion(_smallExplosionEnabled);
         proj.SetHoming(_homingEnabled);
-        proj.Init(Damage, _lifeTime, SkillDamageType.Basic, PlayerContext);
+        proj.Init(Damage, _lifeTime, SkillDamageType.Basic, Context);
     }
 }

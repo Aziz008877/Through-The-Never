@@ -1,7 +1,6 @@
 using UnityEngine;
 
-public sealed class MeltdownPassiveUltimate : PassiveSkillBehaviour,
-                                              IOnDamageDealtModifier
+public sealed class MeltdownPassiveUltimate : PassiveSkillBehaviour, IOnDamageDealtModifier
 {
     [Header("Stacks / Amplify")]
     [SerializeField] private float _ampPerStack   = 0.08f;   // +8 % за стак
@@ -16,16 +15,14 @@ public sealed class MeltdownPassiveUltimate : PassiveSkillBehaviour,
 
     private bool _addingBonus;        // защита от рекурсии
 
-    public override void EnablePassive()  =>
-        PlayerContext.RegisterOnDamageDealtModifier(this);
+    public override void EnablePassive()  => Context.RegisterOnDamageDealtModifier(this);
 
-    public override void DisablePassive() =>
-        PlayerContext.UnregisterOnDamageDealtModifier(this);
+    public override void DisablePassive() => Context.UnregisterOnDamageDealtModifier(this);
 
     public void OnDamageDealt(IDamageable target,
                               float        dmg,
                               SkillDamageType type,
-                              PlayerContext ctx)
+                              ActorContext ctx)
     {
         /* только огненный Basic-урон */
         if (type != SkillDamageType.Basic) return;

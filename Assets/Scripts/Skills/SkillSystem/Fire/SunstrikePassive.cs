@@ -8,17 +8,17 @@ public sealed class SunstrikePassive : PassiveSkillBehaviour, IOnDamageDealtModi
 
     public override void EnablePassive()
     {
-        PlayerContext.RegisterOnDamageDealtModifier(this);
+        Context.RegisterOnDamageDealtModifier(this);
         Debug.Log("<color=yellow>[Sunstrike]</color> enabled");
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.UnregisterOnDamageDealtModifier(this);
+        Context.UnregisterOnDamageDealtModifier(this);
         Debug.Log("<color=yellow>[Sunstrike]</color> disabled");
     }
 
-    public void OnDamageDealt(IDamageable target, float damage, SkillDamageType type, PlayerContext ctx)
+    public void OnDamageDealt(IDamageable target, float damage, SkillDamageType type, ActorContext ctx)
     {
         if (_applyingBonus) return;
         

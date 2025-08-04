@@ -3,21 +3,22 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
-public class PlayerHP : MonoBehaviour
+public class PlayerHP : MonoBehaviour, IActorHp
 {
     [SerializeField] private TMP_Text _hpText;
     [SerializeField] private Image _hpFillValue;
     [SerializeField] private float _currentHP, _minHp, _maxHP;
     [SerializeField] private UnityEvent _onPlayerDead;
-    public delegate void IncomingDamageHandler(ref float damage, IDamageable source);
     private bool _canBeDamaged = true;
     public float CurrentHP => _currentHP;
     public float MinHP => _minHp;
     public float MaxHP => _maxHP;
     public Action<float> OnHpValueUpdated;
     public Action OnPlayerDead;
-    public Action<float, IDamageable> OnPlayerReceivedDamage;
     public event IncomingDamageHandler OnIncomingDamage;
+    public Action<float, IDamageable> OnActorReceivedDamage { get; set; }
+    public Action OnActorDead { get; set; }
+
     private void Start()
     {
         ClampHP();
@@ -54,7 +55,7 @@ public class PlayerHP : MonoBehaviour
         if (damageValue <= 0f) return;
 
         _currentHP = Mathf.Max(_currentHP - damageValue, _minHp);
-        OnPlayerReceivedDamage?.Invoke(damageValue, source);
+        OnActorReceivedDamage?.Invoke(damageValue, source);
         UpdateHP();
     }
 
@@ -67,7 +68,7 @@ public class PlayerHP : MonoBehaviour
     {
         _currentHP = Mathf.Clamp(_currentHP, _minHp, _maxHP);
     }
-    
+
     public void AddMaxHP(float amount, bool healToFull = true)
     {
         _maxHP += amount;
@@ -81,7 +82,7 @@ public class PlayerHP : MonoBehaviour
         ClampHP();
         UpdateHP();
     }
-    
+
     public void Revive(float percent01 = 1f)
     {
         percent01 = Mathf.Clamp01(percent01);
@@ -89,5 +90,4 @@ public class PlayerHP : MonoBehaviour
         UpdateHP();
         SetCanBeDamagedState(true);
     }
-
 }

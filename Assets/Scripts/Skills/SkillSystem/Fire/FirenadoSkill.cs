@@ -7,8 +7,8 @@ public class FirenadoSkill : ActiveSkillBehaviour
     {
         if (!IsReady) return;
         base.TryCast();
-        var tornado = Instantiate(_tornadoPrefab, PlayerContext.transform.position, Quaternion.identity);
-        tornado.Init(Damage, _pullForce, Definition.Duration, PlayerContext);
+        var tornado = Instantiate(_tornadoPrefab, Context.transform.position, Quaternion.identity);
+        tornado.Init(Damage, _pullForce, Definition.Duration, Context);
 
         StartCooldown();
     }

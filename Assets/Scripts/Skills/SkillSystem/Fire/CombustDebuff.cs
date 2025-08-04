@@ -10,12 +10,12 @@ public class CombustDebuff : MonoBehaviour
     private float _explosionDmg;
     private float _explosionRad;
     private GameObject _vfxPrefab;
-    private PlayerContext _ownerCtx;
+    private ActorContext _ownerCtx;
     private Coroutine _lifeRoutine;
     private GameObject _vfxInst;
     private BaseEnemyHP _hp;
     
-    public bool Activate(float duration, float explosionDmg, float explosionRad, GameObject vfxPrefab, PlayerContext ownerCtx)
+    public bool Activate(float duration, float explosionDmg, float explosionRad, GameObject vfxPrefab, ActorContext ownerCtx)
     {
         if (IsActive) return false;
         IsActive = true;

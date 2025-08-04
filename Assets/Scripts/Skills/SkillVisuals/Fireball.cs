@@ -28,7 +28,7 @@ public class Fireball : MonoBehaviour, IProjectileBoostable
 
     protected float _instantDamage;
     private SkillDamageType _damageType;
-    protected PlayerContext _context;
+    protected ActorContext _context;
     private bool _canDamage = true;
     private IDamageable _target;
     private Vector3 _moveDirection;
@@ -37,7 +37,7 @@ public class Fireball : MonoBehaviour, IProjectileBoostable
     public void EnableSmallExplosion(bool state) => _smallExplosionEnabled = state;
     public void SetHoming(bool state) => _homingEnabled = state;
 
-    public void Init(float damage, float lifeTime, SkillDamageType type, PlayerContext context)
+    public void Init(float damage, float lifeTime, SkillDamageType type, ActorContext context)
     {
         _startDamage = damage;
         _instantDamage = _startDamage * _damageMul;

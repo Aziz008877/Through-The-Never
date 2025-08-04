@@ -10,13 +10,13 @@ public sealed class SolarGuardianPassive : PassiveSkillBehaviour
     private ActiveSkillBehaviour _special;
     public override void EnablePassive()
     {
-        Hook(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Special));
-        PlayerContext.PlayerSkillManager.ActiveRegistered += OnActiveRegistered;
+        Hook(Context.SkillManager.GetActive(SkillSlot.Special));
+        Context.SkillManager.ActiveRegistered += OnActiveRegistered;
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
+        Context.SkillManager.ActiveRegistered -= OnActiveRegistered;
         Unhook();
     }
 
@@ -46,9 +46,9 @@ public sealed class SolarGuardianPassive : PassiveSkillBehaviour
 
     private void SpawnGuardian()
     {
-        var orb = Instantiate(_guardianPrefab, PlayerContext.PlayerPosition.position + Vector3.up * 1.5f, Quaternion.identity);
-        float dmg = PlayerContext.SkillModifierHub.Apply(new SkillKey(SkillSlot.Passive, SkillStat.Damage), _damage);
-        float radius = PlayerContext.SkillModifierHub.Apply(new SkillKey(SkillSlot.Passive, SkillStat.Radius), _radius);
-        orb.Init(dmg, _fireInterval, radius, _lifeTime, PlayerContext);
+        var orb = Instantiate(_guardianPrefab, Context.ActorPosition.position + Vector3.up * 1.5f, Quaternion.identity);
+        float dmg = Context.SkillModifierHub.Apply(new SkillKey(SkillSlot.Passive, SkillStat.Damage), _damage);
+        float radius = Context.SkillModifierHub.Apply(new SkillKey(SkillSlot.Passive, SkillStat.Radius), _radius);
+        orb.Init(dmg, _fireInterval, radius, _lifeTime, Context);
     }
 }

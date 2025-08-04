@@ -6,12 +6,12 @@ public class BerserkersRagePassive : PassiveSkillBehaviour, ISkillModifier
 
     public override void EnablePassive()
     {
-        PlayerContext.SkillModifierHub.Register(this);
+        Context.SkillModifierHub.Register(this);
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.SkillModifierHub.Unregister(this);
+        Context.SkillModifierHub.Unregister(this);
     }
 
     public float Evaluate(SkillKey key, float baseValue)
@@ -19,7 +19,7 @@ public class BerserkersRagePassive : PassiveSkillBehaviour, ISkillModifier
         if (key.Stat != SkillStat.Damage || key.Slot == SkillSlot.Passive)
             return baseValue;
 
-        float hpFrac = Mathf.Clamp01(PlayerContext.PlayerHp.CurrentHP / PlayerContext.PlayerHp.MaxHP);
+        float hpFrac = Mathf.Clamp01(Context.Hp.CurrentHP / Context.Hp.MaxHP);
         float mul = Mathf.Lerp(MaxMultiplier, 1f, hpFrac);
         return baseValue * mul;
     }

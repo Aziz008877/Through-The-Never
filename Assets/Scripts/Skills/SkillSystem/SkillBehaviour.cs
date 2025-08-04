@@ -4,21 +4,23 @@ using UnityEngine;
 public abstract class SkillBehaviour : MonoBehaviour
 {
     public SkillDefinition Definition { get; private set; }
-    protected PlayerContext PlayerContext { get; private set; }
+    protected ActorContext Context { get; private set; }
+    protected PlayerContext PlayerCtx    => Context as PlayerContext;
+    protected CompanionContext CompanionCtx => Context as CompanionContext;
 
-    public virtual void Inject(SkillDefinition definition, PlayerContext context)
+    public virtual void Inject(SkillDefinition definition, ActorContext context)
     {
         Definition = definition;
-        PlayerContext = context;
+        Context = context;
     }
 }
 
 public abstract class ActiveSkillBehaviour : SkillBehaviour
 {
-    protected float Cooldown => PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Cooldown), Definition.Cooldown);
-    protected float Damage => PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Damage), Definition.Damage);
-    protected float Radius => PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), Definition.Raduis);
-    protected float Duration => PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Duration), Definition.Duration);
+    protected float Cooldown => Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Cooldown), Definition.Cooldown);
+    protected float Damage => Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Damage), Definition.Damage);
+    protected float Radius => Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), Definition.Raduis);
+    protected float Duration => Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Duration), Definition.Duration);
 
     public  bool  IsReady => _cooldownTimer <= 0f;
     public  float RemainingCooldown => _cooldownTimer;

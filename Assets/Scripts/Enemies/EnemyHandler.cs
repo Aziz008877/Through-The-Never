@@ -11,7 +11,7 @@ public class EnemyHandler : MonoBehaviour
     {
         foreach (var enemy in _enemies)
         {
-            enemy.ReceiveTargetEnemy(_playerContext.PlayerPosition);
+            enemy.ReceiveTargetEnemy(_playerContext.ActorPosition);
         }
     }
 }

@@ -12,11 +12,11 @@ public class FirebeamSkill : ActiveSkillBehaviour
     {
         if (!IsReady) return;
         base.TryCast();
-        float duration = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Duration), Definition.Duration);
-        float range = PlayerContext.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Range),    Definition.Range);
+        float duration = Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Duration), Definition.Duration);
+        float range = Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Range),    Definition.Range);
         
-        var beam = Instantiate(_beamPrefab, PlayerContext.PlayerPosition.position, Quaternion.identity);
-        beam.Init(PlayerContext, duration, range, _tickRate, _baseDps, _maxDps);
+        var beam = Instantiate(_beamPrefab, Context.ActorPosition.position, Quaternion.identity);
+        beam.Init(Context, duration, range, _tickRate, _baseDps, _maxDps);
 
         StartCooldown();
     }

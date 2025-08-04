@@ -5,13 +5,13 @@ public class WildfirePassive : PassiveSkillBehaviour
 
     public override void EnablePassive()
     {
-        Attach(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Dash));
-        PlayerContext.PlayerSkillManager.ActiveRegistered += OnActiveRegistered;
+        Attach(Context.SkillManager.GetActive(SkillSlot.Dash));
+        Context.SkillManager.ActiveRegistered += OnActiveRegistered;
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
+        Context.SkillManager.ActiveRegistered -= OnActiveRegistered;
         Detach();
     }
 
@@ -40,7 +40,7 @@ public class WildfirePassive : PassiveSkillBehaviour
     
     private void FireSeekingFireball(Vector3 startPos)
     {
-        if (PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Basic) is not FireballSkill fb)
+        if (Context.SkillManager.GetActive(SkillSlot.Basic) is not FireballSkill fb)
             return;
         
         fb.SetHomingProjectiles(true);

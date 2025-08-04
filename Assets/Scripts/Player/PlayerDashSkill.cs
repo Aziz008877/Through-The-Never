@@ -26,12 +26,12 @@ public class PlayerDashSkill : ActiveSkillBehaviour
         
         _time += Time.deltaTime * _speedScale;
         float k = _time / _baseDuration;
-        PlayerContext.transform.position = Vector3.Lerp(_startPos, _endPos, k);
+        Context.transform.position = Vector3.Lerp(_startPos, _endPos, k);
 
         if (k >= 1f)
         {
             _dashing = false;
-            OnDashEnded?.Invoke(PlayerContext.transform.position);
+            OnDashEnded?.Invoke(Context.transform.position);
         }
     }
 
@@ -39,12 +39,12 @@ public class PlayerDashSkill : ActiveSkillBehaviour
     {
         if (!IsReady || _dashing) return;
         base.TryCast();
-        PlayerContext.PlayerAnimator.Dash();
-        OnDashStarted?.Invoke(PlayerContext.transform.position);
-        Vector3 dir = PlayerContext.PlayerMove.LastMoveDirection;
-        if (dir == Vector3.zero) dir = PlayerContext.transform.forward;
+        Context.Animator.Dash();
+        OnDashStarted?.Invoke(Context.transform.position);
+        Vector3 dir = Context.Move.LastMoveDirection;
+        if (dir == Vector3.zero) dir = Context.transform.forward;
 
-        _startPos = PlayerContext.transform.position;
+        _startPos = Context.transform.position;
         _endPos = _startPos + dir.normalized * _baseDistance;
         _time = 0f;
         _dashing = true;

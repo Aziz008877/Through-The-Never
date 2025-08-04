@@ -46,14 +46,14 @@ public class FirebreathSkill : ActiveSkillBehaviour
 
     private void DealConeDamage()
     {
-        Collider[] hits = Physics.OverlapSphere(PlayerContext.transform.position, _coneRange);
-        Vector3 forward = PlayerContext.transform.forward;
+        Collider[] hits = Physics.OverlapSphere(Context.transform.position, _coneRange);
+        Vector3 forward = Context.transform.forward;
 
         foreach (var col in hits)
         {
             if (!col.TryGetComponent(out IDamageable target)) continue;
 
-            Vector3 dir = col.transform.position - PlayerContext.transform.position;
+            Vector3 dir = col.transform.position - Context.transform.position;
             dir.y = 0f;
             if (dir.sqrMagnitude == 0f) continue;
             if (Vector3.Angle(forward, dir) > _coneAngle) continue;
@@ -61,10 +61,10 @@ public class FirebreathSkill : ActiveSkillBehaviour
             float dmg  = _tickDamage * _tickRate;
             SkillDamageType type = SkillDamageType.Basic;
             
-            PlayerContext.ApplyDamageModifiers(ref dmg, ref type);
+            Context.ApplyDamageModifiers(ref dmg, ref type);
 
             target.ReceiveDamage(dmg, type);
-            PlayerContext.FireOnDamageDealt(target, dmg, type);
+            Context.FireOnDamageDealt(target, dmg, type);
             _hitThisCast.Add(target);
         }
     }

@@ -8,28 +8,28 @@ public sealed class PhoenixSecondBreathUltimate : PassiveSkillBehaviour, IOnDama
     [SerializeField] private ParticleSystem _healVfx;
     public override void EnablePassive()
     {
-        PlayerContext.RegisterOnDamageDealtModifier(this);
+        Context.RegisterOnDamageDealtModifier(this);
         Debug.Log("<color=orange>[Second Breath]</color> enabled");
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.UnregisterOnDamageDealtModifier(this);
+        Context.UnregisterOnDamageDealtModifier(this);
         Debug.Log("<color=orange>[Second Breath]</color> disabled");
     }
 
-    public void OnDamageDealt(IDamageable target, float damage, SkillDamageType type, PlayerContext ctx)
+    public void OnDamageDealt(IDamageable target, float damage, SkillDamageType type, ActorContext ctx)
     {
         if (damage <= 0f) return;
 
         float heal = damage * _healPercent;
         if (_maxHealPerHit > 0f) heal = Mathf.Min(heal, _maxHealPerHit);
 
-        PlayerContext.PlayerHp.ReceiveHP(heal);
+        Context.Hp.ReceiveHP(heal);
 
         if (_healVfx)
         {
-            _healVfx.transform.position = PlayerContext.PlayerPosition.position;
+            _healVfx.transform.position = Context.ActorPosition.position;
             _healVfx.Play(true);
         }
 

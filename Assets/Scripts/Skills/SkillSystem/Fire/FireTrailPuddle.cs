@@ -6,14 +6,12 @@ public class FireTrailPuddle : MonoBehaviour
 {
     private float _tickDmg;
     private float _tickRate;
-    private PlayerContext _ctx;
+    private ActorContext _ctx;
 
     private readonly HashSet<IDamageable> _inside = new();
     private float _timer;
 
-    public void Init(float dmgPerTick, float tickRate,
-        float radius, float lifeTime,
-        PlayerContext ctx)
+    public void Init(float dmgPerTick, float tickRate, float radius, float lifeTime, ActorContext ctx)
     {
         _tickDmg  = dmgPerTick;
         _tickRate = Mathf.Max(0.1f, tickRate);

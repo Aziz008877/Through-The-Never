@@ -19,10 +19,10 @@ public class UndyingShieldSkill : ActiveSkillBehaviour
 
     private IEnumerator ShieldRoutine(float time)
     {
-        _shieldInstance = Instantiate(_shieldVfxPrefab, PlayerContext.transform);
-        PlayerContext.PlayerHp.SetCanBeDamagedState(false);
+        _shieldInstance = Instantiate(_shieldVfxPrefab, Context.transform);
+        Context.Hp.SetCanBeDamagedState(false);
         yield return new WaitForSeconds(time);
-        PlayerContext.PlayerHp.SetCanBeDamagedState(true);
+        Context.Hp.SetCanBeDamagedState(true);
         if (_shieldInstance) Destroy(_shieldInstance);
     }
 }

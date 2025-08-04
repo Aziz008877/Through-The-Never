@@ -11,14 +11,14 @@ public sealed class IfritRagePassive : PassiveSkillBehaviour, ISkillModifier, ID
     public override void EnablePassive()
     {
         Debug.Log("<color=orange>[Ifrit’s Rage]</color> enabled");
-        PlayerContext.PlayerSkillManager.ActiveRegistered += OnActiveRegistered;
-        TryAttach(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Defense));
+        Context.SkillManager.ActiveRegistered += OnActiveRegistered;
+        TryAttach(Context.SkillManager.GetActive(SkillSlot.Defense));
     }
 
     public override void DisablePassive()
     {
         Debug.Log("<color=orange>[Ifrit’s Rage]</color> disabled");
-        PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
+        Context.SkillManager.ActiveRegistered -= OnActiveRegistered;
         StopBuff();
         Detach();
     }
@@ -79,8 +79,8 @@ public sealed class IfritRagePassive : PassiveSkillBehaviour, ISkillModifier, ID
 
     private IEnumerator RageBuffRoutine()
     {
-        PlayerContext.SkillModifierHub.Register(this);
-        PlayerContext.RegisterModifier(this);
+        Context.SkillModifierHub.Register(this);
+        Context.RegisterModifier(this);
         Debug.Log("<color=orange>[Ifrit’s Rage]</color> RAGE ON");
 
         yield return new WaitForSeconds(_buffDuration);
@@ -96,8 +96,8 @@ public sealed class IfritRagePassive : PassiveSkillBehaviour, ISkillModifier, ID
             StopCoroutine(_buffRoutine);
             _buffRoutine = null;
         }
-        PlayerContext.SkillModifierHub.Unregister(this);
-        PlayerContext.UnregisterModifier(this);
+        Context.SkillModifierHub.Unregister(this);
+        Context.UnregisterModifier(this);
     }
     
     public float Evaluate(SkillKey key, float value)

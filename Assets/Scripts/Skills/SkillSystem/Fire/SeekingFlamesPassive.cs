@@ -3,14 +3,14 @@ public sealed class SeekingFlamesPassive : PassiveSkillBehaviour
 {
     public override void EnablePassive()
     {
-        PlayerContext.PlayerSkillManager.ActiveRegistered += OnActiveRegistered;
-        TryAttach(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Basic));
+        Context.SkillManager.ActiveRegistered += OnActiveRegistered;
+        TryAttach(Context.SkillManager.GetActive(SkillSlot.Basic));
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
-        if (PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Basic) is FireballSkill fb)
+        Context.SkillManager.ActiveRegistered -= OnActiveRegistered;
+        if (Context.SkillManager.GetActive(SkillSlot.Basic) is FireballSkill fb)
             fb.SetHomingProjectiles(false);
     }
 

@@ -10,14 +10,14 @@ public sealed class LavapoolPassive : PassiveSkillBehaviour
     private PlayerDashSkill _dash;
     public override void EnablePassive()
     {
-        Attach(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Dash));
-        PlayerContext.PlayerSkillManager.ActiveRegistered += OnActiveRegistered;
+        Attach(Context.SkillManager.GetActive(SkillSlot.Dash));
+        Context.SkillManager.ActiveRegistered += OnActiveRegistered;
     }
 
     public override void DisablePassive()
     {
         Detach();
-        PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
+        Context.SkillManager.ActiveRegistered -= OnActiveRegistered;
     }
 
     private void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour beh)
@@ -46,7 +46,7 @@ public sealed class LavapoolPassive : PassiveSkillBehaviour
     private void SpawnLavapool(Vector3 endPos)
     {
         var pool = Instantiate(_lavaPrefab, endPos, Quaternion.identity);
-        pool.Init(_dps, _radius, _lifeTime, PlayerContext);
+        pool.Init(_dps, _radius, _lifeTime, Context);
 
         Debug.Log(
             $"<color=orange>[Lavapool]</color> spawned at {endPos} " +

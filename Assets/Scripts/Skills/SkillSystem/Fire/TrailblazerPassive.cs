@@ -12,14 +12,14 @@ public class TrailblazerPassive : PassiveSkillBehaviour
     [SerializeField] private float _radius        = 2f;
 
     private PlayerDashSkill     _dash;
-    private PlayerSkillManager  _skillMgr;
+    private ISkillManager  _skillMgr;
     private Coroutine           _spawnRoutine;
     private int                 _puddleCounter;
 
     /* ───────── Enable / Disable ───────── */
     public override void EnablePassive()
     {
-        _skillMgr = PlayerContext.PlayerSkillManager;
+        _skillMgr = Context.SkillManager;
         AttachToDash(_skillMgr.GetActive(SkillSlot.Dash));
         _skillMgr.ActiveRegistered += OnActiveRegistered;
 
@@ -89,18 +89,13 @@ public class TrailblazerPassive : PassiveSkillBehaviour
 
     private void SpawnPuddle()
     {
-        var puddle = Instantiate(
-            _puddlePrefab,
-            PlayerContext.PlayerPosition.position,
-            Quaternion.identity);
+        var puddle = Instantiate(_puddlePrefab, Context.ActorPosition.position, Quaternion.identity);
 
-        float dmg    = PlayerContext.SkillModifierHub
-                       .Apply(new SkillKey(SkillSlot.Passive, SkillStat.Damage), _tickDamage);
+        float dmg    = Context.SkillModifierHub.Apply(new SkillKey(SkillSlot.Passive, SkillStat.Damage), _tickDamage);
 
-        float radius = PlayerContext.SkillModifierHub
-                       .Apply(new SkillKey(SkillSlot.Passive, SkillStat.Radius), _radius);
+        float radius = Context.SkillModifierHub.Apply(new SkillKey(SkillSlot.Passive, SkillStat.Radius), _radius);
 
-        puddle.Init(dmg, _tickRate, radius, _trailLifeTime, PlayerContext);
+        puddle.Init(dmg, _tickRate, radius, _trailLifeTime, Context);
 
         ++_puddleCounter;
         Debug.Log($"<color=orange>[Trailblazer]</color> puddle #{_puddleCounter} spawned");

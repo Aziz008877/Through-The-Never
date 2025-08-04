@@ -10,13 +10,13 @@ public sealed class SolarBlessingPassive : PassiveSkillBehaviour
     private Coroutine _regenRoutine;
     public override void EnablePassive()
     {
-        PlayerContext.PlayerSkillManager.ActiveRegistered += OnActiveRegistered;
-        TryAttach(PlayerContext.PlayerSkillManager.GetActive(SkillSlot.Defense));
+        Context.SkillManager.ActiveRegistered += OnActiveRegistered;
+        TryAttach(Context.SkillManager.GetActive(SkillSlot.Defense));
     }
 
     public override void DisablePassive()
     {
-        PlayerContext.PlayerSkillManager.ActiveRegistered -= OnActiveRegistered;
+        Context.SkillManager.ActiveRegistered -= OnActiveRegistered;
         StopRegen();
         Detach();
     }
@@ -60,7 +60,7 @@ public sealed class SolarBlessingPassive : PassiveSkillBehaviour
 
         while (elapsed < total)
         {
-            PlayerContext.PlayerHp.ReceiveHP(_healPerTick);
+            Context.Hp.ReceiveHP(_healPerTick);
             elapsed += _tickRate;
             yield return wait;
         }

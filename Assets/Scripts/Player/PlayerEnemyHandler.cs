@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class PlayerEnemyHandler : MonoBehaviour
+public class PlayerEnemyHandler : MonoBehaviour, IEnemyHandler
 {
     [SerializeField] private TrainingEnemy _baseEnemyHp;
     public event Action<Transform> OnEnemyKilled;

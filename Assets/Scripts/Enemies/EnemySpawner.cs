@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public void Spawn(Vector3 pos)
     {
         var enemy = Instantiate(_prefab, pos, Quaternion.identity);
-        enemy.GetComponent<BaseEnemyMove>().ReceiveTargetEnemy(_playerContext.PlayerPosition);
+        enemy.GetComponent<BaseEnemyMove>().ReceiveTargetEnemy(_playerContext.ActorPosition);
         _playerEnemyHandler.RegisterEnemy(enemy);
     }
 }

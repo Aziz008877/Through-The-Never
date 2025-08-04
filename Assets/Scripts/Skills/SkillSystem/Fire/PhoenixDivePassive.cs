@@ -14,13 +14,13 @@ public sealed class PhoenixDivePassive : PassiveSkillBehaviour, ISkillModifier
     [Header("Dash tuning")]
     [SerializeField] private float _distanceMultiplier  = 1.4f;
     [SerializeField] private float _cooldownMultiplier  = 1.3f;
-    private PlayerSkillManager _mgr;
+    private ISkillManager _mgr;
     private PlayerDashSkill    _dash;
 
     /* ───────── Enable / Disable ───────── */
     public override void EnablePassive()
     {
-        _mgr = PlayerContext.PlayerSkillManager;
+        _mgr = Context.SkillManager;
         Attach(_mgr.GetActive(SkillSlot.Dash));
         _mgr.ActiveRegistered += OnActiveRegistered;
     }
@@ -63,13 +63,13 @@ public sealed class PhoenixDivePassive : PassiveSkillBehaviour, ISkillModifier
     {
         if (_diveVfx)
         {
-            _diveVfx.transform.SetParent(PlayerContext.PlayerPosition, false);
+            _diveVfx.transform.SetParent(Context.ActorPosition, false);
             _diveVfx.transform.localPosition = Vector3.zero;
             _diveVfx.Play(true);
         }
 
-        PlayerContext.FireballModel.SetActive(true);
-        foreach (var r in PlayerContext.PlayerMeshes) r.enabled = false;
+        Context.FireballModel.SetActive(true);
+        foreach (var r in Context.PlayerMeshes) r.enabled = false;
     }
 
     private void DiveEnd(Vector3 pos)
@@ -78,20 +78,20 @@ public sealed class PhoenixDivePassive : PassiveSkillBehaviour, ISkillModifier
             _diveVfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
 
         // ◄ вернуться к обычной модели
-        PlayerContext.FireballModel.SetActive(false);
-        foreach (var r in PlayerContext.PlayerMeshes) r.enabled = true;
+        Context.FireballModel.SetActive(false);
+        foreach (var r in Context.PlayerMeshes) r.enabled = true;
 
         if (_impactVfx)
         {
-            _impactVfx.transform.position = PlayerContext.PlayerPosition.position;
+            _impactVfx.transform.position = Context.ActorPosition.position;
             _impactVfx.Play(true);
         }
 
-        float radius = PlayerContext.SkillModifierHub
+        float radius = Context.SkillModifierHub
                        .Apply(new SkillKey(Definition.Slot, SkillStat.Radius), _impactRadius);
 
         int hitCount = 0;
-        Collider[] hits = Physics.OverlapSphere(PlayerContext.PlayerPosition.position, radius);
+        Collider[] hits = Physics.OverlapSphere(Context.ActorPosition.position, radius);
         foreach (var h in hits)
         {
             if (!h.TryGetComponent(out IDamageable target)) continue;
@@ -99,9 +99,9 @@ public sealed class PhoenixDivePassive : PassiveSkillBehaviour, ISkillModifier
             float dmg  = _impactDamage;
             SkillDamageType type = SkillDamageType.Basic;          // 🔥
 
-            PlayerContext.ApplyDamageModifiers(ref dmg, ref type);
+            Context.ApplyDamageModifiers(ref dmg, ref type);
             target.ReceiveDamage(dmg, type);                      // ⚠️  НАНОСИМ УРОН
-            PlayerContext.FireOnDamageDealt(target, dmg, type);
+            Context.FireOnDamageDealt(target, dmg, type);
 
             hitCount++;
         }

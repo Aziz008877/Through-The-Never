@@ -3,10 +3,10 @@ public sealed class SmolderRingPassive : PassiveSkillBehaviour
 {
     [SerializeField] private SmolderRingArea _ringPrefab;
     private PlayerDashSkill _dash;
-    private PlayerSkillManager _playerSkillManager;
+    private ISkillManager _playerSkillManager;
     public override void EnablePassive()
     {
-        _playerSkillManager = PlayerContext.PlayerSkillManager;
+        _playerSkillManager = Context.SkillManager;
         Attach(_playerSkillManager.GetActive(SkillSlot.Dash));
         _playerSkillManager.ActiveRegistered += OnActiveRegistered;
     }
@@ -38,6 +38,6 @@ public sealed class SmolderRingPassive : PassiveSkillBehaviour
     private void SpawnRing(Vector3 dashEndPosition)
     {
         var ring = Instantiate(_ringPrefab, dashEndPosition, Quaternion.identity);
-        ring.Init(PlayerContext);
+        ring.Init(Context);
     }
 }

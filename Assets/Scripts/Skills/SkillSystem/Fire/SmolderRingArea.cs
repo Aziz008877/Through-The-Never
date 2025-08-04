@@ -7,8 +7,8 @@ public class SmolderRingArea : MonoBehaviour
     [SerializeField] private float _duration = 3f;
     [SerializeField] private float _projectileBoost = 1.3f;
     private readonly HashSet<IDamageable> _ticked = new();
-    private PlayerContext _context;
-    public void Init(PlayerContext ctx)
+    private ActorContext _context;
+    public void Init(ActorContext ctx)
     {
         _context = ctx;
         var col = GetComponent<SphereCollider>();

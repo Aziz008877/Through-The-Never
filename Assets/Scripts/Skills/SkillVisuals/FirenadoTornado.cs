@@ -10,10 +10,10 @@ public class FirenadoTornado : MonoBehaviour
 
     private float _damage;
     private float _pullForce;
-    private PlayerContext _ctx;
+    private ActorContext _ctx;
     private readonly HashSet<IDamageable> _alreadyHit = new();
 
-    public void Init(float damage, float pullForce, float lifetime, PlayerContext ctx)
+    public void Init(float damage, float pullForce, float lifetime, ActorContext ctx)
     {
         _damage     = damage;
         _pullForce  = pullForce;

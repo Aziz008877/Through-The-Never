@@ -7,9 +7,9 @@ public class AspectOfSolOrb : MonoBehaviour
     [SerializeField] private ParticleSystem _orbVfx;
     [SerializeField] private Fireball _projectilePrefab;
     private float _damage, _projSpeed, _fireRate, _radius;
-    private PlayerContext _ctx;
+    private ActorContext _ctx;
 
-    public void Init(float dmg, float speed, float rate, float radius, float life, PlayerContext ctx)
+    public void Init(float dmg, float speed, float rate, float radius, float life, ActorContext ctx)
     {
         _damage = dmg;
         _projSpeed = speed;
