@@ -16000,6 +16000,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ActorPosition>k__BackingField: {fileID: 1603916744}
   <CastPivot>k__BackingField: {fileID: 1439481747}
+  <SkillModifierHub>k__BackingField: {fileID: 436087291}
   PlayerMeshes:
   - {fileID: 1680429137}
   - {fileID: 1430398276}
@@ -17205,6 +17206,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 6952581982351725339, guid: 0c09a417cc4cd0042ac607fbd5074cf5, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 8ef94319a93ac744994b39ebdb7cab81, type: 2}
     - target: {fileID: 7363479242261063072, guid: 0c09a417cc4cd0042ac607fbd5074cf5, type: 3}
       propertyPath: m_Layer
       value: 2
@@ -23018,6 +23023,7 @@ GameObject:
   - component: {fileID: 2105759140}
   - component: {fileID: 2105759139}
   - component: {fileID: 2105759143}
+  - component: {fileID: 2105759144}
   m_Layer: 2
   m_Name: Companion
   m_TagString: Untagged
@@ -23124,6 +23130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ActorPosition>k__BackingField: {fileID: 2105759136}
   <CastPivot>k__BackingField: {fileID: 2010108092}
+  <SkillModifierHub>k__BackingField: {fileID: 2105759144}
   PlayerMeshes:
   - {fileID: 1657398119}
   - {fileID: 1657398118}
@@ -23208,13 +23215,26 @@ MonoBehaviour:
   _enemyMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  DefensiveSkill: {fileID: 11400000, guid: 459a2ceb0a3c88941b2be170fe39a7f8, type: 2}
+  SpecialSkill: {fileID: 11400000, guid: 5a385610543e2394da525b0bf4d08d9e, type: 2}
+  DashSkill: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
+  BasicSkill: {fileID: 11400000, guid: 821621941a17a924db8fa3e42d07abe1, type: 2}
+  PassiveSkills: []
   _maxHp: 100
   _defThreshold: 0.3
-  _defensive: {fileID: 921024484354742380, guid: 11ef33db7f1cb894692a1e78a13bdaad, type: 3}
-  _special: {fileID: 229319403494095548, guid: 9124301c82425284a860547a226766f9, type: 3}
-  _dash: {fileID: 5520840083938743510, guid: ecdca0a59c4d048469ecf9095a24af5b, type: 3}
-  _basic: {fileID: 6548023706143315007, guid: 3d1a325f96533214581482f1c418da46, type: 3}
   _globalCd: 0.25
+--- !u!114 &2105759144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105759124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e4bc48a9c609bf4aad84fa42bc07cce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2117078000
 PrefabInstance:
   m_ObjectHideFlags: 0

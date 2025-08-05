@@ -6,8 +6,8 @@ public abstract class ActorContext : MonoBehaviour
 {
     [field: SerializeField] public Transform ActorPosition { get; private set; }
     [field: SerializeField] public Transform CastPivot     { get; private set; }
+    [field: SerializeField] public SkillModifierHub SkillModifierHub { get; set; }
     public virtual ISkillManager SkillManager => null;
-    [Inject] public SkillModifierHub SkillModifierHub { get; private set; }
     public Renderer[] PlayerMeshes;
     public GameObject FireballModel;
     public abstract IActorHp    Hp       { get; }
@@ -17,9 +17,7 @@ public abstract class ActorContext : MonoBehaviour
     public float CritChance { get; private set; } = 0;
     public float CritMultiplier { get; set; } = 2f;
     public bool SolarFlareCharge { get; set; }
-
-    /* -------- глобальные модификаторы урона -------- */
-    readonly List<IDamageModifier>        _dmgMods  = new();
+    readonly List<IDamageModifier> _dmgMods = new();
     readonly List<IOnDamageDealtModifier> _dealMods = new();
     public virtual IEnemyHandler EnemyHandler => null;
 

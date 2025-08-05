@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SkillRuntimeFactory
 {
-    public SkillBehaviour Spawn(SkillDefinition definition, PlayerContext context, Transform parent)
+    public SkillBehaviour Spawn(SkillDefinition definition, ActorContext context, Transform parent)
     {
         var go = Object.Instantiate(definition.BehaviourPrefab, parent);
 
