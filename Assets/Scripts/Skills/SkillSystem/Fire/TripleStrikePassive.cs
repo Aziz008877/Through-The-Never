@@ -25,6 +25,9 @@ public sealed class TripleStrikePassive : PassiveSkillBehaviour
     private void AttachIfFireball(ActiveSkillBehaviour behaviour)
     {
         if (behaviour is FireballSkill fb)
+        {
             fb.SetExtraProjectiles(_extraProjectiles);
+        }
+            
     }
 }

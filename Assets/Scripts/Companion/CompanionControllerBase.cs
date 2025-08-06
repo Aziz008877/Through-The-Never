@@ -23,7 +23,7 @@ public abstract class CompanionControllerBase : MonoBehaviour
     public SkillDefinition DashSkill;
     public SkillDefinition BasicSkill;
     public List<SkillDefinition> PassiveSkills = new();
-
+    [SerializeField] private CompanionSkillManager _skillManager;
     protected CompanionContext Ctx;
     private CompanionMove _move;
 
@@ -43,20 +43,26 @@ public abstract class CompanionControllerBase : MonoBehaviour
     {
         Ctx = GetComponent<CompanionContext>();
         _move = GetComponent<CompanionMove>();
-
+        _skillManager = GetComponent<CompanionSkillManager>();
+        
+        foreach (var pd in PassiveSkills)
+        {
+            if (_factory.Spawn(pd, Ctx, transform) is PassiveSkillBehaviour p)
+            {
+                _passives.Add(p);
+                _skillManager.AddPassive(p);
+            }
+        }
+        
         _def = _factory.Spawn(DefensiveSkill, Ctx, transform) as ActiveSkillBehaviour;
         _spec = _factory.Spawn(SpecialSkill, Ctx, transform) as ActiveSkillBehaviour;
         _dash = _factory.Spawn(DashSkill, Ctx, transform) as ActiveSkillBehaviour;
         _basic = _factory.Spawn(BasicSkill, Ctx, transform) as ActiveSkillBehaviour;
 
-        foreach (var pd in PassiveSkills)
-        {
-            if (_factory.Spawn(pd, Ctx, transform) is PassiveSkillBehaviour p)
-            {
-                p.EnablePassive();
-                _passives.Add(p);
-            }
-        }
+        _skillManager.AddSkill(SkillSlot.Defense, _def);
+        _skillManager.AddSkill(SkillSlot.Special, _spec);
+        _skillManager.AddSkill(SkillSlot.Dash, _dash);
+        _skillManager.AddSkill(SkillSlot.Basic, _basic);
 
         PlayerBasicAttackEvents.OnBasicAttack += SavePlayerShot;
     }
