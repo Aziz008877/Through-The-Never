@@ -5559,7 +5559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8858051749441068820, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -23024,6 +23024,7 @@ GameObject:
   - component: {fileID: 2105759139}
   - component: {fileID: 2105759143}
   - component: {fileID: 2105759144}
+  - component: {fileID: 2105759145}
   m_Layer: 2
   m_Name: Companion
   m_TagString: Untagged
@@ -23136,6 +23137,7 @@ MonoBehaviour:
   - {fileID: 1657398118}
   - {fileID: 1657398115}
   FireballModel: {fileID: 1264451872}
+  _companionSkillManager: {fileID: 2105759145}
 --- !u!114 &2105759139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23212,14 +23214,15 @@ MonoBehaviour:
   _stopDist: 3
   _idleDelay: 2
   _searchRadius: 12
-  _enemyMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  _combatGraceTime: 4
   DefensiveSkill: {fileID: 11400000, guid: 459a2ceb0a3c88941b2be170fe39a7f8, type: 2}
   SpecialSkill: {fileID: 11400000, guid: 5a385610543e2394da525b0bf4d08d9e, type: 2}
   DashSkill: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
   BasicSkill: {fileID: 11400000, guid: 821621941a17a924db8fa3e42d07abe1, type: 2}
-  PassiveSkills: []
+  PassiveSkills:
+  - {fileID: 11400000, guid: 988029c1a49d11240b899c4ba2079cbf, type: 2}
+  - {fileID: 11400000, guid: 70ff99bfe38a2464bb80d09315dc2c14, type: 2}
+  _skillManager: {fileID: 2105759145}
   _maxHp: 100
   _defThreshold: 0.3
   _globalCd: 0.25
@@ -23235,6 +23238,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e4bc48a9c609bf4aad84fa42bc07cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2105759145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105759124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad149ff1ab60b534195a5cef37beb672, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skillRoot: {fileID: 1285711562}
+  _context: {fileID: 2105759138}
 --- !u!1001 &2117078000
 PrefabInstance:
   m_ObjectHideFlags: 0

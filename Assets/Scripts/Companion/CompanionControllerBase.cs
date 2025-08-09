@@ -12,7 +12,6 @@ public abstract class CompanionControllerBase : MonoBehaviour
 
     [Header("Enemy Search")]
     [SerializeField] private float _searchRadius = 12f;
-    [SerializeField] private LayerMask _enemyMask = ~0;
 
     [Header("Combat State")]
     [SerializeField] private float _combatGraceTime = 4f;
@@ -24,6 +23,7 @@ public abstract class CompanionControllerBase : MonoBehaviour
     public SkillDefinition BasicSkill;
     public List<SkillDefinition> PassiveSkills = new();
     [SerializeField] private CompanionSkillManager _skillManager;
+
     protected CompanionContext Ctx;
     private CompanionMove _move;
 
@@ -33,7 +33,8 @@ public abstract class CompanionControllerBase : MonoBehaviour
     protected ActiveSkillBehaviour _def, _spec, _dash, _basic;
     private readonly List<PassiveSkillBehaviour> _passives = new();
 
-    [SerializeField] private bool _combatStarted;
+    private Transform _target;
+    private bool _combatStarted;
     private float _combatTimer;
     private Vector3 _lastShot;
     private float _lastShotTime = -999f;
@@ -43,17 +44,7 @@ public abstract class CompanionControllerBase : MonoBehaviour
     {
         Ctx = GetComponent<CompanionContext>();
         _move = GetComponent<CompanionMove>();
-        _skillManager = GetComponent<CompanionSkillManager>();
-        
-        foreach (var pd in PassiveSkills)
-        {
-            if (_factory.Spawn(pd, Ctx, transform) is PassiveSkillBehaviour p)
-            {
-                _passives.Add(p);
-                _skillManager.AddPassive(p);
-            }
-        }
-        
+
         _def = _factory.Spawn(DefensiveSkill, Ctx, transform) as ActiveSkillBehaviour;
         _spec = _factory.Spawn(SpecialSkill, Ctx, transform) as ActiveSkillBehaviour;
         _dash = _factory.Spawn(DashSkill, Ctx, transform) as ActiveSkillBehaviour;
@@ -67,6 +58,18 @@ public abstract class CompanionControllerBase : MonoBehaviour
         PlayerBasicAttackEvents.OnBasicAttack += SavePlayerShot;
     }
 
+    protected virtual void Start()
+    {
+        foreach (var pd in PassiveSkills)
+        {
+            if (_factory.Spawn(pd, Ctx, transform) is PassiveSkillBehaviour p)
+            {
+                _passives.Add(p);
+                _skillManager.AddPassive(p);
+            }
+        }
+    }
+
     private void OnDestroy()
     {
         PlayerBasicAttackEvents.OnBasicAttack -= SavePlayerShot;
@@ -75,18 +78,28 @@ public abstract class CompanionControllerBase : MonoBehaviour
 
     private void Update()
     {
-        //UpdateCombatState();
+        UpdateCombatState();
 
-        if (_combatStarted) CombatLoop();
+        if (_combatStarted)
+        {
+            CombatLoop();
+            MoveToTarget();
+        }
         else FollowPlayer();
     }
 
     private void UpdateCombatState()
     {
-        bool playerShotRecently = PlayerActive;
-        bool enemyNearby = NearestEnemy() != null;
+        if (PlayerActive)
+        {
+            _target = FindPlayerTarget();
+        }
+        else
+        {
+            _target = NearestEnemy();
+        }
 
-        if (playerShotRecently || enemyNearby)
+        if (_target != null)
         {
             _combatStarted = true;
             _combatTimer = 0f;
@@ -95,7 +108,10 @@ public abstract class CompanionControllerBase : MonoBehaviour
         {
             _combatTimer += Time.deltaTime;
             if (_combatTimer >= _combatGraceTime)
+            {
                 _combatStarted = false;
+                _target = null;
+            }
         }
     }
 
@@ -103,6 +119,15 @@ public abstract class CompanionControllerBase : MonoBehaviour
     {
         float dist = Vector3.Distance(transform.position, _player.transform.position);
         if (dist > _followRadius) _move.MoveTo(_player.transform.position);
+        else _move.Stop();
+    }
+
+    private void MoveToTarget()
+    {
+        if (_target == null) return;
+
+        float dist = Vector3.Distance(transform.position, _target.position);
+        if (dist > _stopDist) _move.MoveTo(_target.position);
         else _move.Stop();
     }
 
@@ -115,13 +140,24 @@ public abstract class CompanionControllerBase : MonoBehaviour
     protected bool PlayerActive => Time.time - _lastShotTime <= _idleDelay;
     protected Vector3 LastShot => _lastShot;
 
+    protected Transform FindPlayerTarget()
+    {
+        Collider[] hits = Physics.OverlapSphere(_lastShot, 0.5f);
+        foreach (var h in hits)
+            if (h.TryGetComponent(out BaseEnemyHP _))
+                return h.transform;
+        return null;
+    }
+
     protected Transform NearestEnemy()
     {
         Transform best = null;
         float min = float.MaxValue;
 
-        foreach (var c in Physics.OverlapSphere(transform.position, _searchRadius, _enemyMask))
+        foreach (var c in Physics.OverlapSphere(transform.position, _searchRadius))
         {
+            if (!c.TryGetComponent(out BaseEnemyHP _)) continue;
+
             float d = (c.transform.position - transform.position).sqrMagnitude;
             if (d < min) { min = d; best = c.transform; }
         }
@@ -131,7 +167,7 @@ public abstract class CompanionControllerBase : MonoBehaviour
 
     protected virtual void CombatLoop()
     {
-        if (Time.time < _nextCast) return;
+        if (Time.time < _nextCast || _target == null) return;
 
         if (_def && _def.IsReady && Ctx.Hp.CurrentHP / Ctx.Hp.MaxHP < GetDefenceThreshold())
         {
@@ -140,43 +176,29 @@ public abstract class CompanionControllerBase : MonoBehaviour
             return;
         }
 
-        Transform t = PlayerActive ? null : NearestEnemy();
-
         if (_spec && _spec.IsReady)
         {
-            if (t) _spec.transform.LookAt(t);
-            else _spec.transform.forward = (LastShot - Ctx.CastPivot.position).normalized;
-
+            _spec.transform.LookAt(_target);
             _spec.TryCast();
             SetCd();
             return;
         }
 
-        if (_dash && _dash.IsReady && t)
+        if (_dash && _dash.IsReady)
         {
-            _dash.TryCastAtTarget(t);
+            _dash.TryCastAtTarget(_target);
             SetCd();
             return;
         }
 
         if (_basic && _basic.IsReady)
         {
-            if (PlayerActive)
-            {
-                Vector3 dir = (LastShot - Ctx.CastPivot.position).normalized;
-                transform.forward = dir;
-                _basic.TryCastAtPoint(LastShot);
-            }
-            else if (t)
-            {
-                _basic.TryCastAtTarget(t);
-            }
+            _basic.TryCastAtTarget(_target);
             SetCd();
         }
     }
 
     private void SetCd() => _nextCast = Time.time + GetGlobalCooldown();
-
     protected virtual float GetDefenceThreshold() => 0.3f;
     protected virtual float GetGlobalCooldown() => 0.25f;
 }
