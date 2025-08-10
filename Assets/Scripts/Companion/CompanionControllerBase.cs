@@ -293,18 +293,22 @@ public abstract class CompanionControllerBase : MonoBehaviour
     {
         if (Time.time < _nextCast || _target == null) return;
 
+        Vector3 aimPoint = _target ? _target.position : transform.position;
+
         if (_def && _def.IsReady && Ctx.Hp.CurrentHP / Ctx.Hp.MaxHP < GetDefenceThreshold())
         {
             _holdFacingTarget = _target; _holdFacingUntil = Time.time + _aimHold;
-            _def.TryCastAtTarget(_target);
-            SetCd(); return;
+            _def.TryCastByDefinition(_target);
+            SetCd();
+            return;
         }
 
         if (_spec && _spec.IsReady)
         {
             _holdFacingTarget = _target; _holdFacingUntil = Time.time + _aimHold;
-            _spec.TryCastAtTarget(_target);
-            SetCd(); return;
+            _spec.TryCastByDefinition(_target);
+            SetCd();
+            return;
         }
 
         if (_dash && _dash.IsReady)
@@ -313,15 +317,16 @@ public abstract class CompanionControllerBase : MonoBehaviour
             if (dist >= _dashMinDist)
             {
                 _holdFacingTarget = _target; _holdFacingUntil = Time.time + _aimHold;
-                _dash.TryCastAtTarget(_target);
-                SetCd(); return;
+                _dash.TryCastByDefinition(_target);
+                SetCd();
+                return;
             }
         }
 
         if (_basic && _basic.IsReady)
         {
             _holdFacingTarget = _target; _holdFacingUntil = Time.time + _aimHold;
-            _basic.TryCastAtTarget(_target);
+            _basic.TryCastByDefinition(_target);
             SetCd();
         }
     }

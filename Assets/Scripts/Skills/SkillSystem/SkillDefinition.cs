@@ -16,6 +16,9 @@ public class SkillDefinition : ScriptableObject
 
     [Header("Prefab Behaviour")]
     public GameObject BehaviourPrefab;
+    
+    [Header("Cast Settings")]
+    public CastType CastType;
 
     [Header("Data")]
     public float Damage;
