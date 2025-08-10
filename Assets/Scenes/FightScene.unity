@@ -8770,9 +8770,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6efa46cb393afb4b831d37e752e8c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentHP>k__BackingField: 100
+  <CurrentHP>k__BackingField: 300
   <MinHP>k__BackingField: 0
-  <MaxHP>k__BackingField: 100
+  <MaxHP>k__BackingField: 300
   _onEnemyDead:
     m_PersistentCalls:
       m_Calls: []
@@ -15985,7 +15985,7 @@ MonoBehaviour:
   _moveSpeed: 6
   _rotationSpeed: 10
   _mainCamera: {fileID: 603968867}
-  _aimLockDuration: 0.25
+  _aimLockDuration: 1
 --- !u!114 &1603916755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23210,11 +23210,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726c80e3d9b7a0c48acaf78d38419fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _followRadius: 5
-  _stopDist: 3
-  _idleDelay: 2
+  _followRadius: 3
+  _stopDist: 1
+  _idleDelay: 0
   _searchRadius: 12
+  _playerHitPickRadius: 2
+  _retargetInterval: 0.25
   _combatGraceTime: 4
+  _dashMinDist: 4
+  _tetherOutRadius: 4
+  _tetherInRadius: 2
+  _followStopFromPlayer: 1
+  _aimRoot: {fileID: 0}
+  _aimHold: 0.25
   DefensiveSkill: {fileID: 11400000, guid: 459a2ceb0a3c88941b2be170fe39a7f8, type: 2}
   SpecialSkill: {fileID: 11400000, guid: 5a385610543e2394da525b0bf4d08d9e, type: 2}
   DashSkill: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}

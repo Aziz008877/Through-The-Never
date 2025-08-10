@@ -16,12 +16,13 @@ MonoBehaviour:
   DisplayName: Dash
   Description: 
   Icon: {fileID: 0}
+  Stars: []
   Slot: 3
   Kind: 0
   School: 4
   BehaviourPrefab: {fileID: 2941879385599068809, guid: ecdca0a59c4d048469ecf9095a24af5b, type: 3}
   Damage: 0
-  Cooldown: 0.5
+  Cooldown: 2
   Duration: 0
   Range: 0
   Raduis: 0

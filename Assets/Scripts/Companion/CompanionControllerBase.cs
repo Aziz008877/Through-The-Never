@@ -12,9 +12,21 @@ public abstract class CompanionControllerBase : MonoBehaviour
 
     [Header("Enemy Search")]
     [SerializeField] private float _searchRadius = 12f;
+    [SerializeField] private float _playerHitPickRadius = 2f;
+    [SerializeField] private float _retargetInterval = 0.25f;
 
     [Header("Combat State")]
     [SerializeField] private float _combatGraceTime = 4f;
+    [SerializeField] private float _dashMinDist = 4f;
+
+    [Header("Leash")]
+    [SerializeField] private float _tetherOutRadius = 8f;
+    [SerializeField] private float _tetherInRadius = 6f;
+    [SerializeField] private float _followStopFromPlayer = 1.6f;
+
+    [Header("Aiming")]
+    [SerializeField] private Transform _aimRoot;
+    [SerializeField] private float _aimHold = 0.25f;
 
     [Header("Skill Definitions")]
     public SkillDefinition DefensiveSkill;
@@ -34,11 +46,17 @@ public abstract class CompanionControllerBase : MonoBehaviour
     private readonly List<PassiveSkillBehaviour> _passives = new();
 
     private Transform _target;
+    private Transform _lastPlayerTarget;
     private bool _combatStarted;
     private float _combatTimer;
     private Vector3 _lastShot;
     private float _lastShotTime = -999f;
     private float _nextCast;
+    private float _lastRetarget;
+
+    private bool _leashing;
+    private float _holdFacingUntil;
+    private Transform _holdFacingTarget;
 
     protected virtual void Awake()
     {
@@ -54,6 +72,9 @@ public abstract class CompanionControllerBase : MonoBehaviour
         _skillManager.AddSkill(SkillSlot.Special, _spec);
         _skillManager.AddSkill(SkillSlot.Dash, _dash);
         _skillManager.AddSkill(SkillSlot.Basic, _basic);
+
+        if (_aimRoot == null) _aimRoot = transform;
+        _move.SetAgentRotation(false);
 
         PlayerBasicAttackEvents.OnBasicAttack += SavePlayerShot;
     }
@@ -82,21 +103,78 @@ public abstract class CompanionControllerBase : MonoBehaviour
 
         if (_combatStarted)
         {
-            CombatLoop();
-            MoveToTarget();
+            if (ShouldLeashToPlayer())
+            {
+                FaceTarget();
+                MoveTowardPlayerDuringCombat();
+                CombatLoop();
+            }
+            else
+            {
+                RetargetIfNeeded();
+                FaceTarget();
+                MoveToTarget();
+                CombatLoop();
+            }
         }
-        else FollowPlayer();
+        else
+        {
+            FollowPlayer();
+        }
+    }
+
+    private void LateUpdate()
+    {
+        // если цели нет — обычный поворот
+        if (_target == null || !IsEnemyAlive(_target))
+        {
+            ClearAimLock();
+            // 1) если бежим — смотрим по движению
+            Vector3 mv = _move.LastMoveDirection;
+            mv.y = 0f;
+            if (mv.sqrMagnitude > 0.0001f)
+            {
+                ForceFace(_aimRoot.position + mv);
+                return;
+            }
+            // 2) если стоим — можно смотреть на игрока (чтобы модель не «зависала» боком)
+            Vector3 toPlayer = _player.transform.position - _aimRoot.position;
+            toPlayer.y = 0f;
+            if (toPlayer.sqrMagnitude > 0.0001f) ForceFace(_aimRoot.position + toPlayer);
+            return;
+        }
+
+        // есть цель: удерживаем взгляд на ней на поводке и во время aimHold
+        if (_leashing || Time.time < _holdFacingUntil)
+        {
+            ForceFace(_holdFacingTarget ? _holdFacingTarget.position : _target.position);
+            return;
+        }
+
+        // если почти не двигаемся — также держим взгляд на цели
+        if (_move.LastMoveDirection.sqrMagnitude < 0.001f)
+            ForceFace(_target.position);
     }
 
     private void UpdateCombatState()
     {
+        // сбрасываем прицел, если текущая цель «умерла»
+        if (_target != null && !IsEnemyAlive(_target))
+        {
+            _target = null;
+            ClearAimLock();
+        }
+
         if (PlayerActive)
         {
-            _target = FindPlayerTarget();
+            if (_lastPlayerTarget == null || !IsEnemyAlive(_lastPlayerTarget))
+                _lastPlayerTarget = FindEnemyNearPoint(_lastShot, _playerHitPickRadius);
+
+            _target = IsEnemyAlive(_lastPlayerTarget) ? _lastPlayerTarget : null;
         }
         else
         {
-            _target = NearestEnemy();
+            if (_target == null) _target = NearestEnemy();
         }
 
         if (_target != null)
@@ -111,8 +189,32 @@ public abstract class CompanionControllerBase : MonoBehaviour
             {
                 _combatStarted = false;
                 _target = null;
+                ClearAimLock();
             }
         }
+    }
+
+    private void RetargetIfNeeded()
+    {
+        if (Time.time - _lastRetarget < _retargetInterval) return;
+        _lastRetarget = Time.time;
+
+        if (!IsEnemyAlive(_target))
+        {
+            _target = PlayerActive
+                ? (IsEnemyAlive(_lastPlayerTarget) ? _lastPlayerTarget : FindEnemyNearPoint(_lastShot, _playerHitPickRadius))
+                : NearestEnemy();
+
+            if (_target == null) ClearAimLock();
+        }
+    }
+
+    private bool ShouldLeashToPlayer()
+    {
+        float d = Vector3.Distance(transform.position, _player.transform.position);
+        if (!_leashing && d > _tetherOutRadius) _leashing = true;
+        else if (_leashing && d < _tetherInRadius) _leashing = false;
+        return _leashing;
     }
 
     private void FollowPlayer()
@@ -122,46 +224,68 @@ public abstract class CompanionControllerBase : MonoBehaviour
         else _move.Stop();
     }
 
+    private void MoveTowardPlayerDuringCombat()
+    {
+        float dist = Vector3.Distance(transform.position, _player.transform.position);
+        if (dist > _followStopFromPlayer) _move.MoveTo(_player.transform.position);
+        else _move.Stop();
+    }
+
     private void MoveToTarget()
     {
-        if (_target == null) return;
+        if (_target == null) { _move.Stop(); return; }
 
-        float dist = Vector3.Distance(transform.position, _target.position);
-        if (dist > _stopDist) _move.MoveTo(_target.position);
+        float distToPlayer = Vector3.Distance(transform.position, _player.transform.position);
+        if (distToPlayer > _tetherOutRadius) { MoveTowardPlayerDuringCombat(); return; }
+
+        float distToTarget = Vector3.Distance(transform.position, _target.position);
+        if (distToTarget > _stopDist) _move.MoveTo(_target.position);
         else _move.Stop();
+    }
+
+    private void FaceTarget()
+    {
+        if (_target == null) return;
+        if (!IsEnemyAlive(_target)) return;
+        Vector3 p = _target.position;
+        p.y = transform.position.y;
+        Vector3 dir = p - transform.position;
+        if (dir.sqrMagnitude > 0.0001f) transform.rotation = Quaternion.LookRotation(dir);
+    }
+
+    private void ForceFace(Vector3 lookPoint)
+    {
+        Vector3 p = lookPoint; p.y = _aimRoot.position.y;
+        Vector3 dir = p - _aimRoot.position;
+        if (dir.sqrMagnitude < 0.0001f) return;
+        _aimRoot.rotation = Quaternion.LookRotation(dir);
+    }
+
+    private void ClearAimLock()
+    {
+        _holdFacingUntil = 0f;
+        _holdFacingTarget = null;
     }
 
     private void SavePlayerShot(Vector3 pt)
     {
         _lastShot = pt;
         _lastShotTime = Time.time;
+        _lastPlayerTarget = FindEnemyNearPoint(pt, _playerHitPickRadius);
+        if (_lastPlayerTarget != null) _target = _lastPlayerTarget;
     }
 
     protected bool PlayerActive => Time.time - _lastShotTime <= _idleDelay;
-    protected Vector3 LastShot => _lastShot;
 
-    protected Transform FindPlayerTarget()
+    protected Transform FindEnemyNearPoint(Vector3 point, float radius)
     {
-        Collider[] hits = Physics.OverlapSphere(_lastShot, 0.5f);
-        foreach (var h in hits)
-            if (h.TryGetComponent(out BaseEnemyHP _))
-                return h.transform;
-        return null;
-    }
-
-    protected Transform NearestEnemy()
-    {
-        Transform best = null;
-        float min = float.MaxValue;
-
-        foreach (var c in Physics.OverlapSphere(transform.position, _searchRadius))
+        Transform best = null; float min = float.MaxValue;
+        foreach (var c in Physics.OverlapSphere(point, radius))
         {
             if (!c.TryGetComponent(out BaseEnemyHP _)) continue;
-
-            float d = (c.transform.position - transform.position).sqrMagnitude;
+            float d = (c.transform.position - point).sqrMagnitude;
             if (d < min) { min = d; best = c.transform; }
         }
-
         return best;
     }
 
@@ -171,31 +295,54 @@ public abstract class CompanionControllerBase : MonoBehaviour
 
         if (_def && _def.IsReady && Ctx.Hp.CurrentHP / Ctx.Hp.MaxHP < GetDefenceThreshold())
         {
-            _def.TryCast();
-            SetCd();
-            return;
+            _holdFacingTarget = _target; _holdFacingUntil = Time.time + _aimHold;
+            _def.TryCastAtTarget(_target);
+            SetCd(); return;
         }
 
         if (_spec && _spec.IsReady)
         {
-            _spec.transform.LookAt(_target);
-            _spec.TryCast();
-            SetCd();
-            return;
+            _holdFacingTarget = _target; _holdFacingUntil = Time.time + _aimHold;
+            _spec.TryCastAtTarget(_target);
+            SetCd(); return;
         }
 
         if (_dash && _dash.IsReady)
         {
-            _dash.TryCastAtTarget(_target);
-            SetCd();
-            return;
+            float dist = Vector3.Distance(transform.position, _target.position);
+            if (dist >= _dashMinDist)
+            {
+                _holdFacingTarget = _target; _holdFacingUntil = Time.time + _aimHold;
+                _dash.TryCastAtTarget(_target);
+                SetCd(); return;
+            }
         }
 
         if (_basic && _basic.IsReady)
         {
+            _holdFacingTarget = _target; _holdFacingUntil = Time.time + _aimHold;
             _basic.TryCastAtTarget(_target);
             SetCd();
         }
+    }
+
+    protected Transform NearestEnemy()
+    {
+        Transform best = null; float min = float.MaxValue;
+        foreach (var c in Physics.OverlapSphere(transform.position, _searchRadius))
+        {
+            if (!c.TryGetComponent(out BaseEnemyHP _)) continue;
+            float d = (c.transform.position - transform.position).sqrMagnitude;
+            if (d < min) { min = d; best = c.transform; }
+        }
+        return best;
+    }
+
+    private static bool IsEnemyAlive(Transform t)
+    {
+        if (t == null) return false;
+        if (!t.gameObject.activeInHierarchy) return false;
+        return t.TryGetComponent(out BaseEnemyHP _);
     }
 
     private void SetCd() => _nextCast = Time.time + GetGlobalCooldown();
