@@ -5291,7 +5291,7 @@ GameObject:
   - component: {fileID: 502334693}
   - component: {fileID: 502334697}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: FireSchool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8834,6 +8834,11 @@ MonoBehaviour:
   _stopDistance: 1.6
   _patrolPoints: []
   _wanderPause: 1.2
+  _frostStacks: 0
+  _frostMaxStacks: 0
+  _frostSlowPerStack: 0
+  _frostDmgRedPerStack: 0
+  _frostTimeLeft: 0
 --- !u!195 &846569863
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -19933,7 +19938,7 @@ GameObject:
   - component: {fileID: 1807081314}
   - component: {fileID: 1807081318}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: IceSchool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20041,13 +20046,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _school: 1
-  _starterBasic: {fileID: 0}
-  _starterInnate: {fileID: 0}
-  _starterDash: {fileID: 0}
-  _currentTestSpecial: {fileID: 0}
-  _currentTestPassive: {fileID: 0}
-  _currentTestDefensive: {fileID: 0}
-  _saver: {fileID: 0}
+  _starterBasic: {fileID: 11400000, guid: 821621941a17a924db8fa3e42d07abe1, type: 2}
+  _starterInnate: {fileID: 11400000, guid: d1debc585a5b0644ca92e0fa31431aca, type: 2}
+  _starterDash: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
+  _currentTestSpecial: {fileID: 11400000, guid: 5a385610543e2394da525b0bf4d08d9e, type: 2}
+  _currentTestPassive: {fileID: 11400000, guid: 2b6c9e5fd577ee445afb6083d5b7d5ef, type: 2}
+  _currentTestDefensive: {fileID: 11400000, guid: 459a2ceb0a3c88941b2be170fe39a7f8, type: 2}
+  _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
   _chooseVFX: {fileID: 0}
   <InteractionUI>k__BackingField: {fileID: 0}
   <CanInteract>k__BackingField: 1
@@ -23031,7 +23036,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &2105759128
 Rigidbody:
   m_ObjectHideFlags: 0
