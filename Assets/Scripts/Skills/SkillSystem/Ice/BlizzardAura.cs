@@ -44,10 +44,14 @@ public class BlizzardAura : MonoBehaviour
             rb.useGravity = false;
         }
 
+        transform.SetParent(_follow, false);
+        transform.localPosition = Vector3.zero;
+
         if (_vfx != null) _vfx.Play();
         StopAllCoroutines();
         StartCoroutine(Run());
     }
+
 
     private IEnumerator Run()
     {
@@ -56,8 +60,6 @@ public class BlizzardAura : MonoBehaviour
 
         while (elapsed < _duration)
         {
-            if (_follow != null) transform.position = _follow.position;
-
             float t = Mathf.Clamp01(elapsed / Mathf.Max(0.01f, _duration));
             float dmgMul = Mathf.Lerp(0.25f, 1f, t);
             float dmgTick = _baseDamage * dmgMul * _tickRate;
