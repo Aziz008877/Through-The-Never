@@ -16,7 +16,7 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
     
     private readonly List<SkillDefinition> _chosenSkills = new();
     public IReadOnlyList<SkillDefinition>  ChosenSkills => _chosenSkills;
-    
+    private bool _basicLocked;
     private void OnEnable()
     {
         _input.OnBasicSkillPressed += CastBasic;
@@ -69,7 +69,11 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
         }
     }
     
-    private void CastBasic() => Cast(SkillSlot.Basic);
+    private void CastBasic()
+    {
+        if (_basicLocked) return;
+        Cast(SkillSlot.Basic);
+    }
     private void CastDefense() => Cast(SkillSlot.Defense);
     private void CastSpecial() => Cast(SkillSlot.Special);
     private void CastDash() => Cast(SkillSlot.Dash);
@@ -80,6 +84,8 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
 
         //Debug.Log(a.Definition.DisplayName);
     }
+    
+    public void SetBasicLocked(bool state) => _basicLocked = state;
     
     public ActiveSkillBehaviour GetActive(SkillSlot slot)
     {

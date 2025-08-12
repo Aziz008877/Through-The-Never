@@ -4,7 +4,7 @@ public interface ISkillModifier
     float Evaluate(SkillKey key, float currentValue);
 }
 
-public enum SkillStat { Cooldown, Damage, Speed, Radius, Duration, Range }
+public enum SkillStat { Cooldown, Damage, Speed, Radius, Duration, Range, TickRate, PushForce }
 
 public readonly struct SkillKey
 {

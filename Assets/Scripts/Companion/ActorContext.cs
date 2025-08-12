@@ -7,6 +7,7 @@ public abstract class ActorContext : MonoBehaviour
     [field: SerializeField] public Transform ActorPosition { get; private set; }
     [field: SerializeField] public Transform CastPivot     { get; private set; }
     [field: SerializeField] public SkillModifierHub SkillModifierHub { get; set; }
+    public Camera MainCamera;
     public virtual ISkillManager SkillManager => null;
     public Renderer[] PlayerMeshes;
     public GameObject FireballModel;

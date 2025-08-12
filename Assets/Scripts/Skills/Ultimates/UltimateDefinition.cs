@@ -9,7 +9,7 @@ public class UltimateDefinition : ScriptableObject
     public GameObject Behaviour;
 }
 
-public enum Aspect { Sol, Ifrit, Phoenix }
+public enum Aspect { Sol, Ifrit, Phoenix, Tiamat, Skadi, Winter }
 
 [System.Serializable]
 public struct AspectStars
