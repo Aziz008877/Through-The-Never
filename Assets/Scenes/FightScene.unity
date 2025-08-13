@@ -3996,7 +3996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8858051749441068820, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13617,8 +13617,8 @@ MonoBehaviour:
   _starterBasic: {fileID: 11400000, guid: 8970cddf47b24484fb637c0359bf57e7, type: 2}
   _starterInnate: {fileID: 11400000, guid: d1debc585a5b0644ca92e0fa31431aca, type: 2}
   _starterDash: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
-  _currentTestSpecial: {fileID: 11400000, guid: cbfefd4f0ec0b7a4285398dfa397876a, type: 2}
-  _currentTestPassive: {fileID: 11400000, guid: 2b6c9e5fd577ee445afb6083d5b7d5ef, type: 2}
+  _currentTestSpecial: {fileID: 11400000, guid: 7ca3415963521d247bb073e09493f35d, type: 2}
+  _currentTestPassive: {fileID: 11400000, guid: 2a701e73748d0db4980aba0c02c9f020, type: 2}
   _currentTestDefensive: {fileID: 11400000, guid: 459a2ceb0a3c88941b2be170fe39a7f8, type: 2}
   _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
   _chooseVFX: {fileID: 0}
