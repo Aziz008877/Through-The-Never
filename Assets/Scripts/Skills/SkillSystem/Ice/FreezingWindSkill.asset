@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
-  m_Name: OceantideSkill
+  m_Name: FreezingWindSkill
   m_EditorClassIdentifier: 
-  Id: Oceantide
+  Id: Freezing Wind
   DisplayName: 
   Description: 
   Icon: {fileID: 0}
@@ -20,7 +20,7 @@ MonoBehaviour:
   Slot: 3
   Kind: 1
   School: 1
-  BehaviourPrefab: {fileID: 697607040491694105, guid: 9d7b8c7f8b0d3c048a08616d80047aa4, type: 3}
+  BehaviourPrefab: {fileID: 273425078621901308, guid: 651cf4a2939e6b444aaee7e772ed3f55, type: 3}
   CastType: 0
   Damage: 10
   Cooldown: 0

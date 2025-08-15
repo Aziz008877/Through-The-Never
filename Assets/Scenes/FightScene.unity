@@ -13634,7 +13634,7 @@ MonoBehaviour:
   _starterInnate: {fileID: 11400000, guid: d1debc585a5b0644ca92e0fa31431aca, type: 2}
   _starterDash: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
   _currentTestSpecial: {fileID: 11400000, guid: 7ca3415963521d247bb073e09493f35d, type: 2}
-  _currentTestPassive: {fileID: 11400000, guid: e1fc66761d473d64ebb1bb35211b873d, type: 2}
+  _currentTestPassive: {fileID: 11400000, guid: b5cba53ccc9152f4fae2e071ed78d4a7, type: 2}
   _currentTestDefensive: {fileID: 11400000, guid: 459a2ceb0a3c88941b2be170fe39a7f8, type: 2}
   _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
   _chooseVFX: {fileID: 0}
