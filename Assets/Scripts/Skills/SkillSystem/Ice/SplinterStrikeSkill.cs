@@ -22,8 +22,7 @@ public class SplinterStrikeSkill : ActiveSkillBehaviour
         if (!IsReady) return;
         base.TryCast();
 
-        if (PlayerCtx != null)
-            PlayerCtx.Move.RotateTowardsMouse();
+        PlayerCtx.Move.RotateTowardsMouse();
 
         StartCoroutine(BurstRoutine());
     }

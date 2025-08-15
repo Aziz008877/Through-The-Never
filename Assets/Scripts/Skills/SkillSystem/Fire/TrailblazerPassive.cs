@@ -7,16 +7,13 @@ public class TrailblazerPassive : PassiveSkillBehaviour
     [SerializeField] private FireTrailPuddle _puddlePrefab;
     [SerializeField] private float _spawnInterval = .05f;
     [SerializeField] private float _trailLifeTime = 3f;
-    [SerializeField] private float _tickRate      = 0.5f;
-    [SerializeField] private float _tickDamage    = 5f;
-    [SerializeField] private float _radius        = 2f;
-
-    private PlayerDashSkill     _dash;
-    private ISkillManager  _skillMgr;
-    private Coroutine           _spawnRoutine;
-    private int                 _puddleCounter;
-
-    /* ───────── Enable / Disable ───────── */
+    [SerializeField] private float _tickRate = 0.5f;
+    [SerializeField] private float _tickDamage = 5f;
+    [SerializeField] private float _radius = 2f;
+    private PlayerDashSkill _dash;
+    private ISkillManager _skillMgr;
+    private Coroutine _spawnRoutine;
+    private int _puddleCounter;
     public override void EnablePassive()
     {
         _skillMgr = Context.SkillManager;

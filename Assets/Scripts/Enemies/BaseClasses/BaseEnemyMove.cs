@@ -125,6 +125,12 @@ public abstract class BaseEnemyMove : MonoBehaviour, IFrostbiteReceivable
         _enemyAnimation.SetMove(false);
     }
 
+    public void SetMoveState(bool state)
+    {
+        _isMoving = state;
+        _agent.isStopped = _isMoving;
+    }
+
     void RotateTowardsMovement()
     {
         Vector3 lookDir;
