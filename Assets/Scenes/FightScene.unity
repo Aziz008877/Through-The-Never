@@ -10632,7 +10632,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hpText: {fileID: 1922941533}
   _hpFillValue: {fileID: 1039884769}
-  _currentHP: 100
+  _currentHP: 70
   _minHp: 0
   _maxHP: 100
   _onPlayerDead:
@@ -13635,7 +13635,7 @@ MonoBehaviour:
   _starterInnate: {fileID: 11400000, guid: d1debc585a5b0644ca92e0fa31431aca, type: 2}
   _starterDash: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
   _currentTestSpecial: {fileID: 11400000, guid: 5f44d218da65e86438a56e3c4dbc5c2c, type: 2}
-  _currentTestPassive: {fileID: 11400000, guid: fe0994b97fdf5ef478850aa6eb46b566, type: 2}
+  _currentTestPassive: {fileID: 11400000, guid: 55a40f1450ff6fa48bd438e5937dbbdf, type: 2}
   _currentTestDefensive: {fileID: 11400000, guid: 459a2ceb0a3c88941b2be170fe39a7f8, type: 2}
   _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
   _chooseVFX: {fileID: 0}
