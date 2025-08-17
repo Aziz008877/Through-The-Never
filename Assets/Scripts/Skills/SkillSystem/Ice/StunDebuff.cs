@@ -15,6 +15,7 @@ public class StunDebuff : MonoBehaviour
 
     public void ApplyStun(float duration)
     {
+        Debug.Log("STUNNED");
         _stunTimeLeft = duration;
         _isStunned = true;
         _baseEnemyAnimation.Stun(_isStunned);

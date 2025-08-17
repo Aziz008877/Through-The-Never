@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3547665752944377294
+--- !u!1 &4819193491385730405
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5315567122380598308}
-  - component: {fileID: 1319650076198352457}
+  - component: {fileID: 7458447175011446452}
+  - component: {fileID: 2418243548931193355}
   m_Layer: 0
-  m_Name: SplinterStrikeSkill
+  m_Name: DeepfrostWatersSkill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5315567122380598308
+--- !u!4 &7458447175011446452
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3547665752944377294}
+  m_GameObject: {fileID: 4819193491385730405}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1319650076198352457
+--- !u!114 &2418243548931193355
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3547665752944377294}
+  m_GameObject: {fileID: 4819193491385730405}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2049f6c1a0dab20448f2f1e68b91d1f0, type: 3}
+  m_Script: {fileID: 11500000, guid: f677c58ff6c0b40499624fbd8671c39d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shardPrefab: {fileID: 5809723182223953360, guid: 453003fa65838a64fb79f9eb7b3c58ed, type: 3}
-  _deepfrostWaterProjectile: {fileID: 68806845229557253, guid: 1053cf9211dc80444a365acfb25c6e2b, type: 3}
-  _lifeTime: 3
-  _shotsPerBurst: 10
-  _minDelayBetween: 0
-  _maxDelayBetween: 0.06
-  _delayChance: 0.5
-  _spreadAngleDeg: 2.2
-  _posJitter: 0.05

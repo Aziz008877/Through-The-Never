@@ -18,6 +18,7 @@ public abstract class ActorContext : MonoBehaviour
     public float CritChance { get; private set; } = 0;
     public float CritMultiplier { get; set; } = 2f;
     public bool SolarFlareCharge { get; set; }
+    public bool DeepfrostWaterMode { get; set; }
     readonly List<IDamageModifier> _dmgMods = new();
     readonly List<IOnDamageDealtModifier> _dealMods = new();
     public virtual IEnemyHandler EnemyHandler => null;

@@ -1,5 +1,5 @@
 using UnityEngine;
-public class OceantidePassive : PassiveSkillBehaviour
+public class OceantideSkill : PassiveSkillBehaviour
 {
     [SerializeField] private float _pushForce;
     [SerializeField] private float _stunDuration;

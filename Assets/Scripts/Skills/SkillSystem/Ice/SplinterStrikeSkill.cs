@@ -5,6 +5,7 @@ public class SplinterStrikeSkill : ActiveSkillBehaviour
 {
     [Header("Prefabs")]
     [SerializeField] private IceShard _shardPrefab;
+    [SerializeField] private DeepfrostWaterProjectile _deepfrostWaterProjectile;
     [SerializeField] private float _lifeTime = 3f;
 
     [Header("Burst")]
@@ -16,7 +17,6 @@ public class SplinterStrikeSkill : ActiveSkillBehaviour
     [Header("Spread")]
     [SerializeField] private float _spreadAngleDeg = 2.2f;
     [SerializeField] private float _posJitter = 0.05f;
-
     public override void TryCast()
     {
         if (!IsReady) return;
@@ -30,6 +30,23 @@ public class SplinterStrikeSkill : ActiveSkillBehaviour
     private IEnumerator BurstRoutine()
     {
         Vector3 mainDir = Context.CastPivot.forward;
+        bool empowered = Context.DeepfrostWaterMode;
+
+        if (empowered)
+        {
+            var pos = Context.CastPivot.position;
+            var rot = Quaternion.LookRotation(mainDir, Vector3.up);
+
+            var beam = Instantiate(_deepfrostWaterProjectile, pos, rot);
+            beam.Init(Damage, _lifeTime, SkillDamageType.Basic, Context);
+
+            Vector3 firePoint = Context.CastPivot.position + mainDir * 5f;
+            PlayerBasicAttackEvents.Fire(firePoint);
+
+            StartCooldown();
+            yield break;
+        }
+
         Vector3 right = Context.transform.right;
         Vector3 up = Vector3.up;
 
@@ -43,7 +60,7 @@ public class SplinterStrikeSkill : ActiveSkillBehaviour
             Vector3 pos = Context.CastPivot.position + offset;
 
             Quaternion rot = Quaternion.LookRotation(dir, Vector3.up);
-            IceShard shard = Instantiate(_shardPrefab, pos, rot);
+            var shard = Instantiate(_shardPrefab, pos, rot);
             shard.Init(Damage, _lifeTime, SkillDamageType.Basic, Context);
 
             if (i == 0)
@@ -61,4 +78,5 @@ public class SplinterStrikeSkill : ActiveSkillBehaviour
 
         StartCooldown();
     }
+
 }
