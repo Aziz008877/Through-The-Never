@@ -1,12 +1,17 @@
 using System;
 using UnityEngine;
+
 public class StunDebuff : MonoBehaviour
 {
+    public event Action<StunDebuff, float> OnStunStarted;
+    public event Action<StunDebuff> OnStunEnded;
+
     private BaseEnemyAnimation _baseEnemyAnimation;
     private BaseEnemyAttack _baseEnemyAttack;
     private BaseEnemyMove _baseEnemyMove;
     private float _stunTimeLeft;
     private bool _isStunned;
+
     private void Start()
     {
         _baseEnemyAnimation = GetComponent<BaseEnemyAnimation>();
@@ -16,22 +21,18 @@ public class StunDebuff : MonoBehaviour
 
     public void ApplyStun(float duration)
     {
-        Debug.Log("STUNNED");
         _stunTimeLeft = duration;
         _isStunned = true;
-        _baseEnemyAnimation.Stun(_isStunned);
+        _baseEnemyAnimation.Stun(true);
         _baseEnemyMove.SetMoveState(false);
+        OnStunStarted?.Invoke(this, duration);
     }
-    
+
     private void Update()
     {
         if (!_isStunned) return;
-
         _stunTimeLeft -= Time.deltaTime;
-        if (_stunTimeLeft <= 0f)
-        {
-            EndStun();
-        }
+        if (_stunTimeLeft <= 0f) EndStun();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,7 +47,8 @@ public class StunDebuff : MonoBehaviour
     private void EndStun()
     {
         _isStunned = false;
-        _baseEnemyAnimation.Stun(_isStunned);
+        _baseEnemyAnimation.Stun(false);
         _baseEnemyMove.SetMoveState(true);
+        OnStunEnded?.Invoke(this);
     }
 }

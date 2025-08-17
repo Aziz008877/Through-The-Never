@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class PlayerEnemyHandler : MonoBehaviour, IEnemyHandler
 {
-    [SerializeField] private BaseEnemyHP[] _baseEnemyHp;
+    [field: SerializeField] public BaseEnemyHP[] Enemies { get; set; }
     public event Action<Transform> OnEnemyKilled;
 
     private void Start()
     {
-        foreach (var enemyHp in _baseEnemyHp)
+        foreach (var enemyHp in Enemies)
         {
             RegisterEnemy(enemyHp);
         }

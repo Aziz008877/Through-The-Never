@@ -45,6 +45,7 @@ public interface ISkillManager
 
 public interface IEnemyHandler
 {
+    public BaseEnemyHP[] Enemies { get; set; }
     event Action<Transform> OnEnemyKilled;
     void RegisterEnemy(IDamageable dmg);
 }
