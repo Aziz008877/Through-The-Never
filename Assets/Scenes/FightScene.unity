@@ -3996,7 +3996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8858051749441068820, guid: 4c67ed6c086451b4db54ac4d24b626bb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6249,9 +6249,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6efa46cb393afb4b831d37e752e8c5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentHP>k__BackingField: 300
+  <CurrentHP>k__BackingField: 10
   <MinHP>k__BackingField: 0
-  <MaxHP>k__BackingField: 300
+  <MaxHP>k__BackingField: 10
   _onEnemyDead:
     m_PersistentCalls:
       m_Calls: []
@@ -10775,7 +10775,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd2515e53ff28d45add7ec104459224, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _baseEnemyHp: {fileID: 1127282088}
+  _baseEnemyHp:
+  - {fileID: 846569859}
 --- !u!1 &1608828628
 GameObject:
   m_ObjectHideFlags: 0
@@ -13634,7 +13635,7 @@ MonoBehaviour:
   _starterInnate: {fileID: 11400000, guid: d1debc585a5b0644ca92e0fa31431aca, type: 2}
   _starterDash: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
   _currentTestSpecial: {fileID: 11400000, guid: 5f44d218da65e86438a56e3c4dbc5c2c, type: 2}
-  _currentTestPassive: {fileID: 11400000, guid: 946f6e8ef33a4284c9d64e1ef06581a7, type: 2}
+  _currentTestPassive: {fileID: 11400000, guid: 40157737fc0cc1246a39aa80e4dcfaff, type: 2}
   _currentTestDefensive: {fileID: 11400000, guid: 459a2ceb0a3c88941b2be170fe39a7f8, type: 2}
   _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
   _chooseVFX: {fileID: 0}

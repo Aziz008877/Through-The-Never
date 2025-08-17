@@ -127,8 +127,8 @@ public abstract class BaseEnemyMove : MonoBehaviour, IFrostbiteReceivable
 
     public void SetMoveState(bool state)
     {
-        _isMoving = state;
-        _agent.isStopped = _isMoving;
+        _canMove = state;
+        if (!state) { _agent.isStopped = true; _agent.velocity = Vector3.zero; _isMoving = false; _enemyAnimation.SetMove(false); }
     }
 
     void RotateTowardsMovement()

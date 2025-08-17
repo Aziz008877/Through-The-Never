@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
-  m_Name: SplinterStrikeSkil
+  m_Name: IcyRetaliationSkill
   m_EditorClassIdentifier: 
-  Id: Splinter Strike
+  Id: Icy Retaliation
   DisplayName: 
   Description: 
   Icon: {fileID: 0}
   Stars: []
-  Slot: 0
-  Kind: 0
+  Slot: 5
+  Kind: 1
   School: 1
-  BehaviourPrefab: {fileID: 3547665752944377294, guid: 5c4d3126cb441e44bb5abd68c79737c4, type: 3}
+  BehaviourPrefab: {fileID: 7965967100783512708, guid: fc9850040a07d45429d4ecfccc7e78fb, type: 3}
   CastType: 0
-  Damage: 10
+  Damage: 5
   Cooldown: 0
-  Duration: 0
+  Duration: 5
   Range: 0
-  Raduis: 0
+  Raduis: 10

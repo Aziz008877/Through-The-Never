@@ -3,18 +3,20 @@ using UnityEngine;
 
 public class PlayerEnemyHandler : MonoBehaviour, IEnemyHandler
 {
-    [SerializeField] private TrainingEnemy _baseEnemyHp;
+    [SerializeField] private BaseEnemyHP[] _baseEnemyHp;
     public event Action<Transform> OnEnemyKilled;
 
     private void Start()
     {
-        RegisterEnemy(_baseEnemyHp);
+        foreach (var enemyHp in _baseEnemyHp)
+        {
+            RegisterEnemy(enemyHp);
+        }
     }
 
     public void RegisterEnemy(IDamageable dmg)
     {
         dmg.OnEnemyDead += HandleEnemyDead;
-        //UnregisterEnemy(dmg);
     }
 
     private void UnregisterEnemy(IDamageable dmg)

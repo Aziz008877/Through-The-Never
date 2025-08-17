@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 public class StunDebuff : MonoBehaviour
 {
@@ -30,6 +31,15 @@ public class StunDebuff : MonoBehaviour
         if (_stunTimeLeft <= 0f)
         {
             EndStun();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out IceCage cage))
+        {
+            ApplyStun(cage.FreezeTime);
+            cage.ExplodeCage();
         }
     }
 
