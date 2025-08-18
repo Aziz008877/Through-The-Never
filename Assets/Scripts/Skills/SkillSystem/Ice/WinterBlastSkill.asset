@@ -20,7 +20,7 @@ MonoBehaviour:
   Slot: 1
   Kind: 1
   School: 1
-  BehaviourPrefab: {fileID: 4310525011119276437, guid: 231ffd1733675d34886f1a45bc6b79a8, type: 3}
+  BehaviourPrefab: {fileID: 5626904384520279098, guid: 2a56afd2a2dd0d74ba01d413727549e3, type: 3}
   CastType: 0
   Damage: 0
   Cooldown: 0
