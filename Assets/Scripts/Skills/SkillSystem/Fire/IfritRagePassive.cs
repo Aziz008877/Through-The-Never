@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-public sealed class IfritRagePassive : PassiveSkillBehaviour, ISkillModifier, IDamageModifier
+public sealed class IfritRagePassive : PassiveSkillBehaviour, ISkillModifier, IDamageContextModifier
 {
     [Header("Rage settings")]
     [SerializeField] private float _buffDuration = 5f;
@@ -80,7 +80,7 @@ public sealed class IfritRagePassive : PassiveSkillBehaviour, ISkillModifier, ID
     private IEnumerator RageBuffRoutine()
     {
         Context.SkillModifierHub.Register(this);
-        Context.RegisterModifier(this);
+        Context.RegisterContextModifier(this);
         Debug.Log("<color=orange>[Ifrit’s Rage]</color> RAGE ON");
 
         yield return new WaitForSeconds(_buffDuration);
@@ -97,7 +97,7 @@ public sealed class IfritRagePassive : PassiveSkillBehaviour, ISkillModifier, ID
             _buffRoutine = null;
         }
         Context.SkillModifierHub.Unregister(this);
-        Context.UnregisterModifier(this);
+        Context.UnregisterContextModifier(this);
     }
     
     public float Evaluate(SkillKey key, float value)
@@ -112,14 +112,14 @@ public sealed class IfritRagePassive : PassiveSkillBehaviour, ISkillModifier, ID
         }
         return value;
     }
-    
-    public void Apply(ref float dmg, ref SkillDamageType type)
+
+    public void Apply(ref DamageContext ctx)
     {
         if (_buffRoutine == null) return;
 
-        float extra = dmg * _incomingBonusPct;
-        dmg += extra;
-        Debug.Log($"<color=orange>[Ifrit’s Rage]</color> IN +{_incomingBonusPct:P0} → {dmg:F1}");
+        float extra = ctx.Damage * _incomingBonusPct;
+        ctx.Damage += extra;
+        Debug.Log($"<color=orange>[Ifrit’s Rage]</color> IN +{_incomingBonusPct:P0} → {ctx.Damage:F1}");
     }
 
     private void OnDisable() => DisablePassive();

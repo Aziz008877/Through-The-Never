@@ -10,12 +10,20 @@ public class Vase : MonoBehaviour, IDamageable
     public float MinHP { get; set; }
     public float MaxHP { get; set; }
     public bool CanBeDamaged { get; set; } = true;
-    public Action<Transform> OnEnemyDead { get; set; }
-    public void ReceiveDamage(float damageValue, SkillDamageType type)
+    public event Action<Transform> OnEnemyDead;
+    public void ReceiveDamage(in DamageContext ctx)
     {
-        _playerHp.ReceiveHP(_healAmount);
-        _explosionParticles.transform.SetParent(null);
-        _explosionParticles.Play();
+        if (!CanBeDamaged) return;
+
+        ctx.Attacker.Hp.ReceiveHP(_healAmount);
+
+        if (_explosionParticles)
+        {
+            _explosionParticles.transform.SetParent(null);
+            _explosionParticles.Play(true);
+        }
+
+        CanBeDamaged = false;
         Destroy(gameObject);
     }
 }

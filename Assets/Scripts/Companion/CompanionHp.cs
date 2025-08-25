@@ -56,6 +56,11 @@ public class CompanionHp : MonoBehaviour, IActorHp
     }
 
     /* ---------- Heal ---------- */
+    public void UpdateHP()
+    {
+        
+    }
+
     public void ReceiveHP(float heal) =>
         CurrentHP = Mathf.Min(MaxHP, CurrentHP + heal);
 

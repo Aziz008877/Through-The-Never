@@ -1,26 +1,24 @@
 using UnityEngine;
-public sealed class IfritFervorPassiveUltimate : PassiveSkillBehaviour, IOnDamageDealtModifier          
+public sealed class IfritFervorPassiveUltimate : PassiveSkillBehaviour, IOnDamageDealtContextModifier          
 {
     [Header("Fervor parameters")]
     [SerializeField] private float _debuffDuration = 10f;
     [SerializeField] private float _hpThreshold = 0.30f;
     [SerializeField] private GameObject _curseVfx;
-
     public override void EnablePassive()
     {
-        Context.RegisterOnDamageDealtModifier(this);
+        Context.RegisterOnDamageDealtContextModifier(this);
         Debug.Log("<color=orange>[Fervor]</color> passive enabled");
     }
 
     public override void DisablePassive()
     {
-        Context.UnregisterOnDamageDealtModifier(this);
+        Context.UnregisterOnDamageDealtContextModifier(this);
     }
-    
-    public void OnDamageDealt(IDamageable target, float damage,
-        SkillDamageType type, ActorContext ctx)
+
+    public void OnDamageDealt(in DamageContext ctx)
     {
-        if (target is not BaseEnemyHP hp) return;
+        if (ctx.Target is not BaseEnemyHP hp) return;
         
         if (!hp.TryGetComponent(out IfritFervorDebuff debuff))
             debuff = hp.gameObject.AddComponent<IfritFervorDebuff>();

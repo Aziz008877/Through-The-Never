@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public sealed class MeltdownPassiveUltimate : PassiveSkillBehaviour, IOnDamageDealtModifier
+public sealed class MeltdownPassiveUltimate : PassiveSkillBehaviour, IOnDamageDealtContextModifier
 {
     [Header("Stacks / Amplify")]
     [SerializeField] private float _ampPerStack   = 0.08f;   // +8 % за стак
@@ -13,45 +13,42 @@ public sealed class MeltdownPassiveUltimate : PassiveSkillBehaviour, IOnDamageDe
     [SerializeField] private float _puddleRadius = 2f;
     [SerializeField] private float _puddleLife   = 2f;
 
-    private bool _addingBonus;        // защита от рекурсии
+    private bool _addingBonus;
 
-    public override void EnablePassive()  => Context.RegisterOnDamageDealtModifier(this);
+    public override void EnablePassive()  => Context.RegisterOnDamageDealtContextModifier(this);
 
-    public override void DisablePassive() => Context.UnregisterOnDamageDealtModifier(this);
+    public override void DisablePassive() => Context.UnregisterOnDamageDealtContextModifier(this);
 
-    public void OnDamageDealt(IDamageable target,
-                              float        dmg,
-                              SkillDamageType type,
-                              ActorContext ctx)
+    public void OnDamageDealt(in DamageContext ctx)
     {
-        /* только огненный Basic-урон */
-        if (type != SkillDamageType.Basic) return;
-        if (_addingBonus) return;                 // внутренний вызов – игнор
-        if (target is not BaseEnemyHP hp) return;
-
-        /* компонент стаков */
+        if (ctx.Attacker != Context) return;
+        if (ctx.Type != SkillDamageType.Basic) return;
+        if (ctx.SkillDef == null || ctx.SkillDef.School != MagicSchool.Fire) return;
+        if (_addingBonus) return;
+        if (ctx.Target is not BaseEnemyHP hp) return;
+        
         if (!hp.TryGetComponent(out MeltdownDebuff deb))
             deb = hp.gameObject.AddComponent<MeltdownDebuff>();
 
-        deb.Configure(_stackLifeTime, _puddlePrefab,
-                      _puddleDps, _puddleRate,
-                      _puddleRadius, _puddleLife, ctx);
+        deb.Configure(_stackLifeTime, _puddlePrefab, _puddleDps, _puddleRate, _puddleRadius, _puddleLife, Context);
 
         int prev = deb.StackCount;
         deb.AddStack();
         Debug.Log($"<color=orange>[Meltdown]</color> {hp.name} stacks {prev}→{deb.StackCount}");
-
-        /* бонус-урон */
-        float extra = dmg * deb.StackCount * _ampPerStack;
+        
+        float extra = ctx.Damage * deb.StackCount * _ampPerStack;
         if (extra <= 0f) return;
 
-        _addingBonus = true;                 // блокируем ре-вход
-        hp.ReceiveDamage(extra, type);
-        ctx.FireOnDamageDealt(hp, extra, type);
-        _addingBonus = false;                // снимаем ТОЛЬКО теперь
+        var bonusCtx = ctx;
+        bonusCtx.Damage = extra;
+        bonusCtx.Target = hp;
+        bonusCtx.IsCrit = false;
+        bonusCtx.CritMultiplier = 1f;
 
-        Debug.Log(
-            $"<color=orange>[Meltdown]</color> bonus +{_ampPerStack:P0}×{deb.StackCount} = "
-            + $"{extra:F1} dmg");
+        _addingBonus = true;
+        hp.ReceiveDamage(bonusCtx);
+        _addingBonus = false;
+
+        Debug.Log($"<color=orange>[Meltdown]</color> bonus +{_ampPerStack:P0}×{deb.StackCount} = {extra:F1} dmg");
     }
 }

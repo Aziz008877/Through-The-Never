@@ -58,19 +58,26 @@ public class RippingTorrentsSkill : ActiveSkillBehaviour
     private void DealDamage(Vector3 pos, float radius)
     {
         _buffer.Clear();
-        Collider[] hits = Physics.OverlapSphere(pos, radius);
-        foreach (var col in hits)
-            if (col.TryGetComponent(out IDamageable d) && !_buffer.Contains(d))
-                _buffer.Add(d);
 
-        SkillDamageType type = SkillDamageType.Basic;
-        foreach (var tgt in _buffer)
+        var hits = Physics.OverlapSphere(pos, radius);
+        for (int i = 0; i < hits.Length; i++)
         {
-            float dmg = _geyserDamage;
-            Context.ApplyDamageModifiers(ref dmg, ref type);
+            if (hits[i].TryGetComponent(out IDamageable d) && !_buffer.Contains(d))
+                _buffer.Add(d);
+        }
+        if (_buffer.Count == 0) return;
 
-            tgt.ReceiveDamage(dmg, type);
-            Context.FireOnDamageDealt(tgt, dmg, type);
+        for (int i = 0; i < _buffer.Count; i++)
+        {
+            var target = _buffer[i];
+
+            var ctx = BuildDamage(_geyserDamage, SkillDamageType.Basic, pos, Vector3.up, gameObject);
+            ctx.Target = target;
+
+            // Если нужны общие модификаторы ещё раз поверх — раскомментируй:
+            // Context.ApplyDamageContextModifiers(ref ctx);
+
+            target.ReceiveDamage(ctx); // OnDamageDealtContext разойдётся из цели сам
         }
     }
 

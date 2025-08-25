@@ -22,19 +22,22 @@ public abstract class BaseEnemyAttack : MonoBehaviour
 
     private Transform _target;
     private BaseEnemyAnimation _anim;
-    private BaseEnemyHP _baseEnemyHp;
-    private float _meleeTimer, _rangedTimer, _lockTimer;
 
-    private IFrostbiteReceivable _frost;
+    private ActorContext _attackerCtx;              // контекст врага-атакера
+    private IFrostbiteReceivable _frost;            // модификатор исходящего урона
+    private IBlindable _blindSelf;                  // промах при ослеплении
+
+    private float _meleeTimer, _rangedTimer, _lockTimer;
 
     public bool IsCasting { get; private set; }
     public event Action<float> OnAttackStarted;
 
     private void Awake()
     {
-        _baseEnemyHp = GetComponent<BaseEnemyHP>();
         _anim = GetComponent<BaseEnemyAnimation>();
-        TryGetComponent<IFrostbiteReceivable>(out _frost);
+        _attackerCtx = GetComponent<ActorContext>() ?? GetComponentInParent<ActorContext>();
+        TryGetComponent(out _frost);
+        TryGetComponent(out _blindSelf);
     }
 
     private void Update()
@@ -60,61 +63,73 @@ public abstract class BaseEnemyAttack : MonoBehaviour
     public void SetTarget(Transform t) => _target = t;
     public bool ShouldStopMovement() => _lockTimer > 0f;
 
-    public void HandleMeleeHit() { if (IsCasting) DealMeleeHit(); }
+    public void HandleMeleeHit()   { if (IsCasting) DealMeleeHit(); }
     public void HandleRangedFire() { if (IsCasting) DealRangedShot(); }
 
-    public void MeleeEndEvent() { if (IsCasting) EndCast(ref _meleeTimer,  _meleeCd); }
+    public void MeleeEndEvent()  { if (IsCasting) EndCast(ref _meleeTimer,  _meleeCd); }
     public void RangedEndEvent() { if (IsCasting) EndCast(ref _rangedTimer, _rangedCd); }
 
     protected virtual void DealMeleeHit()
     {
-        if (!TryGetValidTarget(_meleeDist, out var player, out var enemy)) return;
+        if (!TryGetValidTarget(_meleeDist, out var target)) return;
         float dmg = _meleeDamage;
         if (_frost != null && _frost.IsFrostActive) dmg *= _frost.OutgoingDamageMul;
-        ApplyDamage(player, enemy, dmg);
+        ApplyDamage(target, dmg, SkillDamageType.Basic);
     }
 
     protected virtual void DealRangedShot()
     {
-        if (!TryGetValidTarget(_rangedDist, out var player, out var enemy)) return;
+        if (!TryGetValidTarget(_rangedDist, out var target)) return;
         float dmg = _rangedDamage;
         if (_frost != null && _frost.IsFrostActive) dmg *= _frost.OutgoingDamageMul;
-        ApplyDamage(player, enemy, dmg);
+        ApplyDamage(target, dmg, SkillDamageType.Basic);
     }
 
-    private bool TryGetValidTarget(float maxDist, out PlayerHP player, out BaseEnemyHP enemy)
+    private bool TryGetValidTarget(float maxDist, out IDamageable target)
     {
-        player = null; enemy = null;
+        target = null;
         if (_target == null) return false;
         if ((transform.position - _target.position).sqrMagnitude > maxDist * maxDist) return false;
 
-        player = _target.GetComponent<PlayerHP>();
-        enemy  = player ? null : _target.GetComponent<BaseEnemyHP>();
-        if (player == null && enemy == null) return false;
+        if (!_target.TryGetComponent(out target)) return false;
 
-        if (TryGetComponent<IBlindable>(out var blind) && blind.IsBlinded() && Random.value < blind.CurrentMissChance)
+        if (_blindSelf != null && _blindSelf.IsBlinded() && Random.value < _blindSelf.CurrentMissChance)
             return false;
 
         return true;
     }
 
-    private void ApplyDamage(PlayerHP player, BaseEnemyHP enemy, float dmg)
+    private void ApplyDamage(IDamageable target, float dmg, SkillDamageType type)
     {
-        if (player) player.ReceiveDamage(dmg, _baseEnemyHp);
-        else enemy.ReceiveDamage(dmg, SkillDamageType.Basic);
+        var ctx = new DamageContext
+        {
+            Attacker       = _attackerCtx,
+            Target         = target,
+            SkillBehaviour = null,
+            SkillDef       = null,
+            Slot           = SkillSlot.Undefined,
+            Type           = type,
+            Damage         = dmg,
+            IsCrit         = false,
+            CritMultiplier = 1f,
+            SourceGO       = gameObject
+        };
+
+        _attackerCtx?.ApplyDamageContextModifiers(ref ctx);
+        target.ReceiveDamage(ctx); // события разойдутся внутри цели
     }
 
     private void TickTimers()
     {
-        if (_meleeTimer > 0f) _meleeTimer -= Time.deltaTime;
+        if (_meleeTimer  > 0f) _meleeTimer  -= Time.deltaTime;
         if (_rangedTimer > 0f) _rangedTimer -= Time.deltaTime;
-        if (_lockTimer > 0f) _lockTimer -= Time.deltaTime;
+        if (_lockTimer   > 0f) _lockTimer   -= Time.deltaTime;
     }
 
     private void BeginCast()
     {
         IsCasting = true;
-        _lockTimer = 999f;
+        _lockTimer = 999f;                  // блок до конца анимации
         OnAttackStarted?.Invoke(_stopAfterCast);
     }
 
@@ -122,6 +137,6 @@ public abstract class BaseEnemyAttack : MonoBehaviour
     {
         IsCasting = false;
         cdTimer = cdValue;
-        _lockTimer = _stopAfterCast;
+        _lockTimer = _stopAfterCast;       // короткий стоп после каста
     }
 }

@@ -13,11 +13,28 @@ public class RetaliationPassive : PassiveSkillBehaviour
     {
         if (incomingDamage <= 0f || attacker == null) return;
 
+        // сколько отражаем
         float dmgBack = incomingDamage * _returnPercent;
-        SkillDamageType type = SkillDamageType.Basic;
-        Context.ApplyDamageModifiers(ref dmgBack, ref type);
 
-        attacker.ReceiveDamage(dmgBack, type);
-        Context.FireOnDamageDealt(attacker, dmgBack, type);
+        // формируем контекст отражённого удара
+        var ctx = new DamageContext
+        {
+            Attacker       = Context,
+            Target         = attacker,
+            SkillBehaviour = this,
+            SkillDef       = null,
+            Slot           = SkillSlot.Passive,
+            Type           = SkillDamageType.Basic,
+            Damage         = dmgBack,
+            IsCrit         = false,
+            CritMultiplier = 1f,
+            HitPoint       = (attacker as Component)?.transform.position ?? Context.transform.position,
+            HitNormal      = Vector3.up,
+            SourceGO       = gameObject
+        };
+
+        Context.ApplyDamageContextModifiers(ref ctx); // применяем контекстные модификаторы
+        attacker.ReceiveDamage(ctx);                  // событие "урон нанесён" вызовется внутри цели
     }
+
 }

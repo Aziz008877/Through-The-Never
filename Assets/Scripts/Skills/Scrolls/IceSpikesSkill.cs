@@ -42,25 +42,31 @@ public class IceSpikesSkill : ActiveSkillBehaviour
         if (_spikeWavePrefab)
             Instantiate(_spikeWavePrefab, center, Quaternion.identity)
                 .transform.localScale = Vector3.one * radius;
-        
+
         _targets.Clear();
         var hits = Physics.OverlapSphere(center, radius);
-        foreach (var col in hits)
-            if (col.TryGetComponent(out IDamageable t) && !_targets.Contains(t))
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (hits[i].TryGetComponent(out IDamageable t) && !_targets.Contains(t))
                 _targets.Add(t);
-
+        }
         if (_targets.Count == 0) return;
 
-        SkillDamageType type = SkillDamageType.Basic;
-        foreach (var tgt in _targets)
+        for (int i = 0; i < _targets.Count; i++)
         {
-            float dealt = dmg;
-            Context.ApplyDamageModifiers(ref dealt, ref type);
+            var target = _targets[i];
 
-            tgt.ReceiveDamage(dealt, type);
-            Context.FireOnDamageDealt(tgt, dealt, type);
+            // Собираем контекст урона: крит/моды применятся внутри BuildDamage
+            var ctx = BuildDamage(dmg, SkillDamageType.Basic, center, Vector3.up, gameObject);
+            ctx.Target = target;
+
+            // Если нужны дополнительные моды поверх — можно ещё раз прогнать:
+            // Context.ApplyDamageContextModifiers(ref ctx);
+
+            target.ReceiveDamage(ctx); // событие разлетится само
         }
     }
+
 
     private bool GetAimPoint(out Vector3 point)
     {

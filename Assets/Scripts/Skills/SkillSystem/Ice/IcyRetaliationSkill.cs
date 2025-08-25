@@ -26,9 +26,31 @@ public class IcyRetaliationSkill : PassiveSkillBehaviour
         {
             if (col.TryGetComponent(out IDamageable damageable))
             {
-                damageable.ReceiveDamage(Definition.Damage, SkillDamageType.Basic);
-                if (!_seen.Add(damageable)) continue;
+                if (_seen.Add(damageable))
+                {
+                    var ctx = new DamageContext
+                    {
+                        Attacker       = Context,
+                        Target         = damageable,
+                        SkillBehaviour = this,
+                        SkillDef       = Definition,
+                        Slot           = Definition.Slot,
+                        Type           = SkillDamageType.Basic,
+                        Damage         = Definition.Damage,
+                        IsCrit         = UnityEngine.Random.value < Context.CritChance,
+                        CritMultiplier = Context.CritMultiplier,
+                        HitPoint       = col.transform.position,
+                        HitNormal      = Vector3.up,
+                        SourceGO       = gameObject
+                    };
+
+                    if (ctx.IsCrit) ctx.Damage *= ctx.CritMultiplier;
+                    Context.ApplyDamageContextModifiers(ref ctx);
+
+                    damageable.ReceiveDamage(ctx);
+                }
             }
+
             
             var stun = col.GetComponent<StunDebuff>();
             if (stun != null) stun.ApplyStun(_freezeDuration);

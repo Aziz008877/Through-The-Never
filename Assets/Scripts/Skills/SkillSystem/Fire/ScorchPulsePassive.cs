@@ -48,15 +48,32 @@ public sealed class ScorchPulsePassive : PassiveSkillBehaviour
             _pulseVfx.Play();
         }
 
-        Collider[] hits = Physics.OverlapSphere(startPosition, _radius);
-        foreach (var h in hits)
+        var hits = Physics.OverlapSphere(startPosition, _radius);
+        for (int i = 0; i < hits.Length; i++)
         {
+            var h = hits[i];
             if (!h.TryGetComponent(out IDamageable target)) continue;
+            if (h.transform == Context.transform) continue; // не бьём себя (по желанию)
 
-            float dmg  = _damage;
-            SkillDamageType type = SkillDamageType.Basic;
-            Context.ApplyDamageModifiers(ref dmg, ref type);
-            target.ReceiveDamage(dmg, type);
+            var ctx = new DamageContext
+            {
+                Attacker       = Context,
+                Target         = target,
+                SkillBehaviour = null,              // это не ActiveSkillBehaviour
+                SkillDef       = Definition,        // если есть Definition; иначе = null
+                Slot           = Definition ? Definition.Slot : SkillSlot.Undefined,
+                Type           = SkillDamageType.Basic,
+                Damage         = _damage,
+                IsCrit         = false,
+                CritMultiplier = 1f,
+                HitPoint       = h.transform.position,
+                HitNormal      = Vector3.up,
+                SourceGO       = gameObject
+            };
+
+            Context.ApplyDamageContextModifiers(ref ctx);
+            target.ReceiveDamage(ctx);              // события разойдутся внутри цели
         }
     }
+
 }

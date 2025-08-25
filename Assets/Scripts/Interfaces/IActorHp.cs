@@ -7,10 +7,10 @@ public delegate void IncomingDamageHandler(ref float damage, IDamageable source)
 
 public interface IActorHp
 {
-    float CurrentHP { get; }
-    float MinHP     { get; }
-    float MaxHP     { get; }
-
+    float CurrentHP { get; set; }
+    float MinHP     { get; set; }
+    float MaxHP     { get; set; }
+    void UpdateHP();
     void  ReceiveHP(float amount);
     void ReceiveDamage(float damageValue, IDamageable source);
 
@@ -47,5 +47,6 @@ public interface IEnemyHandler
 {
     public BaseEnemyHP[] Enemies { get; set; }
     event Action<Transform> OnEnemyKilled;
+    event Action<IDamageable> EnemyRegistered;
     void RegisterEnemy(IDamageable dmg);
 }

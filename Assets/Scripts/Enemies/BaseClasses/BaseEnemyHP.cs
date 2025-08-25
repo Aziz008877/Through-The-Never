@@ -5,84 +5,69 @@ using UnityEngine.Events;
 using Zenject;
 public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
 {
-    [Header("HP Data")]
     [field: SerializeField] public float CurrentHP { get; set; }
     [field: SerializeField] public float MinHP { get; set; }
     [field: SerializeField] public float MaxHP { get; set; }
-    public bool IsDotActive { get; set; }
     public bool CanBeDamaged { get; set; } = true;
+    public bool IsDotActive  { get; set; }
     [SerializeField] private UnityEvent _onEnemyDead;
     [Inject] private DamageTextPool _damageTextPool;
-    public Action<Transform> OnEnemyDead { get; set; }
+    public event Action<DamageContext> OnDamaged;
+    public event Action<DamageContext> OnKilled;
     private BaseEnemyAnimation _enemyAnimation;
     private BaseEnemyMove _enemyMove;
     private Coroutine _dotCoroutine;
     private float _dotDps;
-    private float _dotTickRate = 1;
+    private float _dotTickRate = 1f;
+    public event Action<Transform> OnEnemyDead;
     private void Start()
     {
         _enemyAnimation = GetComponent<BaseEnemyAnimation>();
-        _enemyMove = GetComponent<BaseEnemyMove>();
+        _enemyMove      = GetComponent<BaseEnemyMove>();
     }
 
-    public void Init(DamageTextPool damageTextPool)
+    public void ReceiveDamage(in DamageContext ctx)
     {
-        _damageTextPool = damageTextPool;
-    }
+        if (!CanBeDamaged) return;
 
-    public void ReceiveDamage(float damageValue, SkillDamageType type)
-    {
-        if (type == SkillDamageType.DOT)
+        if (ctx.HasDot || ctx.Type == SkillDamageType.DOT)
         {
-            if (_dotCoroutine != null)
-            {
-                StopCoroutine(_dotCoroutine);
-            }
-            
-            _dotCoroutine = StartCoroutine(DotRoutine(3));
+            ApplyDot(ctx.DotDps, ctx.DotDuration, ctx.DotTickRate <= 0f ? 1f : ctx.DotTickRate);
             return;
         }
 
-        ApplyDamage(damageValue);
+        ApplyDamageInternal(ctx);
     }
 
-    private IEnumerator DotRoutine(float duration)
+    private void ApplyDamageInternal(in DamageContext ctx)
     {
-        float elapsed = 0f;
-        while (elapsed < duration)
-        {
-            ApplyDamage(_dotDps);
-            yield return new WaitForSeconds(1f / _dotTickRate);
-            elapsed += 1f / _dotTickRate;
-        }
-
-        IsDotActive  = false;
-        _dotCoroutine = null;
-        //Debug.Log("<color=orange>[Ignite]</color> expired");
-    }
-
-    private void ApplyDamage(float damageValue)
-    {
-        //Debug.Log(damageValue);
         if (!CanBeDamaged) return;
-        
-        if (CurrentHP - damageValue <= MinHP)
+
+        float dmg = Mathf.Max(0f, ctx.Damage);
+
+        if (CurrentHP - dmg <= MinHP)
         {
-            CurrentHP = MinHP;
+            CurrentHP    = MinHP;
             CanBeDamaged = false;
-            Die();
+
+            if (dmg > 0f) _damageTextPool.ShowDamage(Mathf.Round(dmg * 10f) / 10f, transform.position);
+
+            OnDamaged?.Invoke(ctx);
+            Die(ctx);
         }
         else
         {
-            CurrentHP -= damageValue;
-            damageValue = Mathf.Round(damageValue * 10f) / 10f;
-            _damageTextPool.ShowDamage(damageValue, transform.position);
+            CurrentHP -= dmg;
+            if (dmg > 0f) _damageTextPool.ShowDamage(Mathf.Round(dmg * 10f) / 10f, transform.position);
+
+            OnDamaged?.Invoke(ctx);
         }
     }
 
-    private void Die()
+    private void Die(in DamageContext lastCtx)
     {
         OnEnemyDead?.Invoke(transform);
+        OnKilled?.Invoke(lastCtx);
         _onEnemyDead?.Invoke();
         _enemyAnimation.PlayDeath();
         _enemyMove.StopChasing();
@@ -91,24 +76,52 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
 
     private IEnumerator DestroySkeleton()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }
 
-    public void ApplyDot(float dps, float duration)
+    public void ApplyDot(float dps, float duration, float tickRate = 1f)
     {
         _dotDps = dps;
-        RefreshDot(duration); 
+        _dotTickRate = Mathf.Max(0.01f, tickRate);
+        RefreshDot(duration);
     }
 
     public void RefreshDot(float duration)
     {
         if (duration <= 0f) return;
-        
         if (_dotCoroutine != null) StopCoroutine(_dotCoroutine);
         _dotCoroutine = StartCoroutine(DotRoutine(duration));
-
         IsDotActive = true;
-        //Debug.Log($"<color=orange>[Ignite]</color> applied {_dotDps:F1} DPS for {duration:F1}s");
+    }
+
+    private IEnumerator DotRoutine(float duration)
+    {
+        float elapsed = 0f;
+        var wait = new WaitForSeconds(1f / _dotTickRate);
+
+        while (elapsed < duration)
+        {
+            var tickCtx = new DamageContext
+            {
+                Attacker = null,
+                Target = this,
+                SkillBehaviour = null,
+                SkillDef = null,
+                Slot = SkillSlot.Undefined,
+                Type = SkillDamageType.DOT,
+                Damage = _dotDps,
+                IsCrit = false,
+                CritMultiplier = 1f
+            };
+
+            ApplyDamageInternal(tickCtx);
+
+            yield return wait;
+            elapsed += 1f / _dotTickRate;
+        }
+
+        IsDotActive  = false;
+        _dotCoroutine = null;
     }
 }

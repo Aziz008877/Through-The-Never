@@ -24,27 +24,47 @@ public class TiamatProjectile : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        
+        var targetComp = _target as Component;
+        if (targetComp == null)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-        Vector3 targetPos = ((MonoBehaviour) _target).transform.position;
+        Vector3 targetPos = targetComp.transform.position;
         transform.position = Vector3.MoveTowards(transform.position, targetPos, _speed * Time.deltaTime);
 
         if (Vector3.Distance(transform.position, targetPos) <= _hitRadius)
         {
-            Impact();
+            Impact(targetPos);
         }
     }
 
-    private void Impact()
+    private void Impact(Vector3 hitPoint)
     {
-        SkillDamageType type = SkillDamageType.Basic;
-        float finalDamage = _damage;
-
-        _ownerContext.ApplyDamageModifiers(ref finalDamage, ref type);
-        _target.ReceiveDamage(finalDamage, type);
-        _ownerContext.FireOnDamageDealt(_target, finalDamage, type);
-
+        var ctx = new DamageContext
+        {
+            Attacker = _ownerContext,
+            Target = _target,
+            SkillBehaviour = null,
+            SkillDef = null,
+            Slot = SkillSlot.Special,
+            Type = SkillDamageType.Basic,
+            Damage = _damage,
+            IsCrit = false,
+            CritMultiplier = 1f,
+            HitPoint = hitPoint,
+            HitNormal = Vector3.up,
+            SourceGO = gameObject
+        };
+        
+        _ownerContext.ApplyDamageContextModifiers(ref ctx);
+        
+        _target.ReceiveDamage(ctx);
+        
         if (_target.CurrentHP <= _target.MinHP)
-            _ownerContext.Hp.ReceiveHP(finalDamage * 0.5f);
+            _ownerContext.Hp.ReceiveHP(ctx.Damage * 0.5f);
 
         if (_impactVfx) Instantiate(_impactVfx, transform.position, Quaternion.identity);
         Destroy(gameObject);

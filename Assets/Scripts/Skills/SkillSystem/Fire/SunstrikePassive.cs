@@ -1,5 +1,5 @@
 using UnityEngine;
-public sealed class SunstrikePassive : PassiveSkillBehaviour, IOnDamageDealtModifier
+public sealed class SunstrikePassive : PassiveSkillBehaviour, IOnDamageDealtContextModifier
 {
     [SerializeField] [Range(0f, 2f)] private float _bonusPercent = 0.25f;
     [SerializeField] private float _igniteDuration = 5f;
@@ -8,27 +8,27 @@ public sealed class SunstrikePassive : PassiveSkillBehaviour, IOnDamageDealtModi
 
     public override void EnablePassive()
     {
-        Context.RegisterOnDamageDealtModifier(this);
+        Context.RegisterOnDamageDealtContextModifier(this);
         Debug.Log("<color=yellow>[Sunstrike]</color> enabled");
     }
 
     public override void DisablePassive()
     {
-        Context.UnregisterOnDamageDealtModifier(this);
+        Context.UnregisterOnDamageDealtContextModifier(this);
         Debug.Log("<color=yellow>[Sunstrike]</color> disabled");
     }
 
-    public void OnDamageDealt(IDamageable target, float damage, SkillDamageType type, ActorContext ctx)
+    public void OnDamageDealt(in DamageContext ctx)
     {
         if (_applyingBonus) return;
         
-        if (target is not IDotReceivable dot || !dot.IsDotActive)
+        if (ctx.Target is not IDotReceivable dot || !dot.IsDotActive)
         {
             Debug.Log("<color=yellow>[Sunstrike]</color> no Ignite – skip");
             return;
         }
 
-        float extra = damage * (BonusMul - 1f);
+        float extra = ctx.Damage * (BonusMul - 1f);
         
         if (extra <= 0f)
         {
@@ -37,7 +37,7 @@ public sealed class SunstrikePassive : PassiveSkillBehaviour, IOnDamageDealtModi
         }
 
         _applyingBonus = true;
-        target.ReceiveDamage(extra, type);
+        ctx.Target.ReceiveDamage(ctx);
         dot.RefreshDot(_igniteDuration);
         _applyingBonus = false;
 

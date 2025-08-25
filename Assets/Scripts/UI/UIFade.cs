@@ -1,16 +1,20 @@
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIFade : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField] private Image _fadeImage;
+    [SerializeField] private DotweenSettings _dotweenSettings;
+    public void Fade(float fadeValue)
     {
-        
+        _fadeImage
+            .DOFade(fadeValue, _dotweenSettings.Duration)
+            .SetEase(_dotweenSettings.AnimationType);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RaycastState(bool state)
     {
-        
+        _fadeImage.raycastTarget = state;
     }
 }

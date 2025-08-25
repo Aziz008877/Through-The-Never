@@ -10,9 +10,24 @@ public class PlayerHP : MonoBehaviour, IActorHp
     [SerializeField] private float _currentHP, _minHp, _maxHP;
     [SerializeField] private UnityEvent _onPlayerDead;
     private bool _canBeDamaged = true;
-    public float CurrentHP => _currentHP;
-    public float MinHP => _minHp;
-    public float MaxHP => _maxHP;
+    public float CurrentHP
+    {
+        get => _currentHP;
+        set => _currentHP = value;
+    }
+
+    public float MinHP
+    {
+        get => _minHp;
+        set => _minHp = value;
+    }
+
+    public float MaxHP
+    {
+        get => _maxHP;
+        set => _maxHP = value;
+    }
+
     public Action<float> OnHpValueUpdated;
     public Action OnPlayerDead;
     public event IncomingDamageHandler OnIncomingDamage;
@@ -25,7 +40,8 @@ public class PlayerHP : MonoBehaviour, IActorHp
         UpdateHP();
     }
 
-    private void UpdateHP()
+
+    public void UpdateHP()
     {
         ClampHP();
 

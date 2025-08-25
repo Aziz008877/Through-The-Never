@@ -22,7 +22,7 @@ MonoBehaviour:
   School: 1
   BehaviourPrefab: {fileID: 5626904384520279098, guid: 2a56afd2a2dd0d74ba01d413727549e3, type: 3}
   CastType: 0
-  Damage: 0
+  Damage: 15
   Cooldown: 0
   Duration: 0
   Range: 0

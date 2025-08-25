@@ -59,29 +59,44 @@ public class EmberGuardSkill : ActiveSkillBehaviour, ISkillModifier, IDefenceDur
         if (!_active || dmg <= 0f) return;
 
         float original = dmg;
-        
-        float reflected = dmg * _reflectPercent;
-        SkillDamageType reflectType = SkillDamageType.Basic;
 
-        Context.ApplyDamageModifiers(ref reflected, ref reflectType);
+        // 1) режем входящий урон
         dmg *= 1f - _damageReduction;
 
+        // 2) считаем отражение
+        float reflected = original * _reflectPercent;
+
         float radius = Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), 5f);
+        var hits = Physics.OverlapSphere(Context.transform.position, radius);
 
-        Collider[] hits = Physics.OverlapSphere(Context.transform.position, radius);
-        foreach (var hit in hits)
+        for (int i = 0; i < hits.Length; i++)
         {
-            if (!hit.TryGetComponent(out IDamageable enemy)) continue;
+            if (!hits[i].TryGetComponent(out IDamageable enemy)) continue;
 
-            enemy.ReceiveDamage(reflected, reflectType);
-            Context.FireOnDamageDealt(enemy, reflected, reflectType);
+            var reflectCtx = new DamageContext
+            {
+                Attacker       = Context,
+                Target         = enemy,
+                SkillBehaviour = this,
+                SkillDef       = Definition,
+                Slot           = Definition.Slot,
+                Type           = SkillDamageType.Basic,
+                Damage         = reflected,
+                IsCrit         = false,
+                CritMultiplier = 1f,
+                HitPoint       = Context.transform.position,
+                SourceGO       = gameObject
+            };
+
+            // вместо старого ApplyDamageModifiers(...)
+            Context.ApplyDamageContextModifiers(ref reflectCtx);
+
+            enemy.ReceiveDamage(reflectCtx); // события разлетятся внутри цели
         }
 
-        Debug.Log(
-            $"<color=orange>[Ember Guard]</color> incoming {original:F0} → " +
-            $"reduced {dmg:F0} (-{_damageReduction:P0}), " +
-            $"reflected {reflected:F0}");
+        Debug.Log($"<color=orange>[Ember Guard]</color> incoming {original:F0} → reduced {dmg:F0} (-{_damageReduction:P0}), reflected {reflected:F0}");
     }
+
     
     public float Evaluate(SkillKey key, float value)
     {

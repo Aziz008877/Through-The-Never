@@ -18,20 +18,35 @@ public class FieryRetaliationPassive : PassiveSkillBehaviour
     {
         if (_pulseVfx) _pulseVfx.Play();
 
-        Collider[] hits = Physics.OverlapSphere(Context.transform.position, _radius);
+        Vector3 origin = Context.transform.position;
+        var hits = Physics.OverlapSphere(origin, _radius);
 
-        foreach (var hit in hits)
+        for (int i = 0; i < hits.Length; i++)
         {
-            if (hit.transform == Context.transform) continue;
+            var tr = hits[i].transform;
+            if (tr == Context.transform) continue;
+            if (!hits[i].TryGetComponent(out IDamageable target)) continue;
+            // если не хотим бить того, кто нанёс урон:
+            // if (ReferenceEquals(target, source)) continue;
 
-            if (!hit.TryGetComponent(out IDamageable target)) continue;
+            var ctx = new DamageContext
+            {
+                Attacker       = Context,
+                Target         = target,
+                SkillBehaviour = null,                    // это не ActiveSkillBehaviour
+                SkillDef       = Definition,              // если класс наследует SkillBehaviour — ок
+                Slot           = Definition.Slot,         // иначе можно поставить SkillSlot.Undefined
+                Type           = SkillDamageType.Basic,
+                Damage         = _damage,
+                IsCrit         = false,
+                CritMultiplier = 1f,
+                HitPoint       = origin,
+                SourceGO       = gameObject
+            };
 
-            float dmg  = _damage;
-            SkillDamageType type = SkillDamageType.Basic;
-            Context.ApplyDamageModifiers(ref dmg, ref type);
-
-            target.ReceiveDamage(dmg, type);
-            Context.FireOnDamageDealt(target, dmg, type);
+            Context.ApplyDamageContextModifiers(ref ctx);
+            target.ReceiveDamage(ctx); // события разойдутся внутри цели
         }
     }
+
 }

@@ -41,20 +41,32 @@ public class OceantideSkill : PassiveSkillBehaviour
     {
         Collider[] hits = Physics.OverlapSphere(Context.transform.position, Definition.Raduis);
 
-        foreach (Collider col in hits)
+        foreach (var col in hits)
         {
             if (!col.TryGetComponent(out IDamageable enemy)) continue;
-        
-            float dmg  = Definition.Damage;
-            SkillDamageType type = SkillDamageType.Basic;
-            Context.ApplyDamageModifiers(ref dmg, ref type);
-            enemy.ReceiveDamage(dmg, type);
-            Context.FireOnDamageDealt(enemy, dmg, type);
-            
-            if (col.TryGetComponent(out StunDebuff stun))
+            if (col.transform == Context.transform) continue; // опционально: не бьём себя
+
+            var ctx = new DamageContext
             {
+                Attacker       = Context,
+                Target         = enemy,
+                SkillBehaviour = this,                 // теперь поле базового типа SkillBehaviour
+                SkillDef       = Definition,
+                Slot           = Definition.Slot,
+                Type           = SkillDamageType.Basic,
+                Damage         = Definition.Damage,    // урон пассивки
+                IsCrit         = false,                // при желании можешь зароллить крит вручную
+                CritMultiplier = Context.CritMultiplier,
+                HitPoint       = col.transform.position,
+                HitNormal      = Vector3.up,
+                SourceGO       = gameObject
+            };
+
+            Context.ApplyDamageContextModifiers(ref ctx);
+            enemy.ReceiveDamage(ctx);                  // события разойдутся из цели автоматически
+
+            if (col.TryGetComponent(out StunDebuff stun))
                 stun.ApplyStun(_stunDuration);
-            }
 
             if (col.attachedRigidbody != null)
             {
@@ -62,6 +74,7 @@ public class OceantideSkill : PassiveSkillBehaviour
                 col.attachedRigidbody.AddForce(dir * _pushForce, ForceMode.VelocityChange);
             }
         }
+
     }
     
     private void Detach()

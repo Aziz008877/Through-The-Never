@@ -50,19 +50,26 @@ public class SupernovaSkill : ActiveSkillBehaviour
         float t = Mathf.Clamp01(_timer / _maxChargeTime);
 
         float radius = Mathf.Lerp(_minRadius, _maxRadius, t);
-
         radius = Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), radius);
 
         float damage = Mathf.Lerp(_minDamage, _maxDamage, t);
-        SkillDamageType type = SkillDamageType.Basic;
-        Context.ApplyDamageModifiers(ref damage, ref type);
 
-        Collider[] hits = Physics.OverlapSphere(Context.transform.position, radius);
-        foreach (var h in hits)
+        var hits = Physics.OverlapSphere(Context.transform.position, radius);
+        for (int i = 0; i < hits.Length; i++)
         {
-            if (!h.TryGetComponent(out IDamageable d)) continue;
-            d.ReceiveDamage(damage, type);
-            Context.FireOnDamageDealt(d, damage, type);
+            if (!hits[i].TryGetComponent(out IDamageable d)) continue;
+
+            // Собираем фактический удар (крит/моды применятся внутри BuildDamage/контекстных модов)
+            var ctx = BuildDamage(damage, SkillDamageType.Basic,
+                hitPoint: hits[i].transform.position,
+                hitNormal: Vector3.up,
+                sourceGO: gameObject);
+            ctx.Target = d;
+
+            // Если нужны дополнительные моды поверх — можно прогнать ещё раз:
+            // Context.ApplyDamageContextModifiers(ref ctx);
+
+            d.ReceiveDamage(ctx); // события разойдутся внутри цели автоматически
         }
 
         if (_blastVfx != null)
@@ -74,6 +81,7 @@ public class SupernovaSkill : ActiveSkillBehaviour
 
         StartCooldown();
     }
+
 
     private void OnDisable()
     {

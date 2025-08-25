@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerEnemyHandler : MonoBehaviour, IEnemyHandler
 {
     [field: SerializeField] public BaseEnemyHP[] Enemies { get; set; }
+    public event Action<IDamageable> EnemyRegistered;
     public event Action<Transform> OnEnemyKilled;
 
     private void Start()
@@ -11,6 +12,7 @@ public class PlayerEnemyHandler : MonoBehaviour, IEnemyHandler
         foreach (var enemyHp in Enemies)
         {
             RegisterEnemy(enemyHp);
+            EnemyRegistered?.Invoke(enemyHp);
         }
     }
 

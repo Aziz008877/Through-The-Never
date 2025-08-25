@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public sealed class CombustPassiveUltimate : PassiveSkillBehaviour, IOnDamageDealtModifier
+public sealed class CombustPassiveUltimate : PassiveSkillBehaviour, IOnDamageDealtContextModifier
 {
     [Header("Combust parameters")]
     [SerializeField] private float      _duration        = 2f;
@@ -12,40 +12,52 @@ public sealed class CombustPassiveUltimate : PassiveSkillBehaviour, IOnDamageDea
     private bool _addingBonus;             // защита от рекурсии
 
     public override void EnablePassive()  =>
-        Context.RegisterOnDamageDealtModifier(this);
+        Context.RegisterOnDamageDealtContextModifier(this);
 
     public override void DisablePassive() =>
-        Context.UnregisterOnDamageDealtModifier(this);
+        Context.UnregisterOnDamageDealtContextModifier(this);
 
-    public void OnDamageDealt(IDamageable target, float damage, SkillDamageType type, ActorContext ctx)
+    public void OnDamageDealt(in DamageContext ctx)
     {
-        if (_addingBonus) return;                       // избегаем StackOverflow
-        if (target is not BaseEnemyHP hp) return;
+        if (_addingBonus) return;                       
+        if (ctx.Target is not BaseEnemyHP hp) return;
 
-        /* ── достаём компонент, он уже есть на префабе ── */
         if (!hp.TryGetComponent(out CombustDebuff combust))
-            return;                                     // защита на случай пропуска
+            return;
 
-        /* а) попытка активировать бомбу */
-        if (combust.Activate(_duration, _explosionDamage, _explosionRadius, _vfxPrefab, ctx))
+        // а) пробуем активировать бомбу
+        if (combust.Activate(_duration, _explosionDamage, _explosionRadius, _vfxPrefab, ctx.Attacker))
         {
             Debug.Log($"<color=orange>[Combust]</color> applied to {hp.name}");
-            return;     // только что наложили – базовый урон уже прошёл
+            return;
         }
 
-        /* б) если бомба активна и в фазе Amplify → бонусный урон */
+        // б) если уже в фазе Amplify → накладываем бонусный урон
         if (combust.IsAmplifyPhase)
         {
-            float extra = damage * _amplifyPercent;
+            float extra = ctx.Damage * _amplifyPercent;
+
+            var bonusCtx = new DamageContext
+            {
+                Attacker       = ctx.Attacker,
+                Target         = hp,
+                SkillBehaviour = ctx.SkillBehaviour,
+                SkillDef       = ctx.SkillDef,
+                Slot           = ctx.Slot,
+                Type           = ctx.Type,
+                Damage         = extra,
+                IsCrit         = false,
+                CritMultiplier = 1f,
+                SourceGO       = ctx.SourceGO
+            };
 
             _addingBonus = true;
-            hp.ReceiveDamage(extra, type);
+            hp.ReceiveDamage(bonusCtx); // тут и HP спишется, и событие OnDamageDealt сработает
             _addingBonus = false;
-
-            ctx.FireOnDamageDealt(hp, extra, type);
 
             Debug.Log($"<color=orange>[Combust]</color> +{_amplifyPercent:P0} " +
                       $"({extra:F1}) bonus to {hp.name}");
         }
     }
+
 }

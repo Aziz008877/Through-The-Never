@@ -4,7 +4,7 @@ using UnityEngine;
 public abstract class SkillBehaviour : MonoBehaviour
 {
     public SkillDefinition Definition { get; private set; }
-    protected ActorContext Context { get; private set; }
+    public ActorContext Context { get; private set; }
     protected PlayerContext PlayerCtx    => Context as PlayerContext;
     protected CompanionContext CompanionCtx => Context as CompanionContext;
 
@@ -18,23 +18,16 @@ public abstract class SkillBehaviour : MonoBehaviour
 public abstract class ActiveSkillBehaviour : SkillBehaviour
 {
     protected float Cooldown => Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Cooldown), Definition.Cooldown);
-    protected float Damage => Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Damage), Definition.Damage);
-    protected float Radius => Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), Definition.Raduis);
+    protected float Damage => Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Damage),   Definition.Damage);
+    protected float Radius => Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius),   Definition.Raduis);
     protected float Duration => Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Duration), Definition.Duration);
-
-    public  bool  IsReady => _cooldownTimer <= 0f;
-    public  float RemainingCooldown => _cooldownTimer;
-
+    public bool IsReady => _cooldownTimer <= 0f;
+    public float RemainingCooldown => _cooldownTimer;
     protected float _cooldownTimer;
-
     public Action<float> OnCooldownStarted;
     public Action<float> OnSkillActivated;
+    public virtual void TryCast() { OnSkillActivated?.Invoke(Duration); }
 
-    public virtual void TryCast()
-    {
-        OnSkillActivated?.Invoke(Duration);
-    }
-    
     public void ReduceCooldownByPercent(float percent01)
     {
         percent01 = Mathf.Clamp01(percent01);
@@ -42,11 +35,8 @@ public abstract class ActiveSkillBehaviour : SkillBehaviour
         _cooldownTimer -= _cooldownTimer * percent01;
     }
 
-    public void SetCooldown(float seconds)
-    {
-        _cooldownTimer = Mathf.Max(0f, seconds);
-    }
-    
+    public void SetCooldown(float seconds) => _cooldownTimer = Mathf.Max(0f, seconds);
+
     protected virtual void Update()
     {
         if (_cooldownTimer > 0f) _cooldownTimer -= Time.deltaTime;
@@ -56,6 +46,39 @@ public abstract class ActiveSkillBehaviour : SkillBehaviour
     {
         _cooldownTimer = Cooldown;
         OnCooldownStarted?.Invoke(_cooldownTimer);
+    }
+
+    public DamageContext BuildDamage(float amount, SkillDamageType type, Vector3 hitPoint = default, Vector3 hitNormal = default, GameObject sourceGO = null)
+    {
+        var ctx = new DamageContext
+        {
+            Attacker = Context,
+            SkillBehaviour = this,
+            SkillDef = Definition,
+            Slot = Definition.Slot,
+            Type = type,
+            Damage = amount,
+            IsCrit = UnityEngine.Random.value < Context.CritChance,
+            CritMultiplier = Context.CritMultiplier,
+            HitPoint = hitPoint,
+            HitNormal = hitNormal,
+            SourceGO = sourceGO
+        };
+
+        if (ctx.IsCrit) ctx.Damage *= ctx.CritMultiplier;
+
+        Context.ApplyDamageContextModifiers(ref ctx);
+        return ctx;
+    }
+
+    public DamageContext BuildDot(float dps, float duration, float tickRate = 1f, Vector3 hitPoint = default, Vector3 hitNormal = default, GameObject sourceGO = null)
+    {
+        var ctx = BuildDamage(0f, SkillDamageType.DOT, hitPoint, hitNormal, sourceGO);
+        ctx.HasDot = true;
+        ctx.DotDps = dps;
+        ctx.DotDuration = duration;
+        ctx.DotTickRate = tickRate <= 0f ? 1f : tickRate;
+        return ctx;
     }
 }
 

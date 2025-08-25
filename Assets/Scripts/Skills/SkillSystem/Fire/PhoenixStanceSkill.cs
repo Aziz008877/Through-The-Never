@@ -89,14 +89,15 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour, IDefenceDurationSkill
         {
             if (!hit.TryGetComponent(out IDamageable enemy)) continue;
 
-            float dmg  = _aoeDamage;
-            SkillDamageType type = SkillDamageType.Basic;
-            Context.ApplyDamageModifiers(ref dmg, ref type);
+            var ctx = BuildDamage(_aoeDamage, SkillDamageType.Basic, hitPoint: hit.transform.position, hitNormal: Vector3.up, sourceGO: gameObject);
+            ctx.Target = enemy;
 
-            enemy.ReceiveDamage(dmg, type);
-            Context.FireOnDamageDealt(enemy, dmg, type);
-            _totalDamageDone += dmg;
+            // при желании: Context.ApplyDamageContextModifiers(ref ctx);
+
+            enemy.ReceiveDamage(ctx);
+            _totalDamageDone += ctx.Damage; // фактический урон после всех модификаторов
         }
+
 
         float heal = _totalDamageDone * _healPercent;
         Context.Hp.ReceiveHP(heal);

@@ -1,16 +1,15 @@
 using UnityEngine;
 
-public class RejuvenationSkillPassive : PassiveSkillBehaviour, IOnDamageDealtModifier
+public class RejuvenationSkillPassive : PassiveSkillBehaviour, IOnDamageDealtContextModifier
 {
     [SerializeField, Range(0f,1f)] private float _lifestealPercent = 0.3f;
     [SerializeField] private float _creditWindow = 0.6f;
-
     private ActiveSkillBehaviour _special;
     private float _creditUntil;
 
     public override void EnablePassive()
     {
-        Context.RegisterOnDamageDealtModifier(this);
+        Context.RegisterOnDamageDealtContextModifier(this);
 
         _special = Context.SkillManager.GetActive(SkillSlot.Special);
         if (_special) _special.OnCooldownStarted += OnSpecialCast;
@@ -20,7 +19,7 @@ public class RejuvenationSkillPassive : PassiveSkillBehaviour, IOnDamageDealtMod
 
     public override void DisablePassive()
     {
-        Context.UnregisterOnDamageDealtModifier(this);
+        Context.UnregisterOnDamageDealtContextModifier(this);
 
         if (_special) _special.OnCooldownStarted -= OnSpecialCast;
         _special = null;
@@ -41,12 +40,12 @@ public class RejuvenationSkillPassive : PassiveSkillBehaviour, IOnDamageDealtMod
         _creditUntil = Time.time + _creditWindow;
     }
 
-    public void OnDamageDealt(IDamageable target, float damage, SkillDamageType type, ActorContext context)
+    public void OnDamageDealt(in DamageContext ctx)
     {
-        if (damage <= 0f) return;
+        if (ctx.Damage <= 0f) return;
         if (Time.time > _creditUntil) return;
 
-        float heal = damage * _lifestealPercent;
+        float heal = ctx.Damage * _lifestealPercent;
         Context.Hp.ReceiveHP(heal);
     }
 }

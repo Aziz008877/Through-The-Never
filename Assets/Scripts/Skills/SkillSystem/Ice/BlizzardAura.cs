@@ -85,11 +85,23 @@ public class BlizzardAura : MonoBehaviour
             // урон
             foreach (var dmg in uniqueDamageables)
             {
-                float d = dmgTick;
-                var type = SkillDamageType.Basic;
-                _ctx.ApplyDamageModifiers(ref d, ref type);
-                dmg.ReceiveDamage(d, type);
-                _ctx.FireOnDamageDealt(dmg, d, type);
+                var ctx = new DamageContext
+                {
+                    Attacker       = _ctx,                  // ActorContext источника
+                    Target         = dmg,
+                    SkillBehaviour = null,
+                    SkillDef       = null,
+                    Slot           = SkillSlot.Undefined,
+                    Type           = SkillDamageType.Basic, // как было
+                    Damage         = dmgTick,               // урон за тик ДО модификаторов
+                    IsCrit         = false,
+                    CritMultiplier = 1f,
+                    HitPoint       = (dmg as Component)?.transform.position ?? transform.position,
+                    SourceGO       = gameObject
+                };
+
+                _ctx.ApplyDamageContextModifiers(ref ctx); // вместо ApplyDamageModifiers(...)
+                dmg.ReceiveDamage(ctx);                    // события разойдутся внутри цели
             }
 
             // frostbite

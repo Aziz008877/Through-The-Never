@@ -49,23 +49,31 @@ public class SolarRuneSkill : ActiveSkillBehaviour
 
     private void Tick(Vector3 center, float radius, float dmgTick, float healTick)
     {
+        // Лечение себе (без контекста урона — это не урон)
         if (Vector3.Distance(Context.transform.position, center) <= radius)
             Context.Hp.ReceiveHP(healTick);
 
         _enemies.Clear();
-        Collider[] cols = Physics.OverlapSphere(center, radius);
-        foreach (var col in cols)
-            if (col.TryGetComponent(out IDamageable d) && !_enemies.Contains(d))
-                _enemies.Add(d);
-
-        SkillDamageType type = SkillDamageType.Basic;
-        foreach (var enemy in _enemies)
+        var cols = Physics.OverlapSphere(center, radius);
+        for (int i = 0; i < cols.Length; i++)
         {
-            float dmg = dmgTick;
-            Context.ApplyDamageModifiers(ref dmg, ref type);
+            if (cols[i].TryGetComponent(out IDamageable d) && !_enemies.Contains(d))
+                _enemies.Add(d);
+        }
+        if (_enemies.Count == 0) return;
 
-            enemy.ReceiveDamage(dmg, type);
-            Context.FireOnDamageDealt(enemy, dmg, type);
+        for (int i = 0; i < _enemies.Count; i++)
+        {
+            var enemy = _enemies[i];
+
+            // Собираем фактический удар тиком
+            var ctx = BuildDamage(dmgTick, SkillDamageType.Basic, center, Vector3.up, gameObject);
+            ctx.Target = enemy;
+
+            // Если нужно — можно ещё раз прогнать контекстные модификаторы:
+            // Context.ApplyDamageContextModifiers(ref ctx);
+
+            enemy.ReceiveDamage(ctx); // события разойдутся из цели автоматически
         }
     }
 

@@ -107,12 +107,14 @@ public class IceBoulderSkill : ActiveSkillBehaviour
             var col = hits[i];
             if (!col.TryGetComponent(out IDamageable tgt)) continue;
 
-            float dmg = Damage;
-            var type = SkillDamageType.Basic;
-            Context.ApplyDamageModifiers(ref dmg, ref type);
-            tgt.ReceiveDamage(dmg, type);
-            Context.FireOnDamageDealt(tgt, dmg, type);
-            dealt += dmg;
+            var ctx = BuildDamage(Damage, SkillDamageType.Basic,
+                hitPoint: col.transform.position,
+                hitNormal: Vector3.up,
+                sourceGO: gameObject);
+            ctx.Target = tgt;
+
+            tgt.ReceiveDamage(ctx);      // события разойдутся внутри цели
+            dealt += ctx.Damage;         // фактический урон после модификаторов/критов
         }
 
         if (_boulderInstance) Destroy(_boulderInstance);

@@ -14,7 +14,8 @@ public class CombustDebuff : MonoBehaviour
     private Coroutine _lifeRoutine;
     private GameObject _vfxInst;
     private BaseEnemyHP _hp;
-    
+    private bool _exploded = false;
+
     public bool Activate(float duration, float explosionDmg, float explosionRad, GameObject vfxPrefab, ActorContext ownerCtx)
     {
         if (IsActive) return false;
@@ -49,23 +50,49 @@ public class CombustDebuff : MonoBehaviour
     
     private void Explode()
     {
-        Debug.Log($"<color=orange>[Combust]</color> {_hp.name} EXPLODES!");
+        if (_exploded) return;
+        _exploded = true;
 
-        _hp.ReceiveDamage(_explosionDmg, SkillDamageType.Basic);
+        Vector3 p = transform.position;
 
-        Collider[] hits = Physics.OverlapSphere(transform.position, _explosionRad);
-        foreach (var h in hits)
+        var selfCtx = new DamageContext
         {
-            if (!h.TryGetComponent(out BaseEnemyHP enemy)) continue;
-            if (enemy == _hp) continue;
+            Attacker = _ownerCtx,
+            Target   = _hp,
+            Type     = SkillDamageType.Basic,
+            Damage   = _explosionDmg,
+            IsCrit   = false,
+            CritMultiplier = 1f,
+            HitPoint = p,
+            SourceGO = gameObject,
+            Slot     = SkillSlot.Ultimate
+        };
+        _ownerCtx.ApplyDamageContextModifiers(ref selfCtx);
+        _hp.ReceiveDamage(selfCtx);
 
-            enemy.ReceiveDamage(_explosionDmg, SkillDamageType.Basic);
-            _ownerCtx.FireOnDamageDealt(enemy, _explosionDmg, SkillDamageType.Basic);
+        var hits = Physics.OverlapSphere(p, _explosionRad);
+        for (int i = 0; i < hits.Length; i++)
+        {
+            if (!hits[i].TryGetComponent(out BaseEnemyHP enemy) || enemy == _hp) continue;
 
-            Debug.Log($"<color=orange>[Combust]</color> AoE hit {enemy.name} " +
-                      $"-{_explosionDmg:F1}");
+            var aoeCtx = new DamageContext
+            {
+                Attacker = _ownerCtx,
+                Target   = enemy,
+                Type     = SkillDamageType.Basic,
+                Damage   = _explosionDmg,
+                IsCrit   = false,
+                CritMultiplier = 1f,
+                HitPoint = p,
+                SourceGO = gameObject,
+                Slot     = SkillSlot.Undefined
+            };
+            _ownerCtx?.ApplyDamageContextModifiers(ref aoeCtx);
+            enemy.ReceiveDamage(aoeCtx);
         }
     }
+
+
     
     private void ResetState()
     {

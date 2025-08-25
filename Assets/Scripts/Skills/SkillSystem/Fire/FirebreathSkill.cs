@@ -46,26 +46,34 @@ public class FirebreathSkill : ActiveSkillBehaviour
 
     private void DealConeDamage()
     {
-        Collider[] hits = Physics.OverlapSphere(Context.transform.position, _coneRange);
-        Vector3 forward = Context.transform.forward;
+        var origin  = Context.transform.position;
+        var forward = Context.transform.forward;
 
-        foreach (var col in hits)
+        var hits = Physics.OverlapSphere(origin, _coneRange);
+        for (int i = 0; i < hits.Length; i++)
         {
+            var col = hits[i];
             if (!col.TryGetComponent(out IDamageable target)) continue;
+            if (_hitThisCast != null && _hitThisCast.Contains(target)) continue; // защита от повторов
 
-            Vector3 dir = col.transform.position - Context.transform.position;
+            Vector3 dir = col.transform.position - origin;
             dir.y = 0f;
-            if (dir.sqrMagnitude == 0f) continue;
+            if (dir.sqrMagnitude <= 0f) continue;
             if (Vector3.Angle(forward, dir) > _coneAngle) continue;
 
-            float dmg  = _tickDamage * _tickRate;
-            SkillDamageType type = SkillDamageType.Basic;
-            
-            Context.ApplyDamageModifiers(ref dmg, ref type);
+            // урон за тик
+            float dmgPerTick = _tickDamage * _tickRate;
 
-            target.ReceiveDamage(dmg, type);
-            Context.FireOnDamageDealt(target, dmg, type);
-            _hitThisCast.Add(target);
+            // собираем DamageContext (крит/моды применятся внутри BuildDamage)
+            var ctx = BuildDamage(dmgPerTick, SkillDamageType.Basic, hitPoint: col.transform.position, hitNormal: Vector3.up, sourceGO: gameObject);
+            ctx.Target = target;
+
+            // при желании можно ещё раз прогнать контекстные моды
+            // Context.ApplyDamageContextModifiers(ref ctx);
+
+            target.ReceiveDamage(ctx);
+            _hitThisCast?.Add(target);
         }
     }
+
 }

@@ -25,23 +25,33 @@ public class HailSpikeProjectile : MonoBehaviour
     {
         var cols = Physics.OverlapSphere(transform.position, _impactRadius, ~0, QueryTriggerInteraction.Ignore);
 
-        SkillDamageType type = SkillDamageType.Basic;
-        float baseDamage = _damage;
-        
-        _actorContext.ApplyDamageModifiers(ref baseDamage, ref type);
-        
-        float finalDamage = baseDamage;
-        if (_actorContext != null && _actorContext.CritChance > 0f && Random.value < _actorContext.CritChance)
-            finalDamage *= _actorContext.CritMultiplier;
-
         for (int i = 0; i < cols.Length; i++)
         {
             if (!cols[i].TryGetComponent<IDamageable>(out var d) || !d.CanBeDamaged) continue;
 
-            d.ReceiveDamage(finalDamage, type);
-            _actorContext.FireOnDamageDealt(d, finalDamage, type);
+            var ctx = new DamageContext
+            {
+                Attacker       = _actorContext,
+                Target         = d,
+                SkillBehaviour = null,                     // не активный скилл
+                SkillDef       = null,
+                Slot           = SkillSlot.Undefined,
+                Type           = SkillDamageType.Basic,    // как у тебя было
+                Damage         = _damage,                  // базовый урон ДО модификаторов
+                IsCrit         = (_actorContext != null && Random.value < _actorContext.CritChance),
+                CritMultiplier = _actorContext != null ? _actorContext.CritMultiplier : 1f,
+                HitPoint       = cols[i].transform.position,
+                HitNormal      = Vector3.up,
+                SourceGO       = gameObject
+            };
+
+            if (ctx.IsCrit) ctx.Damage *= ctx.CritMultiplier; // как в BuildDamage
+            _actorContext.ApplyDamageContextModifiers(ref ctx);
+
+            d.ReceiveDamage(ctx); // событие «урон нанесён» вызовется внутри цели
         }
 
         Destroy(gameObject);
     }
+
 }

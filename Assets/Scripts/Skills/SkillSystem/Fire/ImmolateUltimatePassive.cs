@@ -48,25 +48,42 @@ public sealed class ImmolateUltimatePassive : PassiveSkillBehaviour
             _pulseVfx.Play();
         }
 
-        Collider[] hits = Physics.OverlapSphere(Context.transform.position, _radius);
+        Vector3 origin = Context.transform.position;
+        var hits = Physics.OverlapSphere(origin, _radius);
 
-        foreach (Collider col in hits)
+        for (int i = 0; i < hits.Length; i++)
         {
+            var col = hits[i];
+            if (col.transform == Context.transform) continue;
             if (!col.TryGetComponent(out IDamageable enemy)) continue;
-            
-            float dmg  = _damage;
-            SkillDamageType type = SkillDamageType.Basic;
-            Context.ApplyDamageModifiers(ref dmg, ref type);
-            enemy.ReceiveDamage(dmg, type);
-            Context.FireOnDamageDealt(enemy, dmg, type);
+
+            var ctx = new DamageContext
+            {
+                Attacker       = Context,
+                Target         = enemy,
+                SkillBehaviour = null,
+                SkillDef       = null,
+                Slot           = SkillSlot.Passive,
+                Type           = SkillDamageType.Basic,
+                Damage         = _damage,
+                IsCrit         = false,
+                CritMultiplier = 1f,
+                HitPoint       = col.transform.position,
+                HitNormal      = Vector3.up,
+                SourceGO       = gameObject
+            };
+
+            Context.ApplyDamageContextModifiers(ref ctx);
+            enemy.ReceiveDamage(ctx);
 
             if (col.attachedRigidbody != null)
             {
-                Vector3 dir = (col.transform.position - Context.transform.position).normalized;
+                Vector3 dir = (col.transform.position - origin).normalized;
                 col.attachedRigidbody.AddForce(dir * _pushForce, ForceMode.VelocityChange);
             }
         }
     }
+
 
     private IEnumerator CastRandomSpecialDelayed(float delay)
     {

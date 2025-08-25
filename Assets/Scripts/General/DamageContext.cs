@@ -1,15 +1,27 @@
-public readonly struct DamageContext
+using System;
+using UnityEngine;
+public struct DamageContext
 {
-    public readonly float Damage;
-    public readonly SkillDamageType DamageType;
-    public readonly SkillSlot Slot;
-    public readonly ActiveSkillBehaviour Source;
+    public ActorContext Attacker;
+    public IDamageable  Target;
 
-    public DamageContext(float damage, SkillDamageType type, SkillSlot slot = SkillSlot.Basic, ActiveSkillBehaviour source = null)
-    {
-        Damage = damage;
-        DamageType = type;
-        Slot = slot;
-        Source = source;
-    }
+    public SkillBehaviour SkillBehaviour;
+    public SkillDefinition SkillDef;
+    public SkillSlot Slot;
+    public SkillDamageType Type;
+
+    public float Damage;
+    public bool IsCrit;
+    public float CritMultiplier;
+
+    public Vector3 HitPoint;
+    public Vector3 HitNormal;
+    public GameObject SourceGO;
+
+    public bool  HasDot;
+    public float DotDps;
+    public float DotDuration;
+    public float DotTickRate;
+
+    public bool IsLethalPrediction;
 }

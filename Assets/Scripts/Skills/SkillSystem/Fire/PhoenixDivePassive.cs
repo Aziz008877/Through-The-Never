@@ -94,17 +94,30 @@ public sealed class PhoenixDivePassive : PassiveSkillBehaviour, ISkillModifier
         Collider[] hits = Physics.OverlapSphere(Context.ActorPosition.position, radius);
         foreach (var h in hits)
         {
+            if (h.transform == Context.transform) continue;                // не бьём себя
             if (!h.TryGetComponent(out IDamageable target)) continue;
 
-            float dmg  = _impactDamage;
-            SkillDamageType type = SkillDamageType.Basic;          // 🔥
+            var ctx = new DamageContext
+            {
+                Attacker       = Context,
+                Target         = target,
+                SkillBehaviour = null,                                      // пассивка
+                SkillDef       = Definition,
+                Slot           = Definition.Slot,
+                Type           = SkillDamageType.Basic,
+                Damage         = _impactDamage,
+                IsCrit         = false,
+                CritMultiplier = 1f,
+                HitPoint       = h.transform.position,
+                HitNormal      = Vector3.up,
+                SourceGO       = gameObject
+            };
 
-            Context.ApplyDamageModifiers(ref dmg, ref type);
-            target.ReceiveDamage(dmg, type);                      // ⚠️  НАНОСИМ УРОН
-            Context.FireOnDamageDealt(target, dmg, type);
-
+            Context.ApplyDamageContextModifiers(ref ctx);                   // вместо ApplyDamageModifiers
+            target.ReceiveDamage(ctx);                                      // событие разойдётся из цели
             hitCount++;
         }
+
 
         Debug.Log($"<color=orange>[Phoenix Dive]</color> dealt {_impactDamage} to {hitCount} target(s)");
     }

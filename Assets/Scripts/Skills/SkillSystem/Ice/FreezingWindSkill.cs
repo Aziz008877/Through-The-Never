@@ -39,26 +39,42 @@ public class FreezingWindSkill : PassiveSkillBehaviour
 
         Collider[] hits = Physics.OverlapSphere(endPosition, Definition.Raduis);
 
-        foreach (Collider col in hits)
+        foreach (var col in hits)
         {
             if (!col.TryGetComponent(out IDamageable enemy)) continue;
-            
-            float dmg = Definition.Damage;
-            SkillDamageType type = SkillDamageType.Basic;
-            Context.ApplyDamageModifiers(ref dmg, ref type);
-            enemy.ReceiveDamage(dmg, type);
-            Context.FireOnDamageDealt(enemy, dmg, type);
+            if (col.transform == Context.transform) continue; // опционально: не бьём себя
 
+            var ctx = new DamageContext
+            {
+                Attacker       = Context,
+                Target         = enemy,
+                SkillBehaviour = null,                // пассивка
+                SkillDef       = Definition,          // чтобы знать, чем нанесено
+                Slot           = Definition.Slot,
+                Type           = SkillDamageType.Basic,
+                Damage         = Definition.Damage,   // здесь твой урон
+                IsCrit         = false,               // пассивка без крита (или сам ролльни при желании)
+                CritMultiplier = 1f,
+                HitPoint       = col.transform.position,
+                HitNormal      = Vector3.up,
+                SourceGO       = gameObject
+            };
+
+            Context.ApplyDamageContextModifiers(ref ctx); // контекстные модификаторы
+            enemy.ReceiveDamage(ctx);                     // событие разойдётся внутри цели
+
+            // физический толчок — без изменений
             if (col.attachedRigidbody != null)
             {
-                Vector3 dir = (col.transform.position - endPosition).normalized;
-                Vector3 dashDir = (endPosition - Context.transform.position).normalized;
+                Vector3 dir      = (col.transform.position - endPosition).normalized;
+                Vector3 dashDir  = (endPosition - Context.transform.position).normalized;
                 Vector3 finalDir = (dir + dashDir * 0.5f).normalized;
 
                 col.attachedRigidbody.linearVelocity = Vector3.zero;
                 col.attachedRigidbody.AddForce(finalDir * _pushForce, ForceMode.Impulse);
             }
         }
+
     }
     private void SpawnIceWind(Vector3 position, Vector3 forward)
     {

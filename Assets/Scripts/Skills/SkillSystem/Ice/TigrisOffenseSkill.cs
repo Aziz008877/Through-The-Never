@@ -75,29 +75,44 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
         Vector3 b = a + Context.CastPivot.forward * _range;
 
         var hits = Physics.OverlapCapsule(a, b, Radius, ~0, QueryTriggerInteraction.Collide);
-        float dmgPerTick = (Damage) * _tickRate; // можно добавить доп. DPS если надо
+
+        // урон за тик (DPS * tickInterval). У тебя Damage уже модифицирован через SkillModifierHub
+        float dmgPerTick = Damage * _tickRate;
 
         for (int i = 0; i < hits.Length; i++)
         {
             var col = hits[i];
 
+            // урон
             if (col.TryGetComponent<IDamageable>(out var tgt))
             {
-                float dmg = dmgPerTick;
-                var type = SkillDamageType.Basic;
-                Context.ApplyDamageModifiers(ref dmg, ref type);
-                tgt.ReceiveDamage(dmg, type);
-                Context.FireOnDamageDealt(tgt, dmg, type);
+                var ctx = BuildDamage(dmgPerTick, SkillDamageType.Basic,
+                    hitPoint: col.transform.position,
+                    hitNormal: Vector3.up,
+                    sourceGO: gameObject);
+                ctx.Target = tgt;
+
+                // при желании — дополнительные моды поверх:
+                // Context.ApplyDamageContextModifiers(ref ctx);
+
+                tgt.ReceiveDamage(ctx); // события разойдутся из цели сами
             }
 
+            // толчок вперёд
             Vector3 push = Context.CastPivot.forward * _pushForce;
 
             if (col.attachedRigidbody != null)
+            {
                 col.attachedRigidbody.AddForce(push, ForceMode.Acceleration);
+            }
             else if (col.TryGetComponent<NavMeshAgent>(out var agent) && agent.isOnNavMesh)
+            {
                 agent.Move(push * Time.deltaTime);
+            }
             else
+            {
                 col.transform.position += push * Time.deltaTime;
+            }
         }
     }
 }

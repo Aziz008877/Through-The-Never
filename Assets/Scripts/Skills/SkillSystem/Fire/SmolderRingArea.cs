@@ -21,13 +21,28 @@ public class SmolderRingArea : MonoBehaviour
     {
         if (other.TryGetComponent(out IDamageable enemy) && !_ticked.Contains(enemy))
         {
-            float dmg = _dps;
-            SkillDamageType type = SkillDamageType.Basic;
-            _context.ApplyDamageModifiers(ref dmg, ref type);
-            _context.FireOnDamageDealt(enemy, dmg, type);
+            var ctx = new DamageContext
+            {
+                Attacker       = _context,                 // ActorContext источника зоны
+                Target         = enemy,
+                SkillBehaviour = null,                     // не активный скилл
+                SkillDef       = null,
+                Slot           = SkillSlot.Undefined,
+                Type           = SkillDamageType.Basic,
+                Damage         = _dps,                     // столько ты и слал раньше
+                IsCrit         = false,
+                CritMultiplier = 1f,
+                HitPoint       = other.transform.position,
+                HitNormal      = Vector3.up,
+                SourceGO       = gameObject
+            };
+
+            _context.ApplyDamageContextModifiers(ref ctx);
+            enemy.ReceiveDamage(ctx);                      // события вызовутся внутри цели
             _ticked.Add(enemy);
         }
     }
+
 
     private void OnTriggerEnter(Collider other)
     {

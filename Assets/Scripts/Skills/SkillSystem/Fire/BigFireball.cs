@@ -28,10 +28,25 @@ public class BigFireball : Fireball
         {
             if (!h.TryGetComponent(out IDamageable target)) continue;
 
-            float damage = _instantDamage * _aoeMultiplier;
-            SkillDamageType type = SkillDamageType.Basic;
-            _context.ApplyDamageModifiers(ref damage, ref type);
-            target.ReceiveDamage(damage, type);
+            var ctx = new DamageContext
+            {
+                Attacker = _context,
+                Target = target,
+                SkillBehaviour = null,
+                SkillDef = null,
+                Slot = SkillSlot.Special,
+                Type = SkillDamageType.Basic,
+                Damage = _instantDamage * _aoeMultiplier,
+                IsCrit = false,
+                CritMultiplier = 1f,
+                HitPoint = h.transform.position,
+                HitNormal = Vector3.up,
+                SourceGO = gameObject
+            };
+
+            _context.ApplyDamageContextModifiers(ref ctx);
+            target.ReceiveDamage(ctx);
         }
+
     }
 }

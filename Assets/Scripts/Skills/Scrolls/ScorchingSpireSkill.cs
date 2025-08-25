@@ -5,26 +5,22 @@ using UnityEngine;
 public class ScorchingSpireSkill : ActiveSkillBehaviour
 {
      [Header("VFX / SFX")]
-    [SerializeField] private GameObject _pillarPrefab;      // prefab, а не объект в сцене
+    [SerializeField] private GameObject _pillarPrefab;
 
     [Header("Damage Setup")]
     [SerializeField] private float _tickRate = 0.25f;
-
     private readonly List<IDamageable> _targets = new();
-
-    /* ─────────────────────────────── PUBLIC API ────────────────────────────── */
     public override void TryCast()
     {
-        if (!IsReady) return;                       // кулдаун
+        if (!IsReady) return;
         if (!GetAimPoint(out Vector3 point)) return;
 
-        base.TryCast();                             // бросаем событие «активирован»
+        base.TryCast();
 
         StartCoroutine(SpireRoutine(point));
         StartCooldown();
     }
-
-    /* ─────────────────────────────── MAIN ROUTINE ─────────────────────────── */
+    
     private IEnumerator SpireRoutine(Vector3 center)
     {
         // 1) создаём визуал
@@ -53,39 +49,40 @@ public class ScorchingSpireSkill : ActiveSkillBehaviour
         Destroy(gameObject);
     }
 
-    /* ───────────────────────────── DAMAGE ─────────────────────────────────── */
     private void DealDamage(Vector3 center, float radius, float dmgPerTick)
     {
         _targets.Clear();
-        Collider[] cols = Physics.OverlapSphere(center, radius);
-
-        foreach (var col in cols)
-            if (col.TryGetComponent(out IDamageable d) && !_targets.Contains(d))
+        var cols = Physics.OverlapSphere(center, radius);
+        for (int i = 0; i < cols.Length; i++)
+            if (cols[i].TryGetComponent(out IDamageable d) && !_targets.Contains(d))
                 _targets.Add(d);
 
-        if (_targets.Count == 0) return;
+        int count = _targets.Count;
+        if (count == 0) return;
 
-        float each = dmgPerTick / _targets.Count;
-        SkillDamageType type = SkillDamageType.Basic;
+        float each = dmgPerTick / count;
 
-        foreach (var tgt in _targets)
+        for (int i = 0; i < count; i++)
         {
-            float dmg = each;
-            Context.ApplyDamageModifiers(ref dmg, ref type);
-            tgt.ReceiveDamage(dmg, type);
-            Context.FireOnDamageDealt(tgt, dmg, type);
+            var tgt = _targets[i];
+
+            var ctx = BuildDamage(each, SkillDamageType.Basic, center, Vector3.up, gameObject);
+            ctx.Target = tgt;
+
+            // при желании ещё раз прогнать контекстные модификаторы:
+            // Context.ApplyDamageContextModifiers(ref ctx);
+
+            tgt.ReceiveDamage(ctx); // события разойдутся автоматически
         }
     }
-
-    /* ───────────────────────────── AIM POINT ──────────────────────────────── */
+    
     private bool GetAimPoint(out Vector3 point)
     {
         var cam = Camera.main;
         var ray = cam.ScreenPointToRay(Input.mousePosition);
 
         int groundMask = LayerMask.GetMask("Ground");
-        if (Physics.Raycast(ray, out var hit, 1000f, groundMask,
-                            QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(ray, out var hit, 1000f, groundMask, QueryTriggerInteraction.Ignore))
         {
             point = hit.point;
             return true;

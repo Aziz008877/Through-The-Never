@@ -53,16 +53,29 @@ public class BlindingLightSkill : ActiveSkillBehaviour, IDefenceDurationSkill
 
             if (col.TryGetComponent(out IBlindable enemy))
             {
-                enemy.ApplyBlind(_duration, _missPercent, _slowPercent, dps * proximity);
+                enemy.ApplyBlind(_duration, _missPercent, _slowPercent, Damage, Context);
             }
 
             if (col.TryGetComponent(out IDamageable dmg))
             {
                 float tickDmg = dps * proximity;
-                SkillDamageType type = SkillDamageType.Basic;
-                Context.ApplyDamageModifiers(ref tickDmg, ref type);
-                dmg.ReceiveDamage(tickDmg, type);
-                Context.FireOnDamageDealt(dmg, tickDmg, type);
+
+                var ctx = new DamageContext
+                {
+                    Attacker = Context,
+                    Target = dmg,
+                    SkillBehaviour = this,
+                    SkillDef = Definition,
+                    Slot = Definition.Slot,
+                    Type = SkillDamageType.Basic,
+                    Damage = tickDmg,
+                    IsCrit = false,
+                    CritMultiplier = 1f,
+                    SourceGO = gameObject
+                };
+
+                Context.ApplyDamageContextModifiers(ref ctx);
+                dmg.ReceiveDamage(ctx);
             }
         }
     }

@@ -28,26 +28,43 @@ public class FirenadoTornado : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        // притягиваем физикой
         if (other.TryGetComponent(out Rigidbody rb))
         {
             Vector3 dir = (transform.position - other.transform.position).normalized;
             rb.AddForce(dir * _pullForce, ForceMode.Acceleration);
         }
 
-        if (!other.TryGetComponent(out IDamageable target) || _alreadyHit.Contains(target)) return;
+        // урон/дот
+        if (!other.TryGetComponent(out IDamageable target) || _alreadyHit.Contains(target))
+            return;
 
-        float dmg  = _damage;
-        SkillDamageType type = SkillDamageType.Basic;
-        _ctx.ApplyDamageModifiers(ref dmg, ref type);
+        var ctx = new DamageContext
+        {
+            Attacker       = _ctx,                 // ActorContext источника зоны
+            Target         = target,
+            SkillBehaviour = null,                 // не активный скилл
+            SkillDef       = null,
+            Slot           = SkillSlot.Undefined,
+            Type           = SkillDamageType.Basic,
+            Damage         = _damage,              // разовый урон при первом касании
+            IsCrit         = false,
+            CritMultiplier = 1f,
+            HitPoint       = other.transform.position,
+            HitNormal      = Vector3.up,
+            SourceGO       = gameObject
+        };
 
-        target.ReceiveDamage(dmg, type);
-        _ctx.FireOnDamageDealt(target, dmg, type);
-        
+        _ctx.ApplyDamageContextModifiers(ref ctx);
+        target.ReceiveDamage(ctx);                 // событие разойдётся внутри цели
+
+        // опционально — наложить DoT отдельно
         if (other.TryGetComponent(out IDotReceivable dot))
             dot.ApplyDot(_dotPerSecond, _dotDuration);
 
         _alreadyHit.Add(target);
     }
+
 
     private void DestroySelf() => Destroy(gameObject);
 

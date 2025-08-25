@@ -74,16 +74,31 @@ public class DeepfrostWaterProjectile : IceBasicAttackprojectile
 
             if (st.nextTick <= 0f)
             {
-                float dps = _instantDamage * _dpsMultiplier;
+                float dps        = _instantDamage * _dpsMultiplier;
                 float tickDamage = dps * Mathf.Max(0.01f, _tickRate);
-                var type = _damageType;
-
-                _context.ApplyDamageModifiers(ref tickDamage, ref type);
-                dmg.ReceiveDamage(tickDamage, type);
-                _context.FireOnDamageDealt(dmg, tickDamage, type);
-
+            
+                var ctx = new DamageContext
+                {
+                    Attacker       = _context,                         // ActorContext источника
+                    Target         = dmg,
+                    SkillBehaviour = null,                              // не активный скилл
+                    SkillDef       = null,
+                    Slot           = SkillSlot.Special,
+                    Type           = _damageType,                       // как у тебя было (Basic/DOT и т.д.)
+                    Damage         = tickDamage,
+                    IsCrit         = false,
+                    CritMultiplier = 1f,
+                    HitPoint       = (dmg as Component)?.transform.position ?? transform.position,
+                    HitNormal      = Vector3.up,
+                    SourceGO       = gameObject
+                };
+            
+                _context.ApplyDamageContextModifiers(ref ctx);
+                dmg.ReceiveDamage(ctx);
+            
                 st.nextTick = _tickRate;
             }
+
             else
             {
                 st.nextTick -= Time.deltaTime;

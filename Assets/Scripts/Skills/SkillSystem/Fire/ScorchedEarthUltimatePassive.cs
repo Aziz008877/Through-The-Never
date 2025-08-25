@@ -102,16 +102,29 @@ public sealed class ScorchedEarthUltimatePassive : PassiveSkillBehaviour, ISkill
             _auraVfx.transform.localScale = Vector3.one * radius * 0.5f;
 
         Collider[] hits = Physics.OverlapSphere(Context.transform.position, radius);
-        foreach (Collider col in hits)
+        for (int i = 0; i < hits.Length; i++)
         {
+            var col = hits[i];
             if (!col.TryGetComponent(out IDamageable enemy)) continue;
 
-            SkillDamageType type = SkillDamageType.Basic;
-            float dmg = tickDmg;
-            Context.ApplyDamageModifiers(ref dmg, ref type);
-            enemy.ReceiveDamage(dmg, type);
+            var ctx = new DamageContext
+            {
+                Attacker       = Context,
+                Target         = enemy,
+                SkillBehaviour = null,
+                SkillDef       = null,
+                Slot           = SkillSlot.Ultimate,
+                Type           = SkillDamageType.Basic,
+                Damage         = tickDmg,
+                IsCrit         = false,
+                CritMultiplier = 1f,
+                HitPoint       = col.transform.position,
+                HitNormal      = Vector3.up,
+                SourceGO       = gameObject
+            };
 
-            Context.FireOnDamageDealt(enemy, dmg, type);
+            Context.ApplyDamageContextModifiers(ref ctx);
+            enemy.ReceiveDamage(ctx);
         }
     }
 

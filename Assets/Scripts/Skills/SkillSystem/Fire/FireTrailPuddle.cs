@@ -44,17 +44,34 @@ public class FireTrailPuddle : MonoBehaviour
 
         foreach (var tgt in _inside)
         {
-            float dmg  = _tickDmg;
-            SkillDamageType type = SkillDamageType.Basic;   // у вас Basic/DOT
+            // собираем контекст тикового урона
+            var ctx = new DamageContext
+            {
+                Attacker       = _ctx,                               // источник ауры/трейла
+                Target         = tgt,
+                SkillBehaviour = null,                               // не ActiveSkillBehaviour — оставляем null
+                SkillDef       = null,
+                Slot           = SkillSlot.Dash,
+                Type           = SkillDamageType.Basic,              // у тебя было Basic
+                Damage         = _tickDmg,                           // урон за тик ДО модификаторов
+                IsCrit         = false,
+                CritMultiplier = 1f,
+                HitPoint       = (tgt as Component)?.transform.position ?? transform.position,
+                SourceGO       = gameObject
+            };
 
-            _ctx.ApplyDamageModifiers(ref dmg, ref type);
-            tgt.ReceiveDamage(dmg, type);
+            // применяем контекстные модификаторы вместо старого ApplyDamageModifiers
+            _ctx.ApplyDamageContextModifiers(ref ctx);
 
-            if (tgt is IDotReceivable dot)                  // Ignite продлевать не обязательно, но можно
-                dot.ApplyDot(dmg, 1f);
+            // наносим урон
+            tgt.ReceiveDamage(ctx);
 
-            Debug.Log(
-                $"<color=orange>[Trailblazer]</color> tick {dmg:F1} to {tgt}");
+            // опционально: продлеваем/накладываем дот (как у тебя было)
+            if (tgt is IDotReceivable dot)
+                dot.ApplyDot(ctx.Damage, 1f); // используем уже модифицированное значение
+
+            Debug.Log($"<color=orange>[Trailblazer]</color> tick {ctx.Damage:F1} to {tgt}");
         }
     }
+
 }

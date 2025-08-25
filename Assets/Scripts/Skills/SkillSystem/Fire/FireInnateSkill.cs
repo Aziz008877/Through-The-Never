@@ -1,23 +1,24 @@
 using UnityEngine;
 
-public class FireInnateSkill : PassiveSkillBehaviour, IOnDamageDealtModifier
+public class FireInnateSkill : PassiveSkillBehaviour, IOnDamageDealtContextModifier
 {
     [SerializeField] private float _dotPercent = 0.25f;
     [SerializeField] private float _dotDuration = 3f;
     public override void EnablePassive()
     {
-        Context.RegisterOnDamageDealtModifier(this);
+        Context.RegisterOnDamageDealtContextModifier(this);
     }
     public override void DisablePassive()
     {
-        Context.UnregisterOnDamageDealtModifier(this);
+        Context.UnregisterOnDamageDealtContextModifier(this);
     }
-    public void OnDamageDealt(IDamageable target, float damage, SkillDamageType type, ActorContext context)
+
+    public void OnDamageDealt(in DamageContext ctx)
     {
-        if (type == SkillDamageType.Basic)
+        if (ctx.Type == SkillDamageType.Basic)
         {
-            if (target is IDotReceivable dot)
-                dot.ApplyDot(damage * _dotPercent, _dotDuration);
+            if (ctx.Target is IDotReceivable dot)
+                dot.ApplyDot(ctx.Damage * _dotPercent, _dotDuration);
         }
     }
 }

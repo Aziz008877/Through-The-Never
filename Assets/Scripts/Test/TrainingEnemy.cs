@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,13 +15,13 @@ public class TrainingEnemy : MonoBehaviour, IDamageable, IDotReceivable
     [SerializeField] private Image _hpFillImage;
 
     public bool CanBeDamaged { get; set; } = true;
-    public System.Action<Transform> OnEnemyDead { get; set; }
-
     private Coroutine _dotRoutine;
-
+    public event Action<Transform> OnEnemyDead;
+    public void ReceiveDamage(in DamageContext ctx)
+    {
+        throw new System.NotImplementedException();
+    }
     private void Awake() => UpdateBar();
-
-
     public void ReceiveDamage(float amount, SkillDamageType type)
     {
         if (!CanBeDamaged) return;
@@ -38,6 +39,11 @@ public class TrainingEnemy : MonoBehaviour, IDamageable, IDotReceivable
     {
         if (_dotRoutine != null) StopCoroutine(_dotRoutine);
         _dotRoutine = StartCoroutine(DotTick(dps, duration));
+    }
+
+    public void ApplyDot(float dps, float duration, float tickRate = 1)
+    {
+        throw new System.NotImplementedException();
     }
 
     public void RefreshDot(float duration)

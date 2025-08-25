@@ -39,51 +39,69 @@ public class FirebeamBeam : MonoBehaviour
     }
     
     private void Update()
+{
+    if (!_running) return;
+
+    var playerPos = _playerContext.ActorPosition.position;
+    transform.position = new Vector3(playerPos.x, playerPos.y + 2, playerPos.z);
+
+    IDamageable target = FindClosest(_range);
+
+    // безопасно достаём Transform у цели (IDamageable может быть не MonoBehaviour)
+    Transform targetTr = (target as Component)?.transform;
+
+    Vector3 dir = _playerContext.transform.forward;
+    if (targetTr != null)
     {
-        if (!_running) return;
-
-        var playerPos = _playerContext.ActorPosition.position;
-        transform.position = new Vector3(playerPos.x, playerPos.y + 2, playerPos.z);
-
-        IDamageable target = FindClosest(_range);
-
-        Vector3 dir = _playerContext.transform.forward;
-        if (target != null)
-        {
-            dir = ((MonoBehaviour)target).transform.position - transform.position;
-            dir.y = 0f;
-            if (dir != Vector3.zero)
-                transform.rotation = Quaternion.LookRotation(dir.normalized);
-        }
-
-        Vector3 start = transform.position;
-        bool hit = Physics.Raycast(start, transform.forward, out var hitInfo, _range);
-        Vector3 end = hit ? hitInfo.point : start + transform.forward * _range;
-
-        HandleVfx(hit, end, start);
-        
-        _tickTimer += Time.deltaTime;
-        
-        if (_tickTimer >= _tickRate)
-        {
-            _tickTimer -= _tickRate;
-
-            if (hit && hitInfo.collider.TryGetComponent(out IDamageable d))
-            {
-                float t = Mathf.Clamp01(_lifeTimer / _lifeTime);
-                float dps = Mathf.Lerp(_baseDps, _maxDps, t);
-                float dmg = dps * _tickRate;
-
-                SkillDamageType type = SkillDamageType.Basic;
-                _playerContext.ApplyDamageModifiers(ref dmg, ref type);
-                d.ReceiveDamage(dmg, type);
-                _playerContext.FireOnDamageDealt(d, dmg, type);
-            }
-        }
-
-        _lifeTimer += Time.deltaTime;
-        if (_lifeTimer >= _lifeTime) Stop();
+        dir = targetTr.position - transform.position;
+        dir.y = 0f;
+        if (dir != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(dir.normalized);
     }
+
+    Vector3 start = transform.position;
+    bool hit = Physics.Raycast(start, transform.forward, out var hitInfo, _range);
+    Vector3 end = hit ? hitInfo.point : start + transform.forward * _range;
+
+    HandleVfx(hit, end, start);
+
+    _tickTimer += Time.deltaTime;
+
+    if (_tickTimer >= _tickRate)
+    {
+        _tickTimer -= _tickRate;
+
+        if (hit && hitInfo.collider.TryGetComponent(out IDamageable d))
+        {
+            float t   = Mathf.Clamp01(_lifeTimer / _lifeTime);
+            float dps = Mathf.Lerp(_baseDps, _maxDps, t);
+            float perTickDamage = dps * _tickRate;
+
+            // Собираем DamageContext и применяем контекстные модификаторы
+            var ctx = new DamageContext
+            {
+                Attacker       = _playerContext,
+                Target         = d,
+                SkillBehaviour = null,                   // если это не ActiveSkillBehaviour
+                SkillDef       = null,
+                Slot           = SkillSlot.Special,
+                Type           = SkillDamageType.Basic,  // как у тебя было
+                Damage         = perTickDamage,
+                IsCrit         = false,
+                CritMultiplier = 1f,
+                HitPoint       = hitInfo.point,
+                SourceGO       = gameObject
+            };
+
+            _playerContext.ApplyDamageContextModifiers(ref ctx);
+            d.ReceiveDamage(ctx); // все события разойдутся внутри цели
+        }
+    }
+
+    _lifeTimer += Time.deltaTime;
+    if (_lifeTimer >= _lifeTime) Stop();
+}
+
     
     private void HandleVfx(bool hit, Vector3 end, Vector3 start)
     {

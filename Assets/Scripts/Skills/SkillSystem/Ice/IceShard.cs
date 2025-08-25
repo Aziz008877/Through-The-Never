@@ -12,14 +12,28 @@ public class IceShard : IceBasicAttackprojectile
         if (!_canDamage) return;
         if (!other.TryGetComponent(out IDamageable tgt)) return;
 
-        float dmg = _instantDamage;
-        SkillDamageType type = _damageType;
-        _context.ApplyDamageModifiers(ref dmg, ref type);
-        tgt.ReceiveDamage(dmg, type);
-        _context.FireOnDamageDealt(tgt, dmg, type);
+        var ctx = new DamageContext
+        {
+            Attacker       = _context,               // ActorContext источника
+            Target         = tgt,
+            SkillBehaviour = null,                   // не активный скилл — пассив/эффект
+            SkillDef       = null,
+            Slot           = SkillSlot.Basic,
+            Type           = _damageType,            // Basic / DOT и т.д.
+            Damage         = _instantDamage,
+            IsCrit         = false,                  // если нужен крит — заролльни и умножь Damage
+            CritMultiplier = 1f,
+            HitPoint       = other.transform.position,
+            HitNormal      = Vector3.up,
+            SourceGO       = gameObject
+        };
+
+        _context.ApplyDamageContextModifiers(ref ctx); // контекстные модификаторы
+        tgt.ReceiveDamage(ctx);                        // события разойдутся внутри цели
 
         HitAndStop();
     }
+
 
     private void HitAndStop()
     {

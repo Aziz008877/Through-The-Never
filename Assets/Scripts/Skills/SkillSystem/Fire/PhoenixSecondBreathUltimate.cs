@@ -1,5 +1,5 @@
 using UnityEngine;
-public sealed class PhoenixSecondBreathUltimate : PassiveSkillBehaviour, IOnDamageDealtModifier
+public sealed class PhoenixSecondBreathUltimate : PassiveSkillBehaviour, IOnDamageDealtContextModifier
 {
     [Header("Heal settings")]
     [SerializeField, Range(0f, 1f)]
@@ -8,21 +8,21 @@ public sealed class PhoenixSecondBreathUltimate : PassiveSkillBehaviour, IOnDama
     [SerializeField] private ParticleSystem _healVfx;
     public override void EnablePassive()
     {
-        Context.RegisterOnDamageDealtModifier(this);
+        Context.RegisterOnDamageDealtContextModifier(this);
         Debug.Log("<color=orange>[Second Breath]</color> enabled");
     }
 
     public override void DisablePassive()
     {
-        Context.UnregisterOnDamageDealtModifier(this);
+        Context.UnregisterOnDamageDealtContextModifier(this);
         Debug.Log("<color=orange>[Second Breath]</color> disabled");
     }
 
-    public void OnDamageDealt(IDamageable target, float damage, SkillDamageType type, ActorContext ctx)
+    public void OnDamageDealt(in DamageContext ctx)
     {
-        if (damage <= 0f) return;
+        if (ctx.Damage <= 0f) return;
 
-        float heal = damage * _healPercent;
+        float heal = ctx.Damage * _healPercent;
         if (_maxHealPerHit > 0f) heal = Mathf.Min(heal, _maxHealPerHit);
 
         Context.Hp.ReceiveHP(heal);
@@ -33,8 +33,6 @@ public sealed class PhoenixSecondBreathUltimate : PassiveSkillBehaviour, IOnDama
             _healVfx.Play(true);
         }
 
-        Debug.Log(
-            $"<color=orange>[Second Breath]</color> healed {heal:F1} HP " +
-            $"({ _healPercent:P0} of {damage:F1})");
+        Debug.Log($"<color=orange>[Second Breath]</color> +{heal:F1} HP ({_healPercent:P0} of {ctx.Damage:F1})");
     }
 }
