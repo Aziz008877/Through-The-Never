@@ -23,9 +23,9 @@ public abstract class BaseEnemyAttack : MonoBehaviour
     private Transform _target;
     private BaseEnemyAnimation _anim;
 
-    private ActorContext _attackerCtx;              // контекст врага-атакера
-    private IFrostbiteReceivable _frost;            // модификатор исходящего урона
-    private IBlindable _blindSelf;                  // промах при ослеплении
+    private ActorContext _attackerCtx;
+    private IFrostbiteReceivable _frost;
+    private IBlindable _blindSelf;
 
     private float _meleeTimer, _rangedTimer, _lockTimer;
 
@@ -115,8 +115,8 @@ public abstract class BaseEnemyAttack : MonoBehaviour
             SourceGO       = gameObject
         };
 
-        _attackerCtx?.ApplyDamageContextModifiers(ref ctx);
-        target.ReceiveDamage(ctx); // события разойдутся внутри цели
+        _attackerCtx.ApplyDamageContextModifiers(ref ctx);
+        target.ReceiveDamage(ctx);
     }
 
     private void TickTimers()
@@ -129,7 +129,7 @@ public abstract class BaseEnemyAttack : MonoBehaviour
     private void BeginCast()
     {
         IsCasting = true;
-        _lockTimer = 999f;                  // блок до конца анимации
+        _lockTimer = 999f;
         OnAttackStarted?.Invoke(_stopAfterCast);
     }
 
@@ -137,6 +137,6 @@ public abstract class BaseEnemyAttack : MonoBehaviour
     {
         IsCasting = false;
         cdTimer = cdValue;
-        _lockTimer = _stopAfterCast;       // короткий стоп после каста
+        _lockTimer = _stopAfterCast;
     }
 }

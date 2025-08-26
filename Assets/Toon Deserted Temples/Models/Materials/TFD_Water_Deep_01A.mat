@@ -139,7 +139,7 @@ Material:
     - __dirty: 1
     m_Colors:
     - _ASEOutlineColor: {r: 0, g: 0, b: 0, a: 0}
-    - _DeepColor: {r: 0.02745098, g: 0.17254902, b: 0.25490198, a: 1}
+    - _DeepColor: {r: 0, g: 0.54966384, b: 0.764151, a: 1}
     - _EdgeColor: {r: 1, g: 0, b: 0, a: 1}
     - _EdgeFoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}

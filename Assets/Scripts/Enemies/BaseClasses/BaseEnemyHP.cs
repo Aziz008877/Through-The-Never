@@ -72,6 +72,7 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
         _enemyAnimation.PlayDeath();
         _enemyMove.StopChasing();
         StartCoroutine(DestroySkeleton());
+        EnemyDeathReporter.ReportEnemyDied(transform);
     }
 
     private IEnumerator DestroySkeleton()

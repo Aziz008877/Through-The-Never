@@ -1,5 +1,4 @@
 using System.Collections;
-using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +22,7 @@ public class MessageHandler : MonoBehaviour
             PlayerMessage();
         });
     }
-    public void ScrollToBottom()
+    private void ScrollToBottom()
     {
         StartCoroutine(ScrollEndOfFrame());
     }
@@ -46,6 +45,7 @@ public class MessageHandler : MonoBehaviour
     {
         MessageBubble newMessage = Instantiate(_playerBubble, _messageContainer);
         newMessage.Init(_playerInput.text);
+        _playerInput.text = "";
         ScrollToBottom();
     }
 

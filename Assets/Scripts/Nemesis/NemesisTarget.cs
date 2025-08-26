@@ -1,19 +1,16 @@
 using UnityEngine;
 
-public class NemesisTarget : MonoBehaviour
+[DisallowMultipleComponent]
+public sealed class NemesisTarget : MonoBehaviour
 {
-    [SerializeField] private string _npcId; // Уникальный, стабильный ID
+    [SerializeField] private string _npcId;      // стабильный уникальный ID
     [SerializeField] private bool _autoGuid = true;
+
+    [Header("Base Stats (optional)")]
     [SerializeField] private float _baseMaxHp = 100f;
     [SerializeField] private float _baseDamage = 10f;
 
-    private float _currentMaxHp;
-    private float _currentDamage;
-    private NemesisMarkUI _mark;
-
     public string NpcId => _npcId;
-    public float CurrentMaxHp => _currentMaxHp;
-    public float CurrentDamage => _currentDamage;
 
     private void Reset()
     {
@@ -29,67 +26,41 @@ public class NemesisTarget : MonoBehaviour
 
     private void OnEnable()
     {
-        ApplyNemesisStatsAndMark();
+        ApplyNemesisModifiers();
         if (NemesisRuntime.Svc != null)
-            NemesisRuntime.Svc.OnLevelChanged += HandleLevelChanged;
+            NemesisRuntime.Svc.OnLevelChanged += OnNemesisLevelChanged;
     }
 
     private void OnDisable()
     {
         if (NemesisRuntime.Svc != null)
-            NemesisRuntime.Svc.OnLevelChanged -= HandleLevelChanged;
-
-        if (_mark) Destroy(_mark.gameObject);
+            NemesisRuntime.Svc.OnLevelChanged -= OnNemesisLevelChanged;
     }
 
-    private void HandleLevelChanged(string id, int level)
+    private void OnNemesisLevelChanged(string id, int lvl)
     {
         if (id != _npcId) return;
-        ApplyNemesisStatsAndMark();
+        ApplyNemesisModifiers();
     }
 
-    private void ApplyNemesisStatsAndMark()
+    public void ApplyNemesisModifiers()
     {
         var svc = NemesisRuntime.Svc;
-        int lvl = svc != null ? svc.GetLevel(_npcId) : 0;
+        if (svc == null) return;
 
-        float hpMul = svc != null ? svc.GetHpMultiplier(_npcId) : 1f;
-        float dmgMul = svc != null ? svc.GetDamageMultiplier(_npcId) : 1f;
+        float hp = Mathf.Max(1f, _baseMaxHp * svc.HpMul(_npcId));
+        float dmg = Mathf.Max(0f, _baseDamage * svc.DamageMul(_npcId));
 
-        _currentMaxHp = Mathf.Max(1f, _baseMaxHp * hpMul);
-        _currentDamage = Mathf.Max(0f, _baseDamage * dmgMul);
+        // ВКЛЮЧИ СВОИ АДАПТЕРЫ ЗДЕСЬ:
+        // GetComponent<BaseEnemyHP>()?.SetMaxHp(hp);
+        // GetComponent<BaseEnemyAttackAdapter>()?.SetBaseDamage(dmg);
+        // или прокинь в твои системы напрямую.
+    }
 
-        // UI mark
-        if (svc != null)
-        {
-            var cfg = (svc.GetType()
-                .GetField("_cfg", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-                ?.GetValue(svc)) as NemesisConfig;
-
-            if (cfg != null && cfg.MarkPrefab)
-            {
-                bool shouldShow = lvl > 0;
-                if (shouldShow)
-                {
-                    if (!_mark)
-                    {
-                        _mark = Instantiate(cfg.MarkPrefab, transform);
-                        _mark.transform.localPosition = cfg.MarkOffset;
-                    }
-
-                    _mark.SetLevel(lvl);
-                    _mark.gameObject.SetActive(true);
-                }
-                else if (_mark)
-                {
-                    _mark.gameObject.SetActive(false);
-                }
-            }
-        }
-
-        // HOOK: здесь можно прокинуть новые статы в твою систему HP/урона
-        // например:
-        // GetComponent<BaseEnemyHP>().SetMaxHp(_currentMaxHp);
-        // GetComponent<BaseEnemyAttack>().SetBaseDamage(_currentDamage);
+    // Вызови это из кода смерти врага (см. EnemyDeathReporter ниже)
+    public void OnDied()
+    {
+        NemesisRuntime.Svc?.Clear(_npcId); // обнуляем модификаторы этого id
+        // дальше твоя логика удаления/пула/Destroy
     }
 }

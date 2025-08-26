@@ -5,33 +5,50 @@ using UnityEngine;
 public sealed class NemesisService
 {
     private readonly NemesisConfig _cfg;
-    private readonly INemesisStorage _storage;
-    private readonly Dictionary<string, int> _levels; // npcId -> level
-    public event Action<string, int> OnLevelChanged;   // npcId, newLevel
-    public NemesisService(NemesisConfig cfg, INemesisStorage storage)
+    private readonly Dictionary<string, int> _levels = new(StringComparer.Ordinal);
+    public string LastKillerId { get; private set; }
+    public event Action<string,int> OnLevelChanged;
+
+    public NemesisService(NemesisConfig cfg)
     {
         _cfg = cfg;
-        _storage = storage;
-        _levels = storage.LoadAll() ?? new Dictionary<string, int>(StringComparer.Ordinal);
+        var s = NemesisStorage.Load();
+        for (int i = 0; i < s.Ids.Count && i < s.Levels.Count; i++)
+            _levels[s.Ids[i]] = Mathf.Max(0, s.Levels[i]);
+        LastKillerId = s.LastKillerId;
     }
 
-    public int GetLevel(string npcId)
+    private void Persist()
     {
-        return npcId != null && _levels.TryGetValue(npcId, out var lvl) ? lvl : 0;
+        var s = new NemesisState();
+        foreach (var kv in _levels)
+        {
+            s.Ids.Add(kv.Key);
+            s.Levels.Add(kv.Value);
+        }
+        s.LastKillerId = LastKillerId;
+        NemesisStorage.Save(s);
     }
 
+    public int GetLevel(string npcId) => (npcId != null && _levels.TryGetValue(npcId, out var lvl)) ? lvl : 0;
     public bool IsNemesis(string npcId) => GetLevel(npcId) > 0;
 
     public void Promote(string npcId)
     {
         if (string.IsNullOrEmpty(npcId)) return;
-        var cur = GetLevel(npcId);
-        var next = Mathf.Clamp(cur + 1, 1, _cfg.MaxLevel);
+        int cur = GetLevel(npcId);
+        int next = Mathf.Clamp(cur + 1, 1, _cfg.MaxLevel);
         if (next != cur)
         {
             _levels[npcId] = next;
-            _storage.SaveAll(_levels);
+            LastKillerId = npcId;
+            Persist();
             OnLevelChanged?.Invoke(npcId, next);
+        }
+        else
+        {
+            LastKillerId = npcId;
+            Persist();
         }
     }
 
@@ -40,20 +57,11 @@ public sealed class NemesisService
         if (string.IsNullOrEmpty(npcId)) return;
         if (_levels.Remove(npcId))
         {
-            _storage.SaveAll(_levels);
+            Persist();
             OnLevelChanged?.Invoke(npcId, 0);
         }
     }
 
-    public float GetHpMultiplier(string npcId)
-    {
-        int lvl = GetLevel(npcId);
-        return 1f + lvl * Mathf.Max(0f, _cfg.HpPerLevel);
-    }
-
-    public float GetDamageMultiplier(string npcId)
-    {
-        int lvl = GetLevel(npcId);
-        return 1f + lvl * Mathf.Max(0f, _cfg.DamagePerLevel);
-    }
+    public float HpMul(string npcId)    => 1f + GetLevel(npcId) * Mathf.Max(0f, _cfg.HpPerLevel);
+    public float DamageMul(string npcId)=> 1f + GetLevel(npcId) * Mathf.Max(0f, _cfg.DamagePerLevel);
 }
