@@ -6,6 +6,7 @@ Shader "Toon/TFD_CustomToon"
 	{
 		[HideInInspector] _AlphaCutoff("Alpha Cutoff ", Range(0, 1)) = 0.5
 		[HideInInspector] _EmissionColor("Emission Color", Color) = (1,1,1,1)
+		_Fade ("Fade", Range(0,1)) = 1
 		_TextureSample("Texture Sample", 2D) = "white" {}
 		_TextureRamp("Texture Ramp", 2D) = "white" {}
 		[HideInInspector] _texcoord( "", 2D ) = "white" {}
