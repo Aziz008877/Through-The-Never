@@ -20,7 +20,7 @@ public class PlayerMove : MonoBehaviour, IActorMove, IExternalSpeedMul
     private float _baseSpeedMul = 1f;
     private float _externalSpeedMul = 1f;
     private readonly Dictionary<object, float> _externalMuls = new();
-    private float _xMin = -20f, _xMax = 20f, _zMin = -13f, _zMax = 29f;
+    private float _xMin = -7.5f, _xMax = 1.7f, _zMin = -13f, _zMax = 20f;
     private void Start()
     {
         _speed = _moveSpeed;

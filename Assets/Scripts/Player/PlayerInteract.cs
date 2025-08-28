@@ -50,6 +50,7 @@ public class PlayerInteract : MonoBehaviour
         {
             HideCurrentUI();
             _currentInteractable = closest;
+            Debug.Log("YES");
             ShowCurrentUI();
         }
     }
