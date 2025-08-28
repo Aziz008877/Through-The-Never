@@ -13,7 +13,7 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
     [Inject] private PlayerContext _context;
     [Inject] private PlayerInput _input;
     [Inject] private SkillRuntimeFactory _factory;
-    
+    [Inject] private PlayerAnimator _playerAnimator;
     private readonly List<SkillDefinition> _chosenSkills = new();
     public IReadOnlyList<SkillDefinition>  ChosenSkills => _chosenSkills;
     private bool _basicLocked;
@@ -73,6 +73,7 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
     {
         if (_basicLocked) return;
         Cast(SkillSlot.Basic);
+        _playerAnimator.CastBasics();
     }
     private void CastDefense() => Cast(SkillSlot.Defense);
     private void CastSpecial() => Cast(SkillSlot.Special);
