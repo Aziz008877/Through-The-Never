@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: edae91a5b71ba7045acbe1051936f4b7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 229905
+  packageName: Stylized Fantasy Sand Golem
+  packageVersion: 1.0
+  assetPath: Assets/SandGolem/Materials/Mobile/M_SandGolem_Gn.mat
+  uploadId: 519067

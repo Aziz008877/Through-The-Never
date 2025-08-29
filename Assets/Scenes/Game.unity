@@ -24615,7 +24615,7 @@ MonoBehaviour:
   - {fileID: 1759935264}
   - {fileID: 332312754}
   - {fileID: 1253224897}
-  _fadeTo: 0.1
+  _fadeTo: 0
   _fadeSpeed: 5
   _unfadeSpeed: 6
   _debugLogs: 0
@@ -28352,7 +28352,7 @@ MonoBehaviour:
   - {fileID: 1028192515}
   - {fileID: 684014473}
   - {fileID: 950831432}
-  _fadeTo: 0.1
+  _fadeTo: 0
   _fadeSpeed: 5
   _unfadeSpeed: 6
   _debugLogs: 0
@@ -30523,7 +30523,7 @@ MonoBehaviour:
   - {fileID: 1245418648}
   - {fileID: 1558404316}
   - {fileID: 1472684817}
-  _fadeTo: 0.1
+  _fadeTo: 0
   _fadeSpeed: 5
   _unfadeSpeed: 6
   _debugLogs: 0
@@ -30972,6 +30972,79 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732620750}
   m_CullTransparentMesh: 1
+--- !u!1001 &1737801169
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4845172142442127619, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
+      propertyPath: m_Name
+      value: SandGolem_Rd
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845172142442127619, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221451837253745593, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2.2021
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221451837253745593, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2.2021
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221451837253745593, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.2021
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221451837253745593, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -3.2244394
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221451837253745593, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.14999962
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221451837253745593, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.2674961
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221451837253745593, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.00000058114523
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221451837253745593, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221451837253745593, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221451837253745593, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221451837253745593, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221451837253745593, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5221451837253745593, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 924d8ff6037699c4cbd07b036aa903c7, type: 3}
 --- !u!1001 &1738905002
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -38820,7 +38893,7 @@ MonoBehaviour:
   - {fileID: 1355025392}
   - {fileID: 58516137}
   - {fileID: 1252673882}
-  _fadeTo: 0.1
+  _fadeTo: 0
   _fadeSpeed: 5
   _unfadeSpeed: 6
   _debugLogs: 0
@@ -39000,7 +39073,7 @@ MonoBehaviour:
   - {fileID: 756979738}
   - {fileID: 652813275}
   - {fileID: 566000982}
-  _fadeTo: 0.1
+  _fadeTo: 0
   _fadeSpeed: 5
   _unfadeSpeed: 6
   _debugLogs: 0
@@ -93619,3 +93692,4 @@ SceneRoots:
   - {fileID: 1468912280}
   - {fileID: 1489186450}
   - {fileID: 1500883343}
+  - {fileID: 1737801169}
