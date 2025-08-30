@@ -113,8 +113,8 @@ public class IceBoulderSkill : ActiveSkillBehaviour
                 sourceGO: gameObject);
             ctx.Target = tgt;
 
-            tgt.ReceiveDamage(ctx);      // события разойдутся внутри цели
-            dealt += ctx.Damage;         // фактический урон после модификаторов/критов
+            tgt.ReceiveDamage(ctx);
+            dealt += ctx.Damage;
         }
 
         if (_boulderInstance) Destroy(_boulderInstance);

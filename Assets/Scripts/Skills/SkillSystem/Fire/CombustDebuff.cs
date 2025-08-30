@@ -87,7 +87,7 @@ public class CombustDebuff : MonoBehaviour
                 SourceGO = gameObject,
                 Slot     = SkillSlot.Undefined
             };
-            _ownerCtx?.ApplyDamageContextModifiers(ref aoeCtx);
+            _ownerCtx.ApplyDamageContextModifiers(ref aoeCtx);
             enemy.ReceiveDamage(aoeCtx);
         }
     }

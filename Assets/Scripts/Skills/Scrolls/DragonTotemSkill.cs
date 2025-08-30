@@ -78,13 +78,10 @@ public class DragonTotemSkill : ActiveSkillBehaviour
 
         var ctx = BuildDamage(_fireDamage, SkillDamageType.Basic, transform.position, Vector3.up, gameObject);
         ctx.Target = target;
-
-        // при желании ещё прогнать через модификаторы
         Context.ApplyDamageContextModifiers(ref ctx);
 
-        target.ReceiveDamage(ctx); // события OnDamageDealtContext вызовутся внутри цели
+        target.ReceiveDamage(ctx);
     }
-
 
     private void ApplyFreeze(IDamageable target)
     {

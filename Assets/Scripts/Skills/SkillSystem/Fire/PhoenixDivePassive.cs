@@ -16,8 +16,6 @@ public sealed class PhoenixDivePassive : PassiveSkillBehaviour, ISkillModifier
     [SerializeField] private float _cooldownMultiplier  = 1.3f;
     private ISkillManager _mgr;
     private PlayerDashSkill    _dash;
-
-    /* ───────── Enable / Disable ───────── */
     public override void EnablePassive()
     {
         _mgr = Context.SkillManager;
@@ -31,7 +29,6 @@ public sealed class PhoenixDivePassive : PassiveSkillBehaviour, ISkillModifier
         Detach();
     }
 
-    /* ───────── подписка на Dash ───────── */
     private void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour beh)
     {
         if (slot == SkillSlot.Dash) Attach(beh);
@@ -58,7 +55,6 @@ public sealed class PhoenixDivePassive : PassiveSkillBehaviour, ISkillModifier
         }
     }
 
-    /* ───────── начало / конец рывка ───────── */
     private void DiveStart(Vector3 pos)
     {
         if (_diveVfx)
@@ -77,7 +73,6 @@ public sealed class PhoenixDivePassive : PassiveSkillBehaviour, ISkillModifier
         if (_diveVfx)
             _diveVfx.Stop(true, ParticleSystemStopBehavior.StopEmitting);
 
-        // ◄ вернуться к обычной модели
         Context.FireballModel.SetActive(false);
         foreach (var r in Context.PlayerMeshes) r.enabled = true;
 
@@ -87,21 +82,20 @@ public sealed class PhoenixDivePassive : PassiveSkillBehaviour, ISkillModifier
             _impactVfx.Play(true);
         }
 
-        float radius = Context.SkillModifierHub
-                       .Apply(new SkillKey(Definition.Slot, SkillStat.Radius), _impactRadius);
+        float radius = Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), _impactRadius);
 
         int hitCount = 0;
         Collider[] hits = Physics.OverlapSphere(Context.ActorPosition.position, radius);
         foreach (var h in hits)
         {
-            if (h.transform == Context.transform) continue;                // не бьём себя
+            if (h.transform == Context.transform) continue;
             if (!h.TryGetComponent(out IDamageable target)) continue;
 
             var ctx = new DamageContext
             {
                 Attacker       = Context,
                 Target         = target,
-                SkillBehaviour = null,                                      // пассивка
+                SkillBehaviour = null,
                 SkillDef       = Definition,
                 Slot           = Definition.Slot,
                 Type           = SkillDamageType.Basic,
@@ -113,16 +107,15 @@ public sealed class PhoenixDivePassive : PassiveSkillBehaviour, ISkillModifier
                 SourceGO       = gameObject
             };
 
-            Context.ApplyDamageContextModifiers(ref ctx);                   // вместо ApplyDamageModifiers
-            target.ReceiveDamage(ctx);                                      // событие разойдётся из цели
+            Context.ApplyDamageContextModifiers(ref ctx);
+            target.ReceiveDamage(ctx);
             hitCount++;
         }
 
 
         Debug.Log($"<color=orange>[Phoenix Dive]</color> dealt {_impactDamage} to {hitCount} target(s)");
     }
-
-    /* ───────── ISkillModifier ───────── */
+    
     public float Evaluate(SkillKey key, float value)
     {
         if (key.Slot == SkillSlot.Dash && key.Stat == SkillStat.Cooldown)

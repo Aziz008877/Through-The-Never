@@ -3,7 +3,7 @@ using Zenject;
 
 public class HotbarInput : MonoBehaviour
 {
-    [SerializeField] private Transform     _spawnRoot;
+    [SerializeField] private Transform _spawnRoot;
     [SerializeField] private PlayerContext _ctx;
     [SerializeField] private ItemInventory _inv;
     [Inject] private SkillRuntimeFactory _factory;
@@ -22,7 +22,6 @@ public class HotbarInput : MonoBehaviour
         {   Debug.LogWarning($"{item.DisplayName}: SkillDefinition missing"); return; }
 
         Debug.Log($"Scroll {item.DisplayName} → will spawn prefab {item.Skill.BehaviourPrefab.name}");
-        // 1) спавним через фабрику
         var beh = _factory.Spawn(item.Skill, _ctx, null) as ActiveSkillBehaviour;
         if (beh == null)
         {
@@ -30,9 +29,8 @@ public class HotbarInput : MonoBehaviour
             return;
         }
 
-        beh.TryCast();                 // активируем
+        beh.TryCast();
 
-        // 2) очищаем хот-бар и –1 scroll
         _inv.ClearHotbarSlot(idx);
         _inv.Remove(item, 1);
     }

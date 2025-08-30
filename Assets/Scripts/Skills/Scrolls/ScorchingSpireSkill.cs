@@ -23,17 +23,14 @@ public class ScorchingSpireSkill : ActiveSkillBehaviour
     
     private IEnumerator SpireRoutine(Vector3 center)
     {
-        // 1) создаём визуал
         GameObject pillar = _pillarPrefab
             ? Instantiate(_pillarPrefab, center, Quaternion.identity)
             : null;
-
-        // 2) параметры из Definition c fallback-ами
+        
         float lifeTime  = Definition.Duration > 0f ? Definition.Duration : 2f;
         float radius    = Definition.Raduis   > 0f ? Definition.Raduis   : 3f;
         float totalDmg  = Definition.Damage   > 0f ? Definition.Damage   : 50f;
-
-        // 3) наносим урон по тик-рейту
+        
         float elapsed = 0f;
         var   wait    = new WaitForSeconds(_tickRate);
 
@@ -43,8 +40,7 @@ public class ScorchingSpireSkill : ActiveSkillBehaviour
             elapsed += _tickRate;
             yield return wait;
         }
-
-        // 4) убираем визуал и саму «спелл-капсулу»
+        
         if (pillar) Destroy(pillar);
         Destroy(gameObject);
     }
@@ -69,10 +65,9 @@ public class ScorchingSpireSkill : ActiveSkillBehaviour
             var ctx = BuildDamage(each, SkillDamageType.Basic, center, Vector3.up, gameObject);
             ctx.Target = tgt;
 
-            // при желании ещё раз прогнать контекстные модификаторы:
-            // Context.ApplyDamageContextModifiers(ref ctx);
+            Context.ApplyDamageContextModifiers(ref ctx);
 
-            tgt.ReceiveDamage(ctx); // события разойдутся автоматически
+            tgt.ReceiveDamage(ctx);
         }
     }
     

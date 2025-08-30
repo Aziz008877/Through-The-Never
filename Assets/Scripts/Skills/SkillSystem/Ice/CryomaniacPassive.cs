@@ -32,7 +32,6 @@ public sealed class CryomaniacPassive : PassiveSkillBehaviour
         }
         else
         {
-            // фоллбэк: просто подпишемся на всех в сцене
             var inScene = Context.EnemyHandler.Enemies;
             for (int i = 0; i < inScene.Length; i++) TrySubEnemy(inScene[i]);
         }

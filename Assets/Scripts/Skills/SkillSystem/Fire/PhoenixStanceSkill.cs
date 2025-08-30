@@ -92,10 +92,10 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour, IDefenceDurationSkill
             var ctx = BuildDamage(_aoeDamage, SkillDamageType.Basic, hitPoint: hit.transform.position, hitNormal: Vector3.up, sourceGO: gameObject);
             ctx.Target = enemy;
 
-            // при желании: Context.ApplyDamageContextModifiers(ref ctx);
+            Context.ApplyDamageContextModifiers(ref ctx);
 
             enemy.ReceiveDamage(ctx);
-            _totalDamageDone += ctx.Damage; // фактический урон после всех модификаторов
+            _totalDamageDone += ctx.Damage;
         }
 
 

@@ -28,26 +28,24 @@ public class FirenadoTornado : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        // притягиваем физикой
         if (other.TryGetComponent(out Rigidbody rb))
         {
             Vector3 dir = (transform.position - other.transform.position).normalized;
             rb.AddForce(dir * _pullForce, ForceMode.Acceleration);
         }
-
-        // урон/дот
+        
         if (!other.TryGetComponent(out IDamageable target) || _alreadyHit.Contains(target))
             return;
 
         var ctx = new DamageContext
         {
-            Attacker       = _ctx,                 // ActorContext источника зоны
+            Attacker       = _ctx,
             Target         = target,
-            SkillBehaviour = null,                 // не активный скилл
+            SkillBehaviour = null,
             SkillDef       = null,
             Slot           = SkillSlot.Undefined,
             Type           = SkillDamageType.Basic,
-            Damage         = _damage,              // разовый урон при первом касании
+            Damage         = _damage,
             IsCrit         = false,
             CritMultiplier = 1f,
             HitPoint       = other.transform.position,
@@ -56,9 +54,8 @@ public class FirenadoTornado : MonoBehaviour
         };
 
         _ctx.ApplyDamageContextModifiers(ref ctx);
-        target.ReceiveDamage(ctx);                 // событие разойдётся внутри цели
-
-        // опционально — наложить DoT отдельно
+        target.ReceiveDamage(ctx);
+        
         if (other.TryGetComponent(out IDotReceivable dot))
             dot.ApplyDot(_dotPerSecond, _dotDuration);
 

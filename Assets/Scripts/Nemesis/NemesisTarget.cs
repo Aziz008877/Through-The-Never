@@ -50,17 +50,14 @@ public sealed class NemesisTarget : MonoBehaviour
 
         float hp = Mathf.Max(1f, _baseMaxHp * svc.HpMul(_npcId));
         float dmg = Mathf.Max(0f, _baseDamage * svc.DamageMul(_npcId));
-
-        // ВКЛЮЧИ СВОИ АДАПТЕРЫ ЗДЕСЬ:
+        
         // GetComponent<BaseEnemyHP>()?.SetMaxHp(hp);
         // GetComponent<BaseEnemyAttackAdapter>()?.SetBaseDamage(dmg);
-        // или прокинь в твои системы напрямую.
     }
-
-    // Вызови это из кода смерти врага (см. EnemyDeathReporter ниже)
+    
     public void OnDied()
     {
-        NemesisRuntime.Svc?.Clear(_npcId); // обнуляем модификаторы этого id
-        // дальше твоя логика удаления/пула/Destroy
+        NemesisRuntime.Svc?.Clear(_npcId);
+        
     }
 }

@@ -26,16 +26,15 @@ public class FieryRetaliationPassive : PassiveSkillBehaviour
             var tr = hits[i].transform;
             if (tr == Context.transform) continue;
             if (!hits[i].TryGetComponent(out IDamageable target)) continue;
-            // если не хотим бить того, кто нанёс урон:
             // if (ReferenceEquals(target, source)) continue;
 
             var ctx = new DamageContext
             {
                 Attacker       = Context,
                 Target         = target,
-                SkillBehaviour = null,                    // это не ActiveSkillBehaviour
-                SkillDef       = Definition,              // если класс наследует SkillBehaviour — ок
-                Slot           = Definition.Slot,         // иначе можно поставить SkillSlot.Undefined
+                SkillBehaviour = null,
+                SkillDef       = Definition,
+                Slot           = Definition.Slot,
                 Type           = SkillDamageType.Basic,
                 Damage         = _damage,
                 IsCrit         = false,
@@ -45,7 +44,7 @@ public class FieryRetaliationPassive : PassiveSkillBehaviour
             };
 
             Context.ApplyDamageContextModifiers(ref ctx);
-            target.ReceiveDamage(ctx); // события разойдутся внутри цели
+            target.ReceiveDamage(ctx);
         }
     }
 

@@ -51,18 +51,18 @@ public class SecondWaveSkill : PassiveSkillBehaviour
         {
             var col = hits[i];
             if (!col.TryGetComponent(out IDamageable dmg)) continue;
-            if (ReferenceEquals(dmg, self)) continue; // не бьём себя
+            if (ReferenceEquals(dmg, self)) continue;
 
             var ctx = new DamageContext
             {
                 Attacker       = Context,
                 Target         = dmg,
-                SkillBehaviour = this,                 // ← теперь базовый SkillBehaviour
+                SkillBehaviour = this,
                 SkillDef       = Definition,
                 Slot           = Definition.Slot,
                 Type           = SkillDamageType.Basic,
                 Damage         = Definition.Damage,
-                IsCrit         = false,                // при желании можно зароллить крит
+                IsCrit         = false,
                 CritMultiplier = Context.CritMultiplier,
                 HitPoint       = col.transform.position,
                 HitNormal      = Vector3.up,
@@ -70,7 +70,7 @@ public class SecondWaveSkill : PassiveSkillBehaviour
             };
 
             Context.ApplyDamageContextModifiers(ref ctx);
-            dmg.ReceiveDamage(ctx);                   // событие «урон нанесён» вызовется внутри цели
+            dmg.ReceiveDamage(ctx);
         }
 
     }

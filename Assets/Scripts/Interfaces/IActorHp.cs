@@ -8,21 +8,16 @@ public delegate void IncomingDamageHandler(ref float damage, IDamageable source)
 public interface IActorHp
 {
     float CurrentHP { get; set; }
-    float MinHP     { get; set; }
-    float MaxHP     { get; set; }
+    float MinHP { get; set; }
+    float MaxHP { get; set; }
     void UpdateHP();
     void  ReceiveHP(float amount);
     void ReceiveDamage(float damageValue, IDamageable source);
-
     event IncomingDamageHandler OnIncomingDamage;
-
     void SetCanBeDamagedState(bool state);
-
     void Revive(float percent);
-
     public void AddMaxHP(float amount, bool healToFull = true);
     public void RemoveMaxHP(float amount);
-
     Action OnActorDead { get; set; }
     public Action<float, IDamageable> OnActorReceivedDamage { get; set; }
 }

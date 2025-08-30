@@ -3,7 +3,6 @@ using UnityEngine;
 public sealed class PyrotechnicianPassive : PassiveSkillBehaviour, ISkillModifier
 {
     [SerializeField] private float _damageBonusPercent = 0.30f;
-
     private IDefenceDurationSkill _def;
     private bool _bonusActive;
 
@@ -19,16 +18,14 @@ public sealed class PyrotechnicianPassive : PassiveSkillBehaviour, ISkillModifie
         Context.SkillManager.ActiveRegistered -= OnActiveRegistered;
         Detach();
     }
-
-    /*──────── ISkillModifier ────────*/
+    
     public float Evaluate(SkillKey key, float value)
     {
         if (_bonusActive && key.Stat == SkillStat.Damage && key.Slot != SkillSlot.Passive)
             return value * (1f + _damageBonusPercent);
         return value;
     }
-
-    /*──────── подписка на DEF ────────*/
+    
     private void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour beh)
     {
         if (slot == SkillSlot.Defense) TryAttach(beh);
@@ -52,8 +49,7 @@ public sealed class PyrotechnicianPassive : PassiveSkillBehaviour, ISkillModifie
         _def.OnDefenceFinished -= DeactivateBonus;
         _def = null;
     }
-
-    /*──────── бонус ────────*/
+    
     private void ActivateBonus()
     {
         if (_bonusActive) return;

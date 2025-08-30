@@ -23,13 +23,13 @@ public class SmolderRingArea : MonoBehaviour
         {
             var ctx = new DamageContext
             {
-                Attacker       = _context,                 // ActorContext источника зоны
+                Attacker       = _context,
                 Target         = enemy,
-                SkillBehaviour = null,                     // не активный скилл
+                SkillBehaviour = null,
                 SkillDef       = null,
                 Slot           = SkillSlot.Undefined,
                 Type           = SkillDamageType.Basic,
-                Damage         = _dps,                     // столько ты и слал раньше
+                Damage         = _dps,
                 IsCrit         = false,
                 CritMultiplier = 1f,
                 HitPoint       = other.transform.position,
@@ -38,7 +38,7 @@ public class SmolderRingArea : MonoBehaviour
             };
 
             _context.ApplyDamageContextModifiers(ref ctx);
-            enemy.ReceiveDamage(ctx);                      // события вызовутся внутри цели
+            enemy.ReceiveDamage(ctx);
             _ticked.Add(enemy);
         }
     }

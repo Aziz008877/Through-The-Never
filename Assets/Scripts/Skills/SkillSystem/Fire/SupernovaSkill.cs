@@ -58,18 +58,15 @@ public class SupernovaSkill : ActiveSkillBehaviour
         for (int i = 0; i < hits.Length; i++)
         {
             if (!hits[i].TryGetComponent(out IDamageable d)) continue;
-
-            // Собираем фактический удар (крит/моды применятся внутри BuildDamage/контекстных модов)
             var ctx = BuildDamage(damage, SkillDamageType.Basic,
                 hitPoint: hits[i].transform.position,
                 hitNormal: Vector3.up,
                 sourceGO: gameObject);
             ctx.Target = d;
 
-            // Если нужны дополнительные моды поверх — можно прогнать ещё раз:
-            // Context.ApplyDamageContextModifiers(ref ctx);
+            Context.ApplyDamageContextModifiers(ref ctx);
 
-            d.ReceiveDamage(ctx); // события разойдутся внутри цели автоматически
+            d.ReceiveDamage(ctx);
         }
 
         if (_blastVfx != null)

@@ -4,7 +4,7 @@ using UnityEngine;
 public sealed class FrostShieldPassive : PassiveSkillBehaviour
 {
     [Header("Reflect while Dash is active")]
-    [SerializeField, Range(0f, 1f)] private float _reflectPercent = 1f; // 1 = 100%
+    [SerializeField, Range(0f, 1f)] private float _reflectPercent = 1f;
 
     private ActiveSkillBehaviour _dash;
     private PlayerHP _playerHp;
@@ -13,12 +13,12 @@ public sealed class FrostShieldPassive : PassiveSkillBehaviour
 
     public override void EnablePassive()
     {
-        _playerHp = Context.Hp as PlayerHP;                 // нужен хук входящего урона
+        _playerHp = Context.Hp as PlayerHP;
         HookDash(Context.SkillManager.GetActive(SkillSlot.Dash));
         Context.SkillManager.ActiveRegistered += OnActiveRegistered;
 
         if (_playerHp != null)
-            _playerHp.OnIncomingDamage += OnIncomingDamage; // ref float dmg, IDamageable source
+            _playerHp.OnIncomingDamage += OnIncomingDamage;
     }
 
     public override void DisablePassive()
@@ -42,7 +42,6 @@ public sealed class FrostShieldPassive : PassiveSkillBehaviour
         UnhookDash();
         if (!dash) return;
         _dash = dash;
-        // base.TryCast() внутри даша вызывает OnSkillActivated(Duration)
         _dash.OnSkillActivated += OnDashActivated;
     }
 
@@ -69,24 +68,22 @@ public sealed class FrostShieldPassive : PassiveSkillBehaviour
         _reflectUntil = -1f;
         _window = null;
     }
-
-    // Вызывается из PlayerHP перед применением урона
+    
     private void OnIncomingDamage(ref float dmg, IDamageable source)
     {
         if (Time.time > _reflectUntil) return;
         if (source == null || dmg <= 0f) return;
 
         float reflected = dmg * _reflectPercent;
-
-        // собираем DamageContext так, чтобы килл считался как "Dash"
+        
         var comp = source as Component;
         var ctx = new DamageContext
         {
             Attacker       = Context,
             Target         = source,
-            SkillBehaviour = (SkillBehaviour)_dash ?? this, // поведение: даш, если доступен
+            SkillBehaviour = (SkillBehaviour)_dash ?? this,
             SkillDef       = _dash ? _dash.Definition : Definition,
-            Slot           = SkillSlot.Dash,                // критично для "килл дашем"
+            Slot           = SkillSlot.Dash,
             Type           = SkillDamageType.Basic,
             Damage         = reflected,
             IsCrit         = false,
@@ -96,10 +93,7 @@ public sealed class FrostShieldPassive : PassiveSkillBehaviour
             SourceGO       = gameObject
         };
 
-        Context.ApplyDamageContextModifiers(ref ctx); // стандартные исходящие моды
+        Context.ApplyDamageContextModifiers(ref ctx);
         source.ReceiveDamage(ctx);
-
-        // Debug.Log($"[FrostShield] reflect {dmg:F1} -> {ctx.Damage:F1} to {(comp ? comp.name : "attacker")}");
-        // ВАЖНО: входящий урон игроку НЕ меняем — пассивка только отражает.
     }
 }

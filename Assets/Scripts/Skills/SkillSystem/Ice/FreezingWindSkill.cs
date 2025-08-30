@@ -42,31 +42,30 @@ public class FreezingWindSkill : PassiveSkillBehaviour
         foreach (var col in hits)
         {
             if (!col.TryGetComponent(out IDamageable enemy)) continue;
-            if (col.transform == Context.transform) continue; // опционально: не бьём себя
+            if (col.transform == Context.transform) continue;
 
             var ctx = new DamageContext
             {
                 Attacker       = Context,
                 Target         = enemy,
-                SkillBehaviour = null,                // пассивка
-                SkillDef       = Definition,          // чтобы знать, чем нанесено
+                SkillBehaviour = null,
+                SkillDef       = Definition,
                 Slot           = Definition.Slot,
                 Type           = SkillDamageType.Basic,
-                Damage         = Definition.Damage,   // здесь твой урон
-                IsCrit         = false,               // пассивка без крита (или сам ролльни при желании)
+                Damage         = Definition.Damage,
+                IsCrit         = false,
                 CritMultiplier = 1f,
                 HitPoint       = col.transform.position,
                 HitNormal      = Vector3.up,
                 SourceGO       = gameObject
             };
 
-            Context.ApplyDamageContextModifiers(ref ctx); // контекстные модификаторы
-            enemy.ReceiveDamage(ctx);                     // событие разойдётся внутри цели
-
-            // физический толчок — без изменений
+            Context.ApplyDamageContextModifiers(ref ctx);
+            enemy.ReceiveDamage(ctx);
+            
             if (col.attachedRigidbody != null)
             {
-                Vector3 dir      = (col.transform.position - endPosition).normalized;
+                Vector3 dir = (col.transform.position - endPosition).normalized;
                 Vector3 dashDir  = (endPosition - Context.transform.position).normalized;
                 Vector3 finalDir = (dir + dashDir * 0.5f).normalized;
 

@@ -33,11 +33,11 @@ public class HailSpikeProjectile : MonoBehaviour
             {
                 Attacker       = _actorContext,
                 Target         = d,
-                SkillBehaviour = null,                     // не активный скилл
+                SkillBehaviour = null,
                 SkillDef       = null,
                 Slot           = SkillSlot.Undefined,
-                Type           = SkillDamageType.Basic,    // как у тебя было
-                Damage         = _damage,                  // базовый урон ДО модификаторов
+                Type           = SkillDamageType.Basic,
+                Damage         = _damage,
                 IsCrit         = (_actorContext != null && Random.value < _actorContext.CritChance),
                 CritMultiplier = _actorContext != null ? _actorContext.CritMultiplier : 1f,
                 HitPoint       = cols[i].transform.position,
@@ -45,10 +45,10 @@ public class HailSpikeProjectile : MonoBehaviour
                 SourceGO       = gameObject
             };
 
-            if (ctx.IsCrit) ctx.Damage *= ctx.CritMultiplier; // как в BuildDamage
+            if (ctx.IsCrit) ctx.Damage *= ctx.CritMultiplier;
             _actorContext.ApplyDamageContextModifiers(ref ctx);
 
-            d.ReceiveDamage(ctx); // событие «урон нанесён» вызовется внутри цели
+            d.ReceiveDamage(ctx);
         }
 
         Destroy(gameObject);

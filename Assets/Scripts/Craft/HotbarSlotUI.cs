@@ -17,19 +17,15 @@ public class HotbarSlotUI : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData ev)
     {
-        var drag = ev.pointerDrag?.GetComponent<DragItem>();
-        if (drag == null) return;
-        if (drag.ItemData.Role != ItemRole.Scroll) return;
-
-        // 1) пробуем положить в хот-бар
-        if (_inv.SetHotbarSlot(_idx, drag.ItemData))
+        if (ev.pointerDrag.TryGetComponent(out DragItem dragItem))
         {
-            // 2) успешно → вычитаем 1 из стэка
-            _inv.Remove(drag.ItemData, 1);
-
-            // 3) убираем перетянутую иконку
-            Destroy(drag.gameObject);
+            if (dragItem.ItemData.Role != ItemRole.Scroll) return;
+            
+            if (_inv.SetHotbarSlot(_idx, dragItem.ItemData))
+            {
+                _inv.Remove(dragItem.ItemData, 1);
+                Destroy(dragItem.gameObject);
+            }
         }
-        // SetHotbarSlot уже вызывает OnChanged → InventoryUI сам обновится
     }
 }

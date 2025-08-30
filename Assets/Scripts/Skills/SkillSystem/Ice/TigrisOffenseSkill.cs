@@ -75,15 +75,12 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
         Vector3 b = a + Context.CastPivot.forward * _range;
 
         var hits = Physics.OverlapCapsule(a, b, Radius, ~0, QueryTriggerInteraction.Collide);
-
-        // урон за тик (DPS * tickInterval). У тебя Damage уже модифицирован через SkillModifierHub
         float dmgPerTick = Damage * _tickRate;
 
         for (int i = 0; i < hits.Length; i++)
         {
             var col = hits[i];
-
-            // урон
+            
             if (col.TryGetComponent<IDamageable>(out var tgt))
             {
                 var ctx = BuildDamage(dmgPerTick, SkillDamageType.Basic,
@@ -92,13 +89,11 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
                     sourceGO: gameObject);
                 ctx.Target = tgt;
 
-                // при желании — дополнительные моды поверх:
-                // Context.ApplyDamageContextModifiers(ref ctx);
-
-                tgt.ReceiveDamage(ctx); // события разойдутся из цели сами
+                
+                Context.ApplyDamageContextModifiers(ref ctx);
+                tgt.ReceiveDamage(ctx);
             }
-
-            // толчок вперёд
+            
             Vector3 push = Context.CastPivot.forward * _pushForce;
 
             if (col.attachedRigidbody != null)

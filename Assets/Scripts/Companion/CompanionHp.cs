@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class CompanionHp : MonoBehaviour, IActorHp
 {
-    [SerializeField] float _maxHp = 100f;
-    [SerializeField] float _dotTickRate = 1f;
-
+    [SerializeField] private float _maxHp = 100f;
+    [SerializeField] private float _dotTickRate = 1f;
     public float CurrentHP { get; set; }
     public float MinHP { get; set; } = 0f;
     public float MaxHP { get; set; }
     public bool  CanBeDamaged { get; set; } = true;
     public bool  IsDotActive  { get; set; }
-
-    public event Action<Transform>           OnEnemyDead;
+    public event Action<Transform> OnEnemyDead;
     public void ReceiveDamage(float damageValue, IDamageable source)
     {
         throw new NotImplementedException();
     }
 
-    public event IncomingDamageHandler       OnIncomingDamage;     // NEW
+    public event IncomingDamageHandler OnIncomingDamage;
     public void SetCanBeDamagedState(bool state)
     {
         throw new NotImplementedException();
@@ -42,10 +40,7 @@ public class CompanionHp : MonoBehaviour, IActorHp
 
     public Action OnActorDead { get; set; }
     public Action<float, IDamageable> OnActorReceivedDamage { get; set; }
-
-    void Awake() => CurrentHP = MaxHP = _maxHp;
-
-    /* ---------- Damage ---------- */
+    private void Awake() => CurrentHP = MaxHP = _maxHp;
     public void ReceiveDamage(float dmg, SkillDamageType t = SkillDamageType.Basic)
     {
         OnIncomingDamage?.Invoke(ref dmg, null);
@@ -54,8 +49,7 @@ public class CompanionHp : MonoBehaviour, IActorHp
         CurrentHP = Mathf.Max(MinHP, CurrentHP - dmg);
         if (CurrentHP <= MinHP) Die();
     }
-
-    /* ---------- Heal ---------- */
+    
     public void UpdateHP()
     {
         
@@ -63,12 +57,10 @@ public class CompanionHp : MonoBehaviour, IActorHp
 
     public void ReceiveHP(float heal) =>
         CurrentHP = Mathf.Min(MaxHP, CurrentHP + heal);
-
-    /* ---------- DOT ---------- */
+    
     public void ApplyDot(float dps, float dur) => StartCoroutine(DotRoutine(dps, dur));
-    public void RefreshDot(float dur)           => ApplyDot(0, dur);
-
-    IEnumerator DotRoutine(float dps, float dur)
+    public void RefreshDot(float dur) => ApplyDot(0, dur);
+    private IEnumerator DotRoutine(float dps, float dur)
     {
         IsDotActive = true;
         float t = 0f;
@@ -81,5 +73,5 @@ public class CompanionHp : MonoBehaviour, IActorHp
         IsDotActive = false;
     }
 
-    void Die() { OnEnemyDead?.Invoke(transform); Destroy(gameObject); }
+    private void Die() { OnEnemyDead?.Invoke(transform); Destroy(gameObject); }
 }

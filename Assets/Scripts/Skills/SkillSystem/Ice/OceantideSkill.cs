@@ -44,18 +44,18 @@ public class OceantideSkill : PassiveSkillBehaviour
         foreach (var col in hits)
         {
             if (!col.TryGetComponent(out IDamageable enemy)) continue;
-            if (col.transform == Context.transform) continue; // опционально: не бьём себя
+            if (col.transform == Context.transform) continue;
 
             var ctx = new DamageContext
             {
                 Attacker       = Context,
                 Target         = enemy,
-                SkillBehaviour = this,                 // теперь поле базового типа SkillBehaviour
+                SkillBehaviour = this,
                 SkillDef       = Definition,
                 Slot           = Definition.Slot,
                 Type           = SkillDamageType.Basic,
-                Damage         = Definition.Damage,    // урон пассивки
-                IsCrit         = false,                // при желании можешь зароллить крит вручную
+                Damage         = Definition.Damage,
+                IsCrit         = false,
                 CritMultiplier = Context.CritMultiplier,
                 HitPoint       = col.transform.position,
                 HitNormal      = Vector3.up,
@@ -63,7 +63,7 @@ public class OceantideSkill : PassiveSkillBehaviour
             };
 
             Context.ApplyDamageContextModifiers(ref ctx);
-            enemy.ReceiveDamage(ctx);                  // события разойдутся из цели автоматически
+            enemy.ReceiveDamage(ctx);
 
             if (col.TryGetComponent(out StunDebuff stun))
                 stun.ApplyStun(_stunDuration);

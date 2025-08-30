@@ -79,12 +79,12 @@ public class DeepfrostWaterProjectile : IceBasicAttackprojectile
             
                 var ctx = new DamageContext
                 {
-                    Attacker       = _context,                         // ActorContext источника
+                    Attacker       = _context,
                     Target         = dmg,
-                    SkillBehaviour = null,                              // не активный скилл
+                    SkillBehaviour = null,
                     SkillDef       = null,
                     Slot           = SkillSlot.Special,
-                    Type           = _damageType,                       // как у тебя было (Basic/DOT и т.д.)
+                    Type           = _damageType,
                     Damage         = tickDamage,
                     IsCrit         = false,
                     CritMultiplier = 1f,

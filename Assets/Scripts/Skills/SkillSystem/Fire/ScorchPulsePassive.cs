@@ -53,14 +53,14 @@ public sealed class ScorchPulsePassive : PassiveSkillBehaviour
         {
             var h = hits[i];
             if (!h.TryGetComponent(out IDamageable target)) continue;
-            if (h.transform == Context.transform) continue; // не бьём себя (по желанию)
+            if (h.transform == Context.transform) continue;
 
             var ctx = new DamageContext
             {
                 Attacker       = Context,
                 Target         = target,
-                SkillBehaviour = null,              // это не ActiveSkillBehaviour
-                SkillDef       = Definition,        // если есть Definition; иначе = null
+                SkillBehaviour = null,
+                SkillDef       = Definition,
                 Slot           = Definition ? Definition.Slot : SkillSlot.Undefined,
                 Type           = SkillDamageType.Basic,
                 Damage         = _damage,
@@ -72,7 +72,7 @@ public sealed class ScorchPulsePassive : PassiveSkillBehaviour
             };
 
             Context.ApplyDamageContextModifiers(ref ctx);
-            target.ReceiveDamage(ctx);              // события разойдутся внутри цели
+            target.ReceiveDamage(ctx);
         }
     }
 

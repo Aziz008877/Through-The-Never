@@ -3,8 +3,8 @@ using UnityEngine;
 public sealed class MeltdownPassiveUltimate : PassiveSkillBehaviour, IOnDamageDealtContextModifier
 {
     [Header("Stacks / Amplify")]
-    [SerializeField] private float _ampPerStack   = 0.08f;   // +8 % за стак
-    [SerializeField] private float _stackLifeTime = 4f;      // сек
+    [SerializeField] private float _ampPerStack   = 0.08f;
+    [SerializeField] private float _stackLifeTime = 4f;
 
     [Header("Trail (при 5 стаках)")]
     [SerializeField] private FireTrailPuddle _puddlePrefab;

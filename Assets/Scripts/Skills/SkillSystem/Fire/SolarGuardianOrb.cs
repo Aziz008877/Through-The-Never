@@ -61,7 +61,7 @@ public class SolarGuardianOrb : MonoBehaviour
         var ctx = new DamageContext
         {
             Attacker       = _ctx,
-            Target         = null,                // цель определит коллайдер при столкновении
+            Target         = null,
             SkillBehaviour = null,
             SkillDef       = null,
             Slot           = SkillSlot.Undefined,
@@ -75,6 +75,6 @@ public class SolarGuardianOrb : MonoBehaviour
         };
 
         _ctx.ApplyDamageContextModifiers(ref ctx);
-        proj.Init(ctx, 2f); // урон прилетит при попадании проектайла
+        proj.Init(ctx, 2f);
     }
 }

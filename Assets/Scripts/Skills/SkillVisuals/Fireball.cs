@@ -11,66 +11,56 @@ public class Fireball : MonoBehaviour, IProjectileBoostable
     [SerializeField] private float _speed = 25f;
 
     [Header("DOT")]
-    [SerializeField] private float _dotPerSecond = 2f;    // (оставлено как было — не используется тут)
-    [SerializeField] private float _dotDuration  = 3f;    // (оставлено как было — не используется тут)
-    [SerializeField] private float _damageMul    = 1f;
+    [SerializeField] private float _dotPerSecond = 2f;
+    [SerializeField] private float _dotDuration = 3f;
+    [SerializeField] private float _damageMul = 1f;
 
     [Header("Small explosion (Fireblast)")]
-    [SerializeField] private float _smallRadius    = 2f;
+    [SerializeField] private float _smallRadius = 2f;
     [SerializeField] private float _smallDamageMul = 0.5f;
     private bool _smallExplosionEnabled;
 
     [Header("Seeking")]
-    [SerializeField] private float _turnSpeedDeg   = 240f;
-    [SerializeField] private float _seekRadius     = 12f;
-    [SerializeField] private float _hitDistance    = 0.3f;
+    [SerializeField] private float _turnSpeedDeg = 240f;
+    [SerializeField] private float _seekRadius = 12f;
+    [SerializeField] private float _hitDistance = 0.3f;
     private bool _homingEnabled;
-
-    protected float        _instantDamage;
-    private   SkillDamageType _damageType;
+    protected float _instantDamage;
+    private SkillDamageType _damageType;
     protected ActorContext _context;
-    private   bool         _canDamage = true;
-    private   IDamageable  _target;
-    private   Vector3      _moveDirection;
-    private   float        _startDamage;
-
-    // Новый: базовый контекст, который используем при попадании
+    private bool _canDamage = true;
+    private IDamageable _target;
+    private Vector3 _moveDirection;
+    private float _startDamage;
     private DamageContext _baseCtx;
-    // Флаг: если старый Init (с уже применёнными модификаторами), не применять их повторно при хите
     private bool _skipContextModsAtHit;
-
     public void EnableSmallExplosion(bool state) => _smallExplosionEnabled = state;
-    public void SetHoming(bool state)            => _homingEnabled = state;
-
-    /* ───────────────────── NEW INIT (рекомендуемый) ───────────────────── */
+    public void SetHoming(bool state) => _homingEnabled = state;
     public void Init(in DamageContext ctx, float lifeTime)
     {
-        _baseCtx  = ctx;                // контекст без Target (цель подставим при попадании)
-        _context  = ctx.Attacker;
-        _startDamage   = ctx.Damage;    // сохраним базовый урон
-        _damageType    = ctx.Type;
+        _baseCtx = ctx;
+        _context = ctx.Attacker;
+        _startDamage = ctx.Damage;
+        _damageType = ctx.Type;
+        RecomputeInstantDamage();
+        _skipContextModsAtHit = false;
 
-        RecomputeInstantDamage();       // учтём _damageMul
-        _skipContextModsAtHit = false;  // модификаторы контекста можно применять при хите
-
-        _castVfx?.Play();
+        _castVfx.Play();
         Invoke(nameof(DestroySelf), lifeTime);
 
         SetupInitialDirection();
     }
-
-    /* ───────────────────── OLD INIT (совместимость) ───────────────────── */
+    
     public void Init(float damage, float lifeTime, SkillDamageType type, ActorContext context)
     {
-        _context     = context;
-        _startDamage = damage;          // ВАЖНО: это уже "готовый" урон после ApplyDamageModifiers в вызывающем коде
-        _damageType  = type;
-
-        // Сконструируем базовый контекст без повторного применения модификаторов
+        _context = context;
+        _startDamage = damage;
+        _damageType = type;
+        
         _baseCtx = new DamageContext
         {
             Attacker       = _context,
-            Target         = null,          // цель подставим при попадании
+            Target         = null,
             SkillBehaviour = null,
             SkillDef       = null,
             Slot           = SkillSlot.Undefined,
@@ -84,9 +74,9 @@ public class Fireball : MonoBehaviour, IProjectileBoostable
         };
 
         RecomputeInstantDamage();
-        _skipContextModsAtHit = true;   // модификаторы уже были учтены снаружи — не дублируем на хите
+        _skipContextModsAtHit = true;
 
-        _castVfx?.Play();
+        _castVfx.Play();
         Invoke(nameof(DestroySelf), lifeTime);
 
         SetupInitialDirection();
@@ -159,19 +149,16 @@ public class Fireball : MonoBehaviour, IProjectileBoostable
     private void OnTriggerEnter(Collider other)
     {
         if (!_canDamage || !other.TryGetComponent(out IDamageable tgt)) return;
-
-        // Клонируем базовый контекст и подставляем цель + хитпоинт
         var apply = _baseCtx;
         apply.Target   = tgt;
         apply.HitPoint = other.ClosestPoint(transform.position);
         apply.Type     = _damageType;
-        apply.Damage   = _instantDamage;   // фактический урон от снаряда (учтён _damageMul)
-
-        // Если проектайл был инициализирован по новому пути — применяем контекстные модификаторы на моменте хита
+        apply.Damage   = _instantDamage;
+        
         if (!_skipContextModsAtHit)
-            _context?.ApplyDamageContextModifiers(ref apply);
+            _context.ApplyDamageContextModifiers(ref apply);
 
-        tgt.ReceiveDamage(apply); // события разойдутся из цели автоматически
+        tgt.ReceiveDamage(apply);
         HitAndStop();
     }
 
@@ -181,10 +168,8 @@ public class Fireball : MonoBehaviour, IProjectileBoostable
 
         _canDamage = false;
         if (_flightVfx) _flightVfx.gameObject.SetActive(false);
-        _hitVfx?.Play();
+        _hitVfx.Play();
         _speed = 0f;
-
-        // задержка, чтобы доиграли эффекты/доты
         Invoke(nameof(DestroySelf), _dotDuration + 0.5f);
     }
 
@@ -203,7 +188,7 @@ public class Fireball : MonoBehaviour, IProjectileBoostable
             aoe.Damage   = _instantDamage * _smallDamageMul;
 
             if (!_skipContextModsAtHit)
-                _context?.ApplyDamageContextModifiers(ref aoe);
+                _context.ApplyDamageContextModifiers(ref aoe);
 
             tgt.ReceiveDamage(aoe);
         }

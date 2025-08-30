@@ -59,11 +59,7 @@ public class EmberGuardSkill : ActiveSkillBehaviour, ISkillModifier, IDefenceDur
         if (!_active || dmg <= 0f) return;
 
         float original = dmg;
-
-        // 1) режем входящий урон
         dmg *= 1f - _damageReduction;
-
-        // 2) считаем отражение
         float reflected = original * _reflectPercent;
 
         float radius = Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), 5f);
@@ -87,11 +83,10 @@ public class EmberGuardSkill : ActiveSkillBehaviour, ISkillModifier, IDefenceDur
                 HitPoint       = Context.transform.position,
                 SourceGO       = gameObject
             };
-
-            // вместо старого ApplyDamageModifiers(...)
+            
             Context.ApplyDamageContextModifiers(ref reflectCtx);
 
-            enemy.ReceiveDamage(reflectCtx); // события разлетятся внутри цели
+            enemy.ReceiveDamage(reflectCtx);
         }
 
         Debug.Log($"<color=orange>[Ember Guard]</color> incoming {original:F0} → reduced {dmg:F0} (-{_damageReduction:P0}), reflected {reflected:F0}");

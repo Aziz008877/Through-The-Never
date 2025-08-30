@@ -44,13 +44,13 @@ public class LavaPoolArea : MonoBehaviour
         {
             var ctx = new DamageContext
             {
-                Attacker       = _ctx,  // ActorContext источника (ауры/эффекта)
+                Attacker       = _ctx,
                 Target         = tgt,
                 SkillBehaviour = null,
                 SkillDef       = null,
                 Slot           = SkillSlot.Undefined,
-                Type           = SkillDamageType.Basic,   // как у тебя было
-                Damage         = _dps * 0.5f,             // dps * tickInterval
+                Type           = SkillDamageType.Basic,
+                Damage         = _dps * 0.5f,
                 IsCrit         = false,
                 CritMultiplier = 1f,
                 HitPoint       = (tgt as Component)?.transform.position ?? transform.position,
@@ -58,7 +58,7 @@ public class LavaPoolArea : MonoBehaviour
             };
 
             _ctx.ApplyDamageContextModifiers(ref ctx);
-            tgt.ReceiveDamage(ctx); // события разойдутся внутри цели
+            tgt.ReceiveDamage(ctx);
             
             if (tgt is IDotReceivable dot)
                 dot.ApplyDot(_dps, _lifeTime);

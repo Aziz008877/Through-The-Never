@@ -1,33 +1,28 @@
 using UnityEngine;
-
 public class CompanionAnimation : MonoBehaviour, IActorAnim
 {
-    [SerializeField] Animator _anim;
-    [SerializeField] string _moveBool = "IsMoving";
-    [SerializeField] string _moveX    = "X";
-    [SerializeField] string _moveY    = "Y";
-
-    int _moveBoolHash, _moveXHash, _moveYHash;
-    CompanionMove _move;
-
-    void Awake()
+    [SerializeField] private Animator _anim;
+    [SerializeField] private string _moveBool = "IsMoving";
+    [SerializeField] private string _moveX = "X";
+    [SerializeField] private string _moveY = "Y";
+    private int _moveBoolHash, _moveXHash, _moveYHash;
+    private CompanionMove _move;
+    private void Awake()
     {
         _moveBoolHash = Animator.StringToHash(_moveBool);
-        _moveXHash    = Animator.StringToHash(_moveX);
-        _moveYHash    = Animator.StringToHash(_moveY);
+        _moveXHash = Animator.StringToHash(_moveX);
+        _moveYHash = Animator.StringToHash(_moveY);
 
         _move = GetComponent<CompanionMove>();
         if (_move) _move.OnMove += ReceiveMoveState;
     }
-    void OnDestroy()
+    private void OnDestroy()
     {
         if (_move) _move.OnMove -= ReceiveMoveState;
     }
 
-    public void Dash() => _anim.SetTrigger("Dash");   // для Dash-триггера
-
-    /* ---------- обработка движения ---------- */
-    void ReceiveMoveState(Vector3 worldDir)
+    public void Dash() => _anim.SetTrigger("Dash");
+    private void ReceiveMoveState(Vector3 worldDir)
     {
         bool isMoving = worldDir.sqrMagnitude > 0.0001f;
 

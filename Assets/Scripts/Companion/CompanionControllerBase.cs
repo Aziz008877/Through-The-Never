@@ -125,11 +125,9 @@ public abstract class CompanionControllerBase : MonoBehaviour
 
     private void LateUpdate()
     {
-        // если цели нет — обычный поворот
         if (_target == null || !IsEnemyAlive(_target))
         {
             ClearAimLock();
-            // 1) если бежим — смотрим по движению
             Vector3 mv = _move.LastMoveDirection;
             mv.y = 0f;
             if (mv.sqrMagnitude > 0.0001f)
@@ -137,28 +135,25 @@ public abstract class CompanionControllerBase : MonoBehaviour
                 ForceFace(_aimRoot.position + mv);
                 return;
             }
-            // 2) если стоим — можно смотреть на игрока (чтобы модель не «зависала» боком)
+            
             Vector3 toPlayer = _player.transform.position - _aimRoot.position;
             toPlayer.y = 0f;
             if (toPlayer.sqrMagnitude > 0.0001f) ForceFace(_aimRoot.position + toPlayer);
             return;
         }
-
-        // есть цель: удерживаем взгляд на ней на поводке и во время aimHold
+        
         if (_leashing || Time.time < _holdFacingUntil)
         {
             ForceFace(_holdFacingTarget ? _holdFacingTarget.position : _target.position);
             return;
         }
 
-        // если почти не двигаемся — также держим взгляд на цели
         if (_move.LastMoveDirection.sqrMagnitude < 0.001f)
             ForceFace(_target.position);
     }
 
     private void UpdateCombatState()
     {
-        // сбрасываем прицел, если текущая цель «умерла»
         if (_target != null && !IsEnemyAlive(_target))
         {
             _target = null;

@@ -73,9 +73,8 @@ public class RippingTorrentsSkill : ActiveSkillBehaviour
 
             var ctx = BuildDamage(_geyserDamage, SkillDamageType.Basic, pos, Vector3.up, gameObject);
             ctx.Target = target;
-
-            // Если нужны общие модификаторы ещё раз поверх — раскомментируй:
-            // Context.ApplyDamageContextModifiers(ref ctx);
+            
+            Context.ApplyDamageContextModifiers(ref ctx);
 
             target.ReceiveDamage(ctx); // OnDamageDealtContext разойдётся из цели сам
         }

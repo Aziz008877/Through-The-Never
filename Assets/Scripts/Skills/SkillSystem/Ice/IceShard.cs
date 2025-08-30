@@ -14,22 +14,22 @@ public class IceShard : IceBasicAttackprojectile
 
         var ctx = new DamageContext
         {
-            Attacker       = _context,               // ActorContext источника
+            Attacker       = _context,
             Target         = tgt,
-            SkillBehaviour = null,                   // не активный скилл — пассив/эффект
+            SkillBehaviour = null,
             SkillDef       = null,
             Slot           = SkillSlot.Basic,
-            Type           = _damageType,            // Basic / DOT и т.д.
+            Type           = _damageType,
             Damage         = _instantDamage,
-            IsCrit         = false,                  // если нужен крит — заролльни и умножь Damage
+            IsCrit         = false,
             CritMultiplier = 1f,
             HitPoint       = other.transform.position,
             HitNormal      = Vector3.up,
             SourceGO       = gameObject
         };
 
-        _context.ApplyDamageContextModifiers(ref ctx); // контекстные модификаторы
-        tgt.ReceiveDamage(ctx);                        // события разойдутся внутри цели
+        _context.ApplyDamageContextModifiers(ref ctx);
+        tgt.ReceiveDamage(ctx);
 
         HitAndStop();
     }

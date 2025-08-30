@@ -12,11 +12,7 @@ public class RetaliationPassive : PassiveSkillBehaviour
     private void OnPlayerHit(float incomingDamage, IDamageable attacker)
     {
         if (incomingDamage <= 0f || attacker == null) return;
-
-        // сколько отражаем
         float dmgBack = incomingDamage * _returnPercent;
-
-        // формируем контекст отражённого удара
         var ctx = new DamageContext
         {
             Attacker       = Context,
@@ -33,8 +29,8 @@ public class RetaliationPassive : PassiveSkillBehaviour
             SourceGO       = gameObject
         };
 
-        Context.ApplyDamageContextModifiers(ref ctx); // применяем контекстные модификаторы
-        attacker.ReceiveDamage(ctx);                  // событие "урон нанесён" вызовется внутри цели
+        Context.ApplyDamageContextModifiers(ref ctx);
+        attacker.ReceiveDamage(ctx);
     }
 
 }

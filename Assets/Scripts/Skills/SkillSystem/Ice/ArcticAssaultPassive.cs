@@ -12,11 +12,9 @@ public sealed class ArcticAssaultPassive : PassiveSkillBehaviour
 
     public override void EnablePassive()
     {
-        // 1) подписываемся на уже существующих врагов
         var enemies = Context.EnemyHandler.Enemies;
         for (int i = 0; i < enemies.Length; i++) TrySubscribe(enemies[i]);
-
-        // 2) слушаем новых через IEnemyHandler.EnemyRegistered (он у тебя уже есть)
+        
         _handler = Context.EnemyHandler;
         if (_handler != null)
             _handler.EnemyRegistered += OnEnemyRegistered;
@@ -26,8 +24,7 @@ public sealed class ArcticAssaultPassive : PassiveSkillBehaviour
     {
         if (_handler != null)
             _handler.EnemyRegistered -= OnEnemyRegistered;
-
-        // отписываемся от всех врагов
+        
         for (int i = 0; i < _subs.Count; i++)
             if (_subs[i] != null) _subs[i].OnKilled -= OnEnemyKilled;
 
@@ -52,8 +49,7 @@ public sealed class ArcticAssaultPassive : PassiveSkillBehaviour
         Debug.Log(ctx.Attacker.name);
         Debug.Log(Context.name);
         if (ctx.Attacker != Context) return;
-
-        // именно спец-слот?
+        
         if (ctx.Slot != SkillSlot.Special) return;
 
         var hp = Context.Hp;

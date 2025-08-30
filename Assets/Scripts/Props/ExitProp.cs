@@ -10,7 +10,6 @@ public class ExitProp : MonoBehaviour, IInteractable
     public bool CanInteract { get; set; }
     public void PerformAction(GameObject player)
     {
-        Debug.Log("YES");
         _movableExit
             .DOLocalMoveY(_moveYPos, _dotweenSettings.Duration)
             .SetEase(_dotweenSettings.AnimationType);

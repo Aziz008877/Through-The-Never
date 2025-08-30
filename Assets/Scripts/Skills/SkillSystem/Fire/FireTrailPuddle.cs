@@ -23,8 +23,7 @@ public class FireTrailPuddle : MonoBehaviour
 
         Destroy(gameObject, lifeTime);
     }
-
-    /* ——— учёт входа/выхода целей ——— */
+    
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out IDamageable d)) _inside.Add(d);
@@ -34,8 +33,7 @@ public class FireTrailPuddle : MonoBehaviour
     {
         if (other.TryGetComponent(out IDamageable d)) _inside.Remove(d);
     }
-
-    /* ——— тики урона ——— */
+    
     private void Update()
     {
         _timer += Time.deltaTime;
@@ -44,31 +42,25 @@ public class FireTrailPuddle : MonoBehaviour
 
         foreach (var tgt in _inside)
         {
-            // собираем контекст тикового урона
             var ctx = new DamageContext
             {
-                Attacker       = _ctx,                               // источник ауры/трейла
+                Attacker       = _ctx,
                 Target         = tgt,
-                SkillBehaviour = null,                               // не ActiveSkillBehaviour — оставляем null
+                SkillBehaviour = null,
                 SkillDef       = null,
                 Slot           = SkillSlot.Dash,
-                Type           = SkillDamageType.Basic,              // у тебя было Basic
-                Damage         = _tickDmg,                           // урон за тик ДО модификаторов
+                Type           = SkillDamageType.Basic,
+                Damage         = _tickDmg,
                 IsCrit         = false,
                 CritMultiplier = 1f,
                 HitPoint       = (tgt as Component)?.transform.position ?? transform.position,
                 SourceGO       = gameObject
             };
-
-            // применяем контекстные модификаторы вместо старого ApplyDamageModifiers
+            
             _ctx.ApplyDamageContextModifiers(ref ctx);
-
-            // наносим урон
             tgt.ReceiveDamage(ctx);
-
-            // опционально: продлеваем/накладываем дот (как у тебя было)
             if (tgt is IDotReceivable dot)
-                dot.ApplyDot(ctx.Damage, 1f); // используем уже модифицированное значение
+                dot.ApplyDot(ctx.Damage, 1f);
 
             Debug.Log($"<color=orange>[Trailblazer]</color> tick {ctx.Damage:F1} to {tgt}");
         }

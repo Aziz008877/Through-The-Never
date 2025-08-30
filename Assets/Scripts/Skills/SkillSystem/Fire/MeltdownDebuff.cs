@@ -6,44 +6,31 @@ public class MeltdownDebuff : MonoBehaviour
 {
     public  int StackCount { get; private set; }
     private readonly int _maxStacks = 5;
-
-    /* параметры, получает из Configure() */
-    private float            _stackLife;
+    private float _stackLife;
     private FireTrailPuddle  _puddlePrefab;
-    private float            _puddleDps, _puddleRate, _puddleRad, _puddleLife;
-    private ActorContext    _ctx;
-
-    /* внутреннее состояние */
+    private float _puddleDps, _puddleRate, _puddleRad, _puddleLife;
+    private ActorContext _ctx;
     private Coroutine  _decayRoutine;
     private Coroutine  _trailRoutine;
-
-    /* ───────── настройка (вызывается единожды) ───────── */
     public void Configure(float stackLife, FireTrailPuddle prefab, float dps, float rate, float radius, float life, ActorContext ctx)
     {
-        _stackLife     = stackLife;
-        _puddlePrefab  = prefab;
-        _puddleDps     = dps;
-        _puddleRate    = rate;
-        _puddleRad     = radius;
-        _puddleLife    = life;
-        _ctx           = ctx;
+        _stackLife = stackLife;
+        _puddlePrefab = prefab;
+        _puddleDps = dps;
+        _puddleRate = rate;
+        _puddleRad = radius;
+        _puddleLife = life;
+        _ctx = ctx;
     }
-
-    /* ───────── +1 стак ───────── */
+    
     public void AddStack()
     {
         StackCount = Mathf.Min(StackCount + 1, _maxStacks);
-
-        /* обновляем таймер распада */
         if (_decayRoutine != null) StopCoroutine(_decayRoutine);
         _decayRoutine = StartCoroutine(Decay());
-
-        /* если достигли 5 стаков — запускаем лаву */
         if (StackCount >= _maxStacks && _trailRoutine == null)
             _trailRoutine = StartCoroutine(SpawnTrail());
     }
-
-    /* ───────── распад стаков ───────── */
     private IEnumerator Decay()
     {
         yield return new WaitForSeconds(_stackLife);
@@ -55,8 +42,7 @@ public class MeltdownDebuff : MonoBehaviour
         else
             StopTrail();
     }
-
-    /* ───────── лавовый след ───────── */
+    
     private IEnumerator SpawnTrail()
     {
         var wait = new WaitForSeconds(_puddleRate);

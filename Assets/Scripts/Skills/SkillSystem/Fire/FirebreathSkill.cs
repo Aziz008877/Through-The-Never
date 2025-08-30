@@ -54,22 +54,16 @@ public class FirebreathSkill : ActiveSkillBehaviour
         {
             var col = hits[i];
             if (!col.TryGetComponent(out IDamageable target)) continue;
-            if (_hitThisCast != null && _hitThisCast.Contains(target)) continue; // защита от повторов
+            if (_hitThisCast != null && _hitThisCast.Contains(target)) continue;
 
             Vector3 dir = col.transform.position - origin;
             dir.y = 0f;
             if (dir.sqrMagnitude <= 0f) continue;
             if (Vector3.Angle(forward, dir) > _coneAngle) continue;
-
-            // урон за тик
             float dmgPerTick = _tickDamage * _tickRate;
-
-            // собираем DamageContext (крит/моды применятся внутри BuildDamage)
             var ctx = BuildDamage(dmgPerTick, SkillDamageType.Basic, hitPoint: col.transform.position, hitNormal: Vector3.up, sourceGO: gameObject);
             ctx.Target = target;
-
-            // при желании можно ещё раз прогнать контекстные моды
-            // Context.ApplyDamageContextModifiers(ref ctx);
+            Context.ApplyDamageContextModifiers(ref ctx);
 
             target.ReceiveDamage(ctx);
             _hitThisCast?.Add(target);

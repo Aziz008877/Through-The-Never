@@ -6,7 +6,7 @@ public class AquaPrimePassive : PassiveSkillBehaviour
 {
     [Header("Cooldown haste while Defense is active")]
     [SerializeField, Range(0f, 1f)]
-    private float _cooldownHastePercent = 0.35f; // +35% скорость отката (на 35% быстрее)
+    private float _cooldownHastePercent = 0.35f;
 
     private ActiveSkillBehaviour _defense;
     private readonly List<ActiveSkillBehaviour> _actives = new();
@@ -14,10 +14,7 @@ public class AquaPrimePassive : PassiveSkillBehaviour
 
     public override void EnablePassive()
     {
-        // набираем текущие активки владельца
         RefreshActives();
-
-        // хук на Defense в твоём паттерне
         HookDefense(Context.SkillManager.GetActive(SkillSlot.Defense));
         Context.SkillManager.ActiveRegistered += OnActiveRegistered;
     }
@@ -32,7 +29,6 @@ public class AquaPrimePassive : PassiveSkillBehaviour
 
     private void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour beh)
     {
-        // пополняем кэш активок владельца
         if (beh != null && beh.Context == Context && !_actives.Contains(beh))
             _actives.Add(beh);
 
@@ -56,7 +52,6 @@ public class AquaPrimePassive : PassiveSkillBehaviour
         if (defense == null) return;
 
         _defense = defense;
-        // TryCast вызывает base.TryCast() -> OnSkillActivated(Duration)
         _defense.OnSkillActivated += OnDefenseActivated;
     }
 
@@ -71,16 +66,14 @@ public class AquaPrimePassive : PassiveSkillBehaviour
 
     private void OnDefenseActivated(float duration)
     {
-        // окно ускорения КД на время действия деф спела
         _hasteUntil = Time.time + Mathf.Max(0f, duration);
     }
-
-    // ускоряем «тик» КД всем активкам во время окна
+    
     protected void Update()
     {
         if (Time.time >= _hasteUntil) return;
 
-        float extraDt = Time.deltaTime * Mathf.Clamp01(_cooldownHastePercent); // доп. уменьшение таймера
+        float extraDt = Time.deltaTime * Mathf.Clamp01(_cooldownHastePercent);
         if (extraDt <= 0f) return;
 
         for (int i = 0; i < _actives.Count; i++)
@@ -90,7 +83,7 @@ public class AquaPrimePassive : PassiveSkillBehaviour
 
             float rem = s.RemainingCooldown;
             if (rem > 0f)
-                s.SetCooldown(rem - extraDt); // не даём отрицательных — SetCooldown сам зажмёт в 0
+                s.SetCooldown(rem - extraDt);
         }
     }
 }

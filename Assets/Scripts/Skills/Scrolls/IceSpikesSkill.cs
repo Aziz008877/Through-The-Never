@@ -55,15 +55,11 @@ public class IceSpikesSkill : ActiveSkillBehaviour
         for (int i = 0; i < _targets.Count; i++)
         {
             var target = _targets[i];
-
-            // Собираем контекст урона: крит/моды применятся внутри BuildDamage
             var ctx = BuildDamage(dmg, SkillDamageType.Basic, center, Vector3.up, gameObject);
             ctx.Target = target;
-
-            // Если нужны дополнительные моды поверх — можно ещё раз прогнать:
-            // Context.ApplyDamageContextModifiers(ref ctx);
-
-            target.ReceiveDamage(ctx); // событие разлетится само
+            
+            Context.ApplyDamageContextModifiers(ref ctx);
+            target.ReceiveDamage(ctx);
         }
     }
 

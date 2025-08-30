@@ -29,8 +29,7 @@ public class TrailblazerPassive : PassiveSkillBehaviour
         Detach();
         Debug.Log("<color=orange>[Trailblazer]</color> disabled");
     }
-
-    /* ───────── смена Dash-скилла ───────── */
+    
     private void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour beh)
     {
         if (slot == SkillSlot.Dash) AttachToDash(beh);
@@ -57,8 +56,7 @@ public class TrailblazerPassive : PassiveSkillBehaviour
         _dash = null;
         StopSpawn(Vector3.zero);
     }
-
-    /* ───────── спавн луж ───────── */
+    
     private void StartSpawn(Vector3 _)
     {
         if (_spawnRoutine == null)

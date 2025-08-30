@@ -49,7 +49,6 @@ public class SolarRuneSkill : ActiveSkillBehaviour
 
     private void Tick(Vector3 center, float radius, float dmgTick, float healTick)
     {
-        // Лечение себе (без контекста урона — это не урон)
         if (Vector3.Distance(Context.transform.position, center) <= radius)
             Context.Hp.ReceiveHP(healTick);
 
@@ -65,15 +64,12 @@ public class SolarRuneSkill : ActiveSkillBehaviour
         for (int i = 0; i < _enemies.Count; i++)
         {
             var enemy = _enemies[i];
-
-            // Собираем фактический удар тиком
             var ctx = BuildDamage(dmgTick, SkillDamageType.Basic, center, Vector3.up, gameObject);
             ctx.Target = enemy;
+            
+            Context.ApplyDamageContextModifiers(ref ctx);
 
-            // Если нужно — можно ещё раз прогнать контекстные модификаторы:
-            // Context.ApplyDamageContextModifiers(ref ctx);
-
-            enemy.ReceiveDamage(ctx); // события разойдутся из цели автоматически
+            enemy.ReceiveDamage(ctx);
         }
     }
 

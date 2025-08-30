@@ -46,8 +46,6 @@ public class FirebeamBeam : MonoBehaviour
     transform.position = new Vector3(playerPos.x, playerPos.y + 2, playerPos.z);
 
     IDamageable target = FindClosest(_range);
-
-    // безопасно достаём Transform у цели (IDamageable может быть не MonoBehaviour)
     Transform targetTr = (target as Component)?.transform;
 
     Vector3 dir = _playerContext.transform.forward;
@@ -76,16 +74,15 @@ public class FirebeamBeam : MonoBehaviour
             float t   = Mathf.Clamp01(_lifeTimer / _lifeTime);
             float dps = Mathf.Lerp(_baseDps, _maxDps, t);
             float perTickDamage = dps * _tickRate;
-
-            // Собираем DamageContext и применяем контекстные модификаторы
+            
             var ctx = new DamageContext
             {
                 Attacker       = _playerContext,
                 Target         = d,
-                SkillBehaviour = null,                   // если это не ActiveSkillBehaviour
+                SkillBehaviour = null,
                 SkillDef       = null,
                 Slot           = SkillSlot.Special,
-                Type           = SkillDamageType.Basic,  // как у тебя было
+                Type           = SkillDamageType.Basic,
                 Damage         = perTickDamage,
                 IsCrit         = false,
                 CritMultiplier = 1f,
@@ -94,7 +91,7 @@ public class FirebeamBeam : MonoBehaviour
             };
 
             _playerContext.ApplyDamageContextModifiers(ref ctx);
-            d.ReceiveDamage(ctx); // все события разойдутся внутри цели
+            d.ReceiveDamage(ctx);
         }
     }
 
