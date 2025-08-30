@@ -6,24 +6,24 @@ using Random = UnityEngine.Random;
 public abstract class BaseEnemyAttack : MonoBehaviour
 {
     [Header("Melee")]
-    [SerializeField] private bool  _useMelee    = true;
-    [SerializeField] private float _meleeDamage = 10f;
-    [SerializeField] private float _meleeDist   = 2f;
-    [SerializeField] private float _meleeCd     = 2f;
+    [SerializeField] protected bool  _useMelee    = true;
+    [SerializeField] protected float _meleeDamage = 10f;
+    [SerializeField] protected float _meleeDist   = 2f;
+    [SerializeField] protected float _meleeCd     = 2f;
 
     [Header("Ranged")]
-    [SerializeField] private bool  _useRanged    = true;
-    [SerializeField] private float _rangedDamage = 8f;
-    [SerializeField] private float _rangedDist   = 6f;
-    [SerializeField] private float _rangedCd     = 4f;
+    [SerializeField] protected bool  _useRanged    = true;
+    [SerializeField] protected float _rangedDamage = 8f;
+    [SerializeField] protected float _rangedDist   = 6f;
+    [SerializeField] protected float _rangedCd     = 4f;
 
     [Header("Behaviour")]
     [SerializeField] private float _stopAfterCast = .8f;
 
-    private Transform _target;
+    protected Transform _target;
     private BaseEnemyAnimation _anim;
 
-    private ActorContext _attackerCtx;
+    protected ActorContext _attackerCtx;
     private IFrostbiteReceivable _frost;
     private IBlindable _blindSelf;
 

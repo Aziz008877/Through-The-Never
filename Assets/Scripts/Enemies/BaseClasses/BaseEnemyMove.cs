@@ -13,7 +13,7 @@ public abstract class BaseEnemyMove : MonoBehaviour, IFrostbiteReceivable
     [Header("Patrol")]
     [SerializeField] protected Transform[] _patrolPoints;
     [SerializeField] protected float _wanderPause = 1.2f;
-
+    protected bool AgentReady => _agent != null && _agent.enabled && _agent.isOnNavMesh;
     protected NavMeshAgent _agent;
     protected BaseEnemyAnimation _enemyAnimation;
     protected BaseEnemyAttack _enemyAttack;
@@ -110,7 +110,8 @@ public abstract class BaseEnemyMove : MonoBehaviour, IFrostbiteReceivable
 
     protected void MoveTo(Vector3 pos)
     {
-        if (_agent.isOnNavMesh) _agent.SetDestination(pos);
+        if (!AgentReady) { _isMoving = false; _enemyAnimation.SetMove(false); return; }
+        _agent.SetDestination(pos);
         _agent.speed = _baseSpeed * MoveSpeedMul;
         _agent.isStopped = false;
         _isMoving = true;
@@ -119,8 +120,11 @@ public abstract class BaseEnemyMove : MonoBehaviour, IFrostbiteReceivable
 
     protected void StopMoving()
     {
-        _agent.isStopped = true;
-        _agent.velocity = Vector3.zero;
+        if (AgentReady)
+        {
+            _agent.isStopped = true;
+            _agent.velocity = Vector3.zero;
+        }
         _isMoving = false;
         _enemyAnimation.SetMove(false);
     }
@@ -128,7 +132,16 @@ public abstract class BaseEnemyMove : MonoBehaviour, IFrostbiteReceivable
     public void SetMoveState(bool state)
     {
         _canMove = state;
-        if (!state) { _agent.isStopped = true; _agent.velocity = Vector3.zero; _isMoving = false; _enemyAnimation.SetMove(false); }
+        if (!state)
+        {
+            if (AgentReady)
+            {
+                _agent.isStopped = true;
+                _agent.velocity = Vector3.zero;
+            }
+            _isMoving = false;
+            _enemyAnimation.SetMove(false);
+        }
     }
 
     void RotateTowardsMovement()
