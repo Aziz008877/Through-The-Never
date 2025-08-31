@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e6985a859b192814ca4412238c974c70
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 265296
+  packageName: Stylized Fantasy Spawn Of Corruption
+  packageVersion: 1.0
+  assetPath: Assets/SpawnOfCorruption/Meshes/SpawnOfCorruption.controller
+  uploadId: 612891

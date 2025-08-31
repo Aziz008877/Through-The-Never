@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 12132a1dcb41c21479d6385d26e2379d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 249007
+  packageName: Stylized Fantasy Cave Crasher
+  packageVersion: 1.0
+  assetPath: Assets/NHance/Creatures/CaveCrystalMonstersPack/Meshes/CaveCrasher/CaveCrasher_Controller.controller
+  uploadId: 765390
