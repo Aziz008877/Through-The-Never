@@ -12,6 +12,7 @@ public class IntroHandler : MonoBehaviour
     [SerializeField] private DotweenSettings _imagesDotweenSettings;
     private IEnumerator Start()
     {
+        _uiFade.DOFade(0, 1);
         yield return new WaitForSeconds(3);
 
         _uiFade
