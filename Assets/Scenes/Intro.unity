@@ -886,8 +886,8 @@ MonoBehaviour:
     Duration: 2
     AnimationType: 2
   _imagesDotweenSettings:
-    Duration: 5
-    AnimationType: 13
+    Duration: 1
+    AnimationType: 1
 --- !u!1 &1286447766
 GameObject:
   m_ObjectHideFlags: 0
