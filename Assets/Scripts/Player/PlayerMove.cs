@@ -8,6 +8,7 @@ public class PlayerMove : MonoBehaviour, IActorMove, IExternalSpeedMul
     [SerializeField] private float _rotationSpeed = 10f;
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private float _aimLockDuration = 0.25f;
+    [SerializeField] private float _xMin = -7.5f, _xMax = 5f, _zMin = -13f, _zMax = 20f;
     private float _aimLockTimer;
     public Vector3 LastMoveDirection { get; private set; } = Vector3.forward;
 
@@ -20,7 +21,7 @@ public class PlayerMove : MonoBehaviour, IActorMove, IExternalSpeedMul
     private float _baseSpeedMul = 1f;
     private float _externalSpeedMul = 1f;
     private readonly Dictionary<object, float> _externalMuls = new();
-    private float _xMin = -7.5f, _xMax = 5f, _zMin = -13f, _zMax = 20f;
+
     private void Start()
     {
         _speed = _moveSpeed;
