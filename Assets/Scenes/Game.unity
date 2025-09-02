@@ -28514,6 +28514,10 @@ MonoBehaviour:
   _rotationSpeed: 10
   _mainCamera: {fileID: 1808150386}
   _aimLockDuration: 1
+  _xMin: -7.5
+  _xMax: 5
+  _zMin: -13
+  _zMax: 20
 --- !u!114 &1603916755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35734,6 +35738,10 @@ PrefabInstance:
     - target: {fileID: 1606516049056313673, guid: 67784930a52c2bd4fb7d3c99af068854, type: 3}
       propertyPath: m_Name
       value: TFD_Grass_Patch_02A
+      objectReference: {fileID: 0}
+    - target: {fileID: 1606516049056313673, guid: 67784930a52c2bd4fb7d3c99af068854, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2089860962961550323, guid: 67784930a52c2bd4fb7d3c99af068854, type: 3}
       propertyPath: m_LocalPosition.x
