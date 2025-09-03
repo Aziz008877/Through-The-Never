@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.AI;
 
 public class MeleeMobMove : BaseEnemyMove
 {
@@ -14,16 +13,16 @@ public class MeleeMobMove : BaseEnemyMove
     protected override void Start()
     {
         _attack = GetComponent<MeleeMobAttack>();
-        _agent = GetComponent<NavMeshAgent>();
+        _agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
 
-        float baseSpeed = _tier1Speed;
+        _baseSpeed = _tier1Speed;
         switch (_attack != null ? _attack.Tier : MeleeMobTier.Tier1_Blue)
         {
-            case MeleeMobTier.Tier2_Cyan:  baseSpeed = _tier2Speed; break;
-            case MeleeMobTier.Tier3_Green: baseSpeed = _tier3Speed; break;
-            case MeleeMobTier.Tier4_Red:   baseSpeed = _tier4Speed; break;
+            case MeleeMobTier.Tier2_Cyan:  _baseSpeed = _tier2Speed; break;
+            case MeleeMobTier.Tier3_Green: _baseSpeed = _tier3Speed; break;
+            case MeleeMobTier.Tier4_Red:   _baseSpeed = _tier4Speed; break;
         }
-        _agent.speed = baseSpeed;
+        _agent.speed = _baseSpeed;
 
         base.Start();
         _behaviour = MoveBehaviour.ChaseAlways;
@@ -32,7 +31,20 @@ public class MeleeMobMove : BaseEnemyMove
     protected override void Update()
     {
         base.Update();
-        if (AgentReady && _isMoving && _attack != null)
-            _agent.speed *= _attack.CurrentRoarSpeedMul;
+        if (AgentReady)
+            _agent.speed = _isMoving && _attack ? _baseSpeed * _attack.CurrentRoarSpeedMul : _baseSpeed;
+    }
+
+    // если tier меняется на лету — полезно иметь:
+    public void RecalculateBaseSpeed()
+    {
+        if (!_attack) return;
+        switch (_attack.Tier)
+        {
+            case MeleeMobTier.Tier1_Blue:  _baseSpeed = _tier1Speed; break;
+            case MeleeMobTier.Tier2_Cyan:  _baseSpeed = _tier2Speed; break;
+            case MeleeMobTier.Tier3_Green: _baseSpeed = _tier3Speed; break;
+            case MeleeMobTier.Tier4_Red:   _baseSpeed = _tier4Speed; break;
+        }
     }
 }

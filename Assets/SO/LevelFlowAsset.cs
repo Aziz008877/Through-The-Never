@@ -3,26 +3,27 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Game/Level Flow", fileName = "LevelFlowAsset")]
 public class LevelFlowAsset : ScriptableObject
 {
+    public enum LayoutVariant { First = 1, Second = 2 }
+
     [System.Serializable]
     public struct Step
     {
         public string Scene;
-        public int Variant;
+        [Tooltip("1 = Layout 1, 2 = Layout 2")]
+        public LayoutVariant Variant;
+
+        [Tooltip("Набор волн для ЭТОГО захода на сцену/лейаут")]
+        public WaveLayout WaveLayout; // <-- НОВОЕ поле
     }
 
-    [Header("Последовательность шагов")]
+    [Header("Шаги потока")]
     public Step[] Steps;
 
-    [Header("Сохранение прогресса")]
+    [Header("Сейв прогресса")]
     public bool SaveProgress = false;
     public string PlayerPrefsKey = "level_flow_index";
 
-    [System.NonSerialized] public int Index; // runtime
-
-    public void ResetToStart()
-    {
-        Index = 0;
-    }
+    [System.NonSerialized] public int Index;
 
     public void LoadSavedOrReset()
     {
@@ -32,8 +33,7 @@ public class LevelFlowAsset : ScriptableObject
 
     public void Save()
     {
-        if (SaveProgress)
-            PlayerPrefs.SetInt(PlayerPrefsKey, Index);
+        if (SaveProgress) PlayerPrefs.SetInt(PlayerPrefsKey, Index);
     }
 
     public bool TryGetCurrent(out Step step)
@@ -48,11 +48,7 @@ public class LevelFlowAsset : ScriptableObject
     {
         Index++;
         Save();
-        if (Index >= (Steps?.Length ?? 0))
-        {
-            next = default;
-            return false; // поток закончился
-        }
+        if (Index >= (Steps?.Length ?? 0)) { next = default; return false; }
         next = Steps[Index];
         return true;
     }

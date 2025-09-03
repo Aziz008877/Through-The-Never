@@ -15,15 +15,21 @@ MonoBehaviour:
   Steps:
   - Scene: GameLayout
     Variant: 1
+    WaveLayout: {fileID: 11400000, guid: 56f4fc8ac75b4ac449ecf69c455683e4, type: 2}
   - Scene: GameLayout
-    Variant: 0
-  - Scene: GameLayout
-    Variant: 1
-  - Scene: GameLayout
-    Variant: 0
+    Variant: 2
+    WaveLayout: {fileID: 11400000, guid: 6d8b742af263f034eb8af28097a2c830, type: 2}
   - Scene: GameLayout
     Variant: 1
+    WaveLayout: {fileID: 11400000, guid: 732cdfd28a2345841a71529c02c1745a, type: 2}
+  - Scene: GameLayout
+    Variant: 2
+    WaveLayout: {fileID: 11400000, guid: 1939efa5809398e4e92799ceefa3398c, type: 2}
+  - Scene: GameLayout
+    Variant: 1
+    WaveLayout: {fileID: 11400000, guid: 812e82e338aef384d973d80ae2bf263e, type: 2}
   - Scene: Boss
     Variant: 1
+    WaveLayout: {fileID: 0}
   SaveProgress: 0
   PlayerPrefsKey: level_flow_index

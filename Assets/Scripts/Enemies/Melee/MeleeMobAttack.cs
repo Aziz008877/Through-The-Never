@@ -44,7 +44,10 @@ public class MeleeMobAttack : BaseEnemyAttack
     private Vector3 _preparedTargetPoint;
 
     private float _heavyTimer, _roarTimer, _roarTimeLeft, _tossTimer;
-
+    public void SetTier(MeleeMobTier tier)
+    {
+        _tier = tier;
+    }
     public bool IsManuallyCasting => _isCasting;
     public float FarDistance => _farDistance;
     public MeleeMobTier Tier => _tier;

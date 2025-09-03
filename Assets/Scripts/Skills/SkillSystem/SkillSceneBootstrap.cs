@@ -11,11 +11,11 @@ public class SkillSceneBootstrap : MonoBehaviour
     {
         List<SkillDefinition> skillDefinitions = _skillSelectionSaver.GetChosenSkills();
         _skillManager.Build(skillDefinitions);
-        _skillSelectionSaver.Clear();
+        //_skillSelectionSaver.Clear();
     }
 
     private void OnDestroy()
     {
-        _skillSelectionSaver.Clear();
+        //_skillSelectionSaver.Clear();
     }
 }

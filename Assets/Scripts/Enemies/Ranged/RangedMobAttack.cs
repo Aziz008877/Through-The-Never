@@ -54,7 +54,10 @@ public class RangedMobAttack : BaseEnemyAttack
         _move = GetComponent<BaseEnemyMove>();
         TryGetComponent(out _selfAsSource);
     }
-
+    public void SetTier(RangedMobTier tier)
+    {
+        _tier = tier;
+    }
     private void Update()
     {
         if (_buffCdTimer > 0f) _buffCdTimer -= Time.deltaTime;

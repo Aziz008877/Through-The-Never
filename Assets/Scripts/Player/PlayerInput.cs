@@ -18,6 +18,11 @@ public class PlayerInput : MonoBehaviour
     public Action OnDashPressed;
     public Action ChangeInventoryState;
 
+    private void Start()
+    {
+        //Time.timeScale = 4;
+    }
+
     private void Update()
     {
         if (_playerState.CurrentPlayerState != CurrentPlayerState.CanControl) return;

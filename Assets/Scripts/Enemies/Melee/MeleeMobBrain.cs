@@ -24,7 +24,11 @@ public class MeleeMobBrain : MonoBehaviour
 
     private float _postTimer, _meleeTimer, _thinkTimer, _meleeHold;
     private bool _busy;
-
+    public void ReceivePlayer(Transform player)
+    {
+        _player = player;
+    }
+    
     private void Awake()
     {
         _attack = GetComponent<MeleeMobAttack>();

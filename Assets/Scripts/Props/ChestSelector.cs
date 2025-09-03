@@ -1,3 +1,4 @@
+using System.Collections;
 using DG.Tweening;
 using UnityEngine;
 public class ChestSelector : MonoBehaviour
@@ -5,13 +6,8 @@ public class ChestSelector : MonoBehaviour
     [Header("Targets")]
     [SerializeField] private Transform[] _papers;
     [SerializeField] private Vector3[] _endPositions;
-
-    [Header("Lid")]
-    [SerializeField] private Transform _lid;
-    [SerializeField] private float _lidXValue;
-
+    [SerializeField] private float _waitTime;
     [Header("Tween")]
-    [SerializeField] private DotweenSettings _dotweenSettings;
     [SerializeField] private DotweenSettings _chestSettings;
     [SerializeField] private float _stagger = 0.08f;
 
@@ -23,11 +19,10 @@ public class ChestSelector : MonoBehaviour
     [SerializeField] private float _sideLeft   = -1.2f;
     [SerializeField] private float _sideCenter = 0.0f;
     [SerializeField] private float _sideRight  = 1.2f;
-    private void Start()
+    private IEnumerator Start()
     {
-        _lid.DOLocalRotate(new Vector3(_lidXValue, 0, 0), _dotweenSettings.Duration)
-            .SetEase(_dotweenSettings.AnimationType)
-            .OnComplete(Launch);
+        yield return new WaitForSeconds(_waitTime);
+        Launch();
     }
 
     private void Launch()

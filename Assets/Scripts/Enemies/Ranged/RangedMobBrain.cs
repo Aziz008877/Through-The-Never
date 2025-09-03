@@ -24,7 +24,10 @@ public class RangedMobBrain : MonoBehaviour
 
     private float _postTimer, _meleeTimer, _rangedTimer, _thinkTimer, _meleeHold;
     private bool _busy;
-
+    public void ReceivePlayer(Transform player)
+    {
+        _player = player;
+    }
     private void Awake()
     {
         _atk   = GetComponent<RangedMobAttack>();

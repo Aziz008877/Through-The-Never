@@ -28,7 +28,7 @@ public abstract class BaseEnemyMove : MonoBehaviour, IFrostbiteReceivable
     [SerializeField] private float _frostSlowPerStack;
     [SerializeField] private float _frostDmgRedPerStack;
     [SerializeField] private float _frostTimeLeft;
-    private float _baseSpeed;
+    protected float _baseSpeed;
 
     public virtual void ReceiveTargetEnemy(Transform target) { _target = target; }
 

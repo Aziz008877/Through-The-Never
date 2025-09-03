@@ -11,7 +11,7 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
     public bool CanBeDamaged { get; set; } = true;
     public bool IsDotActive  { get; set; }
     [SerializeField] private UnityEvent _onEnemyDead;
-    [Inject] private DamageTextPool _damageTextPool;
+    //[Inject] private DamageTextPool _damageTextPool;
     public event Action<DamageContext> OnDamaged;
     public event Action<DamageContext> OnKilled;
     private BaseEnemyAnimation _enemyAnimation;
@@ -50,7 +50,7 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
             CurrentHP    = MinHP;
             CanBeDamaged = false;
 
-            if (dmg > 0f) _damageTextPool.ShowDamage(Mathf.Round(dmg * 10f) / 10f, transform.position);
+            //if (dmg > 0f) _damageTextPool.ShowDamage(Mathf.Round(dmg * 10f) / 10f, transform.position);
 
             OnDamaged?.Invoke(ctx);
             Die(ctx);
@@ -58,7 +58,7 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
         else
         {
             CurrentHP -= dmg;
-            if (dmg > 0f) _damageTextPool.ShowDamage(Mathf.Round(dmg * 10f) / 10f, transform.position);
+            //if (dmg > 0f) _damageTextPool.ShowDamage(Mathf.Round(dmg * 10f) / 10f, transform.position);
 
             OnDamaged?.Invoke(ctx);
         }

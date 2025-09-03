@@ -17,6 +17,23 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
     private readonly List<SkillDefinition> _chosenSkills = new();
     public IReadOnlyList<SkillDefinition>  ChosenSkills => _chosenSkills;
     private bool _basicLocked;
+    private SkillSelectionSaver _selectionSaver;
+    private void Start()
+    {
+        _selectionSaver = GetComponent<PlayerContext>().SkillSelectionSaver;
+        
+        Debug.Log(_selectionSaver.GetChosenSkills().Count);
+        /*if (defs != null && defs.Count > 0)
+        {
+            foreach (var def in defs)
+            {
+                Debug.Log(def.DisplayName);
+            }
+            AddSkills(defs);
+        }*/
+        
+    }
+
     private void OnEnable()
     {
         _input.OnBasicSkillPressed += CastBasic;
