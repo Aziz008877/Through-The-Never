@@ -21,3 +21,4 @@ MonoBehaviour:
     StageIndex: 0
     CycleIndex: 0
     School: 0
+  _companionEnabled: 0

@@ -36,6 +36,16 @@ public class SkillSelectionSaver : ScriptableObject
         set => _progress = value;
     }
 
+    [Header("Companion")]
+    [SerializeField] private bool _companionEnabled;        // надо ли включать компаньона в сценах
+    public bool CompanionEnabled
+    {
+        get => _companionEnabled;
+        set => _companionEnabled = value;
+    }
+
+    // --- API ---
+
     public bool TryChooseSchool(MagicSchool school)
     {
         if (_hasSchool) return false;
@@ -64,6 +74,7 @@ public class SkillSelectionSaver : ScriptableObject
         _hasSchool = false;
         _school = default;
         _progress = default;
+        _companionEnabled = false;
     }
 
     public void ResetRun(MagicSchool school)
@@ -79,6 +90,7 @@ public class SkillSelectionSaver : ScriptableObject
         };
         _hasSchool = true;
         _school = school;
+        _companionEnabled = false;
     }
 
     public List<SkillDefinition> GetChosenSkills() => new(_chosen);
