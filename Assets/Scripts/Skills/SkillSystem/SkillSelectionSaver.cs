@@ -72,7 +72,7 @@ public class SkillSelectionSaver : ScriptableObject
         _chosen.Clear();
         _takenList.Clear();
         _hasSchool = false;
-        _school = default;
+        _school = MagicSchool.Neutral;
         _progress = default;
         _companionEnabled = false;
     }

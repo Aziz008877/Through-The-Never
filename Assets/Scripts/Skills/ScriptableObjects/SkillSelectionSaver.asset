@@ -15,7 +15,7 @@ MonoBehaviour:
   _chosen: []
   _takenList: []
   _hasSchool: 0
-  _school: 0
+  _school: 4
   _progress:
     Initialized: 0
     StageIndex: 0
