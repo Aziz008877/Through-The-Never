@@ -27,30 +27,55 @@ public class ChestOfferDirector : MonoBehaviour
     [Header("Runtime")]
     [SerializeField] private MagicSchool _school;
 
+    [Header("Flow")]
+    [SerializeField] private bool _autoInitOnStart = false; // по умолчанию ВЫКЛ
+
     private SkillCatalog.SchoolBundle _bundle;
     private readonly HashSet<SkillDefinition> _taken = new();
     private int _stageIndex;
     private int _cycleIndex;
     private bool _initialized;
+
+    public bool IsInitialized => _initialized;
+
     private void Start()
     {
-        if (_selectionSaver != null && _selectionSaver.HasSchool)
+        // Если в Saver уже есть школа — подтянем её (но НЕ инициализируем)
+        if (_selectionSaver && _selectionSaver.HasSchool)
             _school = _selectionSaver.School;
 
+        // Пытаемся только восстановиться (например, после смены сцены)
         TryRestoreFromSaver();
 
-        if (!_initialized)
-            InitializeAndGrantInitial();
+        // Больше ничего не делаем: НИКАКОЙ InitializeAndGrantInitial() тут!
+        if (_autoInitOnStart)
+        {
+            // Включай только если точно уверены, что в этот момент школа выбрана
+            EnsureInitialized(_school);
+        }
     }
 
-    public void SetSchool(MagicSchool school)
+    /// <summary>Вызывать ПОСЛЕ выбора школы, чтобы начать цикл офферов.</summary>
+    public void BeginRun(MagicSchool school)
     {
         _school = school;
+        // Сбросим, чтобы не мешала старая инициализация
+        _initialized = false;
+        InitializeAndGrantInitial();
     }
+
+    public void SetSchool(MagicSchool school) => _school = school;
 
     public void InitializeAndGrantInitial()
     {
         if (_initialized) return;
+
+        // Блокируем случайную инициализацию без выбранной школы
+        if (_selectionSaver != null && !_selectionSaver.HasSchool)
+        {
+            Debug.Log("[Director] Skip init: school not chosen yet.");
+            return;
+        }
 
         if (_catalog == null || _skillManager == null)
         {
@@ -65,8 +90,8 @@ public class ChestOfferDirector : MonoBehaviour
         }
 
         _taken.Clear();
-        SeedTakenFromManager();
-        SeedStartersIntoTaken();
+        SeedTakenFromManager();    // уже выданные игроку скиллы
+        SeedStartersIntoTaken();   // исключаем Basic/StarterDash/Innate из будущих офферов
 
         _stageIndex = 0;
         _cycleIndex = 0;
@@ -83,10 +108,7 @@ public class ChestOfferDirector : MonoBehaviour
         var p = _selectionSaver.Progress;
         if (!p.Initialized) return;
         if (!_selectionSaver.HasSchool) return;
-        if (!_selectionSaver.School.Equals(_school))
-        {
-            return;
-        }
+        if (!_selectionSaver.School.Equals(_school)) return;
 
         if (!_catalog.TryGetBundle(_school, out _bundle))
         {
@@ -95,11 +117,11 @@ public class ChestOfferDirector : MonoBehaviour
         }
 
         _taken.Clear();
-        
+
         var chosen = _selectionSaver.Chosen;
         for (int i = 0; i < chosen.Count; i++)
             if (chosen[i]) _taken.Add(chosen[i]);
-        
+
         var takenList = _selectionSaver.TakenList;
         for (int i = 0; i < takenList.Count; i++)
             if (takenList[i]) _taken.Add(takenList[i]);
@@ -132,7 +154,7 @@ public class ChestOfferDirector : MonoBehaviour
 
         if (!_initialized)
         {
-            Debug.LogWarning("[Director] Not initialized.");
+            Debug.LogWarning("[Director] Not initialized. Call BeginRun(school) after school selection.");
             return false;
         }
 
@@ -183,7 +205,7 @@ public class ChestOfferDirector : MonoBehaviour
         _taken.Add(chosen);
 
         _skillManager.AddSkills(new List<SkillDefinition> { chosen });
-        _selectionSaver.AddSkill(chosen);
+        _selectionSaver?.AddSkill(chosen);
 
         AdvanceStage();
         SaveProgressToSaver();
@@ -238,7 +260,7 @@ public class ChestOfferDirector : MonoBehaviour
             CycleIndex = _cycleIndex,
             School = _school
         };
-        
+
         foreach (var def in _taken)
             _selectionSaver.MarkTakenOnly(def);
     }
@@ -252,6 +274,7 @@ public class ChestOfferDirector : MonoBehaviour
         sb.AppendLine($"  Order: {string.Join(" -> ", _order)} | StageIdx={_stageIndex} | Cycle={_cycleIndex}/{_cycles}");
         Debug.Log(sb.ToString());
     }
+
 
     private static string NameOrNull(SkillDefinition d) => d ? d.name : "NULL";
     private static int Len(SkillDefinition[] a) => a == null ? 0 : a.Length;

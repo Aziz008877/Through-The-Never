@@ -155,9 +155,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581957231f564ee41ba3810660a5b787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentHP>k__BackingField: 1
+  <CurrentHP>k__BackingField: 100
   <MinHP>k__BackingField: 0
-  <MaxHP>k__BackingField: 1
+  <MaxHP>k__BackingField: 100
   _onEnemyDead:
     m_PersistentCalls:
       m_Calls: []

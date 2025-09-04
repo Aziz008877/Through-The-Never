@@ -30,6 +30,8 @@ MonoBehaviour:
     m_path: Assets/Scenes/Game.unity
   - m_enabled: 1
     m_path: Assets/Scenes/GameLayout.unity
+  - m_enabled: 1
+    m_path: Assets/Scenes/Boss.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings:

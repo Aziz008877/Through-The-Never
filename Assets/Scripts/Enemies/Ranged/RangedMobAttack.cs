@@ -8,7 +8,6 @@ public class RangedMobAttack : BaseEnemyAttack
 {
     [Header("Tier")]
     [SerializeField] private RangedMobTier _tier = RangedMobTier.Tier1_Green;
-
     [Header("General")]
     [SerializeField] private Transform _ownerRoot;
     [SerializeField] private Transform _muzzle;
@@ -57,6 +56,7 @@ public class RangedMobAttack : BaseEnemyAttack
     public void SetTier(RangedMobTier tier)
     {
         _tier = tier;
+        GetComponent<EnemyMaterialApplier>().Refresh();
     }
     private void Update()
     {

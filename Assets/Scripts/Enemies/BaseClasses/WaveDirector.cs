@@ -56,14 +56,14 @@ public sealed class WaveDirector : MonoBehaviour
         Debug.Log($"[WaveDirector] FLOW: step picked -> variant={step.Variant}, " +
                   $"layout={( _activeLayout ? _activeLayout.name : "NULL")}");
 
-        /*if (_activeLayout && _activeLayout.Waves != null)
+        if (_activeLayout && _activeLayout.Waves != null)
         {
             for (int w = 0; w < _activeLayout.Waves.Length; w++)
             {
                 foreach (var e in _activeLayout.Waves[w].Entries)
                     Debug.Log($"[WaveDirector] Layout '{_activeLayout.name}', wave {w}: {e.Kind} x{e.Count} (tier {e.Tier})");
             }
-        }*/
+        }
 
         if (_lockExitWhileRunning && _activeExit) _activeExit.CanInteract = false;
 
@@ -103,7 +103,7 @@ public sealed class WaveDirector : MonoBehaviour
         {
             for (int i = 0; i < e.Count; i++)
             {
-                var p = _spawns[sp % spCount];
+                var p = _spawns[Random.Range(0, _spawns.Count)];
                 sp++;
 
                 var hp = _factory.Spawn(e.Kind, e.Tier, p.position, p.rotation);

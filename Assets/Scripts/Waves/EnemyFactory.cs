@@ -49,15 +49,20 @@ public sealed class EnemyFactory : MonoBehaviour, IEnemyFactory
             move.ReceiveTargetEnemy(_playerTarget);
         }
 
-        // Tier-настройки
         if (hasMelee)
         {
-            melee.SetTier((MeleeMobTier)Mathf.Clamp(tier, 1, 4));
+            int t = tier <= 0 ? 1 : tier;
+            //melee.SetTier((MeleeMobTier)Mathf.Clamp(t, 1, 4));
+            melee.SetTier(MeleeMobTier.Tier4_Red);
+            Debug.Log($"[EnemyFactory] Melee '{hp.name}' tier={t}");
             if (hp.TryGetComponent(out MeleeMobMove move)) move.RecalculateBaseSpeed();
         }
         else if (hasRanged)
         {
-            ranged.SetTier((RangedMobTier)Mathf.Clamp(tier, 1, 3));
+            int t = tier <= 0 ? 1 : tier;
+            //ranged.SetTier((RangedMobTier)Mathf.Clamp(t, 1, 3));
+            ranged.SetTier(RangedMobTier.Tier3_Purple);
+            Debug.Log($"[EnemyFactory] Ranged '{hp.name}' tier={t}");
         }
 
         if (hp.TryGetComponent(out EnemyMaterialApplier vis)) vis.Refresh();
