@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IcyRetaliationSkill
   m_EditorClassIdentifier: 
   Id: Icy Retaliation
-  DisplayName: 
+  DisplayName: Icy Retaliation
   Description: 
   Icon: {fileID: 0}
   Stars: []

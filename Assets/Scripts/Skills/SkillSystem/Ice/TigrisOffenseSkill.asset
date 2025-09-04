@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TigrisOffenseSkill
   m_EditorClassIdentifier: 
   Id: Tihris Offense
-  DisplayName: 
+  DisplayName: Tihris Offense
   Description: 
   Icon: {fileID: 0}
   Stars:

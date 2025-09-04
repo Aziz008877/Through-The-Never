@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: Trailblazer
   m_EditorClassIdentifier: 
-  Id: 
+  Id: Trailblazer
   DisplayName: Trailblazer
   Description: 
   Icon: {fileID: 0}
@@ -23,6 +23,7 @@ MonoBehaviour:
   Kind: 1
   School: 0
   BehaviourPrefab: {fileID: 6035177361056866920, guid: 90b5579e0fec6fc4aadde97312e1602f, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 0
   Duration: 0

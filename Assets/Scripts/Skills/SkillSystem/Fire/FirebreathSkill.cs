@@ -27,7 +27,6 @@ public class FirebreathSkill : ActiveSkillBehaviour
 
     private IEnumerator BreathRoutine()
     {
-        Debug.Log("Start");
         _breathVfx.Play();
         float elapsed = 0f;
         var wait = new WaitForSeconds(_tickRate);
@@ -41,7 +40,6 @@ public class FirebreathSkill : ActiveSkillBehaviour
 
         _breathVfx.Stop();
         _hitThisCast.Clear();
-        Debug.Log("stop");
     }
 
     private void DealConeDamage()

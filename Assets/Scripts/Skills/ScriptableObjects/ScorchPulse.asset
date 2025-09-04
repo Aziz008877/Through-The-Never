@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: ScorchPulse
   m_EditorClassIdentifier: 
-  Id: 
+  Id: Scorch Pulse
   DisplayName: Scorch Pulse
   Description: 
   Icon: {fileID: 0}
@@ -21,6 +21,7 @@ MonoBehaviour:
   Kind: 1
   School: 0
   BehaviourPrefab: {fileID: 5916957851619132962, guid: 2a4402ac2df9ab044b01174bcc9347e5, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 0
   Duration: 1

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: Firebane
   m_EditorClassIdentifier: 
-  Id: 
+  Id: Firebane
   DisplayName: Firebane
   Description: 
   Icon: {fileID: 0}
@@ -21,6 +21,7 @@ MonoBehaviour:
   Kind: 1
   School: 0
   BehaviourPrefab: {fileID: 9053289891796206689, guid: 9411f3e4ced5384469e68b89b0f9ceed, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 0
   Duration: 0

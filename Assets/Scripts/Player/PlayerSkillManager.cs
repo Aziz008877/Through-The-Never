@@ -18,22 +18,6 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
     public IReadOnlyList<SkillDefinition>  ChosenSkills => _chosenSkills;
     private bool _basicLocked;
     private SkillSelectionSaver _selectionSaver;
-    private void Start()
-    {
-        _selectionSaver = GetComponent<PlayerContext>().SkillSelectionSaver;
-        
-        Debug.Log(_selectionSaver.GetChosenSkills().Count);
-        /*if (defs != null && defs.Count > 0)
-        {
-            foreach (var def in defs)
-            {
-                Debug.Log(def.DisplayName);
-            }
-            AddSkills(defs);
-        }*/
-        
-    }
-
     private void OnEnable()
     {
         _input.OnBasicSkillPressed += CastBasic;
@@ -89,8 +73,8 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
     private void CastBasic()
     {
         if (_basicLocked) return;
-        Cast(SkillSlot.Basic);
-        _playerAnimator.CastBasics();
+        if (Cast(SkillSlot.Basic, "temp"))
+            _playerAnimator.CastBasics();
     }
     private void CastDefense() => Cast(SkillSlot.Defense);
     private void CastSpecial() => Cast(SkillSlot.Special);
@@ -102,6 +86,21 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
 
         //Debug.Log(a.Definition.DisplayName);
     }
+    
+    private bool Cast(SkillSlot slot, string basic)
+    {
+        if (_actives.TryGetValue(slot, out var a) && a != null)
+        {
+            if (!a.IsReady) return false;
+            bool wasReady = a.IsReady;
+            a.TryCast();
+            bool success = wasReady && !a.IsReady;
+            return success;
+        }
+
+        return false;
+    }
+
     
     public void SetBasicLocked(bool state) => _basicLocked = state;
     

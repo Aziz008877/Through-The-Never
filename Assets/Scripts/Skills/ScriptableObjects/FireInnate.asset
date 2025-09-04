@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73f973407ccd9de4489e9e317def74b7, type: 3}
   m_Name: FireInnate
   m_EditorClassIdentifier: 
-  Id: ignite
+  Id: Ignite
   DisplayName: Ignite
   Description: Adds DOT Damage
   Icon: {fileID: 21300000, guid: 6c6aec7a466170a4bad88a7afba35922, type: 3}
+  Stars: []
   Slot: 4
   Kind: 1
   School: 0
   BehaviourPrefab: {fileID: 2167231998442799700, guid: c36d3b9614036c94fb16e49c435d7b49, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 0
   Duration: 0

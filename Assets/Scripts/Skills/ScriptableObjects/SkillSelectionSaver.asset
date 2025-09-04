@@ -13,5 +13,11 @@ MonoBehaviour:
   m_Name: SkillSelectionSaver
   m_EditorClassIdentifier: 
   _chosen: []
+  _takenList: []
   _hasSchool: 0
-  _school: 1
+  _school: 0
+  _progress:
+    Initialized: 0
+    StageIndex: 0
+    CycleIndex: 0
+    School: 0

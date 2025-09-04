@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FreezingWindSkill
   m_EditorClassIdentifier: 
   Id: Freezing Wind
-  DisplayName: 
+  DisplayName: Freezing Wind
   Description: 
   Icon: {fileID: 0}
   Stars: []

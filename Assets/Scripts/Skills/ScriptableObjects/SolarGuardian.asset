@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: SolarGuardian
   m_EditorClassIdentifier: 
-  Id: 
+  Id: Solar Guardian
   DisplayName: Solar Guardian
   Description: 
   Icon: {fileID: 0}
@@ -21,6 +21,7 @@ MonoBehaviour:
   Kind: 1
   School: 0
   BehaviourPrefab: {fileID: 3819157162934092003, guid: b8959aab736ae8f4d8fb5dbd1a6afae3, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 30
   Duration: 5

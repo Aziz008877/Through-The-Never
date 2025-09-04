@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: Immolate
   m_EditorClassIdentifier: 
-  Id: 
+  Id: Immolate
   DisplayName: Immolate
   Description: 
   Icon: {fileID: 0}
@@ -21,6 +21,7 @@ MonoBehaviour:
   Kind: 1
   School: 0
   BehaviourPrefab: {fileID: 8712943926157839128, guid: 24a0621270ee1a144b9a0137221e29fe, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 0
   Duration: 0

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WinterBlastSkill
   m_EditorClassIdentifier: 
   Id: Winter Blast
-  DisplayName: 
+  DisplayName: Winter Blast
   Description: 
   Icon: {fileID: 0}
   Stars: []

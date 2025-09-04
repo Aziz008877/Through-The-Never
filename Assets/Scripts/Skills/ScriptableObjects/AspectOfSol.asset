@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: AspectOfSol
   m_EditorClassIdentifier: 
-  Id: sol
+  Id: Aspect of Sol
   DisplayName: Aspect of Sol
   Description: 
   Icon: {fileID: 0}
@@ -23,6 +23,7 @@ MonoBehaviour:
   Kind: 0
   School: 0
   BehaviourPrefab: {fileID: 5661319833831118056, guid: 8c6b9c2b654271b45838bd47ec66ffc9, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 30
   Duration: 15

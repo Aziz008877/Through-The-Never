@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AspectOfTiamatSkill
   m_EditorClassIdentifier: 
   Id: Aspect Of Tiamat
-  DisplayName: 
+  DisplayName: Aspect Of Tiamat
   Description: 
   Icon: {fileID: 0}
   Stars: []

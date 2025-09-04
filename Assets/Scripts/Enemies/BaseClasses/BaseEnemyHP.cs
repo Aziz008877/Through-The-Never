@@ -77,7 +77,7 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
 
     private IEnumerator DestroySkeleton()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(0);
         Destroy(gameObject);
     }
 

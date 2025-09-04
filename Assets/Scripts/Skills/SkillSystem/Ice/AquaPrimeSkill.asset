@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: AquaPrimeSkill
   m_EditorClassIdentifier: 
-  Id: AquaPrimePassive
+  Id: Aqua Prime
   DisplayName: Aqua Prime
   Description: 
   Icon: {fileID: 0}

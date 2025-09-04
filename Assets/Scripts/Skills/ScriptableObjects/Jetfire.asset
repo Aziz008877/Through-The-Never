@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: Jetfire
   m_EditorClassIdentifier: 
-  Id: 
+  Id: Jetfire
   DisplayName: Jetfire
   Description: 
   Icon: {fileID: 0}
@@ -21,6 +21,7 @@ MonoBehaviour:
   Kind: 1
   School: 0
   BehaviourPrefab: {fileID: 2393271945263484664, guid: c243515d61869ca44b7c8fedf07dda04, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 0
   Duration: 0

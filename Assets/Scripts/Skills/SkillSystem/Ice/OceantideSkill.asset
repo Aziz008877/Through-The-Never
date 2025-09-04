@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: OceantideSkill
   m_EditorClassIdentifier: 
   Id: Oceantide
-  DisplayName: 
+  DisplayName: Oceantide
   Description: 
   Icon: {fileID: 0}
   Stars: []

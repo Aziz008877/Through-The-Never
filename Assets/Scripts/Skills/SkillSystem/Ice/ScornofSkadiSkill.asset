@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ScornofSkadiSkill
   m_EditorClassIdentifier: 
   Id: Scorn of Skadi
-  DisplayName: 
+  DisplayName: Scorn of Skadi
   Description: 
   Icon: {fileID: 0}
   Stars: []

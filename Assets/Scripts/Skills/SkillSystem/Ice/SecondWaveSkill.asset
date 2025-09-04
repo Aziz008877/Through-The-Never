@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SecondWaveSkill
   m_EditorClassIdentifier: 
   Id: Second Wave
-  DisplayName: 
+  DisplayName: Second Wave
   Description: 
   Icon: {fileID: 0}
   Stars: []

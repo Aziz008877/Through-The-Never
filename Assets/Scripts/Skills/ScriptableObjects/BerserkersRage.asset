@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: BerserkersRage
   m_EditorClassIdentifier: 
-  Id: 
+  Id: Berserkers Rage
   DisplayName: Berserkers Rage
   Description: 
   Icon: {fileID: 0}
@@ -21,6 +21,7 @@ MonoBehaviour:
   Kind: 1
   School: 4
   BehaviourPrefab: {fileID: 2888320186625043623, guid: f60d783e3d4f25b4181e0a7ae3e4991c, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 0
   Duration: 0

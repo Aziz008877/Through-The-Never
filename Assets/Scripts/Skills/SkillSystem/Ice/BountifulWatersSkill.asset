@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BountifulWatersSkill
   m_EditorClassIdentifier: 
   Id: Bountiful Waters
-  DisplayName: 
+  DisplayName: Bountiful Waters
   Description: 
   Icon: {fileID: 0}
   Stars: []

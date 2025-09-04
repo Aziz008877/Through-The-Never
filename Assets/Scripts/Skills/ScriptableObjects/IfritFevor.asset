@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: IfritFevor
   m_EditorClassIdentifier: 
-  Id: 
+  Id: Ifrit Fevor
   DisplayName: Ifrit Fevor
   Description: 
   Icon: {fileID: 0}
@@ -21,6 +21,7 @@ MonoBehaviour:
   Kind: 1
   School: 0
   BehaviourPrefab: {fileID: 1136759129264312579, guid: 732ac1e4cc04cf44eb22d455445d467a, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 0
   Duration: 0

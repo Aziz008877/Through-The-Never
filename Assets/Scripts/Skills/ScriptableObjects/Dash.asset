@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: Dash
   m_EditorClassIdentifier: 
-  Id: dash
+  Id: Dash
   DisplayName: Dash
   Description: 
   Icon: {fileID: 0}

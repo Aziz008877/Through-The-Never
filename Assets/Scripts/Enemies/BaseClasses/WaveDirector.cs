@@ -24,23 +24,15 @@ public sealed class WaveDirector : MonoBehaviour
     [SerializeField] private Vector2 _delayWithinWave   = new(0f, 1f);
 
     [Header("Выходы (по layout)")]
-    [SerializeField] private ExitProp _exitLayout1; // Exit для Layout 1
-    [SerializeField] private ExitProp _exitLayout2; // Exit для Layout 2
+    [SerializeField] private ExitProp _exitLayout1;
+    [SerializeField] private ExitProp _exitLayout2;
     [SerializeField] private bool _lockExitWhileRunning = true;
-
-    // runtime
     private List<Transform> _spawns;
     private WaveLayout _activeLayout;
-    private ExitProp _activeExit;              // ← текущий выход по layout
+    private ExitProp _activeExit;
     private int _alive;
     private readonly List<IDamageable> _aliveList = new();
     [SerializeField] private WaveLayout _debugOverrideLayout;
-    private void Awake()
-    {
-        if (_spawnPointsLayout1.Count == 0 && _spawnRootLayout1) CollectChildren(_spawnRootLayout1, _spawnPointsLayout1);
-        if (_spawnPointsLayout2.Count == 0 && _spawnRootLayout2) CollectChildren(_spawnRootLayout2, _spawnPointsLayout2);
-    }
-
     private void Start()
     {
         if (_flow == null || !_flow.TryGetCurrent(out var step))
@@ -48,8 +40,7 @@ public sealed class WaveDirector : MonoBehaviour
             Debug.LogError("[WaveDirector] Нет текущего шага потока.");
             return;
         }
-
-        // Выбор точек спавна и активного выхода по текущему layout
+        
         bool isLayout1 = step.Variant == LevelFlowAsset.LayoutVariant.First;
         _spawns     = isLayout1 ? _spawnPointsLayout1 : _spawnPointsLayout2;
         _activeExit = isLayout1 ? _exitLayout1       : _exitLayout2;
@@ -148,8 +139,8 @@ public sealed class WaveDirector : MonoBehaviour
 
     private static void CollectChildren(Transform root, List<Transform> into)
     {
-        into.Clear();
+        /*into.Clear();
         foreach (Transform t in root) into.Add(t);
-        if (into.Count == 0) into.Add(root);
+        if (into.Count == 0) into.Add(root);*/
     }
 }

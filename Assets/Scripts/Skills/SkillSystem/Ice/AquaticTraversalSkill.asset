@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: AquaticTraversalSkill
   m_EditorClassIdentifier: 
   Id: Aquatic Traversal
-  DisplayName: 
+  DisplayName: Aquatic Traversal
   Description: 
   Icon: {fileID: 0}
   Stars: []

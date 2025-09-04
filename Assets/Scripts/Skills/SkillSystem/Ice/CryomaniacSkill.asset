@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CryomaniacSkill
   m_EditorClassIdentifier: 
   Id: Cryomaniac
-  DisplayName: 
+  DisplayName: Cryomaniac
   Description: 
   Icon: {fileID: 0}
   Stars: []

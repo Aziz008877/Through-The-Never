@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HailstormSkill
   m_EditorClassIdentifier: 
   Id: Hailstorm
-  DisplayName: 
+  DisplayName: Hailstorm
   Description: 
   Icon: {fileID: 0}
   Stars: []

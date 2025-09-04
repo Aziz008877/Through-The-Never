@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RejuvenationSkill
   m_EditorClassIdentifier: 
   Id: RejuvenationSkill
-  DisplayName: 
+  DisplayName: RejuvenationSkill
   Description: 
   Icon: {fileID: 0}
   Stars: []

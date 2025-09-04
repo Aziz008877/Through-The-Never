@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SplinterStrikeSkil
   m_EditorClassIdentifier: 
   Id: Splinter Strike
-  DisplayName: 
+  DisplayName: Splinter Strike
   Description: 
   Icon: {fileID: 0}
   Stars: []

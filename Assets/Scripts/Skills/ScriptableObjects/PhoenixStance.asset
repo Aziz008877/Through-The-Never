@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: PhoenixStance
   m_EditorClassIdentifier: 
-  Id: 
+  Id: Phoenix Stance
   DisplayName: Phoenix Stance
   Description: 
   Icon: {fileID: 0}
@@ -23,6 +23,7 @@ MonoBehaviour:
   Kind: 0
   School: 0
   BehaviourPrefab: {fileID: 1451134601085303500, guid: 11ef33db7f1cb894692a1e78a13bdaad, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 30
   Duration: 5

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WintersBlessingSkill
   m_EditorClassIdentifier: 
   Id: Winters Blessing
-  DisplayName: 
+  DisplayName: Winters Blessing
   Description: 
   Icon: {fileID: 0}
   Stars: []

@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d2cb9ff769c4240a6041da7377233a, type: 3}
+  m_Name: SkillCatalog
+  m_EditorClassIdentifier: 
+  _schools:
+  - School: 0
+    Basic: {fileID: 11400000, guid: 821621941a17a924db8fa3e42d07abe1, type: 2}
+    StarterDash: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
+    Innate: {fileID: 11400000, guid: 441c66dc3d2923b4c8466412bea7b2b9, type: 2}
+    Specials:
+    - {fileID: 11400000, guid: 8f9e78cac3e416e479f4d9d8244c2a65, type: 2}
+    - {fileID: 11400000, guid: a78c7ffdf784c5b4aa85272c22c17b3a, type: 2}
+    - {fileID: 11400000, guid: 5a385610543e2394da525b0bf4d08d9e, type: 2}
+    - {fileID: 11400000, guid: 98c32816e70cb3847ae1a42a82003a61, type: 2}
+    - {fileID: 11400000, guid: a96bdf9badbe9a544a3a1fafcc7d7095, type: 2}
+    - {fileID: 11400000, guid: f762f70e000b12743a9953ee055f61a7, type: 2}
+    Defenses:
+    - {fileID: 11400000, guid: 459a2ceb0a3c88941b2be170fe39a7f8, type: 2}
+    - {fileID: 11400000, guid: 3a0fe176af839e14b940528df76fee0a, type: 2}
+    - {fileID: 11400000, guid: 36ce3bd3a12f73e448165ae2e249c058, type: 2}
+    Dash:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    Passives:
+    - {fileID: 11400000, guid: 53a5e035ec3906a45b6cf147bb33319b, type: 2}
+    - {fileID: 11400000, guid: 7fe5fbc1a1a229841b37c2414f5a74d1, type: 2}
+    - {fileID: 11400000, guid: 2a701e73748d0db4980aba0c02c9f020, type: 2}
+    - {fileID: 11400000, guid: 74ba054a442dc4c45bf55d62f007af58, type: 2}
+    - {fileID: 11400000, guid: 0ade6acca7e2f924d8a8e355459c78e8, type: 2}
+    - {fileID: 11400000, guid: 751f3da45a67d7548a4409f8e04644bd, type: 2}
+  - School: 1
+    Basic: {fileID: 11400000, guid: 8970cddf47b24484fb637c0359bf57e7, type: 2}
+    StarterDash: {fileID: 11400000, guid: cef898db2276c4745abf572135f74311, type: 2}
+    Innate: {fileID: 11400000, guid: d1debc585a5b0644ca92e0fa31431aca, type: 2}
+    Specials: []
+    Defenses: []
+    Dash:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
+    Passives: []

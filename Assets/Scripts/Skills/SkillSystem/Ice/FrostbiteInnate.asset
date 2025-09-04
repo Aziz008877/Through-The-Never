@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: FrostbiteInnate
   m_EditorClassIdentifier: 
   Id: Frostbite
-  DisplayName: 
+  DisplayName: Frostbite
   Description: 
   Icon: {fileID: 0}
   Stars: []

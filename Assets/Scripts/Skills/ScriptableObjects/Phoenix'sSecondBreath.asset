@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: Phoenix'sSecondBreath
   m_EditorClassIdentifier: 
-  Id: 
+  Id: Phoenix's Second Breath
   DisplayName: Phoenix's Second Breath
   Description: 
   Icon: {fileID: 0}
@@ -21,6 +21,7 @@ MonoBehaviour:
   Kind: 1
   School: 0
   BehaviourPrefab: {fileID: 7222045653224661854, guid: 60b526615f9e8fc4493d26385de5718e, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 0
   Duration: 0

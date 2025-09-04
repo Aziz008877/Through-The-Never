@@ -84,13 +84,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f6da2de41e96094db93b42679c5e8c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyType: 0
   _allMaterials:
   - {fileID: 2100000, guid: 266098101a25dfc449c744d819393bc2, type: 2}
   - {fileID: 2100000, guid: b6d141cdb949bcb45af96600554340cb, type: 2}
   - {fileID: 2100000, guid: 8eaefad43cf4e2c408adc908f42f5d7a, type: 2}
   - {fileID: 2100000, guid: b2d44af3854debc49bc900ec63630db9, type: 2}
+  _allRangedMaterials: []
   _skinRenderer: {fileID: 6802966628489389019}
   _meleeMobAttack: {fileID: 7574839595098176369}
+  _rangedMobAttack: {fileID: 0}
 --- !u!195 &6215342903157129169
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -152,9 +155,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 581957231f564ee41ba3810660a5b787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <CurrentHP>k__BackingField: 100
+  <CurrentHP>k__BackingField: 1
   <MinHP>k__BackingField: 0
-  <MaxHP>k__BackingField: 100
+  <MaxHP>k__BackingField: 1
   _onEnemyDead:
     m_PersistentCalls:
       m_Calls: []

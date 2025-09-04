@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: Fireblast
   m_EditorClassIdentifier: 
-  Id: 
+  Id: Fireblast
   DisplayName: Fireblast
   Description: 
   Icon: {fileID: 0}
@@ -21,6 +21,7 @@ MonoBehaviour:
   Kind: 1
   School: 0
   BehaviourPrefab: {fileID: 994059513307565548, guid: 58fe06e7f7ab2d74fba761175bf13cc9, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 0
   Duration: 0

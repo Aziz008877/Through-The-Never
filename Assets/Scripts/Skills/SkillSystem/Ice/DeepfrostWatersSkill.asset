@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DeepfrostWatersSkill
   m_EditorClassIdentifier: 
   Id: Deepfrost Waters
-  DisplayName: 
+  DisplayName: Deepfrost Waters
   Description: 
   Icon: {fileID: 0}
   Stars: []

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: IceCageSkill
   m_EditorClassIdentifier: 
   Id: Ice Cage
-  DisplayName: 
+  DisplayName: Ice Cage
   Description: 
   Icon: {fileID: 0}
   Stars: []

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: SeekingFlames
   m_EditorClassIdentifier: 
-  Id: 
+  Id: Seeking Flames
   DisplayName: Seeking Flames
   Description: 
   Icon: {fileID: 0}
@@ -21,6 +21,7 @@ MonoBehaviour:
   Kind: 1
   School: 4
   BehaviourPrefab: {fileID: 4826529586785716398, guid: 156fff1f9a9fa2f47b76b7cf7a903b51, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 0
   Duration: 0

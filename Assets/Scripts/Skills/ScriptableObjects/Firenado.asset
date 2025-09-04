@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: Firenado
   m_EditorClassIdentifier: 
-  Id: firenado
+  Id: Firenado
   DisplayName: Firenado
   Description: 
   Icon: {fileID: 0}
@@ -23,6 +23,7 @@ MonoBehaviour:
   Kind: 0
   School: 0
   BehaviourPrefab: {fileID: 8361261543459378349, guid: 9124301c82425284a860547a226766f9, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 15
   Duration: 7

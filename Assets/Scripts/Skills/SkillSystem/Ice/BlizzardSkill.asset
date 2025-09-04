@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BlizzardSkill
   m_EditorClassIdentifier: 
   Id: Blizzard
-  DisplayName: 
+  DisplayName: Blizzard
   Description: 
   Icon: {fileID: 0}
   Stars: []

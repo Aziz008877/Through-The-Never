@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ArcticAssaultSkill
   m_EditorClassIdentifier: 
   Id: Arctic Assault
-  DisplayName: 
+  DisplayName: Arctic Assault
   Description: 
   Icon: {fileID: 0}
   Stars: []

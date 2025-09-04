@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 449d9305441f1cc47aa937293d1598fb, type: 3}
   m_Name: Supernova
   m_EditorClassIdentifier: 
-  Id: supernova
+  Id: Supernova
   DisplayName: Supernova
   Description: 
   Icon: {fileID: 0}
@@ -21,6 +21,7 @@ MonoBehaviour:
   Kind: 0
   School: 0
   BehaviourPrefab: {fileID: 7014801617376528231, guid: 06b37b723f912404db7de6b8ded8759d, type: 3}
+  CastType: 0
   Damage: 0
   Cooldown: 10
   Duration: 3
