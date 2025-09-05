@@ -37,7 +37,7 @@ public class SkillSelectionSaver : ScriptableObject
     }
 
     [Header("Companion")]
-    [SerializeField] private bool _companionEnabled;        // надо ли включать компаньона в сценах
+    [SerializeField] private bool _companionEnabled;
     public bool CompanionEnabled
     {
         get => _companionEnabled;
@@ -94,4 +94,49 @@ public class SkillSelectionSaver : ScriptableObject
     }
 
     public List<SkillDefinition> GetChosenSkills() => new(_chosen);
+
+    // ---------- ГАРАНТИРОВАННЫЙ СБРОС ПРИ ЗАПУСКЕ ----------
+    // Срабатывает и в билде, и в редакторе при входе в Play.
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void AutoClearOnBoot()
+    {
+        // Найдём все экземпляры ассета, которые попали в память,
+        // и подчистим ТОЛЬКО runtime-состояние (диск не трогаем).
+        var all = Resources.FindObjectsOfTypeAll<SkillSelectionSaver>();
+        foreach (var saver in all)
+        {
+            saver.Clear();
+        }
+    }
+
+#if UNITY_EDITOR
+    // ---------- УТИЛИТЫ ДЛЯ EDITOR, чтобы не утащить мусор в билд ----------
+
+    // Показывает предупреждение, если asset содержит данные.
+    private void OnValidate()
+    {
+        if (!Application.isPlaying)
+        {
+            if ((_chosen != null && _chosen.Count > 0) ||
+                (_takenList != null && _takenList.Count > 0) ||
+                _hasSchool ||
+                _companionEnabled ||
+                _progress.Initialized ||
+                _progress.StageIndex != 0 ||
+                _progress.CycleIndex != 0 ||
+                _progress.School != MagicSchool.Neutral)
+            {
+                Debug.LogWarning($"[SkillSelectionSaver] Asset \"{name}\" содержит runtime-данные. " +
+                                 $"Рекомендуется очистить через контекстное меню: Skills/Selection Saver -> Clear (Editor).", this);
+            }
+        }
+    }
+
+    [ContextMenu("Clear (Editor)")]
+    private void EditorClear()
+    {
+        Clear();
+        UnityEditor.EditorUtility.SetDirty(this); // сохраняем чистое состояние в asset
+    }
+#endif
 }
