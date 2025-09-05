@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a7ce910cd396d9048a4f4dc53950192c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Light/Aura/Aura_Light_C.mat
+  uploadId: 775907

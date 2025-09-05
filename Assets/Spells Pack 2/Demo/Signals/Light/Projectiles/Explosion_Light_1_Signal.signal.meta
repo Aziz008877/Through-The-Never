@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dd4b353e57a1b1241a0404d37ae40f5c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Light/Projectiles/Explosion_Light_1_Signal.signal
+  uploadId: 775907

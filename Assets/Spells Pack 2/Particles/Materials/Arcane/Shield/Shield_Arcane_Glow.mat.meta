@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ea315059be77b354d83250242c43126e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Arcane/Shield/Shield_Arcane_Glow.mat
+  uploadId: 775907

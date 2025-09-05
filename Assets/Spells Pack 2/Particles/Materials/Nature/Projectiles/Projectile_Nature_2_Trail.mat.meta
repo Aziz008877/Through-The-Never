@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9597859facad986459580a1778d411a2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Nature/Projectiles/Projectile_Nature_2_Trail.mat
+  uploadId: 775907

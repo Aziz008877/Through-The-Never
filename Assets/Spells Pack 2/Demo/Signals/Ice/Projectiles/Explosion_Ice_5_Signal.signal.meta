@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 910d65279f40b3140a5beb914f86a289
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Ice/Projectiles/Explosion_Ice_5_Signal.signal
+  uploadId: 775907

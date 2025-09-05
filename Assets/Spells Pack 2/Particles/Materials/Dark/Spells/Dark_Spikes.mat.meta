@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6030db2dad2080d45acc779a053c3d1e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Dark/Spells/Dark_Spikes.mat
+  uploadId: 775907

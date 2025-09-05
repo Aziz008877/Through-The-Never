@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0cfb21584873a4c4db331b68c960bbaf
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Nature/Buff/Buff_Nature_Timeline.playable
+  uploadId: 775907

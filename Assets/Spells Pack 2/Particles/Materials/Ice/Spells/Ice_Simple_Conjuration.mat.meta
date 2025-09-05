@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c00b0187d21b17f419f84e51ce64ebed
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Ice/Spells/Ice_Simple_Conjuration.mat
+  uploadId: 775907

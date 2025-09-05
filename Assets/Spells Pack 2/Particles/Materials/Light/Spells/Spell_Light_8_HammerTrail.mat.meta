@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2402a9a3927db9d4bb8e4fb84274f7ac
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Light/Spells/Spell_Light_8_HammerTrail.mat
+  uploadId: 775907

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1a76f266b08af3446a76cab849118e5f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Light/Buff/Buff_Light_Magic.mat
+  uploadId: 775907

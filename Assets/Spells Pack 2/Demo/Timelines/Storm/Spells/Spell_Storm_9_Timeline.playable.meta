@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 55ca90bf82bf9244d907c0018184e512
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Storm/Spells/Spell_Storm_9_Timeline.playable
+  uploadId: 775907

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 88b9bf83e0793a84684b02efbb081a23
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Fire/Projectiles/Projectile_Fire_5_Trail_Mid.mat
+  uploadId: 775907

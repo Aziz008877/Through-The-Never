@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 155a98f853705a84c9e5594584535d5c
+VisualEffectImporter:
+  externalObjects: {}
+  serializedVersion: 1
+  template:
+    name: 
+    category: 
+    description: 
+    icon: {instanceID: 0}
+    thumbnail: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/VFXGraphs/Arcane/Aura/SP2_Aura_Arcane_Glow_Decal.vfx
+  uploadId: 775907

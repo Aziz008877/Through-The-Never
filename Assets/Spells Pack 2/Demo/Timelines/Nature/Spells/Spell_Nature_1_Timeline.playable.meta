@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e4b34fdaaf2a78544b22e4329fe08ccd
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Nature/Spells/Spell_Nature_1_Timeline.playable
+  uploadId: 775907

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3c471c975543d084b858bdbfdb84023d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Storm/Projectiles/Projectile_Storm_3_Release.mat
+  uploadId: 775907

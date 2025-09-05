@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 36acb443fb1ddba49ab06628296f33cf
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Ice/Buff/Buff_Ice.mat
+  uploadId: 775907

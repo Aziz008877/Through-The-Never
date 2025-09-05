@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fa3d51129e719e14fbb3c62e74941a15
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Nature/Aura/Aura_Nature_Signal.signal
+  uploadId: 775907

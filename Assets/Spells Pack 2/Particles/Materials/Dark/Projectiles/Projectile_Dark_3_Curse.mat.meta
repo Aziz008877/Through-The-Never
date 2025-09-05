@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: da51575312d064e4e99a134b420a0dca
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Dark/Projectiles/Projectile_Dark_3_Curse.mat
+  uploadId: 775907

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 69dd087a6dfc4bf458f2708167e3a923
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Ice/Spells/Spell_Ice_15_Hit_Signal.signal
+  uploadId: 775907

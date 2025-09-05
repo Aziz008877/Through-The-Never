@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cb995c55a6129b94593a581e45aab27b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Fire/Spells/Spell_Fire_4_Signal.signal
+  uploadId: 775907

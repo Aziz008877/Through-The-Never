@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2b9449fe2e2168942a7f24f96c29f52f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Light/Projectiles/Projectile_Light_4_Sphere_Explosion.mat
+  uploadId: 775907

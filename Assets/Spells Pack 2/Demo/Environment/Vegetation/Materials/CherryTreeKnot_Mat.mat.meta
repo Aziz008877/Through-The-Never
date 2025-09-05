@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f725de1af5c3da645b76dd08fc2bd951
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Environment/Vegetation/Materials/CherryTreeKnot_Mat.mat
+  uploadId: 775907

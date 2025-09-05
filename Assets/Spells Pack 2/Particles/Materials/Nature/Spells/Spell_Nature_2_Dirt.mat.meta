@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a9a0f5bef0dbb36418507fee0c636064
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Nature/Spells/Spell_Nature_2_Dirt.mat
+  uploadId: 775907

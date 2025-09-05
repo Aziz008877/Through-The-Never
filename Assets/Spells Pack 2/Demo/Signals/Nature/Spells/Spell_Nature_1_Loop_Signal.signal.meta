@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e73f431b1ab51434d991c7704d2efe08
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Nature/Spells/Spell_Nature_1_Loop_Signal.signal
+  uploadId: 775907

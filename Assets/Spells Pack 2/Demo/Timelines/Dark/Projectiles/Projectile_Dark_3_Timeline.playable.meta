@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6842dc26c1ec4184fbf4658e1931ca31
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Dark/Projectiles/Projectile_Dark_3_Timeline.playable
+  uploadId: 775907

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 2a52e77b8521c3d49a5e38112846a16d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Arcane/Spells/Arcane_Smoke
+    2_6x6.mat
+  uploadId: 775907

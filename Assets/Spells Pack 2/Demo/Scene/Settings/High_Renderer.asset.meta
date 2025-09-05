@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0d4f104149a5c164eaa1884c48d9ad8a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Scene/Settings/High_Renderer.asset
+  uploadId: 775907

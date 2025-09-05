@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: fdfcba597389b614fb38124aa8251a8e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Light/Projectiles/Projectile_Light_5_Trail
+    Out.mat
+  uploadId: 775907

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3437578bebd552a4c8479f5884029bb0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Storm/Spells/Spell_Storm_11_StormEdges.mat
+  uploadId: 775907

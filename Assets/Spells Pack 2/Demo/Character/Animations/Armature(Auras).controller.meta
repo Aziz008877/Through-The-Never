@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7f0f8b96db238d1469798b7ff0f24728
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Character/Animations/Armature(Auras).controller
+  uploadId: 775907

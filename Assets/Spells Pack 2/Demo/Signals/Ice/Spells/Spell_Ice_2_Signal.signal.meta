@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f796afbe2241edd47a06400cd5daa526
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Ice/Spells/Spell_Ice_2_Signal.signal
+  uploadId: 775907

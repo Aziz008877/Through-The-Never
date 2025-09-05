@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 23ce0d548262251469bc2298499cec95
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Light/Spells/Spell_Light_13_Signal.signal
+  uploadId: 775907

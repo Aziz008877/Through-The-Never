@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e210ae678234a3e46ae8a03c9abe11d0
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Dark/Spells/Spell_Dark_12_SoulFlame.mat
+  uploadId: 775907

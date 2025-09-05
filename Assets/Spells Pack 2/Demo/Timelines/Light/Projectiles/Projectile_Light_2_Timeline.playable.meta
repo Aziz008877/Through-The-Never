@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 95c9f937a2382e44d9999d17df31b8bc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Light/Projectiles/Projectile_Light_2_Timeline.playable
+  uploadId: 775907

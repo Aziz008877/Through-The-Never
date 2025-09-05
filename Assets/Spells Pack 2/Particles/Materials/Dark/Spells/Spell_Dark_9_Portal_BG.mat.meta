@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cc4354f4c67b98b41acd6851da180c6b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Dark/Spells/Spell_Dark_9_Portal_BG.mat
+  uploadId: 775907

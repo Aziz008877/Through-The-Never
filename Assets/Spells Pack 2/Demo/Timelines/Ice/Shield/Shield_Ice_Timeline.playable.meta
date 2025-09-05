@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bc01d7b8d55d30e458ad3ad4951220c4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Ice/Shield/Shield_Ice_Timeline.playable
+  uploadId: 775907

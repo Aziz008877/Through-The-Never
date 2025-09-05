@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 510d033460ccb4a43af319eac25716cc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Arcane/Spells/Spell_Arcane_13_Intro_Signal.signal
+  uploadId: 775907

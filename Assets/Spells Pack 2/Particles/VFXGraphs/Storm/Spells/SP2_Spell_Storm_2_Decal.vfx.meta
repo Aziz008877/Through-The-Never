@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: e2d7852b04edabc47a7378c3e4ce9dba
+VisualEffectImporter:
+  externalObjects: {}
+  serializedVersion: 1
+  template:
+    name: 
+    category: 
+    description: 
+    icon: {instanceID: 0}
+    thumbnail: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/VFXGraphs/Storm/Spells/SP2_Spell_Storm_2_Decal.vfx
+  uploadId: 775907

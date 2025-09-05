@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 827ebd4e311183a4bb9f81d03c5d076d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Fire/Projectiles/Explosion_Fire_5_Timeline.playable
+  uploadId: 775907

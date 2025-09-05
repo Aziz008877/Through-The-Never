@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Buff_Storm_C
+  m_Shader: {fileID: -6465566751694194690, guid: 8012d6ea641c3a64f91e14b40d418e9a, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap:
+    RenderType: Transparent
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  - DepthOnly
+  - SHADOWCASTER
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Alpha_Texture:
+        m_Texture: {fileID: 2800000, guid: f50d61fb1b1e89b44b2158d621636e42, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Color_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Distortion_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise_1:
+        m_Texture: {fileID: 2800000, guid: cbe939e74dace8f4eb898d7555f42164, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise_1_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise_2:
+        m_Texture: {fileID: 2800000, guid: cbe939e74dace8f4eb898d7555f42164, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise_2_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Noise_Texture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Add_Alpha_Texture_to_Albedo: 1
+    - _AlphaClip: 0
+    - _AlphaToMask: 0
+    - _Alpha_Clip: 0
+    - _Alpha_Edge: 1
+    - _Alpha_Movement: 0
+    - _Blend: 0
+    - _CastShadows: 0
+    - _Color_MIxing: 0
+    - _Color_Mixing: 1
+    - _Conjuration: 1
+    - _Contrast: 1.26
+    - _Contrast_Background: 0
+    - _Cull: 2
+    - _Custom_Data: 0
+    - _Custom_Data_Mode: 0
+    - _DstBlend: 10
+    - _Manual_Mode: 0
+    - _Mix: 0.54
+    - _Noise_1_Length_Scale: 1
+    - _Noise_1_Radial_Scale: 1
+    - _Noise_2_Length_Scale: 1
+    - _Noise_2_Radial_Scale: 1
+    - _Noise_Length_Scale: 1
+    - _Noise_Radial_Scale: 0.35
+    - _Noise_Remap: 1.9
+    - _Noise_Scale: 1.63
+    - _Noises_Intensity: 1
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _Range: 0.12
+    - _Scale: 18.48
+    - _Soft_Particle: 1
+    - _Speed: 2
+    - _SrcBlend: 5
+    - _Surface: 1
+    - _Time_Mode: 1
+    - _Trail_Mode: 0
+    - _Trail_Strength: 1
+    - _Use_Distortion: 0
+    - _ZTest: 4
+    - _ZWrite: 0
+    - _ZWriteControl: 0
+    m_Colors:
+    - _Color: {r: 9.082411, g: 9.082411, b: 9.082411, a: 1}
+    - _Color_1: {r: 1, g: 1, b: 1, a: 1}
+    - _Color_2: {r: 1, g: 1, b: 1, a: 1}
+    - _Color_A: {r: 4.0845985, g: 5.004652, b: 10.432951, a: 1}
+    - _Color_B: {r: 0.9137459, g: 1.8134686, b: 3.9533494, a: 1}
+    - _Color_Intensity: {r: 1.4142135, g: 1.4142135, b: 1.4142135, a: 1}
+    - _Distortion_Remap: {r: 0, g: 1, b: 0, a: 0}
+    - _Distortion_Speed: {r: 0, g: 0, b: 0, a: 0}
+    - _Distortion_Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Noise_1_Speed: {r: 0.4, g: 0.4, b: 0, a: 0}
+    - _Noise_1_Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Noise_2_Speed: {r: 1, g: -1, b: 0, a: 0}
+    - _Noise_2_Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Noise_Speed: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Noise_Tiling: {r: 1, g: 1, b: 0, a: 0}
+    - _Noises_Remap: {r: 0, g: 1, b: 0, a: 0}
+    - _Polar_Center: {r: 0.5, g: 0.5, b: 0, a: 0}
+    - _Ramp_Gradient_Remap: {r: 0, g: 1, b: 0, a: 0}
+    - _Remap_Noises: {r: -0.13, g: 0.82, b: 0, a: 0}
+    - _Soft_Particle_Range: {r: 0, g: 1, b: 0, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
+--- !u!114 &1218584419327642507
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9

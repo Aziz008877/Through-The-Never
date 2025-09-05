@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: eae25690347ca2948bb8e19d2197a28c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Timelines/Nature/Aura/VFX_Aura_Nature_Timeline.playable
+  uploadId: 775907

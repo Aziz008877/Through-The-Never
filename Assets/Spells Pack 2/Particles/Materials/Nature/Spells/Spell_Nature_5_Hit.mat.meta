@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8940548a28a015847a1ce1e14a72e89b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Nature/Spells/Spell_Nature_5_Hit.mat
+  uploadId: 775907

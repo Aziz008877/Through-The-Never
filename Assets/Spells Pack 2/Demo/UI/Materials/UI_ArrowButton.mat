@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI_ArrowButton
+  m_Shader: {fileID: -6465566751694194690, guid: 9e75460339325df4d8c197f41aff69e3, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Glow_Sprite:
+        m_Texture: {fileID: 2800000, guid: 5c9ae2f61a31c7841a2aa25c20c0aa7c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Sprite:
+        m_Texture: {fileID: 2800000, guid: 1f576584e215e654fbeee75870ff8b45, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_33d1156d0e10473f8811e3a0796c9c32_Out_0_Texture2D:
+        m_Texture: {fileID: 2800000, guid: d2c271b6bd6f1ba47b97b27a502452f5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_7421b95c777942ed9840f25a5b1414c9_Out_0_Texture2D:
+        m_Texture: {fileID: 2800000, guid: 1f576584e215e654fbeee75870ff8b45, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 0.5
+    - _ColorMask: 15
+    - _Noise_Angle_Speed: 2
+    - _Noise_Scale: 7
+    - _Noise_Speed: 0.1
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UIMaskSoftnessX: 1
+    - _UIMaskSoftnessY: 1
+    m_Colors:
+    - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
+    - _Glow_Color: {r: 2.7728412, g: 3.6607177, b: 11.984315, a: 1}
+    - _Glow_Speed: {r: 1, g: 0, b: 0, a: 0}
+    - _Noise_Color: {r: 23.96863, g: 23.96863, b: 23.96863, a: 1}
+    - _Noise_Remap: {r: 0.74, g: 2.38, b: 0, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1

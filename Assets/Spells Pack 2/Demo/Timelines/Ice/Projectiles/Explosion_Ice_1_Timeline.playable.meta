@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0e49bf3688f474647a5d5829e6c4fc37
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Ice/Projectiles/Explosion_Ice_1_Timeline.playable
+  uploadId: 775907

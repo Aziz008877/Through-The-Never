@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: aefc3da2f9247df45a1e982bd834027d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Nature/Spells/Spell_Nature_3_Signal.signal
+  uploadId: 775907

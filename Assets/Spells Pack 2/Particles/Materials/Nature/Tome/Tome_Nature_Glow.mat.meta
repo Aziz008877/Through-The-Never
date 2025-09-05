@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 717d1acc5ba12574e8640585c4f7390b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Nature/Tome/Tome_Nature_Glow.mat
+  uploadId: 775907

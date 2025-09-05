@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c7ce44c568bd0f649b79f0c8828f7314
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Ice/Projectiles/Projectile_Ice_4_Snowball_Shards_2D.mat
+  uploadId: 775907

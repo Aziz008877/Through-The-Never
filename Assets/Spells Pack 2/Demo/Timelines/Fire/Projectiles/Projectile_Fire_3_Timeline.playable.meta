@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4983d9542793a5946af9ee62e66a1c69
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Fire/Projectiles/Projectile_Fire_3_Timeline.playable
+  uploadId: 775907

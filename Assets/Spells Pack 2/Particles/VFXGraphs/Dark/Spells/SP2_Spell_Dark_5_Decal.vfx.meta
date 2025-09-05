@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 028365c81938b3448be41fd6556f6ec3
+VisualEffectImporter:
+  externalObjects: {}
+  serializedVersion: 1
+  template:
+    name: 
+    category: 
+    description: 
+    icon: {instanceID: 0}
+    thumbnail: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/VFXGraphs/Dark/Spells/SP2_Spell_Dark_5_Decal.vfx
+  uploadId: 775907

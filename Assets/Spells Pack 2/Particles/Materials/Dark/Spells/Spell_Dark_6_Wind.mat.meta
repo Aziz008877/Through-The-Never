@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d0f7b0ed16ce1bf4ab056060922d239e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Dark/Spells/Spell_Dark_6_Wind.mat
+  uploadId: 775907

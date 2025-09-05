@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd2ea0fe4ba10e9489a1150858b9dd58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _emitterPrefab: {fileID: 3803146502054313395, guid: 231ffd1733675d34886f1a45bc6b79a8, type: 3}
+  _emitterPrefab: {fileID: 4096738086290676546, guid: db6e5e48aeaa6004ba924e384bd4868d, type: 3}
   _tickRate: 0.1
   _pushForce: 100
   _range: 8

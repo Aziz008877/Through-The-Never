@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 52e6ed99ef15b0d4e949f1027b6d39b5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Light/Shield/Shield_Light_Timeline.playable
+  uploadId: 775907

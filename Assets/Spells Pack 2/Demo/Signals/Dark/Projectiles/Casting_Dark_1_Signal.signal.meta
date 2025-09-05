@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1291df8b8d2c73c43ad4ee9e358b0081
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Dark/Projectiles/Casting_Dark_1_Signal.signal
+  uploadId: 775907

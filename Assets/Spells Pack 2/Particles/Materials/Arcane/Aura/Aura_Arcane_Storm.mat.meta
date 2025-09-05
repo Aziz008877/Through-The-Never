@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0f62190bc1ceba24b9d1c019cab23d04
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Arcane/Aura/Aura_Arcane_Storm.mat
+  uploadId: 775907

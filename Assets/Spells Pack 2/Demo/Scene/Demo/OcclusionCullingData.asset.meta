@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6afb6e0dac9ca884483b2b13551019e6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 36300000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Scene/Demo/OcclusionCullingData.asset
+  uploadId: 775907

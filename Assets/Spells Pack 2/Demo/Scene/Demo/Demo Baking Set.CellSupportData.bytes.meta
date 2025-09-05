@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2fc1b4c351485a3408ace2f412789e2f
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Scene/Demo/Demo Baking Set.CellSupportData.bytes
+  uploadId: 775907

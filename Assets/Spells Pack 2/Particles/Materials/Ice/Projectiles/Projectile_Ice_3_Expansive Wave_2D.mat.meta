@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 6a4c71408c217764ca74950e41999eb2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Ice/Projectiles/Projectile_Ice_3_Expansive
+    Wave_2D.mat
+  uploadId: 775907

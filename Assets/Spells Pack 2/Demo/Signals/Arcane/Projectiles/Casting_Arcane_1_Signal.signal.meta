@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c928ff67f4ef58144b69750437d75f98
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Arcane/Projectiles/Casting_Arcane_1_Signal.signal
+  uploadId: 775907

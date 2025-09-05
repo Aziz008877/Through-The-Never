@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e9b55b70258aaec4f8d312dfeddd3116
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4300000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Scene/Demo/SplineExtrude_Spline.asset
+  uploadId: 775907

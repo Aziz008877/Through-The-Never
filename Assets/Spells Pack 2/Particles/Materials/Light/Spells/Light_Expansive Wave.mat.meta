@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 378c16dcfe95c7b41b28e0b3a32b9cce
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Light/Spells/Light_Expansive
+    Wave.mat
+  uploadId: 775907

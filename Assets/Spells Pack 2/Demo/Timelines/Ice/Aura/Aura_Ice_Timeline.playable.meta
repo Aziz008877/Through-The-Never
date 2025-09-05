@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8e1c770b4b443634dbe61e03e909a4cf
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Ice/Aura/Aura_Ice_Timeline.playable
+  uploadId: 775907

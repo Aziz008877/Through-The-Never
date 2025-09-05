@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a0c0cd40e6e2c2b4db2e2ccc46237b53
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Arcane/Spells/Spell_Arcane_15_Signal.signal
+  uploadId: 775907

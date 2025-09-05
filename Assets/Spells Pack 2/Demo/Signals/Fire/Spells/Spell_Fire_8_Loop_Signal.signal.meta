@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c2a1ace6cca1adb4bbf1469fc11f0d9a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Fire/Spells/Spell_Fire_8_Loop_Signal.signal
+  uploadId: 775907

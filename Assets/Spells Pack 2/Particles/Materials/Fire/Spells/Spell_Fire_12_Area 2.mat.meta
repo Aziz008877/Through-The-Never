@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 75a252011e9764546916192a00da89ed
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Fire/Spells/Spell_Fire_12_Area
+    2.mat
+  uploadId: 775907

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 21b4ce932dbb2c343969354e1511e950
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Character/Animations/Cast_Stomp.anim
+  uploadId: 775907

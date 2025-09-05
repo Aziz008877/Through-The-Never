@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e2d0bb57da23f8a4b95293c2a126da41
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Scene/Settings/Demo Baking Set-Default.CellProbeOcclusionData.bytes
+  uploadId: 775907

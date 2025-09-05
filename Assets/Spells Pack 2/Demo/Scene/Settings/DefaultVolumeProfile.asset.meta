@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cc3279ce5e46315499c5bfdf48f06065
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Scene/Settings/DefaultVolumeProfile.asset
+  uploadId: 775907

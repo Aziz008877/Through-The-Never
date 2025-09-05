@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 22b96b3f9db518642b8de50d7a937a55
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Storm/Projectiles/Projectile_Storm_2_Timeline.playable
+  uploadId: 775907

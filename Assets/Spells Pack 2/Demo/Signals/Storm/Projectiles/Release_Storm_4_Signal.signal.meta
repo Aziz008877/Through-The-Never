@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a798889f0846b0b48982061771a5be71
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Storm/Projectiles/Release_Storm_4_Signal.signal
+  uploadId: 775907

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2fed8b1643885d46a6ac402416cb38d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _auraPrefab: {fileID: 5867853216869202172, guid: 3c2b2b934ccc51441abbaa75e6023c72, type: 3}
+  _auraPrefab: {fileID: 2828120171698099404, guid: 6e2fcfdd13643fe4d82b478c82f3e217, type: 3}
   _tickRate: 0.25
   _maxSlow: 0.4
   _frostMaxStacks: 5

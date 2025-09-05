@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 20f8c031d491c47498eab423618debd3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Light/Projectiles/Explosion_Light_5_Timeline.playable
+  uploadId: 775907

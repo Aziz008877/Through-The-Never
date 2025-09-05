@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 29c247ad3d6f87e4bb2cff4873c8cee9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Nature/Projectiles/Projectile_Nature_2_Thunder
+    Trail.mat
+  uploadId: 775907

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: aa440069e6083a34b95120fb027c81a8
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Dark/Spells/Spell_Dark_11_Timeline.playable
+  uploadId: 775907

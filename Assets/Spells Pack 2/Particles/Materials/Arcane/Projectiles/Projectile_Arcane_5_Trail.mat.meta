@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8b8082bc64e23ad4bb0d270beff6e59d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Arcane/Projectiles/Projectile_Arcane_5_Trail.mat
+  uploadId: 775907

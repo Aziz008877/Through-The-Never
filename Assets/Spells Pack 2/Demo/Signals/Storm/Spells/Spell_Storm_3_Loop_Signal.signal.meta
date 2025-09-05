@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4d77f436c9b238948a36e60055ded4d7
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Storm/Spells/Spell_Storm_3_Loop_Signal.signal
+  uploadId: 775907

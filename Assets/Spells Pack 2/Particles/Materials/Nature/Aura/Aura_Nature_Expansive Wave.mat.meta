@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 708bb79aeb6ea6246a448f872eaaa2e3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Nature/Aura/Aura_Nature_Expansive
+    Wave.mat
+  uploadId: 775907

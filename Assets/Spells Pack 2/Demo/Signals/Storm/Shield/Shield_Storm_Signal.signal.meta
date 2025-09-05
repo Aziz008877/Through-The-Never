@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 8a52073a2e4f8de4b935e57caf5aa732
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Storm/Shield/Shield_Storm_Signal.signal
+  uploadId: 775907

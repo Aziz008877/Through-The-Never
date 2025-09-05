@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 166887c34617e154f94b99d328520cfe
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Timelines/Dark/Aura/VFX_Aura_Dark_Timeline.playable
+  uploadId: 775907

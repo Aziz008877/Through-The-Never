@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: db07cce5ee458c1498f1f1d8e4b7dd0e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Light/Spells/Spell_Light_11_Area
+    Gradient.mat
+  uploadId: 775907

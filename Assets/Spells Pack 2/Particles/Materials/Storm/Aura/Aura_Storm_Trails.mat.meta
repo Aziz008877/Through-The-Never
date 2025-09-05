@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 48b7af8cd52802c4d924d8026367942f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Storm/Aura/Aura_Storm_Trails.mat
+  uploadId: 775907

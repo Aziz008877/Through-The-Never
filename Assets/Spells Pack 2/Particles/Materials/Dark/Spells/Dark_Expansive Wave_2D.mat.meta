@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ba976f322cc9c104daa8f38c32c975ec
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Dark/Spells/Dark_Expansive
+    Wave_2D.mat
+  uploadId: 775907

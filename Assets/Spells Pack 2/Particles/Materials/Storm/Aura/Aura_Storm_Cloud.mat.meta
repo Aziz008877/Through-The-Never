@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: af1bed78bdcbf054aa3578f85f62fae4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Storm/Aura/Aura_Storm_Cloud.mat
+  uploadId: 775907

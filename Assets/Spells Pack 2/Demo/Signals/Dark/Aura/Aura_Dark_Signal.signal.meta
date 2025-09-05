@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: edd7db419d8f99a4295a7fc44df0efd4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Dark/Aura/Aura_Dark_Signal.signal
+  uploadId: 775907

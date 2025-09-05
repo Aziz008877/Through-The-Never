@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: fcab0d3c918b44e4882d1d00afe2a77f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Ice/Spells/Ice_Icicle_Big_Shards.mat
+  uploadId: 775907

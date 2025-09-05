@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 6a3cf00e35884dd47a49c4cf667de298
+VisualEffectImporter:
+  externalObjects: {}
+  serializedVersion: 1
+  template:
+    name: 
+    category: 
+    description: 
+    icon: {instanceID: 0}
+    thumbnail: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/VFXGraphs/Arcane/Spells/SP2_Spell_Arcane_6_Decal.vfx
+  uploadId: 775907

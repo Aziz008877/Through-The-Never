@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 067bb4bfbe8b5b34d8f98ce2202de3fe
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Storm/Projectiles/Casting_Storm_2_Signal.signal
+  uploadId: 775907

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: cdb56a0ce861ecd4293c1b36d2fbf9cb
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Timelines/Ice/Spells/VFX_Spell_Ice_16_Timeline.playable
+  uploadId: 775907

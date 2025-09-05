@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 95d396762e3482b48acd50dc810ca3f1
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 8574412962073106934
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Environment/Terrain/Textures/Grass.terrainlayer
+  uploadId: 775907

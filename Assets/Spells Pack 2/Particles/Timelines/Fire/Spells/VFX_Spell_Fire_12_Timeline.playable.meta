@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: da25b2e1f7fbc0243b474b34a03bcce6
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Timelines/Fire/Spells/VFX_Spell_Fire_12_Timeline.playable
+  uploadId: 775907

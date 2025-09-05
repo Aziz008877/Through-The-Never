@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2d951f1c76b943145b571cb4296ea726
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Light/Spells/Spell_Light_8_Timeline.playable
+  uploadId: 775907

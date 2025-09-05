@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1a54e02145d90794ba94a9742f12963e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Timelines/Fire/Aura/VFX_Aura_Fire_Timeline.playable
+  uploadId: 775907

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b09ff62cf7c12eb4fbf2aede89cc14aa
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Timelines/Storm/Spells/VFX_Spell_Storm_12_Timeline.playable
+  uploadId: 775907

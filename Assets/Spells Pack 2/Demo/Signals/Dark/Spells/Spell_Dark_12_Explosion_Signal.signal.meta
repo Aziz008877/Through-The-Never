@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4e298713bf0fe27418921846da388b1a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Dark/Spells/Spell_Dark_12_Explosion_Signal.signal
+  uploadId: 775907

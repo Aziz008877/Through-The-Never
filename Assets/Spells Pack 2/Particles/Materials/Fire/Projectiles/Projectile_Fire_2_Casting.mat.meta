@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: df76a119f6aca58499b589b8ede65a55
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Fire/Projectiles/Projectile_Fire_2_Casting.mat
+  uploadId: 775907

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1c151c146e2c2a243962d1bf0baac086
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Ice/Spells/Spell_Ice_13_IceBlock_Signal.signal
+  uploadId: 775907

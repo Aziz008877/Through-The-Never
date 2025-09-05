@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0e673092d5ed72e408fd866a9b450acf
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Storm/Aura/Aura_Storm_Glow.mat
+  uploadId: 775907

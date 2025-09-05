@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 43e032950f8075e419f5da078b46e278
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Arcane/Spells/Spell_Arcane_9_Timeline.playable
+  uploadId: 775907

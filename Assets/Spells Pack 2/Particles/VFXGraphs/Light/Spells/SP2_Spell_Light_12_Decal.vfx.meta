@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 21d32e0ad3950224f8eeddec8afaa718
+VisualEffectImporter:
+  externalObjects: {}
+  serializedVersion: 1
+  template:
+    name: 
+    category: 
+    description: 
+    icon: {instanceID: 0}
+    thumbnail: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/VFXGraphs/Light/Spells/SP2_Spell_Light_12_Decal.vfx
+  uploadId: 775907

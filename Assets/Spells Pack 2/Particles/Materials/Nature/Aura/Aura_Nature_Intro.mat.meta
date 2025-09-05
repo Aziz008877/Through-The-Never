@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e5e624491647faa449c52a78e3f7a7a5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Nature/Aura/Aura_Nature_Intro.mat
+  uploadId: 775907

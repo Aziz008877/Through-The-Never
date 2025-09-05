@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 0a833b78fa56b514db37426f98f6f64d
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Nature/Projectiles/P_Nature_Sparks.mat
+  uploadId: 775907

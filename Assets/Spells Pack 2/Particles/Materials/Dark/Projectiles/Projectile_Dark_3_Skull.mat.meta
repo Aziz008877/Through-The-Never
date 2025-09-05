@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e2e061ed40a69f7489f077a56b94db08
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Dark/Projectiles/Projectile_Dark_3_Skull.mat
+  uploadId: 775907

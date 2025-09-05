@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 3358d37007dfaab499226bf1ded44224
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Storm/Projectiles/Explosion_Storm_4
+    Big_Signal.signal
+  uploadId: 775907

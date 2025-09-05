@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ff8a93d8ee33f3b4ca70bc5961706eb2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Dark/Spells/Spell_Dark_13_In_Signal.signal
+  uploadId: 775907

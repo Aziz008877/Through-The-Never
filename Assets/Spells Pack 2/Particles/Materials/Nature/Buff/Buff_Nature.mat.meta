@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 33520be5304d3fd428fa1ea23b2013a4
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Nature/Buff/Buff_Nature.mat
+  uploadId: 775907

@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 6af3a6aae4f2f1a4f8b86d20d8e6e0bb
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 625f186215c104763be7675aa2d941aa, type: 3}
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Shaders/SP2_VFX_Tornado.shadergraph
+  uploadId: 775907

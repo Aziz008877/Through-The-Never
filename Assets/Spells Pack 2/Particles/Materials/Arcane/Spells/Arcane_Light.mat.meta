@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 29d540c16c7448f458371bfad271fe9c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Arcane/Spells/Arcane_Light.mat
+  uploadId: 775907

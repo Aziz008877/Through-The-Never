@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e572d2ec50e66234a8932c6d89d97c28
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Nature/Shield/Shield_Nature_Sparks.mat
+  uploadId: 775907

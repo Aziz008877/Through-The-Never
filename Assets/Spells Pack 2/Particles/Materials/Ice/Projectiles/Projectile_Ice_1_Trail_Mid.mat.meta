@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1484a7f0ee032b347bd7f431047b0dda
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Ice/Projectiles/Projectile_Ice_1_Trail_Mid.mat
+  uploadId: 775907

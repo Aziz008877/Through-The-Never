@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 12c5854f3ede6c54fa99a97f8cf3593b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Light/Projectiles/P_Light_Light
+    2.mat
+  uploadId: 775907

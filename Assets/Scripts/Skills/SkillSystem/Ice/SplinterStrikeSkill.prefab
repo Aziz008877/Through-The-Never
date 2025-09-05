@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _shardPrefab: {fileID: 5809723182223953360, guid: 453003fa65838a64fb79f9eb7b3c58ed, type: 3}
-  _deepfrostWaterProjectile: {fileID: 68806845229557253, guid: 1053cf9211dc80444a365acfb25c6e2b, type: 3}
+  _deepfrostWaterProjectile: {fileID: -7568334694299046594, guid: 2a252ed38e8c5dc4a8501a496907e269, type: 3}
   _lifeTime: 3
   _shotsPerBurst: 10
   _minDelayBetween: 0

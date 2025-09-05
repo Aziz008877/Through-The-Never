@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e90946d4d7e2db24588687c473efd590
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Timelines/Tomes/VFX_Tomes_Timeline.playable
+  uploadId: 775907

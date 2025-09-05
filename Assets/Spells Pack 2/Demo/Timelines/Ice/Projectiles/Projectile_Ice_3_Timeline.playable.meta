@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 406e3b62a94309341925b159651ab7ad
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Ice/Projectiles/Projectile_Ice_3_Timeline.playable
+  uploadId: 775907

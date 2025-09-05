@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 7037fd9cefc19ed4c8c2202d97d06b40
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Environment/Vegetation/Materials/CherryTree_Mat.mat
+  uploadId: 775907

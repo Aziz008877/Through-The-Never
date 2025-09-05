@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 695d01479432d3643892b53c17e215f9
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Dark/Buff/Buff_Dark_Timeline.playable
+  uploadId: 775907

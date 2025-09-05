@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 2e91cb8c0a5908440b0995f8ae0a48c5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Arcane/Projectiles/Release_Arcane_2_Signal.signal
+  uploadId: 775907

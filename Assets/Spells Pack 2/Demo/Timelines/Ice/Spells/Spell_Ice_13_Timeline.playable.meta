@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: bf7b92608ed189e439e9299be5099b71
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Timelines/Ice/Spells/Spell_Ice_13_Timeline.playable
+  uploadId: 775907

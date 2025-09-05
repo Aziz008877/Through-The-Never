@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6d892140a98d6864a8442b9225c0e661
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Arcane/Projectiles/Projectile_Arcane_2_Smoke_7x7.mat
+  uploadId: 775907

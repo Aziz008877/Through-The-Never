@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: e692096bbc18e29429089065520c1891
+TextScriptImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Scene/Demo/Demo Baking Set.CellBricksData.bytes
+  uploadId: 775907

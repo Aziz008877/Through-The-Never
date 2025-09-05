@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e012d25e3a72e7f48a8b2c3e51c7fd13
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Arcane/Spells/Spell_Arcane_11_Spiral.mat
+  uploadId: 775907

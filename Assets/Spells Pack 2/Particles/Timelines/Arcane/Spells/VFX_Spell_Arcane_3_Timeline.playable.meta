@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: f5f3c1f7d7271ef4ea547f39c4d36bc2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Timelines/Arcane/Spells/VFX_Spell_Arcane_3_Timeline.playable
+  uploadId: 775907

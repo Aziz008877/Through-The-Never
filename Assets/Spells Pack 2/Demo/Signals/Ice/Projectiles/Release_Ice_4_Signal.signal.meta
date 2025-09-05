@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c4c4fa798a704934ca3273747f59e9ca
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Ice/Projectiles/Release_Ice_4_Signal.signal
+  uploadId: 775907

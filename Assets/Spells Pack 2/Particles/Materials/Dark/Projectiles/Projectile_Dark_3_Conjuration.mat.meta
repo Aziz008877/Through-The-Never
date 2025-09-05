@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: af375aedb110d4d49a1c25e17ce4076a
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Materials/Dark/Projectiles/Projectile_Dark_3_Conjuration.mat
+  uploadId: 775907

@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 3460c3f1e0d241948b44c9e98319edb8
+VisualEffectImporter:
+  externalObjects: {}
+  serializedVersion: 1
+  template:
+    name: 
+    category: 
+    description: 
+    icon: {instanceID: 0}
+    thumbnail: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/VFXGraphs/Dark/Spells/SP2_Spell_Dark_10_Curve.vfx
+  uploadId: 775907

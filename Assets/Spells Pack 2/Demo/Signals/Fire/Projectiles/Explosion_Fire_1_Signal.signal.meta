@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 96ded3235d50359409d5ff92ab5c8bb5
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Fire/Projectiles/Explosion_Fire_1_Signal.signal
+  uploadId: 775907

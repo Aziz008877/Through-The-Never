@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 1f412ddbd0cce9e419d878d4de358726
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Demo/Signals/Dark/Spells/Spell_Dark_2_Hit_Signal.signal
+  uploadId: 775907

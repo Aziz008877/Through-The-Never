@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b7af12fc374c58340809e9db27d099cc
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 310670
+  packageName: Spells Pack 2
+  packageVersion: 2.0.0
+  assetPath: Assets/Spells Pack 2/Particles/Timelines/Dark/Spells/VFX_Spell_Dark_6_Timeline.playable
+  uploadId: 775907
