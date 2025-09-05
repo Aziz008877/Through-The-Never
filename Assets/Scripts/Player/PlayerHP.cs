@@ -10,6 +10,10 @@ public class PlayerHP : MonoBehaviour, IActorHp
     [SerializeField] private Image _hpFillValue;
     [SerializeField] private float _currentHP, _minHp, _maxHP;
     [SerializeField] private UnityEvent _onPlayerDead;
+    [Header("Meta MaxHP")]
+    [SerializeField] private bool _applyMetaMaxHp = true;
+    private float _baseMaxHP;
+    private bool _metaApplied;
     private bool _canBeDamaged = true;
     private Transform _lastAggressor;
     private bool _deadReported;
@@ -21,13 +25,29 @@ public class PlayerHP : MonoBehaviour, IActorHp
     public event IncomingDamageHandler OnIncomingDamage;
     public Action<float, IDamageable> OnActorReceivedDamage { get; set; }
     public Action OnActorDead { get; set; }
-
+    private void Awake()
+    {
+        _baseMaxHP = _maxHP;
+    }
     private void Start()
     {
+        if (_applyMetaMaxHp) ApplyMetaMaxHP();
         ClampHP();
         UpdateHP();
     }
-    
+    private void ApplyMetaMaxHP()
+    {
+        if (_metaApplied) return;
+        var meta = MetaProgressionService.Instance;
+        if (!meta) return;
+
+        float bonus = meta.HornMaxHPBonus;
+        _maxHP = _baseMaxHP + Mathf.Max(0f, bonus);
+        
+        _currentHP = Mathf.Max(_currentHP, _maxHP);
+
+        _metaApplied = true;
+    }
     public void ReceiveDamage(float damageValue, IDamageable source)
     {
         if (!_canBeDamaged || damageValue <= 0f) return;

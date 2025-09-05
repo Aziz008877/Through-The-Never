@@ -12,6 +12,7 @@ public class SchoolStatue : MonoBehaviour, IInteractable
     [SerializeField] private ChestOfferDirector _chestOfferDirector;
     [SerializeField] private ParticleSystem _chooseVFX;
     [SerializeField] private ExitProp _exitProp;
+    [SerializeField] private EmissionRunes _emissionRunes;
     [field: SerializeField] public Transform InteractionUI { get; set; }
     [field: SerializeField] public bool CanInteract { get; set; } = true;
 
@@ -40,6 +41,7 @@ public class SchoolStatue : MonoBehaviour, IInteractable
         if (_chooseVFX) _chooseVFX.Play();
         CanInteract = false;
         OnMagicSchoolSelected?.Invoke(_school);
+        _emissionRunes.SetEmissionColor(_school);
         _exitProp.CanInteract = true;
     }
 }

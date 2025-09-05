@@ -1042,6 +1042,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3480433840538946706}
+  - component: {fileID: 7484634869085452472}
   m_Layer: 0
   m_Name: ArtifactItem
   m_TagString: Untagged
@@ -1073,6 +1074,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1715.4, y: 181.81}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7484634869085452472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4762329881641542589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9289046e03e2424ca966a212aa9f03e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _id: 0
+  _pips:
+  - {fileID: 1385072031113920096}
+  - {fileID: 1916775203557812533}
+  - {fileID: 5437079948788161406}
+  - {fileID: 7944676064617780873}
+  - {fileID: 7481374455194970672}
+  _upgradeBtn: {fileID: 5848086548334318977}
+  _priceText: {fileID: 2255124347067757366}
+  _coinsText: {fileID: 0}
 --- !u!1 &6047140579139972519
 GameObject:
   m_ObjectHideFlags: 0

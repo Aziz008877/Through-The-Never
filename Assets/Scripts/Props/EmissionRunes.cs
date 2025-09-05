@@ -9,18 +9,16 @@ public class EmissionRunes : MonoBehaviour
     [SerializeField] private Material _runesMaterial;
     private readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 
-    public void SetFireEmission()
+    public void SetEmissionColor(MagicSchool school)
     {
-        SetEmissionColor(_fireColor);
-    }
-
-    public void SetIceEmission()
-    {
-        SetEmissionColor(_iceColor);
-    }
-
-    public void SetEmissionColor(Color color)
-    {
-        _runesMaterial.SetColor(EmissionColor, color);
+        if (school == MagicSchool.Fire)
+        {
+            _runesMaterial.SetColor(EmissionColor, _fireColor);
+        }
+        else
+        {
+            _runesMaterial.SetColor(EmissionColor, _iceColor);
+        }
+        
     }
 }

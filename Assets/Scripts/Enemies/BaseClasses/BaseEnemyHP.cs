@@ -5,6 +5,8 @@ using UnityEngine.Events;
 using Zenject;
 public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
 {
+    [Header("Reward")]
+    [SerializeField] private int _coinReward = 500;
     [field: SerializeField] public float CurrentHP { get; set; }
     [field: SerializeField] public float MinHP { get; set; }
     [field: SerializeField] public float MaxHP { get; set; }
@@ -66,6 +68,9 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
 
     private void Die(in DamageContext lastCtx)
     {
+        var meta = MetaProgressionService.Instance;
+        if (meta) meta.AddCoins(_coinReward);
+
         OnEnemyDead?.Invoke(transform);
         OnKilled?.Invoke(lastCtx);
         _onEnemyDead?.Invoke();

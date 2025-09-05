@@ -44,8 +44,6 @@ public class SkillSelectionSaver : ScriptableObject
         set => _companionEnabled = value;
     }
 
-    // --- API ---
-
     public bool TryChooseSchool(MagicSchool school)
     {
         if (_hasSchool) return false;
@@ -94,14 +92,9 @@ public class SkillSelectionSaver : ScriptableObject
     }
 
     public List<SkillDefinition> GetChosenSkills() => new(_chosen);
-
-    // ---------- ГАРАНТИРОВАННЫЙ СБРОС ПРИ ЗАПУСКЕ ----------
-    // Срабатывает и в билде, и в редакторе при входе в Play.
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void AutoClearOnBoot()
     {
-        // Найдём все экземпляры ассета, которые попали в память,
-        // и подчистим ТОЛЬКО runtime-состояние (диск не трогаем).
         var all = Resources.FindObjectsOfTypeAll<SkillSelectionSaver>();
         foreach (var saver in all)
         {
@@ -110,9 +103,6 @@ public class SkillSelectionSaver : ScriptableObject
     }
 
 #if UNITY_EDITOR
-    // ---------- УТИЛИТЫ ДЛЯ EDITOR, чтобы не утащить мусор в билд ----------
-
-    // Показывает предупреждение, если asset содержит данные.
     private void OnValidate()
     {
         if (!Application.isPlaying)
@@ -136,7 +126,7 @@ public class SkillSelectionSaver : ScriptableObject
     private void EditorClear()
     {
         Clear();
-        UnityEditor.EditorUtility.SetDirty(this); // сохраняем чистое состояние в asset
+        UnityEditor.EditorUtility.SetDirty(this);
     }
 #endif
 }

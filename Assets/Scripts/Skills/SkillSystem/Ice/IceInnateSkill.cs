@@ -7,14 +7,30 @@ public class IceInnateSkill : PassiveSkillBehaviour, IOnDamageDealtContextModifi
     [SerializeField] private float _duration = 3f;
     [SerializeField] private int _maxStacks = 5;
 
-    public override void EnablePassive() { Context.RegisterOnDamageDealtContextModifier(this); }
-    public override void DisablePassive() { Context.UnregisterOnDamageDealtContextModifier(this); }
+    public override void EnablePassive()
+    {
+        ApplyMeta();
+        Context.RegisterOnDamageDealtContextModifier(this);
+    }
+
+    public override void DisablePassive()
+    {
+        Context.UnregisterOnDamageDealtContextModifier(this);
+    }
+
+    private void ApplyMeta()
+    {
+        var meta = MetaProgressionService.Instance;
+        if (!meta) return;
+        _slowPerStack   = meta.MoonSlowMovePerStack;
+        _dmgRedPerStack = meta.MoonDmgRedPerStack;
+        _maxStacks      = meta.MoonMaxStacks;
+    }
 
     public void OnDamageDealt(in DamageContext ctx)
     {
         if (ctx.Target is not Component co) return;
         if (!co.TryGetComponent<IFrostbiteReceivable>(out var f)) return;
-
         f.ApplyFrostbite(_slowPerStack, _dmgRedPerStack, _duration, _maxStacks);
     }
 }
