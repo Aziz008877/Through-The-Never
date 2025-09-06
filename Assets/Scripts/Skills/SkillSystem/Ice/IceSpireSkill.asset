@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: IceSpireSkill
   DisplayName: Ice Spire
-  Description: 
+  Description: Summon a frost totem at the target point. Its chilling aura repels
+    enemies, destroys projectiles, and doubles the power of spells cast within its
+    range
   Icon: {fileID: 0}
-  Stars: []
+  Stars:
+  - Aspect: 5
+    Stars: 2
   Slot: 1
   Kind: 0
   School: 1

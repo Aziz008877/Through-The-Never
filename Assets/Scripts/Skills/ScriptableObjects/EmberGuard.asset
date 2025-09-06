@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Ember Guard
   DisplayName: Ember Guard
-  Description: 
-  Icon: {fileID: 0}
+  Description: Surround yourself with a sphere of fire, increasing your damage while
+    reducing incoming damage. Reflected flames scorch nearby foes, but your own movement
+    is slowed. Toggle ability
+  Icon: {fileID: 21300000, guid: 392ee19dce6bcf344b4d5ea6262600be, type: 3}
   Stars:
   - Aspect: 1
     Stars: 2

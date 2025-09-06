@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Oceantide
   DisplayName: Oceantide
-  Description: 
+  Description: Dash forward, knocking back enemies at your destination with great
+    force. Enemies suffer bonus max HP damage and a brief stun.
   Icon: {fileID: 0}
-  Stars: []
+  Stars:
+  - Aspect: 3
+    Stars: 1
   Slot: 3
   Kind: 1
   School: 1

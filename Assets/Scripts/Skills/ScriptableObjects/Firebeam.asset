@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Firebeam
   DisplayName: Firebeam
-  Description: 
+  Description: Enchant your grimoire with a continuous fire beam that automatically
+    targets nearby foes. Damage ramps up over time.
   Icon: {fileID: 0}
   Stars:
   - Aspect: 0

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Solar Flare
   DisplayName: Solar Flare
-  Description: 
+  Description: Empower your next basic attack into a massive fireball that explodes
+    on impact, dealing devastating area damage.
   Icon: {fileID: 0}
   Stars:
   - Aspect: 0

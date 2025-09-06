@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Firenado
   DisplayName: Firenado
-  Description: 
-  Icon: {fileID: 0}
+  Description: Conjure a raging fire tornado at the target point. It deals continuous
+    damage and pulls enemies into its core. Lasts 7 seconds.
+  Icon: {fileID: 21300000, guid: 3c3d2df8cc4f3a241a56891c46d2b96a, type: 3}
   Stars:
   - Aspect: 1
     Stars: 2

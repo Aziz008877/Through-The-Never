@@ -14,8 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Phoenix Stance
   DisplayName: Phoenix Stance
-  Description: 
-  Icon: {fileID: 0}
+  Description: Take on the stance of the Phoenix, cloaking yourself in flames. Blocks
+    a limited number of hits, but leaves you immobile. When the shield breaks or
+    after 5 seconds, it erupts in a fiery explosion, dealing massive area damage
+    and healing you for a portion of the damage dealt
+  Icon: {fileID: 21300000, guid: c8815e099da6dc840b79d754f8e514a3, type: 3}
   Stars:
   - Aspect: 2
     Stars: 2

@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Freezing Wind
   DisplayName: Freezing Wind
-  Description: 
+  Description: On dash impact, summon an icy gust that knocks back and damages enemies
+    in its path.
   Icon: {fileID: 0}
-  Stars: []
+  Stars:
+  - Aspect: 5
+    Stars: 1
   Slot: 3
   Kind: 1
   School: 1

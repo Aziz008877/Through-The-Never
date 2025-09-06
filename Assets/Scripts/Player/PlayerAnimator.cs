@@ -10,22 +10,10 @@ public class PlayerAnimator : MonoBehaviour, IActorAnim
     private readonly int _moveY = Animator.StringToHash("Y");
     private readonly int _basicAttack = Animator.StringToHash("BasicAttack");
     private readonly int _isShield = Animator.StringToHash("IsShield");
-    private readonly int _isSitting = Animator.StringToHash("IsSitting");
     private readonly int _dash = Animator.StringToHash("Dash");
     private void Awake()
     {
         _playerMove.OnPlayerMove += ReceivePlayerMoveState;
-    }
-
-    private void PlayerSitState(bool sitState)
-    {
-        _playerAnimator.SetBool(_isSitting, sitState);
-        _playerState.ChangePlayerState(!sitState);
-
-        if (sitState)
-        {
-            _playerAnimator.SetBool(_isMoving, false);
-        }
     }
 
     public void Dash()

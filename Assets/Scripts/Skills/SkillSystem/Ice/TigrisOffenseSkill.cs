@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -8,92 +7,96 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
     [Header("VFX")]
     [SerializeField] private WaterJetEmitter _emitterPrefab;
 
-    [Header("Extra Stats")]
-    [SerializeField] private float _tickRate = 0.1f;
-    [SerializeField] private float _pushForce = 20f;
-    [SerializeField] private float _range = 8f;
+    [Header("Stats")]
+    [SerializeField] private float _tickRate  = 0.1f;  // частота тиков урона/толкания
+    [SerializeField] private float _pushForce = 20f;    // сила отталкивания
+    [SerializeField] private float _range     = 8f;     // длина струи
+    [SerializeField] private float _duration  = 5f;     // ДОЛЖНО БЫТЬ 5 сек
 
-    private Coroutine _channelCo;
+    private Coroutine _routine;
     private WaterJetEmitter _emitter;
-    private bool _isChanneling;
 
     public override void Inject(SkillDefinition definition, ActorContext context)
     {
         base.Inject(definition, context);
 
+        // Только нажатие — без Release и без тумблера
         if (context is PlayerContext pc)
-        {
             pc.PlayerInput.OnSpecialSkillPressed += TryCast;
-            pc.PlayerInput.OnSpecialSkillReleased += Release;
-        }
     }
 
     public override void TryCast()
     {
-        if (!IsReady || _isChanneling) return;
-        base.TryCast();
+        if (!IsReady || _routine != null) return;
+
+        base.TryCast();            // НЕ ставит КД — мы поставим по окончании действия
 
         PlayerCtx?.Move.RotateTowardsMouse();
 
+        // Спавним и привязываем эмиттер к CastPivot
         _emitter = Instantiate(_emitterPrefab, Context.CastPivot.position, Context.CastPivot.rotation);
         _emitter.Bind(Context.CastPivot, _range);
 
-        _isChanneling = true;
-        _channelCo = StartCoroutine(ChannelRoutine());
+        // Форсим луп у всех партиклов эмиттера (на случай, если в префабе не включено)
+        ForceLoopParticles(_emitter.gameObject);
+
+        _routine = StartCoroutine(EffectRoutine());
     }
 
-    private void Release()
-    {
-        if (!_isChanneling) return;
-        _isChanneling = false;
-    }
-
-    private IEnumerator ChannelRoutine()
+    private IEnumerator EffectRoutine()
     {
         float elapsed = 0f;
-        var wait = new WaitForSeconds(_tickRate);
+        var wait = new WaitForSeconds(Mathf.Max(0.01f, _tickRate));
 
-        while (_isChanneling && elapsed < Duration)
+        while (elapsed < _duration)
         {
             DoTick();
             elapsed += _tickRate;
             yield return wait;
         }
 
-        if (_emitter) Destroy(_emitter.gameObject);
-        _emitter = null;
+        CleanupEmitter();
+        _routine = null;
 
-        _isChanneling = false;
+        // КД берём из Definition (или переопредели StartCooldown(x) если нужно фикс. значение)
         StartCooldown();
     }
 
     private void DoTick()
     {
+        // Подворачиваемся к мыши для приятного контроля
         PlayerCtx?.Move.RotateTowardsMouse();
 
         Vector3 a = Context.CastPivot.position;
         Vector3 b = a + Context.CastPivot.forward * _range;
 
-        var hits = Physics.OverlapCapsule(a, b, Radius, ~0, QueryTriggerInteraction.Collide);
+        // Радиус берём из базового скилла (если у тебя это поле/проперти от хаба)
+        float radius = Radius;
+
+        var hits = Physics.OverlapCapsule(a, b, radius, ~0, QueryTriggerInteraction.Collide);
         float dmgPerTick = Damage * _tickRate;
 
         for (int i = 0; i < hits.Length; i++)
         {
             var col = hits[i];
-            
+
+            // Урон
             if (col.TryGetComponent<IDamageable>(out var tgt))
             {
-                var ctx = BuildDamage(dmgPerTick, SkillDamageType.Basic,
+                var ctx = BuildDamage(
+                    dmgPerTick,
+                    SkillDamageType.Basic,
                     hitPoint: col.transform.position,
                     hitNormal: Vector3.up,
-                    sourceGO: gameObject);
+                    sourceGO: gameObject
+                );
                 ctx.Target = tgt;
 
-                
                 Context.ApplyDamageContextModifiers(ref ctx);
                 tgt.ReceiveDamage(ctx);
             }
-            
+
+            // Отталкивание
             Vector3 push = Context.CastPivot.forward * _pushForce;
 
             if (col.attachedRigidbody != null)
@@ -108,6 +111,40 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
             {
                 col.transform.position += push * Time.deltaTime;
             }
+        }
+    }
+
+    private void CleanupEmitter()
+    {
+        if (_emitter)
+        {
+            // Можно остановить партиклы мягко, но раз эффект закончился — просто уничтожаем
+            Destroy(_emitter.gameObject);
+            _emitter = null;
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_routine != null)
+        {
+            StopCoroutine(_routine);
+            _routine = null;
+        }
+        CleanupEmitter();
+        // ВАЖНО: при выгрузке/смерти без постановки КД
+    }
+
+    private static void ForceLoopParticles(GameObject root)
+    {
+        if (!root) return;
+        var pss = root.GetComponentsInChildren<ParticleSystem>(true);
+        for (int i = 0; i < pss.Length; i++)
+        {
+            var ps = pss[i];
+            var main = ps.main;
+            main.loop = true;          // форсим луп
+            if (!ps.isPlaying) ps.Play();
         }
     }
 }

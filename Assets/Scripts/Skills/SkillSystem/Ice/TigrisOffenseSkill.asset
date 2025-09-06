@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Tihris Offense
   DisplayName: Tihris Offense
-  Description: 
+  Description: Release a surging water jet in front of you, holding enemies in place
+    while dealing constant damage
   Icon: {fileID: 0}
   Stars:
   - Aspect: 3

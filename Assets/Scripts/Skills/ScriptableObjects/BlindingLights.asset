@@ -14,8 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Blinding Lights
   DisplayName: Blinding Lights
-  Description: 
-  Icon: {fileID: 0}
+  Description: Conjure a miniature sun that blinds enemies within range for 5 seconds.
+    Affected enemies miss 50% of their attacks, are slowed, and take constant burning
+    damage based on their proximity.
+  Icon: {fileID: 21300000, guid: 9abbc19329901f145b586ce914e435bf, type: 3}
   Stars:
   - Aspect: 0
     Stars: 2

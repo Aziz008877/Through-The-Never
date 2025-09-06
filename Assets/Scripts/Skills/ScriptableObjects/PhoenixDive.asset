@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Phoenix Dive
   DisplayName: Phoenix Dive
-  Description: 
-  Icon: {fileID: 0}
+  Description: Transform into a fiery sphere and dash forward, exploding on arrival
+    to damage enemies in a small area.
+  Icon: {fileID: 21300000, guid: d9faacdac03f2804597521168301152c, type: 3}
   Stars:
   - Aspect: 2
     Stars: 2

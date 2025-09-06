@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Firebreath
   DisplayName: Firebreath
-  Description: 
+  Description: Exhale a cone of fire, scorching everything in front of you
   Icon: {fileID: 0}
   Stars:
   - Aspect: 1

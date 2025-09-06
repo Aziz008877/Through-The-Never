@@ -14,9 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Aspect Of Tiamat
   DisplayName: Aspect Of Tiamat
-  Description: 
+  Description: Summon the avatar of Tiamat. It strikes nearby enemies and heals you
+    when it kills.
   Icon: {fileID: 0}
-  Stars: []
+  Stars:
+  - Aspect: 3
+    Stars: 1
+  - Aspect: 5
+    Stars: 1
   Slot: 2
   Kind: 0
   School: 1

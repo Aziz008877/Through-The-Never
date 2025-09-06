@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Aspect of Sol
   DisplayName: Aspect of Sol
-  Description: 
-  Icon: {fileID: 0}
+  Description: Summon a colossal sphere of fire at the target location. It rains
+    fiery projectiles on nearby enemies for 15 seconds.
+  Icon: {fileID: 21300000, guid: d4210a08a7c570f49a3f8b41841f5362, type: 3}
   Stars:
   - Aspect: 0
     Stars: 2

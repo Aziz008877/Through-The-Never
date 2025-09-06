@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Trailblazer
   DisplayName: Trailblazer
-  Description: 
-  Icon: {fileID: 0}
+  Description: Your dash leaves behind a blazing trail for 3 seconds, burning any
+    enemy who crosses it.
+  Icon: {fileID: 21300000, guid: 7f686629b93bcdd4cb6e07ceebcf7c08, type: 3}
   Stars:
   - Aspect: 0
     Stars: 1

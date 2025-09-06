@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: EuphratesDefenseSkill
   DisplayName: Euphrates Defense
-  Description: 
+  Description: Encase yourself in a sphere of water, fully shielding and regenerating
+    health. All incoming hits are negated. When it ends, gain a damage bonus based
+    on absorbed damage.
   Icon: {fileID: 0}
-  Stars: []
+  Stars:
+  - Aspect: 3
+    Stars: 2
   Slot: 1
   Kind: 0
   School: 1

@@ -3,12 +3,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class SkillPaper : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] private TMP_Text _skillName;
     [SerializeField] private TMP_Text _skillDescription;
-
+    [SerializeField] private SpriteRenderer _skillIcon;
     public SkillDefinition Definition { get; private set; }
 
     public event Action<SkillPaper> Clicked;
@@ -28,7 +29,7 @@ public class SkillPaper : MonoBehaviour, IPointerClickHandler
 
         if (_skillName)        _skillName.text = def.DisplayName;
         if (_skillDescription) _skillDescription.text = def.Description;
-
+        _skillIcon.sprite = Definition.Icon;
         if (!gameObject.activeSelf) gameObject.SetActive(true);
     }
 
