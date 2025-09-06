@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Aspect Of Tiamat
   Description: Summon the avatar of Tiamat. It strikes nearby enemies and heals you
     when it kills.
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: b4582c3f672309b4486c61b44a678f89, type: 3}
   Stars:
   - Aspect: 3
     Stars: 1

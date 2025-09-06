@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Deepfrost Waters
   Description: Replace your basic attack with a continuous stream of icy shards and
     water. Enemies frozen after taking sustained hits. Toggle ability
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: cf064e0c24397624489d7be8461d14f5, type: 3}
   Stars:
   - Aspect: 3
     Stars: 1

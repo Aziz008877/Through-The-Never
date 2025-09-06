@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: Ice Sweep
   DisplayName: Ice Sweep
   Description: Glide swiftly along ice, freezing all enemies in your path for 2 seconds.
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 7643e896706d0064da84c7763f0f63c0, type: 3}
   Stars:
   - Aspect: 4
     Stars: 1

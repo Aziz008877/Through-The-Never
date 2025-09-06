@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Hailstorm
   Description: Rain down icy spikes across a wide area. If no target is struck, the
     shards explode on the ground. All affected enemies are slowed.
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: d789f90ea9837f446b0bbdec37dcd68b, type: 3}
   Stars:
   - Aspect: 4
     Stars: 1

@@ -17,7 +17,7 @@ MonoBehaviour:
   Description: Summon a frost totem at the target point. Its chilling aura repels
     enemies, destroys projectiles, and doubles the power of spells cast within its
     range
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: c1e6a9c3c9a49264d938f7cef15da196, type: 3}
   Stars:
   - Aspect: 5
     Stars: 2

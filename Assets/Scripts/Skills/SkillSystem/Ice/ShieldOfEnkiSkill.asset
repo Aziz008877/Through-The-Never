@@ -16,10 +16,10 @@ MonoBehaviour:
   DisplayName: ShieldOfEnkiSkill
   Description: Raise an icy barrier in front of you, blocking attacks and striking
     enemies in a cone. You cannot turn while the shield is active.
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 3531f133f4975f04e87160cb5dce22d3, type: 3}
   Stars:
   - Aspect: 4
-    Stars: 0
+    Stars: 2
   Slot: 1
   Kind: 0
   School: 1

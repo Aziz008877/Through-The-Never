@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Firebeam
   Description: Enchant your grimoire with a continuous fire beam that automatically
     targets nearby foes. Damage ramps up over time.
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 09c89f90aff221a4d88dd38b094f41b8, type: 3}
   Stars:
   - Aspect: 0
     Stars: 1

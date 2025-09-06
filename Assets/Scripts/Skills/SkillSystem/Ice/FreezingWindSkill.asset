@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Freezing Wind
   Description: On dash impact, summon an icy gust that knocks back and damages enemies
     in its path.
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: fe31fd62273873442bdc962062c9be0b, type: 3}
   Stars:
   - Aspect: 5
     Stars: 1

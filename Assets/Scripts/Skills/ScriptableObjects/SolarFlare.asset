@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Solar Flare
   Description: Empower your next basic attack into a massive fireball that explodes
     on impact, dealing devastating area damage.
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: adf28c75a32ee2d4ea492784a748cab4, type: 3}
   Stars:
   - Aspect: 0
     Stars: 1

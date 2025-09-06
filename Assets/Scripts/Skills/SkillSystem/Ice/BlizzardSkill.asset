@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Blizzard
   Description: Surround yourself with a raging snowstorm that grows in strength over
     5 seconds. Enemies are slowed and damaged, but you cannot attack while channeling.
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 329548f8e19a488499fcdb426fe37391, type: 3}
   Stars:
   - Aspect: 5
     Stars: 2

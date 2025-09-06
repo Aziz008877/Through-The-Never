@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Ice Boulder
   Description: Call down a massive block of ice from above, crushing a wide area
     on impact.
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: 042b3c1e3d9fdba4e8f4cb70cc4ad905, type: 3}
   Stars:
   - Aspect: 4
     Stars: 2
