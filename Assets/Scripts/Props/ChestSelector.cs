@@ -53,19 +53,17 @@ public class ChestSelector : MonoBehaviour, IInteractable
         }
 
         _currentOffer = offer;
-
-        // биндим данные на бумаги
+        
         for (int i = 0; i < _papers.Length; i++)
         {
             var paper = _papers[i];
-            paper.Clicked -= OnPaperClicked; // на всякий случай
+            paper.Clicked -= OnPaperClicked;
             paper.Clicked += OnPaperClicked;
 
             SkillDefinition def = (i < offer.Count) ? offer[i] : null;
-            paper.Init(def); // скроет пустые сам
+            paper.Init(def);
         }
 
-        // полёт
         Launch();
     }
 
@@ -74,8 +72,8 @@ public class ChestSelector : MonoBehaviour, IInteractable
         for (int i = 0; i < _papers.Length; i++)
         {
             var paperTr = _papers[i].transform;
-            var pb = _papers[i].GetComponent<PaperBehaviour>(); // как у тебя
-            if (!paperTr.gameObject.activeSelf) continue;       // пропускаем скрытые слоты
+            var pb = _papers[i].GetComponent<PaperBehaviour>();
+            if (!paperTr.gameObject.activeSelf) continue;
 
             var from = paperTr.position;
             var to = _endPositions[i];
@@ -109,10 +107,8 @@ public class ChestSelector : MonoBehaviour, IInteractable
 
         _choiceLocked = true;
 
-        // зафиксировать выбор
         _director.AcceptChoice(paper.Definition);
 
-        // скрыть остальные
         for (int i = 0; i < _papers.Length; i++)
         {
             if (_papers[i] != paper)

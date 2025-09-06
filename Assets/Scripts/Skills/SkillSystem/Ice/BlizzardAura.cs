@@ -66,8 +66,7 @@ public class BlizzardAura : MonoBehaviour
             float slowPerStack = (_frostMaxStacks > 0) ? (_maxSlow / _frostMaxStacks) : 0f;
 
             CleanupInside();
-
-            // собираем уникальные цели по корневым компонентам
+            
             var uniqueDamageables = new HashSet<IDamageable>();
             var uniqueFrosts = new HashSet<IFrostbiteReceivable>();
 
@@ -81,30 +80,28 @@ public class BlizzardAura : MonoBehaviour
                 var frostComp = col.GetComponentInParent<IFrostbiteReceivable>();
                 if (frostComp != null) uniqueFrosts.Add(frostComp);
             }
-
-            // урон
+            
             foreach (var dmg in uniqueDamageables)
             {
                 var ctx = new DamageContext
                 {
-                    Attacker       = _ctx,                  // ActorContext источника
+                    Attacker       = _ctx,
                     Target         = dmg,
                     SkillBehaviour = null,
                     SkillDef       = null,
                     Slot           = SkillSlot.Undefined,
-                    Type           = SkillDamageType.Basic, // как было
-                    Damage         = dmgTick,               // урон за тик ДО модификаторов
+                    Type           = SkillDamageType.Basic,
+                    Damage         = dmgTick,
                     IsCrit         = false,
                     CritMultiplier = 1f,
                     HitPoint       = (dmg as Component)?.transform.position ?? transform.position,
                     SourceGO       = gameObject
                 };
 
-                _ctx.ApplyDamageContextModifiers(ref ctx); // вместо ApplyDamageModifiers(...)
-                dmg.ReceiveDamage(ctx);                    // события разойдутся внутри цели
+                _ctx.ApplyDamageContextModifiers(ref ctx);
+                dmg.ReceiveDamage(ctx);
             }
 
-            // frostbite
             int targetStacks = Mathf.Clamp(Mathf.CeilToInt(t * _frostMaxStacks), 0, _frostMaxStacks);
             float refresh = _tickRate * 2f;
 

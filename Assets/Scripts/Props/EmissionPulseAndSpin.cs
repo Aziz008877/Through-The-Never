@@ -3,10 +3,10 @@ using UnityEngine;
 public class EmissionPulseAndSpin : MonoBehaviour
 {
     [Header("Emission (EV)")]
-    [SerializeField] private Color emissionColor = Color.white; // базовый цвет
+    [SerializeField] private Color emissionColor = Color.white;
     [SerializeField] private float evMin = -5f;
     [SerializeField] private float evMax = 1f;
-    [SerializeField] private float pulseHz = 1f;                // циклов в секунду
+    [SerializeField] private float pulseHz = 1f;
     [SerializeField] private bool randomizePhase = true;
     [SerializeField] private bool useUnscaledTime = false;
 

@@ -25,14 +25,12 @@ public sealed class EnemyFactory : MonoBehaviour, IEnemyFactory
 
         bool hasMelee  = hp.TryGetComponent(out MeleeMobAttack melee);
         bool hasRanged = hp.TryGetComponent(out RangedMobAttack ranged);
-
-        // Жёсткая валидация соответствия Kind ↔ компонент на префабе
+        
         if (kind == EnemyKind.Ranged && !hasRanged)
             Debug.LogError($"[EnemyFactory] Catalog mismatch: kind=Ranged, prefab '{hp.name}' doesn't have RangedMobAttack.");
         if (kind == EnemyKind.Melee && !hasMelee)
             Debug.LogError($"[EnemyFactory] Catalog mismatch: kind=Melee, prefab '{hp.name}' doesn't have MeleeMobAttack.");
-
-        // Назначаем цель всем движениям
+        
         if (_playerTarget)
         {
             var move = hp.GetComponent<BaseEnemyMove>();

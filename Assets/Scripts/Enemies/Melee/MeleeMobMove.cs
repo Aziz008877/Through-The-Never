@@ -34,8 +34,7 @@ public class MeleeMobMove : BaseEnemyMove
         if (AgentReady)
             _agent.speed = _isMoving && _attack ? _baseSpeed * _attack.CurrentRoarSpeedMul : _baseSpeed;
     }
-
-    // если tier меняется на лету — полезно иметь:
+    
     public void RecalculateBaseSpeed()
     {
         if (!_attack) return;

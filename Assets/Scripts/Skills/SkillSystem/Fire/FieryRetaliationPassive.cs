@@ -26,7 +26,6 @@ public class FieryRetaliationPassive : PassiveSkillBehaviour
             var tr = hits[i].transform;
             if (tr == Context.transform) continue;
             if (!hits[i].TryGetComponent(out IDamageable target)) continue;
-            // if (ReferenceEquals(target, source)) continue;
 
             var ctx = new DamageContext
             {

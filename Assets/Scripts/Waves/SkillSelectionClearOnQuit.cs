@@ -22,8 +22,6 @@ public sealed class SkillSelectionClearOnQuit : MonoBehaviour
 
     private void OnPlayModeStateChanged(UnityEditor.PlayModeStateChange state)
     {
-        // ВО ВРЕМЯ Play мы НЕ пачкаем asset.
-        // Когда выходим из Play — просто подчистим asset и сохраним чистое состояние.
         if (state == UnityEditor.PlayModeStateChange.ExitingPlayMode && _saver)
         {
             _saver.Clear();

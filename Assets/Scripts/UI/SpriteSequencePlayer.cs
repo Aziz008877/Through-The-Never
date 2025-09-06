@@ -15,19 +15,18 @@ public class SpriteSequencePlayer : MonoBehaviour
     [SerializeField] private bool _useUnscaledTime = false;
 
     [Header("UI (optional)")]
-    [SerializeField] private bool _setNativeSizeForUI = false;   // для Image: подгонять размер под спрайт
-
-    public event Action OnSequenceCompleted; // срабатывает в режиме Once
+    [SerializeField] private bool _setNativeSizeForUI = false;
+    public event Action OnSequenceCompleted;
 
     public bool IsPlaying { get; private set; }
     public int FrameIndex { get; private set; }
 
-    float _timer;
-    int _dir = 1; // для PingPong
-    SpriteRenderer _sr;
-    Image _img;
+    private float _timer;
+    private int _dir = 1;
+    private SpriteRenderer _sr;
+    private Image _img;
 
-    void Awake()
+    private void Awake()
     {
         _sr  = GetComponent<SpriteRenderer>();
         _img = GetComponent<Image>();
@@ -46,7 +45,7 @@ public class SpriteSequencePlayer : MonoBehaviour
         else Pause();
     }
 
-    void Update()
+    private void Update()
     {
         if (!IsPlaying || _fps <= 0f) return;
 
@@ -54,14 +53,14 @@ public class SpriteSequencePlayer : MonoBehaviour
         _timer += dt;
 
         float frameDuration = 1f / _fps;
-        while (_timer >= frameDuration) // корректно отрабатывает просадки
+        while (_timer >= frameDuration)
         {
             _timer -= frameDuration;
             StepFrame();
         }
     }
 
-    void StepFrame()
+    private void StepFrame()
     {
         switch (_mode)
         {
@@ -89,7 +88,7 @@ public class SpriteSequencePlayer : MonoBehaviour
         ApplyFrame();
     }
 
-    void ApplyFrame()
+    private void ApplyFrame()
     {
         var sprite = _frames[Mathf.Clamp(FrameIndex, 0, _frames.Length - 1)];
 
@@ -102,7 +101,6 @@ public class SpriteSequencePlayer : MonoBehaviour
         }
     }
 
-    // --- Публичный API ---
     public void Play()
     {
         if (_frames == null || _frames.Length == 0) return;

@@ -14,7 +14,7 @@ public class CompanionHp : MonoBehaviour, IActorHp
     public event Action<Transform> OnEnemyDead;
     public void ReceiveDamage(float damageValue, IDamageable source)
     {
-        throw new NotImplementedException();
+        
     }
 
     public event IncomingDamageHandler OnIncomingDamage;

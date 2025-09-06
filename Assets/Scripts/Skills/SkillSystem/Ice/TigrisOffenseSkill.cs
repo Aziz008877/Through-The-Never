@@ -8,10 +8,10 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
     [SerializeField] private WaterJetEmitter _emitterPrefab;
 
     [Header("Stats")]
-    [SerializeField] private float _tickRate  = 0.1f;  // частота тиков урона/толкания
-    [SerializeField] private float _pushForce = 20f;    // сила отталкивания
-    [SerializeField] private float _range     = 8f;     // длина струи
-    [SerializeField] private float _duration  = 5f;     // ДОЛЖНО БЫТЬ 5 сек
+    [SerializeField] private float _tickRate  = 0.1f;
+    [SerializeField] private float _pushForce = 20f;
+    [SerializeField] private float _range = 8f;
+    [SerializeField] private float _duration  = 5f;
 
     private Coroutine _routine;
     private WaterJetEmitter _emitter;
@@ -19,8 +19,7 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
     public override void Inject(SkillDefinition definition, ActorContext context)
     {
         base.Inject(definition, context);
-
-        // Только нажатие — без Release и без тумблера
+        
         if (context is PlayerContext pc)
             pc.PlayerInput.OnSpecialSkillPressed += TryCast;
     }
@@ -29,15 +28,13 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
     {
         if (!IsReady || _routine != null) return;
 
-        base.TryCast();            // НЕ ставит КД — мы поставим по окончании действия
+        base.TryCast();
 
         PlayerCtx?.Move.RotateTowardsMouse();
-
-        // Спавним и привязываем эмиттер к CastPivot
+        
         _emitter = Instantiate(_emitterPrefab, Context.CastPivot.position, Context.CastPivot.rotation);
         _emitter.Bind(Context.CastPivot, _range);
-
-        // Форсим луп у всех партиклов эмиттера (на случай, если в префабе не включено)
+        
         ForceLoopParticles(_emitter.gameObject);
 
         _routine = StartCoroutine(EffectRoutine());
@@ -57,20 +54,17 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
 
         CleanupEmitter();
         _routine = null;
-
-        // КД берём из Definition (или переопредели StartCooldown(x) если нужно фикс. значение)
+        
         StartCooldown();
     }
 
     private void DoTick()
     {
-        // Подворачиваемся к мыши для приятного контроля
         PlayerCtx?.Move.RotateTowardsMouse();
 
         Vector3 a = Context.CastPivot.position;
         Vector3 b = a + Context.CastPivot.forward * _range;
-
-        // Радиус берём из базового скилла (если у тебя это поле/проперти от хаба)
+        
         float radius = Radius;
 
         var hits = Physics.OverlapCapsule(a, b, radius, ~0, QueryTriggerInteraction.Collide);
@@ -79,8 +73,6 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
         for (int i = 0; i < hits.Length; i++)
         {
             var col = hits[i];
-
-            // Урон
             if (col.TryGetComponent<IDamageable>(out var tgt))
             {
                 var ctx = BuildDamage(
@@ -95,8 +87,7 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
                 Context.ApplyDamageContextModifiers(ref ctx);
                 tgt.ReceiveDamage(ctx);
             }
-
-            // Отталкивание
+            
             Vector3 push = Context.CastPivot.forward * _pushForce;
 
             if (col.attachedRigidbody != null)
@@ -118,7 +109,6 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
     {
         if (_emitter)
         {
-            // Можно остановить партиклы мягко, но раз эффект закончился — просто уничтожаем
             Destroy(_emitter.gameObject);
             _emitter = null;
         }
@@ -132,7 +122,6 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
             _routine = null;
         }
         CleanupEmitter();
-        // ВАЖНО: при выгрузке/смерти без постановки КД
     }
 
     private static void ForceLoopParticles(GameObject root)
@@ -143,7 +132,7 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
         {
             var ps = pss[i];
             var main = ps.main;
-            main.loop = true;          // форсим луп
+            main.loop = true; 
             if (!ps.isPlaying) ps.Play();
         }
     }

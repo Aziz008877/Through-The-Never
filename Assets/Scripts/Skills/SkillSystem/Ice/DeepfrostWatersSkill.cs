@@ -3,15 +3,11 @@ using UnityEngine;
 
 public class DeepfrostWatersSkill : ActiveSkillBehaviour
 {
-    [SerializeField] private float _duration = 15f;
-    [SerializeField] private float _cooldown = 30f;
-
     private Coroutine _routine;
     private bool _active;
 
     public override void TryCast()
     {
-        // Тумблер: если активен — выключаем и уходим на КД; если нет — включаем (если готов).
         if (_active)
         {
             Deactivate(startCd: true);
@@ -19,7 +15,7 @@ public class DeepfrostWatersSkill : ActiveSkillBehaviour
         }
 
         if (!IsReady) return;
-        Activate(); // ВАЖНО: КД не трогаем при включении
+        Activate();
     }
 
     private void Activate()
@@ -33,13 +29,13 @@ public class DeepfrostWatersSkill : ActiveSkillBehaviour
 
     private IEnumerator DurationRoutine()
     {
-        float t = _duration;
+        float t = Definition.Duration;
         while (_active && t > 0f)
         {
             t -= Time.deltaTime;
             yield return null;
         }
-        // Авто-выключение по таймеру → КД
+        
         if (_active) Deactivate(startCd: true);
     }
 
@@ -64,6 +60,6 @@ public class DeepfrostWatersSkill : ActiveSkillBehaviour
 
     private void OnDisable()
     {
-        if (_active) Deactivate(startCd: false); // выгрузка без постановки КД
+        if (_active) Deactivate(startCd: false);
     }
 }

@@ -16,20 +16,17 @@ public sealed class ArcticGalePassive : PassiveSkillBehaviour
 
     public override void EnablePassive()
     {
-        Debug.Log("[ArcticGale] EnablePassive");
         HookDefense(Context.SkillManager.GetActive(SkillSlot.Defense));
         Context.SkillManager.ActiveRegistered += OnActiveRegistered;
 
         if (Context.Hp is PlayerHP php)
         {
-            Debug.Log("[ArcticGale] Subscribed to OnIncomingDamage");
             php.OnIncomingDamage += OnIncomingDamage;
         }
     }
 
     public override void DisablePassive()
     {
-        Debug.Log("[ArcticGale] DisablePassive");
         Context.SkillManager.ActiveRegistered -= OnActiveRegistered;
         UnhookDefense();
 
@@ -38,14 +35,12 @@ public sealed class ArcticGalePassive : PassiveSkillBehaviour
 
         if (Context.Hp is PlayerHP php)
         {
-            Debug.Log("[ArcticGale] Unsubscribed from OnIncomingDamage");
             php.OnIncomingDamage -= OnIncomingDamage;
         }
     }
 
     private void OnActiveRegistered(SkillSlot slot, ActiveSkillBehaviour beh)
     {
-        Debug.Log($"[ArcticGale] OnActiveRegistered: {slot}");
         if (slot == SkillSlot.Defense) HookDefense(beh);
     }
 
@@ -55,7 +50,6 @@ public sealed class ArcticGalePassive : PassiveSkillBehaviour
         if (defense == null) return;
         _defense = defense;
         _defense.OnSkillActivated += OnDefenseActivated;
-        Debug.Log("[ArcticGale] Hooked Defense skill");
     }
 
     private void UnhookDefense()
@@ -63,7 +57,6 @@ public sealed class ArcticGalePassive : PassiveSkillBehaviour
         if (_defense != null)
         {
             _defense.OnSkillActivated -= OnDefenseActivated;
-            Debug.Log("[ArcticGale] Unhooked Defense skill");
             _defense = null;
         }
         if (_pending != null) { StopCoroutine(_pending); _pending = null; }
@@ -71,22 +64,15 @@ public sealed class ArcticGalePassive : PassiveSkillBehaviour
 
     private void OnDefenseActivated(float actualDuration)
     {
-        Debug.Log($"[ArcticGale] Defense Activated, duration={actualDuration:F2}");
         if (_pending != null) StopCoroutine(_pending);
         _pending = StartCoroutine(WaitAndBuff(actualDuration));
     }
 
     private IEnumerator WaitAndBuff(float wait)
     {
-        Debug.Log($"[ArcticGale] Waiting {wait:F2} sec before buff");
         if (wait > 0f) yield return new WaitForSeconds(wait);
-
-        Debug.Log("[ArcticGale] Applying buffs after defense");
         ApplyMoveSpeedBuff(_bonusMoveSpeedPercent, _buffDuration);
-
         _drUntil = Time.time + _buffDuration;
-        Debug.Log($"[ArcticGale] Damage Reduction active until {_drUntil:F2}");
-
         _pending = null;
     }
 
@@ -102,15 +88,12 @@ public sealed class ArcticGalePassive : PassiveSkillBehaviour
         float mul = 1f + Mathf.Max(0f, percent);
         var move = PlayerCtx?.Move as IExternalSpeedMul;
 
-        Debug.Log($"[ArcticGale] MS buff started: +{percent:P0}, mul={mul}");
-
         move?.PushExternalSpeedMul(this, mul);
 
         while (Time.time < _msBuffUntil)
             yield return null;
 
         move?.PopExternalSpeedMul(this);
-        Debug.Log("[ArcticGale] MS buff ended");
 
         _msBuffRoutine = null;
     }
@@ -119,7 +102,6 @@ public sealed class ArcticGalePassive : PassiveSkillBehaviour
     {
         var move = PlayerCtx?.Move as IExternalSpeedMul;
         move?.PopExternalSpeedMul(this);
-        Debug.Log("[ArcticGale] Forced MS buff pop");
     }
 
     private void OnIncomingDamage(ref float dmg, IDamageable source)
@@ -127,7 +109,6 @@ public sealed class ArcticGalePassive : PassiveSkillBehaviour
         if (Time.time <= _drUntil)
         {
             float newDmg = dmg * (1f - _damageReduction);
-            Debug.Log($"[ArcticGale] Damage reduced {dmg:F1} -> {newDmg:F1}");
             dmg = newDmg;
         }
     }

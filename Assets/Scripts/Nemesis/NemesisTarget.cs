@@ -3,7 +3,7 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public sealed class NemesisTarget : MonoBehaviour
 {
-    [SerializeField] private string _npcId;      // стабильный уникальный ID
+    [SerializeField] private string _npcId;
     [SerializeField] private bool _autoGuid = true;
 
     [Header("Base Stats (optional)")]

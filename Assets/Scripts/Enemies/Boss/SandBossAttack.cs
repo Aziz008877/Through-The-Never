@@ -204,7 +204,7 @@ public class SandBossAttack : BaseEnemyAttack
                                    : (_ownerRoot ? _ownerRoot.position : transform.position) + Vector3.up * 1.2f;
 
         _preparedProj = Instantiate(_boulderPrefab, start, Quaternion.identity);
-        _preparedProj.transform.SetParent(_tossSpawn, false);   // false = НЕ сохранять мировые координаты
+        _preparedProj.transform.SetParent(_tossSpawn, false); 
         _preparedProj.transform.localPosition = Vector3.zero;
         _preparedProj.transform.localRotation = Quaternion.identity;
         _preparedProj.isKinematic = true;

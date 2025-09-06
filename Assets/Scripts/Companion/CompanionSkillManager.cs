@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 public class CompanionSkillManager : MonoBehaviour, ISkillManager
 {
-    [SerializeField] private Transform _skillRoot;
-    [SerializeField] private CompanionContext _context;
     private readonly Dictionary<SkillSlot, ActiveSkillBehaviour> _actives = new();
     public IReadOnlyDictionary<SkillSlot, ActiveSkillBehaviour> Actives => _actives;
     public event Action<SkillSlot, ActiveSkillBehaviour> ActiveRegistered;

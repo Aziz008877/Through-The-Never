@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class EuphratesDefenseSkill : ActiveSkillBehaviour, IDefenceDurationSkill
 {
-    [Header("Core")]
-    [SerializeField] private float _duration = 5f;       // время сферы (иммун)
-    [SerializeField] private float _cooldown = 15f;      // если КД хранится в Definition – убери это поле
-
     [Header("Regeneration")]
-    [SerializeField] private float _regenSeconds = 10f;          // время регена
-    [SerializeField] private float _regenPercentOfMaxHP = 0.30f; // 30% MaxHP за всё окно
+    [SerializeField] private float _regenSeconds = 10f;
+    [SerializeField] private float _regenPercentOfMaxHP = 0.30f;
     [SerializeField] private bool  _regenStartsImmediately = true;
 
     [Header("Damage Bonus From Absorbed")]
     [SerializeField] private float _bonusDuration = 6f;
-    [SerializeField] private float _bonusPer100Absorbed = 0.10f; // +10% за каждые 100 поглощённого
-    [SerializeField] private float _bonusCapPercent = 0.60f;     // максимум +60%
+    [SerializeField] private float _bonusPer100Absorbed = 0.10f;
+    [SerializeField] private float _bonusCapPercent = 0.60f;
 
     [Header("VFX / SFX")]
     [SerializeField] private ParticleSystem _bubbleVfx;
@@ -24,10 +20,7 @@ public class EuphratesDefenseSkill : ActiveSkillBehaviour, IDefenceDurationSkill
     private float _absorbedTotal;
     private Coroutine _defRoutine;
     private Coroutine _regenRoutine;
-
-    // временный модификатор исходящего урона
     private BonusDamageMod _bonusMod;
-
     public event Action OnDefenceStarted;
     public event Action OnDefenceFinished;
 
@@ -54,7 +47,7 @@ public class EuphratesDefenseSkill : ActiveSkillBehaviour, IDefenceDurationSkill
         OnDefenceStarted?.Invoke();
 
         float t = 0f;
-        while (t < _duration)
+        while (t < Definition.Duration)
         {
             t += Time.deltaTime;
             yield return null;
@@ -63,7 +56,7 @@ public class EuphratesDefenseSkill : ActiveSkillBehaviour, IDefenceDurationSkill
         OnDefenceFinished?.Invoke();
         CleanupDefense();
 
-        GrantDamageBonusFromAbsorbed(); // выдаём бафф урона после окончания сферы
+        GrantDamageBonusFromAbsorbed();
 
         if (!_regenStartsImmediately)
             StartRegen();
@@ -76,7 +69,7 @@ public class EuphratesDefenseSkill : ActiveSkillBehaviour, IDefenceDurationSkill
         if (damage <= 0f) return;
 
         _absorbedTotal += damage;
-        damage = 0f; // полный игнор урона пока длится защита
+        damage = 0f;
     }
 
     private void StartRegen()
@@ -118,9 +111,8 @@ public class EuphratesDefenseSkill : ActiveSkillBehaviour, IDefenceDurationSkill
         if (cap > 0f) bonusPct = Mathf.Min(bonusPct, cap);
 
         if (bonusPct <= 0f) return;
-
-        // создаём и регистрируем временный контекст-модификатор урона
-        RemoveBonusModIfAny(); // зачистим предыдущий, если вдруг был
+        
+        RemoveBonusModIfAny();
         _bonusMod = new BonusDamageMod(bonusPct, Time.time + _bonusDuration);
         Context.RegisterContextModifier(_bonusMod);
         StartCoroutine(BonusLifetime(_bonusDuration));
@@ -169,23 +161,22 @@ public class EuphratesDefenseSkill : ActiveSkillBehaviour, IDefenceDurationSkill
         CleanupDefense();
     }
 
-    public float GetDefenceDuration() => _duration;
+    public float GetDefenceDuration() => Definition.Duration;
     
     private sealed class BonusDamageMod : IDamageContextModifier
     {
-        private readonly float _mult;     // 1 + бонус
-        private readonly float _expireAt; // Time.time, когда истекает
+        private readonly float _mult;
+        private readonly float _expireAt; 
 
         public BonusDamageMod(float bonusPercent, float expireAt)
         {
-            _mult = 1f + Mathf.Max(0f, bonusPercent); // bonusPercent = 0.25 => mult = 1.25
+            _mult = 1f + Mathf.Max(0f, bonusPercent); 
             _expireAt = expireAt;
         }
 
         public void Apply(ref DamageContext ctx)
         {
             if (Time.time >= _expireAt) return;
-            // Увеличиваем исходящий урон игрока
             ctx.Damage *= _mult;
         }
     }

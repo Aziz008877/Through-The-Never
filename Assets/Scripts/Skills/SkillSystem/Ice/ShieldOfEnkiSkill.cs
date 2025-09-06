@@ -199,10 +199,6 @@ public class ShieldOfEnkiSkill : ActiveSkillBehaviour, ISkillModifier, IDefenceD
     
     public float Evaluate(SkillKey key, float value)
     {
-        // Щит сам по себе не даёт бонус урона/редакцию глобально (это чистая защита + удар конусом),
-        // но если захочешь, можно добавить, например, +Damage к базовым спеллам, пока щит активен:
-        // if (_active && key.Stat == SkillStat.Damage && key.Slot != SkillSlot.Passive)
-        //     return value * 1.0f;
         return value;
     }
 

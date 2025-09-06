@@ -28,7 +28,7 @@ public class ChestOfferDirector : MonoBehaviour
     [SerializeField] private MagicSchool _school;
 
     [Header("Flow")]
-    [SerializeField] private bool _autoInitOnStart = false; // по умолчанию ВЫКЛ
+    [SerializeField] private bool _autoInitOnStart = false;
 
     private SkillCatalog.SchoolBundle _bundle;
     private readonly HashSet<SkillDefinition> _taken = new();
@@ -40,26 +40,20 @@ public class ChestOfferDirector : MonoBehaviour
 
     private void Start()
     {
-        // Если в Saver уже есть школа — подтянем её (но НЕ инициализируем)
         if (_selectionSaver && _selectionSaver.HasSchool)
             _school = _selectionSaver.School;
-
-        // Пытаемся только восстановиться (например, после смены сцены)
+        
         TryRestoreFromSaver();
-
-        // Больше ничего не делаем: НИКАКОЙ InitializeAndGrantInitial() тут!
+        
         if (_autoInitOnStart)
         {
-            // Включай только если точно уверены, что в этот момент школа выбрана
             EnsureInitialized(_school);
         }
     }
-
-    /// <summary>Вызывать ПОСЛЕ выбора школы, чтобы начать цикл офферов.</summary>
+    
     public void BeginRun(MagicSchool school)
     {
         _school = school;
-        // Сбросим, чтобы не мешала старая инициализация
         _initialized = false;
         InitializeAndGrantInitial();
     }
@@ -69,8 +63,7 @@ public class ChestOfferDirector : MonoBehaviour
     public void InitializeAndGrantInitial()
     {
         if (_initialized) return;
-
-        // Блокируем случайную инициализацию без выбранной школы
+        
         if (_selectionSaver != null && !_selectionSaver.HasSchool)
         {
             Debug.Log("[Director] Skip init: school not chosen yet.");
@@ -90,8 +83,8 @@ public class ChestOfferDirector : MonoBehaviour
         }
 
         _taken.Clear();
-        SeedTakenFromManager();    // уже выданные игроку скиллы
-        SeedStartersIntoTaken();   // исключаем Basic/StarterDash/Innate из будущих офферов
+        SeedTakenFromManager();
+        SeedStartersIntoTaken();
 
         _stageIndex = 0;
         _cycleIndex = 0;
