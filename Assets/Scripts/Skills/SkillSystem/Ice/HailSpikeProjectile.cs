@@ -8,17 +8,17 @@ public class HailSpikeProjectile : MonoBehaviour
     private float _damage;
     private float _impactRadius;
     private DotweenSettings _settings;
-    public void Init(Vector3 position, DotweenSettings dotweenSettings, float damage, float radius, ActorContext ctx)
+    public void Init(Vector3 targetPos, DotweenSettings dotweenSettings, float damage, float radius, ActorContext ctx)
     {
-        _actorContext = ctx;
-        _targetPos = position;
-        _settings = dotweenSettings;
-        _damage = damage;
-        _impactRadius = radius;
-        
-        transform.DOMoveY(0, _settings.Duration)
-            .SetEase(_settings.AnimationType)
-            .OnComplete(Impact);
+        _actorContext  = ctx;
+        _targetPos     = targetPos;
+        _settings      = dotweenSettings;
+        _damage        = damage;
+        _impactRadius  = radius;
+
+        transform.DOMove(_targetPos, _settings.Duration)
+                 .SetEase(_settings.AnimationType)
+                 .OnComplete(Impact);
     }
 
     private void Impact()
@@ -38,8 +38,8 @@ public class HailSpikeProjectile : MonoBehaviour
                 Slot           = SkillSlot.Undefined,
                 Type           = SkillDamageType.Basic,
                 Damage         = _damage,
-                IsCrit         = (_actorContext != null && Random.value < _actorContext.CritChance),
-                CritMultiplier = _actorContext != null ? _actorContext.CritMultiplier : 1f,
+                IsCrit         = (_actorContext && Random.value < _actorContext.CritChance),
+                CritMultiplier = _actorContext ? _actorContext.CritMultiplier : 1f,
                 HitPoint       = cols[i].transform.position,
                 HitNormal      = Vector3.up,
                 SourceGO       = gameObject
@@ -47,11 +47,9 @@ public class HailSpikeProjectile : MonoBehaviour
 
             if (ctx.IsCrit) ctx.Damage *= ctx.CritMultiplier;
             _actorContext.ApplyDamageContextModifiers(ref ctx);
-
             d.ReceiveDamage(ctx);
         }
 
         Destroy(gameObject);
     }
-
 }

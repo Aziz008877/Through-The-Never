@@ -31,7 +31,7 @@ public class MetaProgressionService : MonoBehaviour
 
     private void Awake()
     {
-        Time.timeScale = 4;
+        //Time.timeScale = 4;
         if (Instance && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
