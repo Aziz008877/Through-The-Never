@@ -7688,7 +7688,6 @@ GameObject:
   - component: {fileID: 436087289}
   - component: {fileID: 436087290}
   - component: {fileID: 436087291}
-  - component: {fileID: 436087292}
   m_Layer: 0
   m_Name: SkillHandler
   m_TagString: Untagged
@@ -7718,19 +7717,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436087287}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c0d16bfcbbdc3d3449278291c5daf1be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _basicIcon: {fileID: 0}
-  _defenseIcon: {fileID: 0}
-  _specialIcon: {fileID: 0}
-  _dashIcon: {fileID: 0}
-  _basicCooldown: {fileID: 0}
-  _defenseCooldown: {fileID: 0}
-  _specialCooldown: {fileID: 0}
-  _dashCooldown: {fileID: 0}
+  _basicIcon: {fileID: 1713826648}
+  _defenseIcon: {fileID: 640930588}
+  _specialIcon: {fileID: 156683723}
+  _dashIcon: {fileID: 809024514}
+  _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
 --- !u!114 &436087290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7756,24 +7752,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e4bc48a9c609bf4aad84fa42bc07cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &436087292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 436087287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f0922a71f353b8479d59093690dff21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _saver: {fileID: 11400000, guid: bb92441356886fa4c92b188bc681729f, type: 2}
-  _emptySprite: {fileID: 0}
-  _lmbIcon: {fileID: 1713826648}
-  _rmbIcon: {fileID: 640930588}
-  _fIcon: {fileID: 156683723}
-  _spaceIcon: {fileID: 809024514}
 --- !u!1001 &438161897
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14397,7 +14375,7 @@ MonoBehaviour:
   _chooseVFX: {fileID: 0}
   _exitProp: {fileID: 2124200237}
   _emissionRunes: {fileID: 224473702}
-  <InteractionUI>k__BackingField: {fileID: 0}
+  _ui: {fileID: 436087289}
   <CanInteract>k__BackingField: 1
 --- !u!1001 &739658324
 PrefabInstance:
@@ -30454,7 +30432,7 @@ MonoBehaviour:
   _chooseVFX: {fileID: 0}
   _exitProp: {fileID: 2124200237}
   _emissionRunes: {fileID: 224473702}
-  <InteractionUI>k__BackingField: {fileID: 0}
+  _ui: {fileID: 436087289}
   <CanInteract>k__BackingField: 1
 --- !u!23 &1553812425 stripped
 MeshRenderer:

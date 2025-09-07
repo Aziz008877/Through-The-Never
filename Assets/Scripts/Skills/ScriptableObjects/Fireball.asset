@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: Fireball
   DisplayName: Fireball
   Description: 
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: e70205909cc6d4841bf06cde1fc17a6d, type: 3}
   Stars: []
   Slot: 0
   Kind: 0

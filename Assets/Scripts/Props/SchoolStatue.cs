@@ -13,7 +13,8 @@ public class SchoolStatue : MonoBehaviour, IInteractable
     [SerializeField] private ParticleSystem _chooseVFX;
     [SerializeField] private ExitProp _exitProp;
     [SerializeField] private EmissionRunes _emissionRunes;
-    [field: SerializeField] public Transform InteractionUI { get; set; }
+    [SerializeField] private SkillUIHandler _ui;
+    public Transform InteractionUI { get; set; }
     [field: SerializeField] public bool CanInteract { get; set; } = true;
 
     public Action<MagicSchool> OnMagicSchoolSelected;
@@ -31,7 +32,11 @@ public class SchoolStatue : MonoBehaviour, IInteractable
         if (_starterInnate) _saver.AddSkill(_starterInnate);
         if (_starterBasic)  _saver.AddSkill(_starterBasic);
         if (_starterDash)   _saver.AddSkill(_starterDash);
-        
+        if (_ui)
+        {
+            if (_starterBasic) _ui.ReceiveNewSkill(_starterBasic);
+            if (_starterDash)  _ui.ReceiveNewSkill(_starterDash);
+        }
         var psm = player.GetComponent<PlayerSkillManager>();
         psm.AddSkills(starters);
         

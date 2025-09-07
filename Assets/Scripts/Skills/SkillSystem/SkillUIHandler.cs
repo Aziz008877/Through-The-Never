@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
+
 public class SkillUIHandler : MonoBehaviour
 {
     [Header("UI Icons")]
@@ -10,48 +10,55 @@ public class SkillUIHandler : MonoBehaviour
     [SerializeField] private Image _specialIcon;
     [SerializeField] private Image _dashIcon;
 
-    [Header("Cooldown Masks (type = Filled)")]
-    [SerializeField] private Image _basicCooldown;
-    [SerializeField] private Image _defenseCooldown;
-    [SerializeField] private Image _specialCooldown;
-    [SerializeField] private Image _dashCooldown;
+    [Header("Data")] [SerializeField] private SkillSelectionSaver _saver;
 
-    private readonly Dictionary<SkillSlot, Image> _iconBySlot      = new();
-    private readonly Dictionary<SkillSlot, Image> _cooldownBySlot  = new();
-
-    private void Awake()
+    private void OnEnable()
     {
-        _iconBySlot[SkillSlot.Basic]    = _basicIcon;
-        _iconBySlot[SkillSlot.Defense]  = _defenseIcon;
-        _iconBySlot[SkillSlot.Special]  = _specialIcon;
-        _iconBySlot[SkillSlot.Dash]     = _dashIcon;
-
-        _cooldownBySlot[SkillSlot.Basic]   = _basicCooldown;
-        _cooldownBySlot[SkillSlot.Defense] = _defenseCooldown;
-        _cooldownBySlot[SkillSlot.Special] = _specialCooldown;
-        _cooldownBySlot[SkillSlot.Dash]    = _dashCooldown;
+        SyncAllFromSaver();
     }
-    
-    public void Populate(List<SkillDefinition> definitions, Dictionary<SkillSlot, ActiveSkillBehaviour> actives)
+
+    public void SetSaver(SkillSelectionSaver saver)
     {
-        foreach (SkillDefinition definition in definitions)
+        _saver = saver;
+        SyncAllFromSaver();
+    }
+
+    public void SyncAllFromSaver()
+    {
+        if (_saver == null) return;
+
+        var chosen = _saver.Chosen;
+        if (chosen == null) return;
+        
+        for (int i = 0; i < chosen.Count; i++)
         {
-            if (_iconBySlot.TryGetValue(definition.Slot, out var icon))
-                icon.sprite = definition.Icon;
+            var def = chosen[i];
+            if (!def) continue;
+            ReceiveNewSkill(def);
+        }
+    }
 
-            if (definition.Kind != SkillKind.Active) continue;
-            if (!actives.TryGetValue(definition.Slot, out var behaviour)) continue;
-            if (!_cooldownBySlot.TryGetValue(definition.Slot, out var mask) || mask == null) continue;
-            
-            mask.fillAmount = behaviour.IsReady ? 0f : 1f;
+    public void ReceiveNewSkill(SkillDefinition skillDefinition)
+    {
+        if (!skillDefinition) return;
 
-            behaviour.OnCooldownStarted += seconds =>
-            {
-                mask.DOKill();
-                mask.fillAmount = 1f;
-                mask.DOFillAmount(0f, seconds)
-                    .SetEase(Ease.Linear);
-            };
+        switch (skillDefinition.Slot)
+        {
+            case SkillSlot.Basic:
+                if (_basicIcon) _basicIcon.sprite = skillDefinition.Icon;
+                break;
+
+            case SkillSlot.Defense:
+                if (_defenseIcon) _defenseIcon.sprite = skillDefinition.Icon;
+                break;
+
+            case SkillSlot.Special:
+                if (_specialIcon) _specialIcon.sprite = skillDefinition.Icon;
+                break;
+
+            case SkillSlot.Dash:
+                if (_dashIcon) _dashIcon.sprite = skillDefinition.Icon;
+                break;
         }
     }
 }

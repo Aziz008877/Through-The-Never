@@ -28,6 +28,7 @@ public class ChestSelector : MonoBehaviour, IInteractable
     [SerializeField] private ChestOfferDirector _director;  
     [SerializeField] private SkillSelectionSaver _saver; 
     [SerializeField] private MagicSchool _fallbackSchoolIfNone;
+    [SerializeField] private SkillUIHandler _ui;
     [SerializeField] private UnityEvent _onChestOpened, _onChestClosed;
     private List<SkillDefinition> _currentOffer;
     private bool _choiceLocked;
@@ -108,7 +109,7 @@ public class ChestSelector : MonoBehaviour, IInteractable
         _choiceLocked = true;
 
         _director.AcceptChoice(paper.Definition);
-
+        if (_ui) _ui.ReceiveNewSkill(paper.Definition);
         for (int i = 0; i < _papers.Length; i++)
         {
             if (_papers[i] != paper)
