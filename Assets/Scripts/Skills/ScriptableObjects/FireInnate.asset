@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: Ignite
   DisplayName: Ignite
   Description: Adds DOT Damage
-  Icon: {fileID: 21300000, guid: 6c6aec7a466170a4bad88a7afba35922, type: 3}
+  Icon: {fileID: 21300000, guid: e70205909cc6d4841bf06cde1fc17a6d, type: 3}
   Stars: []
   Slot: 4
   Kind: 1

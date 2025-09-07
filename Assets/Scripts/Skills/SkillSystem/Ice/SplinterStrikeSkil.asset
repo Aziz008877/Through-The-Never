@@ -16,7 +16,7 @@ MonoBehaviour:
   DisplayName: Splinter Strike
   Description: Rapidly fire shards of ice like a frosty machine gun. Fires 10 projectiles
     before a short cooldown. Long range, high speed.
-  Icon: {fileID: 0}
+  Icon: {fileID: 21300000, guid: f9dfba3df6790c043b12816cc8d1b8fb, type: 3}
   Stars: []
   Slot: 0
   Kind: 0
