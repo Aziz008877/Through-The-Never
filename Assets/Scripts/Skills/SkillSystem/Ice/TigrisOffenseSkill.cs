@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,7 +16,7 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
 
     private Coroutine _routine;
     private WaterJetEmitter _emitter;
-
+    private readonly HashSet<IDamageable> _hitThisTick = new();
     public override void Inject(SkillDefinition definition, ActorContext context)
     {
         base.Inject(definition, context);
@@ -64,45 +65,54 @@ public class TigrisOffenseSkill : ActiveSkillBehaviour
 
         Vector3 a = Context.CastPivot.position;
         Vector3 b = a + Context.CastPivot.forward * _range;
-        
         float radius = Radius;
+        
+        var hits = Physics.OverlapCapsule(a, b, radius, ~0, QueryTriggerInteraction.Ignore);
 
-        var hits = Physics.OverlapCapsule(a, b, radius, ~0, QueryTriggerInteraction.Collide);
         float dmgPerTick = Damage * _tickRate;
+        _hitThisTick.Clear();
 
         for (int i = 0; i < hits.Length; i++)
         {
             var col = hits[i];
-            if (col.TryGetComponent<IDamageable>(out var tgt))
-            {
-                var ctx = BuildDamage(
-                    dmgPerTick,
-                    SkillDamageType.Basic,
-                    hitPoint: col.transform.position,
-                    hitNormal: Vector3.up,
-                    sourceGO: gameObject
-                );
-                ctx.Target = tgt;
+            if (col.transform.IsChildOf(Context.transform)) continue;
+            
+            var targetComp = col.GetComponentInParent<Component>();
+            var dmg = targetComp ? targetComp.GetComponent<IDamageable>() : null;
+            if (dmg == null || !dmg.CanBeDamaged) continue;
+            
+            if (!_hitThisTick.Add(dmg)) continue;
+            
+            var ctx = BuildDamage(
+                dmgPerTick,
+                SkillDamageType.Basic,
+                hitPoint: col.transform.position,
+                hitNormal: Vector3.up,
+                sourceGO: gameObject
+            );
+            ctx.Target = dmg;
 
-                Context.ApplyDamageContextModifiers(ref ctx);
-                tgt.ReceiveDamage(ctx);
-            }
+            Context.ApplyDamageContextModifiers(ref ctx);
+            dmg.ReceiveDamage(ctx);
             
             Vector3 push = Context.CastPivot.forward * _pushForce;
+            
+            var root = (dmg as Component)?.transform;
+            if (!root) continue;
 
-            if (col.attachedRigidbody != null)
+            if (root.TryGetComponent<Rigidbody>(out var rb) && !rb.isKinematic)
             {
-                col.attachedRigidbody.AddForce(push, ForceMode.Acceleration);
+                rb.AddForce(push, ForceMode.Acceleration);
             }
-            else if (col.TryGetComponent<NavMeshAgent>(out var agent) && agent.isOnNavMesh)
+            else if (root.TryGetComponent<NavMeshAgent>(out var agent) && agent.isOnNavMesh)
             {
                 agent.Move(push * Time.deltaTime);
             }
             else
             {
-                col.transform.position += push * Time.deltaTime;
+                root.position += push * Time.deltaTime;
             }
-        }
+        } 
     }
 
     private void CleanupEmitter()

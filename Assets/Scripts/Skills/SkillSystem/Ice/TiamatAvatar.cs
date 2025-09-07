@@ -38,7 +38,7 @@ public class TiamatAvatar : MonoBehaviour
     
     private void AttackAllEnemiesInRadius()
     {
-        Collider[] colliders = Physics.OverlapSphere(transform.position, _attackRadius, ~0, QueryTriggerInteraction.Ignore);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, _attackRadius);
 
         foreach (var col in colliders)
         {

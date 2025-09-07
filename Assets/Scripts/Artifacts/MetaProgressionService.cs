@@ -31,7 +31,7 @@ public class MetaProgressionService : MonoBehaviour
 
     private void Awake()
     {
-        Time.timeScale = 4;
+        //Time.timeScale = 4;
         if (Instance && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
@@ -147,4 +147,15 @@ public class MetaProgressionService : MonoBehaviour
     public float MoonAttackSpeedSlowPerStack => _config ? _config.GetMoonAttackSpeedSlowPerStack(GetLevel(ArtifactId.MoonShard)) : 0f;
     public float HornMaxHPBonus => _config ? _config.GetHornMaxHPBonus(GetLevel(ArtifactId.CernunnosHorn)) : 0f;
 
+    /*private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Time.timeScale = 15;
+        }
+        else if (Input.GetKeyDown(KeyCode.O))
+        {
+            Time.timeScale = 1;
+        }
+    }*/
 }

@@ -62,6 +62,6 @@ MonoBehaviour:
     m_Bits: 0
   _damageMultiplier: 2
   _onHitKnockback: 10
-  _spirePrefab: {fileID: 0}
+  _spirePrefab: {fileID: 5991949769126156350, guid: 97c4bd9db7df98844bbaa08754e2e83a, type: 3}
   _spawnVfx: {fileID: 0}
   _loopVfx: {fileID: 0}

@@ -106,7 +106,7 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 2.996078, g: 2.996078, b: 2.996078, a: 1}
+    - _Color: {r: 11.984312, g: 11.984312, b: 11.984312, a: 1}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Fade_Range: {r: 0, g: 1, b: 0, a: 0}

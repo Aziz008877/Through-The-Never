@@ -45,8 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3390f353d00c4c47980686556292509, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _duration: 5
-  _cooldown: 15
   _regenSeconds: 10
   _regenPercentOfMaxHP: 0.3
   _regenStartsImmediately: 1
@@ -118,9 +116,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 3134162433235859983, guid: d5a86961c45d65c479603989a2989aba, type: 3}
+      propertyPath: looping
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134162433235859983, guid: d5a86961c45d65c479603989a2989aba, type: 3}
+      propertyPath: SizeModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134162433235859983, guid: d5a86961c45d65c479603989a2989aba, type: 3}
+      propertyPath: ColorModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3987699089632577625, guid: d5a86961c45d65c479603989a2989aba, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4375910351469641121, guid: d5a86961c45d65c479603989a2989aba, type: 3}
       propertyPath: m_LocalScale.x
@@ -220,7 +230,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8669409725321939518, guid: d5a86961c45d65c479603989a2989aba, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8851516039880429548, guid: d5a86961c45d65c479603989a2989aba, type: 3}
       propertyPath: m_LocalScale.x

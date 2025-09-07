@@ -79,6 +79,7 @@ public class PhoenixStanceSkill : ActiveSkillBehaviour, IDefenceDurationSkill
         {
             _explosionVfx.transform.position = Context.transform.position;
             _explosionVfx.Play();
+            _shieldVfx.Stop();
         }
 
         float radius = Context.SkillModifierHub.Apply(new SkillKey(Definition.Slot, SkillStat.Radius), _aoeRadius);

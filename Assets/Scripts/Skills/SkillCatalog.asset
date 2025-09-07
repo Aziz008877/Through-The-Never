@@ -29,9 +29,9 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 3a0fe176af839e14b940528df76fee0a, type: 2}
     - {fileID: 11400000, guid: 36ce3bd3a12f73e448165ae2e249c058, type: 2}
     Dash:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 11400000, guid: e9d892e6d147df5428d7b42d2bc7e47e, type: 2}
+    - {fileID: 11400000, guid: 633dcc8415352a046b7f0315e72cd8f3, type: 2}
+    - {fileID: 11400000, guid: 9210fd1f5441cdb44963147d9a496138, type: 2}
     Passives:
     - {fileID: 11400000, guid: 53a5e035ec3906a45b6cf147bb33319b, type: 2}
     - {fileID: 11400000, guid: 7fe5fbc1a1a229841b37c2414f5a74d1, type: 2}

@@ -159,7 +159,7 @@ Material:
     - _DstBlend: 10
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _Fresnel_Intensity: 1.142
+    - _Fresnel_Intensity: 2
     - _Fresnel_Power: 3.05
     - _Frontface_Opacity: 0.187
     - _GlossMapScale: 0
