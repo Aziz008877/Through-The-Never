@@ -27,7 +27,7 @@ MonoBehaviour:
   BehaviourPrefab: {fileID: 337918662314286809, guid: 0c19750dec55b5940b30debfa69c2a30, type: 3}
   CastType: 0
   Damage: 0
-  Cooldown: 0
-  Duration: 0
+  Cooldown: 15
+  Duration: 5
   Range: 0
   Raduis: 0
