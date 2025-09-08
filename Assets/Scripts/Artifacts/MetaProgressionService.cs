@@ -31,7 +31,6 @@ public class MetaProgressionService : MonoBehaviour
 
     private void Awake()
     {
-        //Time.timeScale = 4;
         if (Instance && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
         DontDestroyOnLoad(gameObject);
@@ -109,7 +108,7 @@ public class MetaProgressionService : MonoBehaviour
             else
             {
                 _data = new MetaSaveData { Coins = _startingCoins, Levels = new Dictionary<int, int>() };
-                Save(); // создадим файл сразу
+                Save();
             }
         }
         catch

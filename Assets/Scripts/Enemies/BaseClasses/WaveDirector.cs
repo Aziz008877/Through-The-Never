@@ -12,11 +12,9 @@ public sealed class WaveDirector : MonoBehaviour
     [SerializeField] private PlayerEnemyHandler _playerEnemyHandler;
 
     [Header("Spawn points — Layout 1 (Variant=1)")]
-    [SerializeField] private Transform _spawnRootLayout1;
     [SerializeField] private List<Transform> _spawnPointsLayout1 = new();
 
     [Header("Spawn points — Layout 2 (Variant=2)")]
-    [SerializeField] private Transform _spawnRootLayout2;
     [SerializeField] private List<Transform> _spawnPointsLayout2 = new();
 
     [Header("Тайминги")]
@@ -26,6 +24,7 @@ public sealed class WaveDirector : MonoBehaviour
     [Header("Выходы (по layout)")]
     [SerializeField] private ExitProp _exitLayout1;
     [SerializeField] private ExitProp _exitLayout2;
+    [SerializeField] private ChestSelector _chestSelector;
     [SerializeField] private bool _lockExitWhileRunning = true;
     private List<Transform> _spawns;
     private WaveLayout _activeLayout;
@@ -83,7 +82,9 @@ public sealed class WaveDirector : MonoBehaviour
                 yield return new WaitForSeconds(Random.Range(_delayBetweenWaves.x, _delayBetweenWaves.y));
         }
 
-        if (_activeExit) _activeExit.CanInteract = true;
+        _chestSelector.CanInteract = true;
+        _exitLayout1.CanInteract = true;
+        _exitLayout2.CanInteract = true;
         Debug.Log("[WaveDirector] Все волны пройдены (для текущего layout).");
     }
 

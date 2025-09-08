@@ -29,43 +29,49 @@ public class ChestSelector : MonoBehaviour, IInteractable
     [SerializeField] private SkillSelectionSaver _saver; 
     [SerializeField] private MagicSchool _fallbackSchoolIfNone;
     [SerializeField] private SkillUIHandler _ui;
+    [field: SerializeField] public bool CanInteract { get; set; }
     [SerializeField] private UnityEvent _onChestOpened, _onChestClosed;
     private List<SkillDefinition> _currentOffer;
     private bool _choiceLocked;
 
+
     private IEnumerator OpenChest()
     {
-        _onChestOpened?.Invoke();
-        _chestAnimator.SetTrigger("OpenChest");
-        yield return new WaitForSeconds(_waitTime);
-
-        if (_director == null)
+        if (CanInteract)
         {
-            Debug.LogError("[ChestSelector] No ChestOfferDirector set");
-            yield break;
-        }
-        var fb = (_saver != null) ? _saver.School : _fallbackSchoolIfNone;
-        _director.EnsureInitialized(fb);
+            _onChestOpened?.Invoke();
+            _chestAnimator.SetTrigger("OpenChest");
+            yield return new WaitForSeconds(_waitTime);
+
+            if (_director == null)
+            {
+                Debug.LogError("[ChestSelector] No ChestOfferDirector set");
+                yield break;
+            }
+            var fb = (_saver != null) ? _saver.School : _fallbackSchoolIfNone;
+            _director.EnsureInitialized(fb);
         
-        if (!_director.TryGetNextOffer(out var stage, out var offer))
-        {
-            Debug.Log("[ChestSelector] No offers left.");
-            yield break;
-        }
+            if (!_director.TryGetNextOffer(out var stage, out var offer))
+            {
+                Debug.Log("[ChestSelector] No offers left.");
+                yield break;
+            }
 
-        _currentOffer = offer;
+            _currentOffer = offer;
         
-        for (int i = 0; i < _papers.Length; i++)
-        {
-            var paper = _papers[i];
-            paper.Clicked -= OnPaperClicked;
-            paper.Clicked += OnPaperClicked;
+            for (int i = 0; i < _papers.Length; i++)
+            {
+                var paper = _papers[i];
+                paper.Clicked -= OnPaperClicked;
+                paper.Clicked += OnPaperClicked;
 
-            SkillDefinition def = (i < offer.Count) ? offer[i] : null;
-            paper.Init(def);
+                SkillDefinition def = (i < offer.Count) ? offer[i] : null;
+                paper.Init(def);
+            }
+
+            Launch();
         }
-
-        Launch();
+        
     }
 
     private void Launch()
@@ -119,7 +125,7 @@ public class ChestSelector : MonoBehaviour, IInteractable
     }
 
     public Transform InteractionUI { get; set; }
-    public bool CanInteract { get; set; }
+
     public void PerformAction(GameObject player)
     {
         StartCoroutine(OpenChest());

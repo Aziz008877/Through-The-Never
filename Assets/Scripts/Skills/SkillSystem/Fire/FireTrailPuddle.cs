@@ -42,6 +42,8 @@ public class FireTrailPuddle : MonoBehaviour
 
         foreach (var tgt in _inside)
         {
+            if (tgt == null) return;
+            
             var ctx = new DamageContext
             {
                 Attacker       = _ctx,

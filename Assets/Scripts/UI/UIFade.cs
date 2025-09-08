@@ -6,6 +6,7 @@ public class UIFade : MonoBehaviour
 {
     [SerializeField] private Image _fadeImage;
     [SerializeField] private DotweenSettings _dotweenSettings;
+    public DotweenSettings DotweenSettings => _dotweenSettings;
     public void Fade(float fadeValue)
     {
         _fadeImage
