@@ -21,6 +21,7 @@ public abstract class BaseEnemyAnimation : MonoBehaviour
         _spec01Hash = Animator.StringToHash(_special01Trig);
         _spec02Hash = Animator.StringToHash(_special02Trig);
         _deathHash = Animator.StringToHash(_deathTrigger);
+        GetComponent<BaseEnemyHP>().OnEnemyDead += Die;
     }
     
     public virtual void SetMove(bool moving) => _animator.SetBool(_runHash, moving);
@@ -38,6 +39,11 @@ public abstract class BaseEnemyAnimation : MonoBehaviour
     private void PlayTrigger(int hash)
     {
         if (_animator && hash != 0) _animator.SetTrigger(hash);
+    }
+
+    private void Die(Transform none)
+    {
+        _animator.SetTrigger(_deathTrigger);
     }
 
     public void MeleeHitEvent()

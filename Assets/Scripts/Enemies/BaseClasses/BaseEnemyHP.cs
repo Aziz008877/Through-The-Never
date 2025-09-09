@@ -70,19 +70,19 @@ public abstract class BaseEnemyHP : MonoBehaviour, IDamageable, IDotReceivable
     {
         var meta = MetaProgressionService.Instance;
         if (meta) meta.AddCoins(_coinReward);
-
+        
         OnEnemyDead?.Invoke(transform);
         OnKilled?.Invoke(lastCtx);
         _onEnemyDead?.Invoke();
         _enemyAnimation.PlayDeath();
         _enemyMove.StopChasing();
-        StartCoroutine(DestroySkeleton());
+        StartCoroutine(DestroyGameObject());
         EnemyDeathReporter.ReportEnemyDied(transform);
     }
 
-    private IEnumerator DestroySkeleton()
+    private IEnumerator DestroyGameObject()
     {
-        yield return new WaitForSeconds(0);
+        yield return new WaitForSeconds(2);
         Destroy(gameObject);
     }
 

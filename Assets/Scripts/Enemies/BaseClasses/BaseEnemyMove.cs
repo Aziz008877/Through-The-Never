@@ -43,7 +43,23 @@ public abstract class BaseEnemyMove : MonoBehaviour, IFrostbiteReceivable
         _baseSpeed = _agent.speed;
     }
 
-    public void StopChasing() { _canMove = false; }
+    public void StopChasing()
+    {
+        _canMove = false;
+        _target = null;
+        ForceStopAgent();
+        StopMoving();
+    }
+    private void ForceStopAgent()
+    {
+        if (!AgentReady) return;
+        
+        _agent.isStopped = true;
+        _agent.ResetPath();
+        _agent.velocity = Vector3.zero;
+
+        _agent.nextPosition = transform.position;
+    }
 
     protected virtual void Update()
     {
