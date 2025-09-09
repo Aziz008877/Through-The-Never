@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Absolute Zero
   DisplayName: Absolute Zero
-  Description: 
-  Icon: {fileID: 0}
+  Description: Double your damage but increase all spell cooldowns by 50%.
+  Icon: {fileID: 21300000, guid: 416c08a56f573b54a93e3582862bb427, type: 3}
   Stars: []
   Slot: 2
   Kind: 1

@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Firebane
   DisplayName: Firebane
-  Description: 
-  Icon: {fileID: 0}
+  Description: Spells deal 40% less damage, have reduced duration and AoE, but each
+    casts twice.
+  Icon: {fileID: 21300000, guid: 86d92c18c231054459e70a7401e79629, type: 3}
   Stars: []
   Slot: 2
   Kind: 1

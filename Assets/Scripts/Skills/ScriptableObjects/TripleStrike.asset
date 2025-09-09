@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Triple Strike
   DisplayName: Triple Strike
-  Description: 
-  Icon: {fileID: 0}
+  Description: Launch additional projectiles to the left and right of your main shot.
+  Icon: {fileID: 21300000, guid: d0b65ce891d5b6c4584eed2285c40a34, type: 3}
   Stars: []
   Slot: 5
   Kind: 1

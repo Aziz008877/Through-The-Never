@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Icy Retaliation
   DisplayName: Icy Retaliation
-  Description: 
-  Icon: {fileID: 0}
+  Description: Emit a freezing burst in a small radius when taking damage.
+  Icon: {fileID: 21300000, guid: dc877062399de624cb84b013d3c69eaf, type: 3}
   Stars: []
   Slot: 5
   Kind: 1

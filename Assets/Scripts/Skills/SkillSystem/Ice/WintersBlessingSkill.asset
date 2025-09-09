@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Winters Blessing
   DisplayName: Winters Blessing
-  Description: 
-  Icon: {fileID: 0}
+  Description: "Begin battles with an ice barrier scaling with enemies\u2019 total
+    HP."
+  Icon: {fileID: 21300000, guid: 66e13987e8fa13949991ddc99a81ada4, type: 3}
   Stars: []
   Slot: 5
   Kind: 1

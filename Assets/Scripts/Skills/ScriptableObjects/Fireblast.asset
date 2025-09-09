@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Fireblast
   DisplayName: Fireblast
-  Description: 
-  Icon: {fileID: 0}
+  Description: Basic attacks explode in a small area on impact.
+  Icon: {fileID: 21300000, guid: 40ea5c9a1d33c6349acf87740202f3c5, type: 3}
   Stars: []
   Slot: 5
   Kind: 1

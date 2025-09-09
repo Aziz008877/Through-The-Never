@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Pyrotechnician
   DisplayName: Pyrotechnician
-  Description: 
-  Icon: {fileID: 0}
+  Description: Gain bonus damage while defensive spells are active
+  Icon: {fileID: 21300000, guid: 44fdb9e4fa74d59489013a5a47db7ee7, type: 3}
   Stars: []
   Slot: 1
   Kind: 1

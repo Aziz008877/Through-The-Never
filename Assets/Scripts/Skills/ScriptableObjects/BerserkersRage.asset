@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Berserkers Rage
   DisplayName: Berserkers Rage
-  Description: 
-  Icon: {fileID: 0}
+  Description: Deal more damage as your health decreases.
+  Icon: {fileID: 21300000, guid: b7d71b15fa5cb704d9b9bf2fae37e871, type: 3}
   Stars: []
   Slot: 5
   Kind: 1

@@ -6,22 +6,45 @@
   <component name="ChangeListManager">
     <list default="true" id="d77b8d14-2ec1-46e6-adfb-32a55b497a69" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Through-The-Never/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Through-The-Never/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2D/Fonts/Greek-Freak SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2D/Fonts/Greek-Freak SDF.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/2D/Fonts/Greek-FreakNoUnderline.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2D/Fonts/Greek-FreakNoUnderline.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3D/Custom/Player/Beard.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3D/Custom/Player/Beard.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3D/Custom/Player/Blue.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3D/Custom/Player/Blue.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3D/Custom/Player/Gold.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3D/Custom/Player/Gold.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3D/Custom/Player/Red.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3D/Custom/Player/Red.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2D/Custom/Skills/Aspect of Tiamat.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2D/Custom/Skills/Aspect of Tiamat.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2D/Custom/Skills/Blizzard.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2D/Custom/Skills/Blizzard.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2D/Custom/Skills/ChatGPT Image 6 сент. 2025 г., 14_38_58.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2D/Custom/Skills/ChatGPT Image 6 сент. 2025 г., 14_38_58.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2D/Custom/Skills/ChatGPT Image 7 сент. 2025 г., 15_57_27.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2D/Custom/Skills/ChatGPT Image 7 сент. 2025 г., 15_57_27.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2D/Custom/Skills/Deepfrost Waters.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2D/Custom/Skills/Deepfrost Waters.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2D/Custom/Skills/Euphrates Defense.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2D/Custom/Skills/Euphrates Defense.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2D/Custom/Skills/Freezing Wind.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2D/Custom/Skills/Freezing Wind.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/2D/Custom/Skills/IceDash.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/2D/Custom/Skills/IceDash.png.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/3D/Custom/TestGeneric.fbx.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Plugins/Zenject/OptionalExtras/ReflectionBaking/Zenject-ReflectionBaking.csproj.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Plugins/Zenject/OptionalExtras/Signals/Zenject-Signals.csproj.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Plugins/Zenject/Source/Zenject.csproj.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Game.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Game.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameLayout.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameLayout.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/SkillSelectionSaver.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/SkillSelectionSaver.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Fonts &amp; Materials/LiberationSans SDF - Fallback.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Toon Deserted Temples/Profiles/TFD_ Demo_01.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Toon Deserted Temples/Profiles/TFD_ Demo_01.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ShaderGraphSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Artifacts/MetaProgressionService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Artifacts/MetaProgressionService.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/BerserkersRage.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/BerserkersRage.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/DragonsFavor.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/DragonsFavor.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/FieryRetaliation.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/FieryRetaliation.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/Firebane.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/Firebane.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/Fireblast.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/Fireblast.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/IfritRage.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/IfritRage.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/IgneousFlicker.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/IgneousFlicker.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/Jetfire.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/Jetfire.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/Lavapool.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/Lavapool.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/Pyrotechnician.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/Pyrotechnician.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/ScorchPulse.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/ScorchPulse.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/SolarBlessing.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/SolarBlessing.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/SolarGuardian.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/SolarGuardian.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/Sunstrike.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/Sunstrike.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/TripleStrike.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/TripleStrike.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/VolcanicExplosion.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/VolcanicExplosion.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/Wildfire.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/ScriptableObjects/Wildfire.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillCatalog.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillCatalog.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/Ice/AbsoluteZeroPassive.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/Ice/AbsoluteZeroPassive.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/Ice/AquaPrimeSkill.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/Ice/AquaPrimeSkill.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/Ice/AquaticTraversalSkill.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/Ice/AquaticTraversalSkill.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/Ice/ArcticAssaultSkill.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/Ice/ArcticAssaultSkill.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/Ice/ArcticGaleSkill.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/Ice/ArcticGaleSkill.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/Ice/RejuvenationSkill.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/Ice/RejuvenationSkill.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/Ice/WinterBlastSkill.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Skills/SkillSystem/Ice/WinterBlastSkill.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,6 +131,7 @@
       <workItem from="1756873023899" duration="3574000" />
       <workItem from="1756894266377" duration="785000" />
       <workItem from="1756962875276" duration="325000" />
+      <workItem from="1757394807471" duration="6379000" />
     </task>
     <servers />
   </component>

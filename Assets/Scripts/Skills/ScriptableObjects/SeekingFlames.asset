@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Seeking Flames
   DisplayName: Seeking Flames
-  Description: 
-  Icon: {fileID: 0}
+  Description: Projectiles curve mid-flight to chase nearby enemies
+  Icon: {fileID: 21300000, guid: 59259dcc807f8fb4c9ac64a647d9b2b4, type: 3}
   Stars: []
   Slot: 5
   Kind: 1

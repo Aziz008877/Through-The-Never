@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Bountiful Waters
   DisplayName: Bountiful Waters
-  Description: 
-  Icon: {fileID: 0}
+  Description: Reduce the cooldown of all spells.
+  Icon: {fileID: 21300000, guid: b16b25b729a9df04197a20af3fc499ea, type: 3}
   Stars: []
   Slot: 5
   Kind: 1

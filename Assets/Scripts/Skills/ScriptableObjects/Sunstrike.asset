@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Sunstrike
   DisplayName: Sunstrike
-  Description: 
-  Icon: {fileID: 0}
+  Description: Deal increased damage to ignited enemies and extend Ignite duration
+    to 5s.
+  Icon: {fileID: 21300000, guid: 1001fd1aa45ac2c4bb3d91ef8085e7e2, type: 3}
   Stars: []
   Slot: 5
   Kind: 1

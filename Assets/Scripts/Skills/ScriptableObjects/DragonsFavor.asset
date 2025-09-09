@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Dragons Favor
   DisplayName: Dragons Favor
-  Description: 
-  Icon: {fileID: 0}
+  Description: Casting a spell grants a shield whose strength scales with its cooldown.
+  Icon: {fileID: 21300000, guid: 4d76dc5fc97a91540b092c646f74da19, type: 3}
   Stars: []
   Slot: 2
   Kind: 1

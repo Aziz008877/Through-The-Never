@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Second Wave
   DisplayName: Second Wave
-  Description: 
-  Icon: {fileID: 0}
+  Description: Frozen or knocked-back enemies emit a water wave that damages nearby
+    foes.
+  Icon: {fileID: 21300000, guid: 39b22cf75c5cc3a43bc509ebaa3e65b2, type: 3}
   Stars: []
   Slot: 5
   Kind: 1

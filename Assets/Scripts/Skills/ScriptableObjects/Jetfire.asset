@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Jetfire
   DisplayName: Jetfire
-  Description: 
-  Icon: {fileID: 0}
+  Description: Gain bonus movement speed and reduced spell cooldowns for 10s at the
+    start of battle.
+  Icon: {fileID: 21300000, guid: 8b14122148f0c104b8e44ad05a763e29, type: 3}
   Stars: []
   Slot: 5
   Kind: 1

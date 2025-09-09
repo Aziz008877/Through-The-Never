@@ -146,7 +146,7 @@ public class MetaProgressionService : MonoBehaviour
     public float MoonAttackSpeedSlowPerStack => _config ? _config.GetMoonAttackSpeedSlowPerStack(GetLevel(ArtifactId.MoonShard)) : 0f;
     public float HornMaxHPBonus => _config ? _config.GetHornMaxHPBonus(GetLevel(ArtifactId.CernunnosHorn)) : 0f;
 
-    /*private void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
@@ -156,5 +156,5 @@ public class MetaProgressionService : MonoBehaviour
         {
             Time.timeScale = 1;
         }
-    }*/
+    }
 }

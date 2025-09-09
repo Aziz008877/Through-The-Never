@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Arctic Assault
   DisplayName: Arctic Assault
-  Description: 
-  Icon: {fileID: 0}
+  Description: Killing with spells permanently increases your max HP.
+  Icon: {fileID: 21300000, guid: 15089db9d9d3a034a9c648ef64409439, type: 3}
   Stars: []
   Slot: 2
   Kind: 1

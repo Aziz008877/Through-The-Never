@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Wildfire
   DisplayName: Wildfire
-  Description: 
-  Icon: {fileID: 0}
+  Description: Fire a basic attack at the nearest enemy while dashing.
+  Icon: {fileID: 21300000, guid: 5a934e13202f47846aa4ca63a9a31cfb, type: 3}
   Stars: []
   Slot: 3
   Kind: 1

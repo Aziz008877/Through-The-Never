@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Igneous Flicker
   DisplayName: Igneous Flicker
-  Description: 
-  Icon: {fileID: 0}
+  Description: Killing an enemy reduces the cooldown of all spells.
+  Icon: {fileID: 21300000, guid: cf62f459c3389cc45b453eb160ddc608, type: 3}
   Stars: []
   Slot: 5
   Kind: 1

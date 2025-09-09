@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Arctic Gale
   DisplayName: Arctic Gale
-  Description: 
-  Icon: {fileID: 0}
+  Description: After a spell ends, gain bonus movement speed and damage reduction.
+  Icon: {fileID: 21300000, guid: df665863aa581ba418b7d5ed2a34e74e, type: 3}
   Stars: []
   Slot: 1
   Kind: 1

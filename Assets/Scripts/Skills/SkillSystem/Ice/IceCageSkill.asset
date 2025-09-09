@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Ice Cage
   DisplayName: Ice Cage
-  Description: 
-  Icon: {fileID: 0}
+  Description: Slain enemies turn into ice blocks that freeze others on contact.
+  Icon: {fileID: 21300000, guid: 761fff1644e28344b8ad76d7a27e3337, type: 3}
   Stars: []
   Slot: 5
   Kind: 1

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Fiery Retaliation
   DisplayName: Fiery Retaliation
-  Description: 
-  Icon: {fileID: 0}
+  Description: Release a fiery wave in a small radius whenever you take damage.
+  Icon: {fileID: 21300000, guid: 7c24e72d93e7c5c4cbe1c54e87b63bdf, type: 3}
   Stars: []
   Slot: 5
   Kind: 1

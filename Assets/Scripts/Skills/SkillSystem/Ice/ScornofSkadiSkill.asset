@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Scorn of Skadi
   DisplayName: Scorn of Skadi
-  Description: 
-  Icon: {fileID: 0}
+  Description: Once per battle, survive fatal damage and restore 20% HP over time.
+  Icon: {fileID: 21300000, guid: 9123eb2ea4e7ff84896480b0e09cb70d, type: 3}
   Stars: []
   Slot: 5
   Kind: 1

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Solar Guardian
   DisplayName: Solar Guardian
-  Description: 
-  Icon: {fileID: 0}
+  Description: Summon a solar aspect when casting spells, attacking nearby enemies.
+  Icon: {fileID: 21300000, guid: da83fe5e974fa0944903bb2bdf236b04, type: 3}
   Stars: []
   Slot: 2
   Kind: 1

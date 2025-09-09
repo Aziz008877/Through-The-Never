@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Winter Blast
   DisplayName: Winter Blast
-  Description: 
-  Icon: {fileID: 0}
+  Description: Emit a freezing shockwave in a small radius on activation.
+  Icon: {fileID: 21300000, guid: 8eaff213b90c9324b9f496ad60802ad0, type: 3}
   Stars: []
   Slot: 1
   Kind: 1

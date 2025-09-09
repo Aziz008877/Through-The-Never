@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Ifrit Rage
   DisplayName: Ifrit Rage
-  Description: 
-  Icon: {fileID: 0}
+  Description: After a defensive spell ends, increase both damage dealt and damage
+    taken for 5s.
+  Icon: {fileID: 21300000, guid: 0f3a90cec41b38b4794baff06372dfda, type: 3}
   Stars: []
   Slot: 1
   Kind: 1

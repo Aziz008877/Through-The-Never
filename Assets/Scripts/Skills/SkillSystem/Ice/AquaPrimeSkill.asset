@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Id: Aqua Prime
   DisplayName: Aqua Prime
-  Description: 
-  Icon: {fileID: 0}
+  Description: Defensive spells accelerate the cooldown of all abilities.
+  Icon: {fileID: 21300000, guid: e752409e55d3097408da55c4523ffe2a, type: 3}
   Stars: []
   Slot: 1
   Kind: 1
