@@ -420,6 +420,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3144437360607540935}
+  - component: {fileID: 5697329184227142415}
+  - component: {fileID: 1056636929649062498}
   m_Layer: 0
   m_Name: TFD_Urn_Interactable_01A
   m_TagString: Untagged
@@ -448,6 +450,47 @@ Transform:
   - {fileID: 3144437360607540939}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5697329184227142415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3144437360607701735}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d68d5a091c4d24b4f953f7cf25d2a497, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _radius: 4
+  _shards:
+  - {fileID: 949537134489910837}
+  - {fileID: 2630250633825827125}
+  - {fileID: 7913946289258223137}
+  - {fileID: 9140550612877699621}
+  - {fileID: 9101200492455609494}
+  - {fileID: 2204098684930032934}
+--- !u!65 &1056636929649062498
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3144437360607701735}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5, y: 1, z: 0.5}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &3144437360607701739
 GameObject:
   m_ObjectHideFlags: 0
