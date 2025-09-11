@@ -56,14 +56,18 @@ public sealed class EnemyFactory : MonoBehaviour, IEnemyFactory
 
         if (hasMelee)
         {
-            int t = tier <= 0 ? 1 : tier;
-            melee.SetTier((MeleeMobTier)Mathf.Clamp(t, 1, 4));
-            if (hp.TryGetComponent(out MeleeMobMove mMove)) mMove.RecalculateBaseSpeed();
+            int tHuman = Mathf.Max(1, tier);
+            int tEnum  = Mathf.Clamp(tHuman - 1, 0, 3);
+            Debug.Log($"[Factory] kind={kind} requestedTier(int)={tier} prefab='{hp.name}'");
+            melee.SetTier((MeleeMobTier)tEnum);
+            if (hp.TryGetComponent(out MeleeMobMove move)) move.RecalculateBaseSpeed();
         }
         else if (hasRanged)
         {
-            int t = tier <= 0 ? 1 : tier;
-            ranged.SetTier((RangedMobTier)Mathf.Clamp(t, 1, 3));
+            int tHuman = Mathf.Max(1, tier);
+            int tEnum  = Mathf.Clamp(tHuman - 1, 0, 2);
+            Debug.Log($"[Factory] kind={kind} requestedTier(int)={tier} prefab='{hp.name}'");
+            ranged.SetTier((RangedMobTier)tEnum);
         }
 
         if (hp.TryGetComponent(out EnemyMaterialApplier vis)) vis.Refresh();

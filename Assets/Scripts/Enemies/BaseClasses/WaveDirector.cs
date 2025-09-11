@@ -37,7 +37,6 @@ public sealed class WaveDirector : MonoBehaviour
     private ExitProp _activeExit;
     private int _alive;
     private readonly List<IDamageable> _aliveList = new();
-    [SerializeField] private WaveLayout _debugOverrideLayout;
     private void Start()
     {
         if (_flow == null || !_flow.TryGetCurrent(out var step))
@@ -56,7 +55,7 @@ public sealed class WaveDirector : MonoBehaviour
             return;
         }
 
-        _activeLayout = _debugOverrideLayout ? _debugOverrideLayout : step.WaveLayout;
+        _activeLayout = step.WaveLayout;
 
         Debug.Log($"[WaveDirector] FLOW: step picked -> variant={step.Variant}, " +
                   $"layout={( _activeLayout ? _activeLayout.name : "NULL")}");
