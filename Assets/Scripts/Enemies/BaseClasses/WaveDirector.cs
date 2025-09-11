@@ -4,6 +4,12 @@ using UnityEngine;
 
 public sealed class WaveDirector : MonoBehaviour
 {
+    [Header("Nemesis")]
+    [SerializeField] private Transform _nemesisOverrideSpawnPoint;
+    [SerializeField] private int _meleeMaxTier = 4;
+    [SerializeField] private int _rangedMaxTier = 3;
+    private bool _nemesisAlive;
+
     [Header("Поток")]
     [SerializeField] private LevelFlowAsset _flow;
 
@@ -82,12 +88,76 @@ public sealed class WaveDirector : MonoBehaviour
                 yield return new WaitForSeconds(Random.Range(_delayBetweenWaves.x, _delayBetweenWaves.y));
         }
 
+        if (_lockExitWhileRunning && _activeExit) _activeExit.CanInteract = false;
+        yield return StartCoroutine(TrySpawnNemesisAfterLayout());
         _chestSelector.CanInteract = true;
         _exitLayout1.CanInteract = true;
         _exitLayout2.CanInteract = true;
         Debug.Log("[WaveDirector] Все волны пройдены (для текущего layout).");
     }
+    private IEnumerator TrySpawnNemesisAfterLayout()
+    {
+        Debug.Log("[Nemesis] TrySpawnNemesisAfterLayout ENTER");
 
+        var svc = NemesisRuntime.Svc;
+        if (svc == null) { Debug.Log("[Nemesis] Svc NULL"); yield break; }
+
+        if (!svc.TryGetActive(out var kind, out var baseTier, out var level))
+        {
+            Debug.Log("[Nemesis] No active nemesis");
+            yield break;
+        }
+
+        int maxTier     = (kind == EnemyKind.Melee) ? _meleeMaxTier : _rangedMaxTier;
+        int desiredTier = baseTier + (level - 1);
+        int targetTier  = Mathf.Clamp(desiredTier, 1, maxTier);
+        int overflow    = Mathf.Max(0, desiredTier - maxTier);
+
+        var spawnPoint = _nemesisOverrideSpawnPoint ? _nemesisOverrideSpawnPoint : GetRandomCurrentSpawnPoint();
+        Debug.Log($"[Nemesis] kind={kind}, baseTier={baseTier}, level={level}, targetTier={targetTier}, overflow={overflow}, spawn={(spawnPoint? spawnPoint.name : "NULL")}");
+        if (!spawnPoint) yield break;
+
+        var enemy = _factory.Spawn(kind, targetTier, spawnPoint.position, spawnPoint.rotation);
+        Debug.Log($"[Nemesis] Factory.Spawn -> {(enemy ? "OK" : "NULL")}");
+        if (!enemy) yield break;
+        
+        if (overflow > 0)
+        {
+            enemy.MaxHP *= svc.HpResidualMult(overflow);
+            enemy.CurrentHP = enemy.MaxHP;
+            
+            if (enemy.TryGetComponent<UnityEngine.AI.NavMeshAgent>(out var agent) && agent && agent.enabled)
+            {
+                float ms = svc.MsResidualMult(overflow);
+                agent.speed *= ms;
+                agent.acceleration *= Mathf.Sqrt(ms);
+            }
+            
+            var boost = enemy.GetComponent<NemesisDamageBoost>() ?? enemy.gameObject.AddComponent<NemesisDamageBoost>();
+            boost.Init(svc.DmgResidualMult(overflow));
+        }
+        
+        _nemesisAlive = true;
+        enemy.OnKilled += _ =>
+        {
+            _nemesisAlive = false;
+            NemesisRuntime.Svc?.ClearActive();
+        };
+
+        while (_nemesisAlive) yield return null;
+
+        if (_lockExitWhileRunning && _activeExit) _activeExit.CanInteract = true;
+
+        Debug.Log("[Nemesis] TrySpawnNemesisAfterLayout EXIT");
+    }
+
+    private Transform GetRandomCurrentSpawnPoint()
+    {
+        if (_nemesisOverrideSpawnPoint) return _nemesisOverrideSpawnPoint;
+        if (_spawns == null || _spawns.Count == 0) return null;
+        return _spawns[Random.Range(0, _spawns.Count)];
+    }
+    
     private IEnumerator SpawnWave(WaveLayout.Wave wave)
     {
         _alive = 0;
@@ -95,8 +165,7 @@ public sealed class WaveDirector : MonoBehaviour
 
         int sp = 0;
         int spCount = Mathf.Max(1, _spawns.Count);
-
-        // Лог структуры волны
+        
         foreach (var e in wave.Entries)
             Debug.Log($"[WaveDirector] Spawn request: {e.Kind} x{e.Count} (tier {e.Tier})");
 
@@ -136,12 +205,5 @@ public sealed class WaveDirector : MonoBehaviour
             }
         }
         _alive = Mathf.Max(0, _alive - 1);
-    }
-
-    private static void CollectChildren(Transform root, List<Transform> into)
-    {
-        /*into.Clear();
-        foreach (Transform t in root) into.Add(t);
-        if (into.Count == 0) into.Add(root);*/
     }
 }

@@ -42,7 +42,7 @@ public class MeleeMobAttack : BaseEnemyAttack
     private bool _isCasting;
     private Rigidbody _preparedProj;
     private Vector3 _preparedTargetPoint;
-
+    public int GetTierOrDefault(int fallback = 1) => (int)_tier <= 0 ? fallback : (int)_tier;
     private float _heavyTimer, _roarTimer, _roarTimeLeft, _tossTimer;
     public void SetTier(MeleeMobTier tier)
     {

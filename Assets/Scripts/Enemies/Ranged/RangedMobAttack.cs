@@ -36,7 +36,7 @@ public class RangedMobAttack : BaseEnemyAttack
     private BaseEnemyMove _move;
     private IDamageable _selfAsSource;
     private Transform _targetTr;
-
+    public int GetTierOrDefault(int fallback = 1) => (int)_tier <= 0 ? fallback : (int)_tier;
     private bool _isCasting;
     private bool _buffActive;
     private float _buffTimeLeft;

@@ -1,46 +1,50 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
 [Serializable]
 public class NemesisState
 {
-    public List<string> Ids = new();
-    public List<int> Levels = new();
-    public string LastKillerId;
+    public bool Active;
+    public string Kind;
+    public int BaseTier;
+    public int Level;
+
+    public override string ToString()
+        => $"Active={Active}, Kind={Kind}, BaseTier={BaseTier}, Level={Level}";
 }
+
 
 public static class NemesisStorage
 {
-    private static string Path => System.IO.Path.Combine(Application.persistentDataPath, "nemesis_state.json");
+    private static string FilePath => Path.Combine(Application.persistentDataPath, "nemesis_state.json");
 
     public static NemesisState Load()
     {
         try
         {
-            if (!File.Exists(Path)) return new NemesisState();
-            var json = File.ReadAllText(Path);
-            var state = JsonUtility.FromJson<NemesisState>(json) ?? new NemesisState();
-            return state;
+            if (!File.Exists(FilePath)) return new NemesisState();
+            var json = File.ReadAllText(FilePath);
+            var s = JsonUtility.FromJson<NemesisState>(json) ?? new NemesisState();
+            return s;
         }
         catch (Exception e)
         {
-            Debug.LogWarning($"NemesisStorage.Load: {e.Message}");
+            Debug.LogWarning($"[Nemesis] Load error: {e.Message}");
             return new NemesisState();
         }
     }
 
-    public static void Save(NemesisState state)
+    public static void Save(NemesisState s)
     {
         try
         {
-            var json = JsonUtility.ToJson(state, prettyPrint: true);
-            File.WriteAllText(Path, json);
+            var json = JsonUtility.ToJson(s, prettyPrint: true);
+            File.WriteAllText(FilePath, json);
         }
         catch (Exception e)
         {
-            Debug.LogWarning($"NemesisStorage.Save: {e.Message}");
+            Debug.LogWarning($"[Nemesis] Save error: {e.Message}");
         }
     }
 }
