@@ -47,7 +47,7 @@ public class MeleeMobAttack : BaseEnemyAttack
     public void SetTier(MeleeMobTier tier)
     {
         _tier = tier;
-        Debug.Log(_tier);
+        GetComponent<EnemyMaterialApplier>().Refresh();
     }
     public bool IsManuallyCasting => _isCasting;
     public float FarDistance => _farDistance;

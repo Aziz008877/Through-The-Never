@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
 using Random = UnityEngine.Random;
-
 public enum OfferStage { Special, Defense, Dash, Passive }
 
 public class ChestOfferDirector : MonoBehaviour
@@ -35,9 +33,6 @@ public class ChestOfferDirector : MonoBehaviour
     private int _stageIndex;
     private int _cycleIndex;
     private bool _initialized;
-
-    public bool IsInitialized => _initialized;
-
     private void Start()
     {
         if (_selectionSaver && _selectionSaver.HasSchool)
@@ -50,13 +45,6 @@ public class ChestOfferDirector : MonoBehaviour
             EnsureInitialized(_school);
         }
     }
-    
-    public void BeginRun(MagicSchool school)
-    {
-        _school = school;
-        _initialized = false;
-        InitializeAndGrantInitial();
-    }
 
     public void SetSchool(MagicSchool school) => _school = school;
 
@@ -66,19 +54,16 @@ public class ChestOfferDirector : MonoBehaviour
         
         if (_selectionSaver != null && !_selectionSaver.HasSchool)
         {
-            Debug.Log("[Director] Skip init: school not chosen yet.");
             return;
         }
 
         if (_catalog == null || _skillManager == null)
         {
-            Debug.LogError("[Director] Missing refs (Catalog/SkillManager).");
             return;
         }
 
         if (!_catalog.TryGetBundle(_school, out _bundle))
         {
-            Debug.LogError($"[Director] No SkillCatalog bundle for school: '{_school}'");
             return;
         }
 
@@ -91,7 +76,6 @@ public class ChestOfferDirector : MonoBehaviour
         _initialized = true;
 
         SaveProgressToSaver();
-        DumpBundle("[Director] Initialized");
     }
 
     private void TryRestoreFromSaver()
@@ -105,7 +89,6 @@ public class ChestOfferDirector : MonoBehaviour
 
         if (!_catalog.TryGetBundle(_school, out _bundle))
         {
-            Debug.LogError($"[Director] Restore failed: bundle not found for '{_school}'");
             return;
         }
 
@@ -124,8 +107,6 @@ public class ChestOfferDirector : MonoBehaviour
         _stageIndex = Mathf.Clamp(p.StageIndex, 0, Mathf.Max(0, _order.Length - 1));
         _cycleIndex = Mathf.Max(0, p.CycleIndex);
         _initialized = true;
-
-        DumpBundle("[Director] Restored from Saver");
     }
 
     public bool EnsureInitialized(MagicSchool fallbackSchool)
@@ -147,13 +128,11 @@ public class ChestOfferDirector : MonoBehaviour
 
         if (!_initialized)
         {
-            Debug.LogWarning("[Director] Not initialized. Call BeginRun(school) after school selection.");
             return false;
         }
 
         if (_cycleIndex >= _cycles)
         {
-            Debug.Log("[Director] All cycles consumed.");
             return false;
         }
 
@@ -172,8 +151,6 @@ public class ChestOfferDirector : MonoBehaviour
                 candidates.Add(def);
             }
 
-            Debug.Log($"[Director] Stage={stage}, pool={pool.Length}, taken={_taken.Count}, available={candidates.Count}, cycle={_cycleIndex+1}/{_cycles}");
-
             if (candidates.Count > 0)
             {
                 Shuffle(candidates);
@@ -185,8 +162,7 @@ public class ChestOfferDirector : MonoBehaviour
             AdvanceStage();
             tries++;
         }
-
-        Debug.LogWarning($"[Director] No candidates. cycle={_cycleIndex}/{_cycles}, stageIdx={_stageIndex}, orderLen={_order.Length}");
+        
         return false;
     }
 
@@ -198,12 +174,10 @@ public class ChestOfferDirector : MonoBehaviour
         _taken.Add(chosen);
 
         _skillManager.AddSkills(new List<SkillDefinition> { chosen });
-        _selectionSaver?.AddSkill(chosen);
+        _selectionSaver.AddSkill(chosen);
 
         AdvanceStage();
         SaveProgressToSaver();
-
-        Debug.Log($"[Director] Accepted: {chosen.name}. Next stage idx={_stageIndex}, cycle={_cycleIndex+1}/{_cycles}");
     }
 
     private void AdvanceStage()
@@ -257,20 +231,6 @@ public class ChestOfferDirector : MonoBehaviour
         foreach (var def in _taken)
             _selectionSaver.MarkTakenOnly(def);
     }
-
-    private void DumpBundle(string header)
-    {
-        var sb = new StringBuilder();
-        sb.AppendLine($"{header} for school '{_school}':");
-        sb.AppendLine($"  Starters: Basic={NameOrNull(_bundle.Basic)}, Dash={NameOrNull(_bundle.StarterDash)}, Innate={NameOrNull(_bundle.Innate)}");
-        sb.AppendLine($"  Pools: Specials={Len(_bundle.Specials)}, Defenses={Len(_bundle.Defenses)}, Dash={Len(_bundle.Dash)}, Passives={Len(_bundle.Passives)}");
-        sb.AppendLine($"  Order: {string.Join(" -> ", _order)} | StageIdx={_stageIndex} | Cycle={_cycleIndex}/{_cycles}");
-        Debug.Log(sb.ToString());
-    }
-
-
-    private static string NameOrNull(SkillDefinition d) => d ? d.name : "NULL";
-    private static int Len(SkillDefinition[] a) => a == null ? 0 : a.Length;
 
     private static void Shuffle<T>(IList<T> list)
     {

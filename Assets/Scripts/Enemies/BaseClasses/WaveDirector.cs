@@ -41,7 +41,6 @@ public sealed class WaveDirector : MonoBehaviour
     {
         if (_flow == null || !_flow.TryGetCurrent(out var step))
         {
-            Debug.LogError("[WaveDirector] Нет текущего шага потока.");
             return;
         }
         
@@ -51,23 +50,10 @@ public sealed class WaveDirector : MonoBehaviour
 
         if (_spawns == null || _spawns.Count == 0)
         {
-            Debug.LogError("[WaveDirector] Нет точек спавна для текущего layout.");
             return;
         }
 
         _activeLayout = step.WaveLayout;
-
-        Debug.Log($"[WaveDirector] FLOW: step picked -> variant={step.Variant}, " +
-                  $"layout={( _activeLayout ? _activeLayout.name : "NULL")}");
-
-        if (_activeLayout && _activeLayout.Waves != null)
-        {
-            for (int w = 0; w < _activeLayout.Waves.Length; w++)
-            {
-                foreach (var e in _activeLayout.Waves[w].Entries)
-                    Debug.Log($"[WaveDirector] Layout '{_activeLayout.name}', wave {w}: {e.Kind} x{e.Count} (tier {e.Tier})");
-            }
-        }
 
         if (_lockExitWhileRunning && _activeExit) _activeExit.CanInteract = false;
 
@@ -92,18 +78,13 @@ public sealed class WaveDirector : MonoBehaviour
         _chestSelector.CanInteract = true;
         _exitLayout1.CanInteract = true;
         _exitLayout2.CanInteract = true;
-        Debug.Log("[WaveDirector] Все волны пройдены (для текущего layout).");
     }
     private IEnumerator TrySpawnNemesisAfterLayout()
     {
-        Debug.Log("[Nemesis] TrySpawnNemesisAfterLayout ENTER");
-
         var svc = NemesisRuntime.Svc;
-        if (svc == null) { Debug.Log("[Nemesis] Svc NULL"); yield break; }
 
         if (!svc.TryGetActive(out var kind, out var baseTier, out var level))
         {
-            Debug.Log("[Nemesis] No active nemesis");
             yield break;
         }
 
@@ -113,11 +94,9 @@ public sealed class WaveDirector : MonoBehaviour
         int overflow    = Mathf.Max(0, desiredTier - maxTier);
 
         var spawnPoint = _nemesisOverrideSpawnPoint ? _nemesisOverrideSpawnPoint : GetRandomCurrentSpawnPoint();
-        Debug.Log($"[Nemesis] kind={kind}, baseTier={baseTier}, level={level}, targetTier={targetTier}, overflow={overflow}, spawn={(spawnPoint? spawnPoint.name : "NULL")}");
         if (!spawnPoint) yield break;
 
         var enemy = _factory.Spawn(kind, targetTier, spawnPoint.position, spawnPoint.rotation);
-        Debug.Log($"[Nemesis] Factory.Spawn -> {(enemy ? "OK" : "NULL")}");
         if (!enemy) yield break;
         
         if (overflow > 0)
@@ -146,8 +125,6 @@ public sealed class WaveDirector : MonoBehaviour
         while (_nemesisAlive) yield return null;
 
         if (_lockExitWhileRunning && _activeExit) _activeExit.CanInteract = true;
-
-        Debug.Log("[Nemesis] TrySpawnNemesisAfterLayout EXIT");
     }
 
     private Transform GetRandomCurrentSpawnPoint()
@@ -163,10 +140,6 @@ public sealed class WaveDirector : MonoBehaviour
         _aliveList.Clear();
 
         int sp = 0;
-        int spCount = Mathf.Max(1, _spawns.Count);
-        
-        foreach (var e in wave.Entries)
-            Debug.Log($"[WaveDirector] Spawn request: {e.Kind} x{e.Count} (tier {e.Tier})");
 
         foreach (var e in wave.Entries)
         {

@@ -18,7 +18,6 @@ public sealed class EnemyFactory : MonoBehaviour, IEnemyFactory
     {
         if (!_catalog.TryGet(kind, out var prefab))
         {
-            Debug.LogError($"[EnemyFactory] Prefab not found in catalog for kind={kind}");
             return null;
         }
 
@@ -48,26 +47,16 @@ public sealed class EnemyFactory : MonoBehaviour, IEnemyFactory
         bool hasMelee  = hp.TryGetComponent(out MeleeMobAttack melee);
         bool hasRanged = hp.TryGetComponent(out RangedMobAttack ranged);
 
-        if (kind == EnemyKind.Ranged && !hasRanged)
-            Debug.LogError($"[EnemyFactory] Catalog mismatch: kind=Ranged, prefab '{hp.name}' doesn't have RangedMobAttack.");
-
-        if (kind == EnemyKind.Melee && !hasMelee)
-            Debug.LogError($"[EnemyFactory] Catalog mismatch: kind=Melee, prefab '{hp.name}' doesn't have MeleeMobAttack.");
-
         if (hasMelee)
         {
-            int tHuman = Mathf.Max(1, tier);
-            int tEnum  = Mathf.Clamp(tHuman - 1, 0, 3);
-            Debug.Log($"[Factory] kind={kind} requestedTier(int)={tier} prefab='{hp.name}'");
-            melee.SetTier((MeleeMobTier)tEnum);
+            int tHuman = Mathf.Clamp(tier, 1, 4);
+            melee.SetTier((MeleeMobTier)tHuman);
             if (hp.TryGetComponent(out MeleeMobMove move)) move.RecalculateBaseSpeed();
         }
         else if (hasRanged)
         {
-            int tHuman = Mathf.Max(1, tier);
-            int tEnum  = Mathf.Clamp(tHuman - 1, 0, 2);
-            Debug.Log($"[Factory] kind={kind} requestedTier(int)={tier} prefab='{hp.name}'");
-            ranged.SetTier((RangedMobTier)tEnum);
+            int tHuman = Mathf.Clamp(tier, 1, 3);
+            ranged.SetTier((RangedMobTier)tHuman);
         }
 
         if (hp.TryGetComponent(out EnemyMaterialApplier vis)) vis.Refresh();
