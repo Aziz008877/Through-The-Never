@@ -8,6 +8,7 @@ public class SkillDefinition : ScriptableObject
     public string DisplayName;
     public string Description;
     public Sprite Icon;
+    public AudioClip SkillSound;
     [Header("Aspects (stars)")]
     public AspectStars[] Stars;
     public SkillSlot Slot;

@@ -6,6 +6,7 @@ using Zenject;
 public class PlayerSkillManager : MonoBehaviour, ISkillManager
 {
     [SerializeField] private Transform _skillRoot;
+    [SerializeField] private AudioSource _skillAudioSource;
     readonly Dictionary<SkillSlot, ActiveSkillBehaviour> _actives = new();
     public IReadOnlyDictionary<SkillSlot, ActiveSkillBehaviour> Actives => _actives;
     public event Action<SkillSlot, ActiveSkillBehaviour> ActiveRegistered;
@@ -83,9 +84,16 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
 
     private void Cast(SkillSlot slot)
     {
-        if (_actives.TryGetValue(slot, out var a)) a.TryCast();
+        if (_actives.TryGetValue(slot, out var a) && a != null)
+        {
+            bool wasReady = a.IsReady;
+            a.TryCast();
+
+            if (wasReady && !a.IsReady) 
+                PlaySkillSound(a);
+        }
+
         OnSkillPerformed?.Invoke(slot);
-        //Debug.Log(a.Definition.DisplayName);
     }
     
     private bool Cast(SkillSlot slot, string basic)
@@ -96,12 +104,22 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
             bool wasReady = a.IsReady;
             a.TryCast();
             bool success = wasReady && !a.IsReady;
+            if (success) PlaySkillSound(a);
             return success;
         }
 
         return false;
     }
+    private void PlaySkillSound(ActiveSkillBehaviour skill)
+    {
+        if (skill?.Definition == null) return;
 
+        var clip = skill.Definition.SkillSound;
+
+        if (clip == null) return;
+
+        _skillAudioSource.PlayOneShot(clip);
+    }
     
     public void SetBasicLocked(bool state) => _basicLocked = state;
     

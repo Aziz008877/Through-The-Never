@@ -16,6 +16,7 @@ MonoBehaviour:
   DisplayName: Dash
   Description: 
   Icon: {fileID: 21300000, guid: af9f51a72fe53e94f98d9e9bc0c3e1ca, type: 3}
+  SkillSound: {fileID: 8300000, guid: aee8484f8da65a94897c063a6d7c7113, type: 3}
   Stars: []
   Slot: 3
   Kind: 0
