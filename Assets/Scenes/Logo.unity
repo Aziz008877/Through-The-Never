@@ -710,7 +710,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config: {fileID: 11400000, guid: 18cae8ed6feed214e92a13bc427fcdfe, type: 2}
-  _startingCoins: 1000
+  _startingCoins: 500
 --- !u!4 &1652136501
 Transform:
   m_ObjectHideFlags: 0

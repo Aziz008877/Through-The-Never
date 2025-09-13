@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _beamPrefab: {fileID: 2954709554770158790, guid: 348f57fd5656cc6459f345482a34b1de, type: 3}
   _tickRate: 0.25
-  _baseDps: 4
+  _baseDps: 6
   _maxDps: 16

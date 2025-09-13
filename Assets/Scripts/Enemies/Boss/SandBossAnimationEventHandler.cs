@@ -33,4 +33,8 @@ public class SandBossAnimationEventHandler : MonoBehaviour
     public void Toss_Throw()  { _attack.ThrowPreparedBoulder(); }
     public void Toss_End()    { _attack.EndManualCast(false); }
 
+    public void Die()
+    {
+        _cameraShakeEffect.ShakeCamera(2);
+    }
 }

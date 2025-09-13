@@ -48,5 +48,5 @@ MonoBehaviour:
   _spawnInterval: 0.05
   _trailLifeTime: 3
   _tickRate: 0.5
-  _tickDamage: 5
+  _tickDamage: 1
   _radius: 2
