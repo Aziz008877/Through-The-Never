@@ -18,6 +18,7 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
     public IReadOnlyList<SkillDefinition>  ChosenSkills => _chosenSkills;
     private bool _basicLocked;
     private SkillSelectionSaver _selectionSaver;
+    public static Action<SkillSlot> OnSkillPerformed;
     private void OnEnable()
     {
         _input.OnBasicSkillPressed += CastBasic;
@@ -83,7 +84,7 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
     private void Cast(SkillSlot slot)
     {
         if (_actives.TryGetValue(slot, out var a)) a.TryCast();
-
+        OnSkillPerformed?.Invoke(slot);
         //Debug.Log(a.Definition.DisplayName);
     }
     

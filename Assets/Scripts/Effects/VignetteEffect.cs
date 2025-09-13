@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -9,7 +10,12 @@ public sealed class VignetteEffect : MonoBehaviour
     [SerializeField] private float _holdTime = .2f;
     [SerializeField] private float _intensity = .45f;
     private Vignette _vignette;
-    private void Awake() => _volume.profile.TryGet(out _vignette);
+
+    private void Awake()
+    {
+        _volume.profile.TryGet(out _vignette);
+        PlayerSkillManager.OnSkillPerformed += OnSkillCast;
+    }
     
     private void OnSkillCast(SkillSlot skill)
     {
@@ -33,5 +39,10 @@ public sealed class VignetteEffect : MonoBehaviour
             yield return null;
         }
         _vignette.intensity.value = to;
+    }
+
+    private void OnDestroy()
+    {
+        PlayerSkillManager.OnSkillPerformed -= OnSkillCast;
     }
 }

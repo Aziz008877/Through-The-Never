@@ -22,6 +22,9 @@ public class SandBossBrain : MonoBehaviour
     [SerializeField] private float _thinkInterval = 0.12f;
     [SerializeField] private float _stationarySpeedEps = 0.05f;
 
+    [Header("Chase → Force Ranged")]
+    [SerializeField] private float _chaseTossDelay = 1.0f; 
+
     private SandBossAttack _attack;
     private BaseEnemyAnimation _anim;
     private BaseEnemyMove _move;
@@ -30,6 +33,7 @@ public class SandBossBrain : MonoBehaviour
 
     private float _dashTimer, _shatterTimer, _tossTimer;
     private float _postTimer, _meleeTimer, _thinkTimer, _meleeHoldTimer;
+    private float _chaseTimer; // накапливаем, пока бежим и не в мили-дистанции
     private bool _busy;
 
     private void Awake()
@@ -68,12 +72,19 @@ public class SandBossBrain : MonoBehaviour
         if (_busy || _postTimer > 0f || _attack.IsManuallyCasting) return;
 
         float dist = Vector3.Distance(transform.position, _player.position);
+        bool inMelee = dist <= _meleeRange;
         bool far = dist > _attack.FarDistance;
         bool agentReady = AgentStationaryNearTarget();
 
-        if (!agentReady || dist > _meleeRange) _meleeHoldTimer = 0f;
+        // Копим время погони, если агент движется и мы вне мили-дистанции
+        bool isChasing = !agentReady && !inMelee;
+        _chaseTimer = isChasing ? (_chaseTimer + Time.deltaTime) : 0f;
+
+        // Сбрасываем "удержание" мили, если мы далеко или ещё не остановились у цели
+        if (!agentReady || !inMelee) _meleeHoldTimer = 0f;
         else _meleeHoldTimer += Time.deltaTime;
 
+        // --- ДАЛЕКАЯ ДИСТАНЦИЯ: Dash/Toss как раньше ---
         if (far)
         {
             var (min, max) = _attack.DashRange;
@@ -82,8 +93,27 @@ public class SandBossBrain : MonoBehaviour
             return;
         }
 
-        if (dist <= _meleeRange && _meleeTimer <= 0f && _meleeHoldTimer >= _meleeWindup && agentReady) { TryCast(SandBossSkill.Melee); return; }
-        if (_shatterTimer <= 0f && agentReady) { TryCast(SandBossSkill.Shatter); return; }
+        // --- «Серая зона» между meleeRange и FarDistance ---
+        // Если давно бежим и не можем в мили — форсим Toss.
+        if (!inMelee && _chaseTimer >= _chaseTossDelay && _tossTimer <= 0f)
+        {
+            TryCast(SandBossSkill.Toss);
+            return;
+        }
+
+        // --- БЛИЗКО: мили при выполнении условий ---
+        if (inMelee && _meleeTimer <= 0f && _meleeHoldTimer >= _meleeWindup && agentReady)
+        {
+            TryCast(SandBossSkill.Melee);
+            return;
+        }
+
+        // Shatter по-прежнему только когда мы остановились у цели
+        if (_shatterTimer <= 0f && agentReady)
+        {
+            TryCast(SandBossSkill.Shatter);
+            return;
+        }
     }
 
     private bool AgentStationaryNearTarget()

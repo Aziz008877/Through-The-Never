@@ -21852,7 +21852,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 55035455c1aef2f4db13015b0db7313f, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: e8cba4ffae383544886af4cde40e4f49, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &1094029671
 GameObject:
@@ -22032,6 +22032,7 @@ Transform:
   - {fileID: 1610821174}
   - {fileID: 224473701}
   - {fileID: 71910134}
+  - {fileID: 1133191964}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1097767278
@@ -22378,6 +22379,55 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1672916468149763889, guid: c442ab991f876d8458642075da440daf, type: 3}
   m_PrefabInstance: {fileID: 1130151077}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1133191963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1133191964}
+  - component: {fileID: 1133191965}
+  m_Layer: 0
+  m_Name: SpeechRecognitionHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1133191964
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133191963}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -53.931267, y: -62.05638, z: 33.88902}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1095996387}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1133191965
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133191963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc6c84be027b58e4d9e65f5e51c05274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _skills: {fileID: 1603916756}
+  _confidence: 2
+  _activationKey: 114
+  _globalCooldown: 0.25
+  _slotAliases: []
 --- !u!23 &1136953011 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 8357425097501519721, guid: 587740918ba73ec4998e4774bdd87324, type: 3}
@@ -92902,6 +92952,6 @@ SceneRoots:
   - {fileID: 1569960997}
   - {fileID: 1468912280}
   - {fileID: 721136930}
-  - {fileID: 1095996387}
   - {fileID: 43065286}
   - {fileID: 1802466421}
+  - {fileID: 1095996387}
