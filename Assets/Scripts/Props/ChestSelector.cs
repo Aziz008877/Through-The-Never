@@ -23,6 +23,7 @@ public class ChestSelector : MonoBehaviour, IInteractable
     [SerializeField] private float _sideLeft   = -1.2f;
     [SerializeField] private float _sideCenter = 0.0f;
     [SerializeField] private float _sideRight  = 1.2f;
+    [SerializeField] private ParticleSystem _lootVFX;
 
     [Header("Offers")]
     [SerializeField] private ChestOfferDirector _director;  
@@ -33,12 +34,12 @@ public class ChestSelector : MonoBehaviour, IInteractable
     [SerializeField] private UnityEvent _onChestOpened, _onChestClosed;
     private List<SkillDefinition> _currentOffer;
     private bool _choiceLocked;
-
-
+    
     private IEnumerator OpenChest()
     {
         if (CanInteract)
         {
+            _lootVFX.Stop();
             _onChestOpened?.Invoke();
             _chestAnimator.SetTrigger("OpenChest");
             yield return new WaitForSeconds(_waitTime);
@@ -129,5 +130,10 @@ public class ChestSelector : MonoBehaviour, IInteractable
     public void PerformAction(GameObject player)
     {
         StartCoroutine(OpenChest());
+    }
+
+    public void ActivateLootVFX()
+    {
+        _lootVFX.Play();
     }
 }

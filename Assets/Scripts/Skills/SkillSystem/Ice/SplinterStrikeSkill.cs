@@ -25,6 +25,7 @@ public class SplinterStrikeSkill : ActiveSkillBehaviour
         PlayerCtx.Move.RotateTowardsMouse();
 
         StartCoroutine(BurstRoutine());
+        StartCooldown();
     }
 
     private IEnumerator BurstRoutine()

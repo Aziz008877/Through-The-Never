@@ -75,8 +75,13 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
     private void CastBasic()
     {
         if (_basicLocked) return;
+
         if (Cast(SkillSlot.Basic, "temp"))
+        {
+            Debug.Log("YES");
             _playerAnimator.CastBasics();
+        }
+            
     }
     private void CastDefense() => Cast(SkillSlot.Defense);
     private void CastSpecial() => Cast(SkillSlot.Special);
@@ -102,8 +107,11 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
         {
             if (!a.IsReady) return false;
             bool wasReady = a.IsReady;
+            Debug.Log(wasReady);
+            Debug.Log(slot);
             a.TryCast();
             bool success = wasReady && !a.IsReady;
+            Debug.Log(success);
             if (success) PlaySkillSound(a);
             return success;
         }

@@ -76,6 +76,7 @@ public sealed class WaveDirector : MonoBehaviour
         if (_lockExitWhileRunning && _activeExit) _activeExit.CanInteract = false;
         yield return StartCoroutine(TrySpawnNemesisAfterLayout());
         _chestSelector.CanInteract = true;
+        _chestSelector.ActivateLootVFX();
         _exitLayout1.CanInteract = true;
         _exitLayout2.CanInteract = true;
     }
