@@ -107,11 +107,8 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
         {
             if (!a.IsReady) return false;
             bool wasReady = a.IsReady;
-            Debug.Log(wasReady);
-            Debug.Log(slot);
             a.TryCast();
             bool success = wasReady && !a.IsReady;
-            Debug.Log(success);
             if (success) PlaySkillSound(a);
             return success;
         }
@@ -120,7 +117,7 @@ public class PlayerSkillManager : MonoBehaviour, ISkillManager
     }
     private void PlaySkillSound(ActiveSkillBehaviour skill)
     {
-        if (skill?.Definition == null) return;
+        if (skill.Definition == null) return;
 
         var clip = skill.Definition.SkillSound;
 
